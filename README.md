@@ -1,4 +1,4 @@
-# Arcweave Adventure Player
+# Csupaszív Csapat
 
 This project is a Next.js-based player for Arcweave stories. It interprets an exported Arcweave project and allows users to play through it as a "Choose Your Own Adventure" style game.
 
@@ -13,10 +13,3 @@ This project is a Next.js-based player for Arcweave stories. It interprets an ex
 
 1.  Place your `project_settings.json` (exported from Arcweave) in `src/data/`.
 2.  Add your assets (images, audio) to `public/assets/`.
-3.  Run the development server:
-
-```bash
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
