@@ -17,7 +17,7 @@ export default function ProfilePage() {
     const [formData, setFormData] = useState({
         full_name: '',
         gender: '',
-        age: ''
+        birth_year: ''
     })
 
     useEffect(() => {
@@ -27,7 +27,7 @@ export default function ProfilePage() {
                 setFormData({
                     full_name: user.user_metadata?.full_name || '',
                     gender: user.user_metadata?.gender || '',
-                    age: user.user_metadata?.age || ''
+                    birth_year: user.user_metadata?.birth_year || ''
                 })
             }
             setLoading(false)
@@ -37,6 +37,16 @@ export default function ProfilePage() {
 
     const handleSave = async (e) => {
         e.preventDefault()
+
+        // Validation
+        if (formData.birth_year) {
+            const year = parseInt(formData.birth_year)
+            if (isNaN(year) || year < 1925 || year > 2050) {
+                setError('A születési évnek 1925 és 2050 között kell lennie!')
+                return
+            }
+        }
+
         setSaving(true)
         setError(null)
         setMessage(null)
@@ -45,7 +55,7 @@ export default function ProfilePage() {
             data: {
                 full_name: formData.full_name,
                 gender: formData.gender,
-                age: formData.age
+                birth_year: formData.birth_year
             }
         })
 
@@ -110,15 +120,15 @@ export default function ProfilePage() {
                     </div>
 
                     <div>
-                        <label className="block text-sm font-medium text-gray-300 mb-2">Életkor</label>
+                        <label className="block text-sm font-medium text-gray-300 mb-2">Születési év</label>
                         <input
                             type="number"
-                            value={formData.age}
-                            onChange={(e) => setFormData({ ...formData, age: e.target.value })}
+                            value={formData.birth_year}
+                            onChange={(e) => setFormData({ ...formData, birth_year: e.target.value })}
                             className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none text-white"
-                            placeholder="25"
-                            min="1"
-                            max="120"
+                            placeholder="1990"
+                            min="1925"
+                            max="2050"
                         />
                     </div>
 
