@@ -12,9 +12,16 @@ export const StoryEngine = () => {
     } = useGame();
 
     const [contentSegments, setContentSegments] = useState([]);
+    const [isMounted, setIsMounted] = useState(false);
+
+    useEffect(() => {
+        setIsMounted(true);
+    }, []);
 
     const element = project.elements[currentElementId];
     const audioRef = useRef(null);
+
+    if (!isMounted) return null;
 
     useEffect(() => {
         if (!element) return;

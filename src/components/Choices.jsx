@@ -1,10 +1,17 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useGame } from '../context/GameContext';
 
 export const Choices = () => {
     const { project, currentElementId, navigateTo, resolveBranch, renderRichText } = useGame();
+    const [isMounted, setIsMounted] = useState(false);
+
+    useEffect(() => {
+        setIsMounted(true);
+    }, []);
+
+    if (!isMounted) return null;
     const element = project.elements[currentElementId];
 
     if (!element) return null;
