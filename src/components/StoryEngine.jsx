@@ -21,8 +21,6 @@ export const StoryEngine = () => {
     const element = project.elements[currentElementId];
     const audioRef = useRef(null);
 
-    if (!isMounted) return null;
-
     useEffect(() => {
         if (!element) return;
 
@@ -64,6 +62,8 @@ export const StoryEngine = () => {
 
 
     const coverUrl = element?.assets?.cover ? getAssetUrl(element.assets.cover.id) : null;
+
+    if (!isMounted) return null;
 
     return (
         <div className="max-w-2xl mx-auto p-8 bg-black/60 backdrop-blur-xl rounded-xl shadow-2xl border border-white/10 transition-all duration-500">

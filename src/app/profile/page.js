@@ -25,8 +25,6 @@ export default function ProfilePage() {
         birth_year: ''
     })
 
-    if (!isMounted) return null
-
     useEffect(() => {
         const getProfile = async () => {
             const { data: { user } } = await supabase.auth.getUser()
@@ -76,6 +74,8 @@ export default function ProfilePage() {
         }
         setSaving(false)
     }
+
+    if (!isMounted) return null
 
     if (loading) {
         return (

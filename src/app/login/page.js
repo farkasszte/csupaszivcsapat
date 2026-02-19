@@ -21,8 +21,6 @@ export default function LoginPage() {
         setIsMounted(true)
     }, [])
 
-    if (!isMounted) return null
-
     const generateCode = () => {
         const chars = 'abcdefghijklmnopqrstuvwxyz0123456789'
         let result = ''
@@ -148,6 +146,8 @@ export default function LoginPage() {
         }
         setLoading(false)
     }
+
+    if (!isMounted) return null
 
     return (
         <div className="min-h-screen bg-gray-900 text-gray-100 flex items-center justify-center p-4 bg-[url('/cover/cover.jpg')] bg-cover bg-center bg-no-repeat bg-blend-multiply">

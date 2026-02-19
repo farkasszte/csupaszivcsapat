@@ -29,12 +29,12 @@ export default function UserMenu() {
         return () => subscription.unsubscribe()
     }, [supabase])
 
-    if (!isMounted) return null;
-
     const handleLogout = async () => {
         await supabase.auth.signOut()
         router.refresh()
     }
+
+    if (!isMounted) return null;
 
     if (!user) {
         return (

@@ -11,8 +11,9 @@ export const Choices = () => {
         setIsMounted(true);
     }, []);
 
-    if (!isMounted) return null;
     const element = project.elements[currentElementId];
+
+    if (!isMounted) return null;
 
     if (!element) return null;
 
