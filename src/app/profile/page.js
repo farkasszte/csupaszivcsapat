@@ -13,12 +13,19 @@ export default function ProfilePage() {
     const [saving, setSaving] = useState(false)
     const [error, setError] = useState(null)
     const [message, setMessage] = useState(null)
+    const [isMounted, setIsMounted] = useState(false)
+
+    useEffect(() => {
+        setIsMounted(true)
+    }, [])
 
     const [formData, setFormData] = useState({
         full_name: '',
         gender: '',
         birth_year: ''
     })
+
+    if (!isMounted) return null
 
     useEffect(() => {
         const getProfile = async () => {

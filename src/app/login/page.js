@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { createClient } from '@/utils/supabase/client'
 import { useRouter } from 'next/navigation'
 
@@ -15,6 +15,13 @@ export default function LoginPage() {
     const [message, setMessage] = useState(null)
     const [guestCode, setGuestCode] = useState('')
     const [generatedCode, setGeneratedCode] = useState(null)
+    const [isMounted, setIsMounted] = useState(false)
+
+    useEffect(() => {
+        setIsMounted(true)
+    }, [])
+
+    if (!isMounted) return null
 
     const generateCode = () => {
         const chars = 'abcdefghijklmnopqrstuvwxyz0123456789'

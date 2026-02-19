@@ -7,10 +7,12 @@ import Link from 'next/link'
 
 export default function UserMenu() {
     const [user, setUser] = useState(null)
+    const [isMounted, setIsMounted] = useState(false)
     const supabase = createClient()
     const router = useRouter()
 
     useEffect(() => {
+        setIsMounted(true)
         const getUser = async () => {
             const { data: { user } } = await supabase.auth.getUser()
             setUser(user)
@@ -26,6 +28,8 @@ export default function UserMenu() {
 
         return () => subscription.unsubscribe()
     }, [supabase])
+
+    if (!isMounted) return null;
 
     const handleLogout = async () => {
         await supabase.auth.signOut()
