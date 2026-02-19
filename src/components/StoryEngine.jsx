@@ -5,7 +5,12 @@ import { useGame } from '../context/GameContext';
 import { Choices } from './Choices';
 
 export const StoryEngine = () => {
-    const { project, currentElementId, executeScript, evaluate, state, getAssetUrl, parseRichText } = useGame();
+    const {
+        project, currentElementId, executeScript, evaluate, state,
+        getAssetUrl, parseRichText, saveGame, loadGame, resetGame,
+        loading, error, message
+    } = useGame();
+
     const [contentSegments, setContentSegments] = useState([]);
 
     const element = project.elements[currentElementId];
@@ -55,6 +60,42 @@ export const StoryEngine = () => {
 
     return (
         <div className="max-w-2xl mx-auto p-8 bg-black/60 backdrop-blur-xl rounded-xl shadow-2xl border border-white/10 transition-all duration-500">
+            {/* Game Toolbar */}
+            <div className="flex justify-end gap-3 mb-6">
+                <button
+                    onClick={saveGame}
+                    disabled={loading}
+                    className="px-3 py-1.5 bg-blue-600/20 hover:bg-blue-600/40 text-blue-300 text-xs font-medium rounded border border-blue-500/30 transition-all disabled:opacity-50"
+                >
+                    Mentés
+                </button>
+                <button
+                    onClick={loadGame}
+                    disabled={loading}
+                    className="px-3 py-1.5 bg-purple-600/20 hover:bg-purple-600/40 text-purple-300 text-xs font-medium rounded border border-purple-500/30 transition-all disabled:opacity-50"
+                >
+                    Betöltés
+                </button>
+                <button
+                    onClick={() => {
+                        if (confirm('Biztosan elölről kezded?')) {
+                            resetGame();
+                        }
+                    }}
+                    disabled={loading}
+                    className="px-3 py-1.5 bg-gray-600/20 hover:bg-gray-600/40 text-gray-300 text-xs font-medium rounded border border-gray-500/30 transition-all disabled:opacity-50"
+                >
+                    Újrakezdés
+                </button>
+            </div>
+
+            {/* Status Messages */}
+            {(error || message) && (
+                <div className={`mb-4 p-2 text-center text-xs rounded border ${error ? 'bg-red-900/40 border-red-800 text-red-200' : 'bg-green-900/40 border-green-800 text-green-200'}`}>
+                    {error || message}
+                </div>
+            )}
+
             {coverUrl && (
                 <div className="mb-6 rounded-lg overflow-hidden shadow-lg border border-white/10">
                     <img src={coverUrl} alt="Scene" className="w-full h-64 object-cover hover:scale-105 transition-transform duration-700" />

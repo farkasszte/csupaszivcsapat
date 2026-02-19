@@ -1,84 +1,25 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useEffect } from 'react';
 import projectSettings from '../data/project_settings.json';
+import { useGameStore } from '../store/useGameStore';
 import { ArcScript } from '../logic/ArcScript';
 
 const GameContext = createContext();
 
 export const useGame = () => useContext(GameContext);
 
+const arcScript = new ArcScript(projectSettings);
+
 export const GameProvider = ({ children }) => {
-    // Initialize State
-    const [currentElementId, setCurrentElementId] = useState(projectSettings.startingElement);
+    const store = useGameStore();
 
-    const [state, setState] = useState({
-        visits: {}, // Map<elementId, count>
-        variables: { score: 0 }, // Initialize global vars
-    });
-
-    const [history, setHistory] = useState([]); // For backtracking if needed
-
-    const arcScript = new ArcScript(projectSettings);
-
-    // Initial load
+    // Initial load - ensuring starting element is visited if no state
     useEffect(() => {
-        // Register initial visit
-        visitElement(projectSettings.startingElement);
+        if (Object.keys(store.visits).length === 0) {
+            store.visitElement(projectSettings.startingElement);
+        }
     }, []);
-
-    const visitElement = (id) => {
-        setState(prev => {
-            const newVisits = { ...prev.visits };
-            newVisits[id] = (newVisits[id] || 0) + 1;
-
-            return {
-                ...prev,
-                visits: newVisits
-            };
-        });
-    };
-
-    const navigateTo = (targetId) => {
-        if (!targetId) return;
-
-        // Resolve Jumper if needed
-        let finalId = targetId;
-        const jumper = projectSettings.jumpers[targetId];
-        if (jumper) {
-            finalId = jumper.elementId;
-        }
-
-        // Resolve Branch if we are navigating TO a branch
-        const branch = projectSettings.branches[finalId];
-        if (branch) {
-            const connId = resolveBranch(finalId);
-            if (connId) {
-                const conn = projectSettings.connections[connId];
-                if (conn) {
-                    navigateTo(conn.targetid); // Recurse
-                    return;
-                }
-            }
-        }
-
-        setHistory(prev => [...prev, currentElementId]);
-        setCurrentElementId(finalId);
-        visitElement(finalId);
-    };
-
-    const executeScript = (script) => {
-        const tempState = { ...state, variables: { ...state.variables } };
-        arcScript.executeScript(script, tempState);
-        setState(prev => ({
-            ...prev,
-            variables: tempState.variables
-        }));
-    };
-
-    const evaluate = (condition) => {
-        return arcScript.evaluateCondition(condition, state, currentElementId);
-    };
 
     const getAssetUrl = (assetId) => {
         const asset = projectSettings.assets[assetId];
@@ -88,45 +29,30 @@ export const GameProvider = ({ children }) => {
     };
 
     const renderRichText = (html) => {
-        return arcScript.renderRichText(html, state, currentElementId);
+        return arcScript.renderRichText(html, { visits: store.visits, variables: store.variables }, store.currentElementId);
     };
 
     const parseRichText = (html) => {
-        return arcScript.parseRichText(html, state, currentElementId);
-    };
-
-    const resolveBranch = (branchId) => {
-        const branch = projectSettings.branches[branchId];
-        if (!branch) return null;
-
-        const ifCondId = branch.conditions?.ifCondition;
-        if (ifCondId) {
-            const ifCond = projectSettings.conditions[ifCondId];
-            if (evaluate(ifCond.script)) {
-                return ifCond.output;
-            }
-        }
-
-        const elseCondId = branch.conditions?.elseCondition;
-        if (elseCondId) {
-            const elseCond = projectSettings.conditions[elseCondId];
-            return elseCond.output;
-        }
-
-        return null;
+        return arcScript.parseRichText(html, { visits: store.visits, variables: store.variables }, store.currentElementId);
     };
 
     const value = {
         project: projectSettings,
-        currentElementId,
-        state,
-        navigateTo,
-        executeScript,
-        evaluate,
+        currentElementId: store.currentElementId,
+        state: { visits: store.visits, variables: store.variables },
+        loading: store.loading,
+        error: store.error,
+        message: store.message,
+        navigateTo: store.navigateTo,
+        executeScript: store.executeScript,
+        evaluate: store.evaluate,
+        saveGame: store.saveGame,
+        loadGame: store.loadGame,
+        resetGame: store.resetGame,
         getAssetUrl,
         renderRichText,
         parseRichText,
-        resolveBranch
+        resolveBranch: store.resolveBranch
     };
 
     return (
