@@ -45,15 +45,23 @@ export default function UserMenu() {
 
     return (
         <div className="flex items-center gap-4">
-            <span className="text-sm text-gray-400 hidden sm:inline">
-                {user.email}
-            </span>
-            <button
-                onClick={handleLogout}
-                className="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-lg transition-colors text-sm font-medium border border-gray-600"
-            >
-                Kilépés
-            </button>
+            <div className="flex flex-col items-end sm:flex-row sm:items-center gap-2 sm:gap-4">
+                <Link
+                    href="/profile"
+                    className="text-sm text-gray-300 hover:text-white transition-colors"
+                >
+                    Profilom
+                </Link>
+                <span className="text-xs text-gray-500 hidden md:inline">
+                    ({user.email})
+                </span>
+                <button
+                    onClick={handleLogout}
+                    className="px-4 py-2 bg-gray-700 hover:bg-red-900/40 hover:text-red-400 text-white rounded-lg transition-all text-sm font-medium border border-gray-600 hover:border-red-800"
+                >
+                    Kilépés
+                </button>
+            </div>
         </div>
     )
 }
