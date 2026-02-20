@@ -4,10 +4,17 @@ import { useEffect, useState } from 'react'
 import { createClient } from '@/utils/supabase/client'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import {
+    RiUserLine,
+    RiFileCopyLine,
+    RiCheckLine,
+    RiLogoutBoxRLine,
+} from '@remixicon/react'
 
 export default function UserMenu() {
     const [user, setUser] = useState(null)
     const [isMounted, setIsMounted] = useState(false)
+    const [copied, setCopied] = useState(false)
     const supabase = createClient()
     const router = useRouter()
 
@@ -34,6 +41,16 @@ export default function UserMenu() {
         router.refresh()
     }
 
+    const handleCopyCode = () => {
+        const code = user?.email?.split('@')[0]
+        if (code) {
+            navigator.clipboard.writeText(code).then(() => {
+                setCopied(true)
+                setTimeout(() => setCopied(false), 2000)
+            })
+        }
+    }
+
     if (!isMounted) return null;
 
     if (!user) {
@@ -47,27 +64,51 @@ export default function UserMenu() {
         )
     }
 
+    const isGuest = user.email?.endsWith('@vendeg.hu')
+    const guestCode = isGuest ? user.email.split('@')[0] : null
+
     return (
-        <div className="flex items-center gap-4">
-            <div className="flex flex-col items-end sm:flex-row sm:items-center gap-2 sm:gap-4">
-                <Link
-                    href="/profile"
-                    className="text-sm text-amber-200/70 hover:text-amber-100 transition-colors"
-                >
-                    Profilom
-                </Link>
-                <span className="text-xs text-zinc-500 hidden md:inline">
-                    {user.email?.endsWith('@vendeg.hu')
-                        ? `Vendég kód: [${user.email.split('@')[0]}]`
-                        : `(${user.email})`}
+        <div className="flex items-center gap-3">
+            {/* Guest code with copy button */}
+            {isGuest && (
+                <span className="hidden md:flex items-center gap-1.5 text-xs text-zinc-500">
+                    Vendég kód: {guestCode}
+                    <button
+                        onClick={handleCopyCode}
+                        title={copied ? 'Másolva!' : 'Kód másolása'}
+                        className={`p-1 rounded transition-all ${copied ? 'text-emerald-400' : 'text-zinc-500 hover:text-amber-300'}`}
+                    >
+                        {copied
+                            ? <RiCheckLine size={14} />
+                            : <RiFileCopyLine size={14} />
+                        }
+                    </button>
                 </span>
-                <button
-                    onClick={handleLogout}
-                    className="px-4 py-2 bg-zinc-800/50 hover:bg-red-900/40 hover:text-red-400 text-zinc-300 rounded-lg transition-all text-sm font-medium border border-zinc-700 hover:border-red-800"
-                >
-                    Kilépés
-                </button>
-            </div>
+            )}
+
+            {/* Regular email (non-guest) */}
+            {!isGuest && (
+                <span className="text-xs text-zinc-500 hidden md:inline">({user.email})</span>
+            )}
+
+            {/* Profile icon link */}
+            <Link
+                href="/profile"
+                title="Profilom"
+                className="p-1.5 text-amber-200/60 hover:text-amber-100 transition-colors rounded"
+            >
+                <RiUserLine size={18} />
+            </Link>
+
+            {/* Logout button */}
+            <button
+                onClick={handleLogout}
+                title="Kilépés"
+                className="flex items-center gap-2 px-3 py-1.5 bg-zinc-800/50 hover:bg-red-900/40 hover:text-red-400 text-zinc-300 rounded-lg transition-all text-sm font-medium border border-zinc-700 hover:border-red-800"
+            >
+                <RiLogoutBoxRLine size={15} />
+                <span className="hidden sm:inline">Kilépés</span>
+            </button>
         </div>
     )
 }

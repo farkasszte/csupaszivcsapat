@@ -166,21 +166,21 @@ export default function LoginPage() {
     if (!isMounted) return null
 
     return (
-        <div className="min-h-screen bg-zinc-950 text-orange-50/90 font-sans flex flex-col items-center justify-center p-4">
+        <div className="min-h-screen bg-zinc-950 text-orange-50/90 font-sans flex flex-col items-center justify-center p-4 py-8">
 
-            <div className="w-full max-w-4xl space-y-12">
+            <div className="w-full max-w-4xl space-y-6 sm:space-y-12">
                 {/* Header Section representing the image */}
-                <div className="text-center space-y-4 max-w-2xl mx-auto">
-                    <h1 className="text-5xl font-extrabold text-amber-200 font-serif tracking-tight drop-shadow-md">Kiszáradt Legelők</h1>
-                    <p className="text-lg text-zinc-300 leading-relaxed">
+                <div className="text-center space-y-3 sm:space-y-4 max-w-2xl mx-auto">
+                    <h1 className="text-3xl sm:text-5xl font-extrabold text-amber-200 font-serif tracking-tight drop-shadow-md">Kiszáradt Legelők</h1>
+                    <p className="text-sm sm:text-lg text-zinc-300 leading-relaxed">
                         A tűző nap égeti a Alföldi pusztát. A föld repedezett, és minden élet vízért könyörög. Souslik barátunk, Pista, kiszáradt torkát érezi.
                     </p>
                 </div>
 
-                <div className="grid md:grid-cols-2 gap-8 relative z-10 w-full">
+                <div className="grid md:grid-cols-2 gap-4 sm:gap-8 relative z-10 w-full">
                     {/* Regular Login */}
-                    <div className="bg-zinc-900/60 backdrop-blur-md p-8 rounded-2xl border border-white/5">
-                        <h2 className="text-2xl font-bold text-center mb-8 text-amber-100">Bejelentkezés</h2>
+                    <div className="bg-zinc-900/60 backdrop-blur-md p-5 sm:p-8 rounded-2xl border border-white/5">
+                        <h2 className="text-xl sm:text-2xl font-bold text-center mb-5 sm:mb-8 text-amber-100">Bejelentkezés</h2>
 
                         <form className="space-y-6">
                             <div className="space-y-5">
@@ -247,14 +247,14 @@ export default function LoginPage() {
                     </div>
 
                     {/* Guest Login */}
-                    <div className="bg-zinc-900/60 backdrop-blur-md p-8 rounded-2xl border border-white/5 flex flex-col justify-between h-full">
+                    <div className="bg-zinc-900/60 backdrop-blur-md p-5 sm:p-8 rounded-2xl border border-white/5 flex flex-col justify-between">
                         <div>
-                            <h2 className="text-2xl font-bold text-center mb-8 text-amber-100">Gyors Játék</h2>
-                            <p className="text-sm text-zinc-400 mb-8 text-center px-4 leading-relaxed">
+                            <h2 className="text-xl sm:text-2xl font-bold text-center mb-5 sm:mb-8 text-amber-100">Gyors Játék</h2>
+                            <p className="text-sm text-zinc-400 mb-5 sm:mb-8 text-center px-2 sm:px-4 leading-relaxed">
                                 Nincs fiókod? Lépj be vendégként és próbáld ki a játékot egy egyedi kóddal.
                             </p>
 
-                            <div className="space-y-8">
+                            <div className="space-y-5 sm:space-y-8">
                                 <button
                                     onClick={handleGuestSignUp}
                                     disabled={loading}
