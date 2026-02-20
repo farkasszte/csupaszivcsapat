@@ -54,7 +54,7 @@ export const Choices = () => {
                     <button
                         key={`${choice.id}-${idx}`}
                         onClick={() => navigateTo(choice.targetId)}
-                        className="w-full text-left px-6 py-4 bg-linear-to-r from-blue-900/50 to-indigo-900/50 hover:from-blue-800 hover:to-indigo-800 rounded-lg text-white font-medium transition-all transform hover:scale-[1.02] shadow-lg border border-white/10 hover:border-white/30 backdrop-blur-sm"
+                        className="w-full text-left px-6 py-4 bg-linear-to-r from-amber-900/40 to-orange-900/40 hover:from-amber-800/60 hover:to-orange-800/60 rounded-lg text-amber-100 font-medium transition-all transform hover:scale-[1.02] shadow-lg border border-amber-500/20 hover:border-amber-400/40 backdrop-blur-sm"
                     >
                         {choice.label}
                     </button>
@@ -62,7 +62,7 @@ export const Choices = () => {
             ) : (
                 <button
                     onClick={() => window.location.reload()}
-                    className="w-full text-center px-6 py-4 bg-linear-to-r from-red-900/50 to-orange-900/50 hover:from-red-800 hover:to-orange-800 rounded-lg text-white font-medium transition-all transform hover:scale-[1.02] shadow-lg border border-white/10 hover:border-white/30 backdrop-blur-sm"
+                    className="w-full text-center px-6 py-4 bg-linear-to-r from-red-900/40 to-orange-900/40 hover:from-red-800/60 hover:to-orange-800/60 rounded-lg text-amber-100 font-medium transition-all transform hover:scale-[1.02] shadow-lg border border-orange-500/20 hover:border-orange-400/40 backdrop-blur-sm"
                 >
                     Restart Adventure
                 </button>

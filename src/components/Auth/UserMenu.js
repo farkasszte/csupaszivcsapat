@@ -40,7 +40,7 @@ export default function UserMenu() {
         return (
             <Link
                 href="/login"
-                className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors text-sm font-medium"
+                className="px-4 py-2 bg-amber-600/20 hover:bg-amber-600/30 text-amber-400 font-semibold rounded-lg transition-colors text-sm border border-amber-500/50 shadow-[0_0_15px_rgba(245,158,11,0.1)]"
             >
                 Belépés
             </Link>
@@ -52,16 +52,18 @@ export default function UserMenu() {
             <div className="flex flex-col items-end sm:flex-row sm:items-center gap-2 sm:gap-4">
                 <Link
                     href="/profile"
-                    className="text-sm text-gray-300 hover:text-white transition-colors"
+                    className="text-sm text-amber-200/70 hover:text-amber-100 transition-colors"
                 >
                     Profilom
                 </Link>
-                <span className="text-xs text-gray-500 hidden md:inline">
-                    ({user.email})
+                <span className="text-xs text-zinc-500 hidden md:inline">
+                    {user.email?.endsWith('@vendeg.hu')
+                        ? `Vendég kód: [${user.email.split('@')[0]}]`
+                        : `(${user.email})`}
                 </span>
                 <button
                     onClick={handleLogout}
-                    className="px-4 py-2 bg-gray-700 hover:bg-red-900/40 hover:text-red-400 text-white rounded-lg transition-all text-sm font-medium border border-gray-600 hover:border-red-800"
+                    className="px-4 py-2 bg-zinc-800/50 hover:bg-red-900/40 hover:text-red-400 text-zinc-300 rounded-lg transition-all text-sm font-medium border border-zinc-700 hover:border-red-800"
                 >
                     Kilépés
                 </button>

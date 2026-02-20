@@ -79,22 +79,22 @@ export default function ProfilePage() {
 
     if (loading) {
         return (
-            <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center">
-                <div className="animate-pulse text-xl">Betöltés...</div>
+            <div className="min-h-screen bg-zinc-950 text-orange-50/90 flex items-center justify-center">
+                <div className="animate-pulse text-xl text-amber-200">Betöltés...</div>
             </div>
         )
     }
 
     return (
-        <div className="min-h-screen bg-gray-900 text-gray-100 flex items-center justify-center p-4 bg-[url('/cover/cover.jpg')] bg-cover bg-center bg-no-repeat bg-blend-multiply">
+        <div className="min-h-screen bg-zinc-950 text-orange-50/90 flex items-center justify-center p-4 bg-[url('/cover/cover.jpg')] bg-cover bg-center bg-no-repeat bg-blend-multiply">
             <div className="absolute inset-0 bg-black/70 z-0"></div>
 
-            <div className="relative z-10 w-full max-w-md bg-gray-800/80 backdrop-blur-md p-8 rounded-xl shadow-2xl border border-gray-700">
+            <div className="relative z-10 w-full max-w-md bg-zinc-900/60 backdrop-blur-md p-8 rounded-2xl shadow-2xl border border-white/5">
                 <div className="flex justify-between items-center mb-8">
-                    <h1 className="text-2xl font-bold text-white">Profilom</h1>
+                    <h1 className="text-2xl font-bold text-amber-100">Profilom</h1>
                     <Link
                         href="/"
-                        className="text-sm text-blue-400 hover:text-blue-300 transition-colors flex items-center gap-1"
+                        className="text-sm text-amber-400 hover:text-amber-300 transition-colors flex items-center gap-1"
                     >
                         <span>&larr;</span> Vissza a játékba
                     </Link>
@@ -102,37 +102,37 @@ export default function ProfilePage() {
 
                 <form onSubmit={handleSave} className="space-y-6">
                     <div>
-                        <label className="block text-sm font-medium text-gray-300 mb-2">Teljes név</label>
+                        <label className="block text-sm font-medium text-amber-200/70 mb-2">Teljes név</label>
                         <input
                             type="text"
                             value={formData.full_name}
                             onChange={(e) => setFormData({ ...formData, full_name: e.target.value })}
-                            className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none text-white"
+                            className="w-full px-4 py-3 bg-zinc-950/50 border border-amber-900/30 rounded-xl focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500/50 transition-all outline-none text-amber-50 placeholder-zinc-600"
                             placeholder="Minta János"
                         />
                     </div>
 
                     <div>
-                        <label className="block text-sm font-medium text-gray-300 mb-2">Nem</label>
+                        <label className="block text-sm font-medium text-amber-200/70 mb-2">Nem</label>
                         <select
                             value={formData.gender}
                             onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
-                            className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none text-white appearance-none"
+                            className="w-full px-4 py-3 bg-zinc-950/50 border border-amber-900/30 rounded-xl focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500/50 transition-all outline-none text-amber-50 appearance-none"
                         >
-                            <option value="">Válassz...</option>
-                            <option value="male">Férfi</option>
-                            <option value="female">Nő</option>
-                            <option value="other">Egyéb</option>
+                            <option value="" className="bg-zinc-900">Válassz...</option>
+                            <option value="male" className="bg-zinc-900">Férfi</option>
+                            <option value="female" className="bg-zinc-900">Nő</option>
+                            <option value="other" className="bg-zinc-900">Egyéb</option>
                         </select>
                     </div>
 
                     <div>
-                        <label className="block text-sm font-medium text-gray-300 mb-2">Születési év</label>
+                        <label className="block text-sm font-medium text-amber-200/70 mb-2">Születési év</label>
                         <input
                             type="number"
                             value={formData.birth_year}
                             onChange={(e) => setFormData({ ...formData, birth_year: e.target.value })}
-                            className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none text-white"
+                            className="w-full px-4 py-3 bg-zinc-950/50 border border-amber-900/30 rounded-xl focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500/50 transition-all outline-none text-amber-50 placeholder-zinc-600"
                             placeholder="1990"
                             min="1925"
                             max="2050"
@@ -142,19 +142,19 @@ export default function ProfilePage() {
                     <button
                         type="submit"
                         disabled={saving}
-                        className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition-all disabled:opacity-50 shadow-lg shadow-blue-900/20"
+                        className="w-full py-3 bg-amber-600/20 hover:bg-amber-600/30 text-amber-400 font-semibold rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed border border-amber-500/50 shadow-[0_0_15px_rgba(245,158,11,0.1)] hover:shadow-[0_0_20px_rgba(245,158,11,0.2)]"
                     >
                         {saving ? 'Mentés...' : 'Mentés'}
                     </button>
 
                     {error && (
-                        <p className="text-red-400 text-sm text-center bg-red-900/20 p-3 rounded-lg border border-red-800/50">
+                        <p className="text-red-300 text-sm text-center bg-red-950/50 p-3 rounded-xl border border-red-900/50">
                             {error}
                         </p>
                     )}
 
                     {message && (
-                        <p className="text-green-400 text-sm text-center bg-green-900/20 p-3 rounded-lg border border-green-800/50">
+                        <p className="text-emerald-300 text-sm text-center bg-emerald-950/50 p-3 rounded-xl border border-emerald-900/50">
                             {message}
                         </p>
                     )}

@@ -5,22 +5,31 @@
   --color-primary: var(--color-orange-500);
   --color-primary-light: var(--color-orange-400);
   --color-primary-dark: var(--color-orange-600);
-  
+
+  /* Semantic Surface Tokens (desert theme) */
   --color-surface: var(--color-zinc-900);
+  --color-surface-card: oklch(0.15 0.005 60 / 0.6);
   --color-surface-dark: var(--color-zinc-950);
-  
+  --color-border-subtle: oklch(1 0 0 / 0.05);
+  --color-border-accent: oklch(0.45 0.15 60 / 0.3);
+
+  /* Semantic Text Tokens */
+  --color-text-primary: var(--color-amber-100);
+  --color-text-secondary: var(--color-zinc-300);
+  --color-text-muted: var(--color-zinc-500);
+
   /* Fonts */
   --font-sans: 'Inter', system-ui, sans-serif;
   --font-serif: 'Georgia', 'Times New Roman', serif;
-  
-  /* Custom Glow Shadows for the buttons */
+
+  /* Custom Glow Shadows */
   --shadow-glow-primary: 0 0 15px rgba(249, 115, 22, 0.4);
   --shadow-glow-primary-lg: 0 0 25px rgba(249, 115, 22, 0.6);
 }
 
 :root {
   --background: var(--color-zinc-950);
-  --foreground: var(--color-zinc-100);
+  --foreground: oklch(0.97 0.02 70 / 0.9);
 }
 
 body {
