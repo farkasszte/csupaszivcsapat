@@ -43,7 +43,9 @@ export const Choices = () => {
         return {
             id: connId,
             targetId,
-            label: label ? renderRichText(label) : 'Continue'
+            label: label ? renderRichText(label) : 'Continue',
+            // Strip HTML tags from rendered label for the story log
+            rawLabel: label ? renderRichText(label).replace(/<[^>]*>/g, '').trim() : 'Continue',
         };
     }).filter(choice => choice !== null);
 
@@ -53,7 +55,7 @@ export const Choices = () => {
                 availableChoices.map((choice, idx) => (
                     <button
                         key={`${choice.id}-${idx}`}
-                        onClick={() => navigateTo(choice.targetId)}
+                        onClick={() => navigateTo(choice.targetId, choice.rawLabel)}
                         className="w-full text-left px-6 py-4 bg-linear-to-r from-amber-900/40 to-orange-900/40 hover:from-amber-800/60 hover:to-orange-800/60 rounded-lg text-amber-100 font-medium transition-all transform hover:scale-[1.02] shadow-lg border border-amber-500/20 hover:border-amber-400/40 backdrop-blur-sm"
                     >
                         {choice.label}

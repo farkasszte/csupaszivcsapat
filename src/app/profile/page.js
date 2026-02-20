@@ -86,10 +86,10 @@ export default function ProfilePage() {
     }
 
     return (
-        <div className="min-h-screen bg-zinc-950 text-orange-50/90 flex items-center justify-center p-4 bg-[url('/cover/cover.jpg')] bg-cover bg-center bg-no-repeat bg-blend-multiply">
+        <div className="relative min-h-screen bg-zinc-950 text-orange-50/90 p-4 pb-12 bg-[url('/cover/cover.jpg')] bg-cover bg-center bg-no-repeat bg-blend-multiply">
             <div className="absolute inset-0 bg-black/70 z-0"></div>
 
-            <div className="relative z-10 w-full max-w-md bg-zinc-900/60 backdrop-blur-md p-8 rounded-2xl shadow-2xl border border-white/5">
+            <div className="relative z-10 w-full max-w-md mx-auto bg-zinc-900/60 backdrop-blur-md p-8 rounded-2xl shadow-2xl border border-white/5">
                 <div className="flex justify-between items-center mb-8">
                     <h1 className="text-2xl font-bold text-amber-100">Profilom</h1>
                     <Link
@@ -129,13 +129,13 @@ export default function ProfilePage() {
                     <div>
                         <label className="block text-sm font-medium text-amber-200/70 mb-2">Születési év</label>
                         <input
-                            type="number"
+                            type="text"
+                            inputMode="numeric"
                             value={formData.birth_year}
-                            onChange={(e) => setFormData({ ...formData, birth_year: e.target.value })}
+                            onChange={(e) => setFormData({ ...formData, birth_year: e.target.value.replace(/\D/g, '').slice(0, 4) })}
                             className="w-full px-4 py-3 bg-zinc-950/50 border border-amber-900/30 rounded-xl focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500/50 transition-all outline-none text-amber-50 placeholder-zinc-600"
                             placeholder="1990"
-                            min="1925"
-                            max="2050"
+                            maxLength={4}
                         />
                     </div>
 

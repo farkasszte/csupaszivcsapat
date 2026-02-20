@@ -109,7 +109,7 @@ export class ArcScript {
      * @param {string} currentElementId
      * @returns {Array<{type: string, content: string}>}
      */
-    parseRichText(html, state, currentElementId) {
+    parseRichText(html, state, currentElementId, { readOnly = false } = {}) {
         if (typeof window === 'undefined') return [];
 
         const parser = new DOMParser();
@@ -154,9 +154,11 @@ export class ArcScript {
                                     }).join('');
                                     results.push({ type: 'text', content: rendered });
                                 }
-                            } else {
+                            } else if (!readOnly) {
+                                // Only execute scripts in normal (non-readOnly) mode
                                 this.executeScript(code, state);
                             }
+                            // In readOnly mode, script blocks are silently skipped
                         }
                     }
                 }

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useEffect } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import projectSettings from '../data/project_settings.json';
 import { useGameStore } from '../store/useGameStore';
 import { ArcScript } from '../logic/ArcScript';
@@ -13,11 +13,15 @@ const arcScript = new ArcScript(projectSettings);
 
 export const GameProvider = ({ children }) => {
     const store = useGameStore();
+    const [showLog, setShowLog] = useState(false);
 
     // Initial load - ensuring starting element is visited if no state
     useEffect(() => {
         if (Object.keys(store.visits).length === 0) {
             store.visitElement(projectSettings.startingElement);
+            store.initStoryLog();
+        } else if (store.storyLog.length === 0) {
+            store.initStoryLog();
         }
     }, []);
 
@@ -36,6 +40,16 @@ export const GameProvider = ({ children }) => {
         return arcScript.parseRichText(html, { visits: store.visits, variables: store.variables }, store.currentElementId);
     };
 
+    // Read-only version for the story log — never executes scripts, just renders text
+    const parseRichTextReadOnly = (html, elementId) => {
+        return arcScript.parseRichText(
+            html,
+            { visits: store.visits, variables: { ...store.variables } },
+            elementId ?? store.currentElementId,
+            { readOnly: true }
+        );
+    };
+
     const value = {
         project: projectSettings,
         currentElementId: store.currentElementId,
@@ -43,6 +57,9 @@ export const GameProvider = ({ children }) => {
         loading: store.loading,
         error: store.error,
         message: store.message,
+        storyLog: store.storyLog,
+        showLog,
+        setShowLog,
         navigateTo: store.navigateTo,
         executeScript: store.executeScript,
         evaluate: store.evaluate,
@@ -52,6 +69,7 @@ export const GameProvider = ({ children }) => {
         getAssetUrl,
         renderRichText,
         parseRichText,
+        parseRichTextReadOnly,
         resolveBranch: store.resolveBranch
     };
 

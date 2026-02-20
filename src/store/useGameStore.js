@@ -12,6 +12,7 @@ export const useGameStore = create((set, get) => ({
     visits: {},
     variables: { score: 0 },
     history: [],
+    storyLog: [],
     loading: false,
     error: null,
     message: null,
@@ -25,7 +26,7 @@ export const useGameStore = create((set, get) => ({
         });
     },
 
-    navigateTo: (targetId) => {
+    navigateTo: (targetId, choiceLabel = null) => {
         if (!targetId) return;
 
         let finalId = targetId;
@@ -40,16 +41,34 @@ export const useGameStore = create((set, get) => ({
             if (connId) {
                 const conn = projectSettings.connections[connId];
                 if (conn) {
-                    get().navigateTo(conn.targetid);
+                    get().navigateTo(conn.targetid, choiceLabel);
                     return;
                 }
             }
         }
 
-        set((state) => ({
-            history: [...state.history, state.currentElementId],
-            currentElementId: finalId,
-        }));
+        const currentId = get().currentElementId;
+
+        set((state) => {
+            // Mark the current log entry's choiceMade
+            const updatedLog = state.storyLog.map((entry, idx) =>
+                idx === state.storyLog.length - 1
+                    ? { ...entry, choiceMade: choiceLabel }
+                    : entry
+            );
+
+            // Add new entry for the element we're navigating to
+            updatedLog.push({
+                elementId: finalId,
+                choiceMade: null,
+            });
+
+            return {
+                history: [...state.history, state.currentElementId],
+                currentElementId: finalId,
+                storyLog: updatedLog,
+            };
+        });
         get().visitElement(finalId);
     },
 
@@ -86,12 +105,27 @@ export const useGameStore = create((set, get) => ({
         return null;
     },
 
+    // Initialize first log entry
+    initStoryLog: () => {
+        const currentId = get().currentElementId;
+        if (get().storyLog.length === 0) {
+            set({
+                storyLog: [{
+                    elementId: currentId,
+                    choiceMade: null,
+                }]
+            });
+        }
+    },
+
     // Persistence Actions
     saveGame: async () => {
         set({ loading: true, error: null, message: null });
         try {
-            const { currentElementId, visits, variables, history } = get();
-            const gameState = { currentElementId, visits, variables, history };
+            const { currentElementId, visits, variables, history, storyLog } = get();
+            // Only persist minimal step data — titles/content are reconstructed from project on load
+            const stepsToSave = storyLog.map(({ elementId, choiceMade }) => ({ elementId, choiceMade }));
+            const gameState = { currentElementId, visits, variables, history, storyLog: stepsToSave };
 
             const { error } = await supabase.auth.updateUser({
                 data: { game_state: gameState }
@@ -119,6 +153,7 @@ export const useGameStore = create((set, get) => ({
                     visits: gameState.visits,
                     variables: gameState.variables,
                     history: gameState.history,
+                    storyLog: gameState.storyLog || [],
                     message: 'Játékállás betöltve!'
                 });
             } else {
@@ -132,14 +167,16 @@ export const useGameStore = create((set, get) => ({
     },
 
     resetGame: () => {
+        const startId = projectSettings.startingElement;
         set({
-            currentElementId: projectSettings.startingElement,
+            currentElementId: startId,
             visits: {},
             variables: { score: 0 },
             history: [],
+            storyLog: [{ elementId: startId, choiceMade: null }],
             error: null,
             message: null
         });
-        get().visitElement(projectSettings.startingElement);
+        get().visitElement(startId);
     }
 }));

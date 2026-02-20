@@ -7,11 +7,13 @@ import {
     RiSave2Line,
     RiDownload2Line,
     RiRefreshLine,
+    RiBookOpenLine,
+    RiGamepadLine,
 } from '@remixicon/react'
 
 export default function Header() {
     const pathname = usePathname();
-    const { saveGame, loadGame, resetGame, loading } = useGame() || {};
+    const { saveGame, loadGame, resetGame, loading, showLog, setShowLog } = useGame() || {};
 
     if (pathname === '/login') {
         return null;
@@ -56,6 +58,19 @@ export default function Header() {
                     >
                         <RiRefreshLine size={14} />
                         <span className="hidden sm:inline">Újrakezdés</span>
+                    </button>
+
+                    {/* Log toggle */}
+                    <button
+                        onClick={() => setShowLog?.(!showLog)}
+                        title={showLog ? 'Játék nézet' : 'Napló'}
+                        className={`flex items-center gap-1.5 px-2 sm:px-3 py-1.5 text-xs font-medium rounded border transition-all ${showLog
+                                ? 'bg-orange-600/20 hover:bg-orange-600/40 text-orange-300 border-orange-500/30'
+                                : 'bg-zinc-700/30 hover:bg-zinc-700/50 text-zinc-400 border-zinc-600/30'
+                            }`}
+                    >
+                        {showLog ? <RiGamepadLine size={14} /> : <RiBookOpenLine size={14} />}
+                        <span className="hidden sm:inline">{showLog ? 'Játék' : 'Napló'}</span>
                     </button>
                 </div>
             </div>
