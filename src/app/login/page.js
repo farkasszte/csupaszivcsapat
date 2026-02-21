@@ -16,6 +16,8 @@ export default function LoginPage() {
     const [guestCode, setGuestCode] = useState('')
     const [generatedCode, setGeneratedCode] = useState(null)
     const [isMounted, setIsMounted] = useState(false)
+    const [showForgotPassword, setShowForgotPassword] = useState(false)
+    const [forgotEmail, setForgotEmail] = useState('')
 
     useEffect(() => {
         setIsMounted(true)
@@ -76,6 +78,29 @@ export default function LoginPage() {
             setError(error.message)
         } else {
             setMessage('Regisztráció sikeres! Ellenőrizd az e-mailedet a visszaigazoláshoz.')
+        }
+        setLoading(false)
+    }
+
+    const handleForgotPassword = async (e) => {
+        e.preventDefault()
+        if (!forgotEmail) {
+            setError('Kérlek add meg az e-mail címedet!')
+            return
+        }
+
+        setLoading(true)
+        setError(null)
+        setMessage(null)
+
+        const { error } = await supabase.auth.resetPasswordForEmail(forgotEmail, {
+            redirectTo: `${window.location.origin}/reset-password`,
+        })
+
+        if (error) {
+            setError(error.message)
+        } else {
+            setMessage('Jelszó-visszaállítási linket küldtünk az e-mail címedre. Ellenőrizd a postaládádat!')
         }
         setLoading(false)
     }
@@ -178,72 +203,120 @@ export default function LoginPage() {
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-4 sm:gap-8 relative z-10 w-full">
-                    {/* Regular Login */}
+                    {/* Regular Login / Forgot Password */}
                     <div className="bg-zinc-900/60 backdrop-blur-md p-5 sm:p-8 rounded-2xl border border-white/5">
-                        <h2 className="text-xl sm:text-2xl font-bold text-center mb-5 sm:mb-8 text-amber-100">Bejelentkezés</h2>
 
-                        <form className="space-y-6">
-                            <div className="space-y-5">
-                                <div>
-                                    <label className="block text-sm font-medium text-amber-200/70 mb-2">E-mail cím</label>
-                                    <input
-                                        type="email"
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
-                                        className="w-full px-4 py-3 bg-zinc-950/50 border border-amber-900/30 rounded-xl focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500/50 transition-all outline-none text-amber-50 placeholder-zinc-600"
-                                        placeholder="pelda@email.hu"
-                                    />
-                                </div>
-
-                                <div>
-                                    <label className="block text-sm font-medium text-amber-200/70 mb-2">Jelszó</label>
-                                    <input
-                                        type="password"
-                                        value={password}
-                                        onChange={(e) => setPassword(e.target.value)}
-                                        className="w-full px-4 py-3 bg-zinc-950/50 border border-amber-900/30 rounded-xl focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500/50 transition-all outline-none text-amber-50 placeholder-zinc-600"
-                                        placeholder="••••••••"
-                                    />
-                                </div>
-
-                                <div className="flex gap-4 pt-2">
-                                    <button
-                                        onClick={handleLogin}
-                                        disabled={loading}
-                                        className="flex-1 py-3 bg-amber-600/20 hover:bg-amber-600/30 text-amber-400 font-semibold rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed border border-amber-500/50 shadow-[0_0_15px_rgba(245,158,11,0.1)] hover:shadow-[0_0_20px_rgba(245,158,11,0.2)]"
-                                    >
-                                        {loading ? '...' : 'Belépés'}
-                                    </button>
-                                    <button
-                                        onClick={handleSignUp}
-                                        disabled={loading}
-                                        className="flex-1 py-3 bg-zinc-800/50 hover:bg-zinc-800 text-zinc-300 font-semibold rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed border border-zinc-700/50"
-                                    >
-                                        Regisztráció
-                                    </button>
-                                </div>
-
-                                <div className="relative py-2">
-                                    <div className="absolute inset-0 flex items-center"><span className="w-full border-t border-zinc-800"></span></div>
-                                    <div className="relative flex justify-center text-xs uppercase"><span className="bg-zinc-900/60 px-2 text-zinc-500 rounded-sm">VAGY</span></div>
-                                </div>
-
+                        {showForgotPassword ? (
+                            /* ===== Forgot Password View ===== */
+                            <>
                                 <button
-                                    onClick={handleGoogleLogin}
-                                    disabled={loading}
-                                    type="button"
-                                    className="w-full py-3 bg-zinc-800 hover:bg-zinc-700 text-zinc-200 font-semibold rounded-xl transition-colors disabled:opacity-50 flex items-center justify-center gap-3 border border-zinc-700 shadow-sm"
+                                    onClick={() => { setShowForgotPassword(false); setError(null); setMessage(null) }}
+                                    className="flex items-center gap-1 text-xs text-zinc-500 hover:text-amber-400 transition-colors mb-6"
                                 >
-                                    <svg className="w-5 h-5" viewBox="0 0 24 24">
-                                        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
-                                        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
-                                        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" />
-                                        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
-                                    </svg>
-                                    Google Bejelentkezés
+                                    ← Vissza a bejelentkezéshez
                                 </button>
-                            </div>
-                        </form>
+                                <h2 className="text-xl sm:text-2xl font-bold text-center mb-2 text-amber-100">Jelszó visszaállítása</h2>
+                                <p className="text-sm text-zinc-400 text-center mb-6">Add meg az e-mail címedet és küldünk egy visszaállítási linket.</p>
+
+                                <form className="space-y-5" onSubmit={handleForgotPassword}>
+                                    <div>
+                                        <label className="block text-sm font-medium text-amber-200/70 mb-2">E-mail cím</label>
+                                        <input
+                                            type="email"
+                                            value={forgotEmail}
+                                            onChange={(e) => setForgotEmail(e.target.value)}
+                                            className="w-full px-4 py-3 bg-zinc-950/50 border border-amber-900/30 rounded-xl focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500/50 transition-all outline-none text-amber-50 placeholder-zinc-600"
+                                            placeholder="pelda@email.hu"
+                                            autoFocus
+                                        />
+                                    </div>
+                                    <button
+                                        type="submit"
+                                        disabled={loading}
+                                        className="w-full py-3 bg-amber-600/20 hover:bg-amber-600/30 text-amber-400 font-semibold rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed border border-amber-500/50 shadow-[0_0_15px_rgba(245,158,11,0.1)] hover:shadow-[0_0_20px_rgba(245,158,11,0.2)]"
+                                    >
+                                        {loading ? '...' : 'Link küldése'}
+                                    </button>
+                                </form>
+                            </>
+                        ) : (
+                            /* ===== Regular Login View ===== */
+                            <>
+                                <h2 className="text-xl sm:text-2xl font-bold text-center mb-5 sm:mb-8 text-amber-100">Bejelentkezés</h2>
+
+                                <form className="space-y-6">
+                                    <div className="space-y-5">
+                                        <div>
+                                            <label className="block text-sm font-medium text-amber-200/70 mb-2">E-mail cím</label>
+                                            <input
+                                                type="email"
+                                                value={email}
+                                                onChange={(e) => setEmail(e.target.value)}
+                                                className="w-full px-4 py-3 bg-zinc-950/50 border border-amber-900/30 rounded-xl focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500/50 transition-all outline-none text-amber-50 placeholder-zinc-600"
+                                                placeholder="pelda@email.hu"
+                                            />
+                                        </div>
+
+                                        <div>
+                                            <div className="flex items-center justify-between mb-2">
+                                                <label className="block text-sm font-medium text-amber-200/70">Jelszó</label>
+                                                <button
+                                                    type="button"
+                                                    onClick={() => { setShowForgotPassword(true); setError(null); setMessage(null); setForgotEmail(email) }}
+                                                    className="text-xs text-zinc-500 hover:text-amber-400 transition-colors"
+                                                >
+                                                    Elfelejtett jelszó?
+                                                </button>
+                                            </div>
+                                            <input
+                                                type="password"
+                                                value={password}
+                                                onChange={(e) => setPassword(e.target.value)}
+                                                className="w-full px-4 py-3 bg-zinc-950/50 border border-amber-900/30 rounded-xl focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500/50 transition-all outline-none text-amber-50 placeholder-zinc-600"
+                                                placeholder="••••••••"
+                                            />
+                                        </div>
+
+                                        <div className="flex gap-4 pt-2">
+                                            <button
+                                                onClick={handleLogin}
+                                                disabled={loading}
+                                                className="flex-1 py-3 bg-amber-600/20 hover:bg-amber-600/30 text-amber-400 font-semibold rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed border border-amber-500/50 shadow-[0_0_15px_rgba(245,158,11,0.1)] hover:shadow-[0_0_20px_rgba(245,158,11,0.2)]"
+                                            >
+                                                {loading ? '...' : 'Belépés'}
+                                            </button>
+                                            <button
+                                                onClick={handleSignUp}
+                                                disabled={loading}
+                                                className="flex-1 py-3 bg-zinc-800/50 hover:bg-zinc-800 text-zinc-300 font-semibold rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed border border-zinc-700/50"
+                                            >
+                                                Regisztráció
+                                            </button>
+                                        </div>
+
+                                        <div className="relative py-2">
+                                            <div className="absolute inset-0 flex items-center"><span className="w-full border-t border-zinc-800"></span></div>
+                                            <div className="relative flex justify-center text-xs uppercase"><span className="bg-zinc-900/60 px-2 text-zinc-500 rounded-sm">VAGY</span></div>
+                                        </div>
+
+                                        <button
+                                            onClick={handleGoogleLogin}
+                                            disabled={loading}
+                                            type="button"
+                                            className="w-full py-3 bg-zinc-800 hover:bg-zinc-700 text-zinc-200 font-semibold rounded-xl transition-colors disabled:opacity-50 flex items-center justify-center gap-3 border border-zinc-700 shadow-sm"
+                                        >
+                                            <svg className="w-5 h-5" viewBox="0 0 24 24">
+                                                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                                                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                                                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" />
+                                                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+                                            </svg>
+                                            Google Bejelentkezés
+                                        </button>
+                                    </div>
+                                </form>
+                            </>
+                        )}
                     </div>
 
                     {/* Guest Login */}

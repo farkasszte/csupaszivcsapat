@@ -14,6 +14,40 @@ const arcScript = new ArcScript(projectSettings);
 export const GameProvider = ({ children }) => {
     const store = useGameStore();
     const [showLog, setShowLog] = useState(false);
+    const [showDashboard, setShowDashboard] = useState(false);
+    const [showMap, setShowMap] = useState(false);
+    const [showMenu, setShowMenu] = useState(false);
+    const [showLibrary, setShowLibrary] = useState(false);
+
+    const toggleLog = (val) => {
+        const next = val !== undefined ? val : !showLog;
+        setShowLog(next);
+        if (next) { setShowDashboard(false); setShowMap(false); setShowMenu(false); setShowLibrary(false); }
+    };
+
+    const toggleDashboard = (val) => {
+        const next = val !== undefined ? val : !showDashboard;
+        setShowDashboard(next);
+        if (next) { setShowLog(false); setShowMap(false); setShowMenu(false); setShowLibrary(false); }
+    };
+
+    const toggleMap = (val) => {
+        const next = val !== undefined ? val : !showMap;
+        setShowMap(next);
+        if (next) { setShowLog(false); setShowDashboard(false); setShowMenu(false); setShowLibrary(false); }
+    };
+
+    const toggleMenu = (val) => {
+        const next = val !== undefined ? val : !showMenu;
+        setShowMenu(next);
+        if (next) { setShowLog(false); setShowDashboard(false); setShowMap(false); setShowLibrary(false); }
+    };
+
+    const toggleLibrary = (val) => {
+        const next = val !== undefined ? val : !showLibrary;
+        setShowLibrary(next);
+        if (next) { setShowLog(false); setShowDashboard(false); setShowMap(false); setShowMenu(false); }
+    };
 
     // Initial load - ensuring starting element is visited if no state
     useEffect(() => {
@@ -59,7 +93,15 @@ export const GameProvider = ({ children }) => {
         message: store.message,
         storyLog: store.storyLog,
         showLog,
-        setShowLog,
+        setShowLog: toggleLog,
+        showDashboard,
+        setShowDashboard: toggleDashboard,
+        showMap,
+        setShowMap: toggleMap,
+        showMenu,
+        setShowMenu: toggleMenu,
+        showLibrary,
+        setShowLibrary: toggleLibrary,
         navigateTo: store.navigateTo,
         executeScript: store.executeScript,
         evaluate: store.evaluate,
