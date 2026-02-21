@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { createClient } from '@/utils/supabase/client'
-import { useRouter } from 'next/navigation'
+import { useRouter, usePathname } from 'next/navigation'
 import Link from 'next/link'
 import {
     RiUserLine,
@@ -10,6 +10,7 @@ import {
     RiCheckLine,
     RiLogoutBoxRLine,
 } from '@remixicon/react'
+import { useGame } from '@/context/GameContext'
 
 export default function UserMenu({ compact = false }) {
     const [user, setUser] = useState(null)
@@ -17,6 +18,8 @@ export default function UserMenu({ compact = false }) {
     const [copied, setCopied] = useState(false)
     const supabase = createClient()
     const router = useRouter()
+    const pathname = usePathname()
+    const { setShowLog, setShowDashboard, setShowMap, setShowMenu, setShowLibrary } = useGame() || {}
 
     useEffect(() => {
         setIsMounted(true)
@@ -76,11 +79,29 @@ export default function UserMenu({ compact = false }) {
     const guestCode = isGuest ? user.email.split('@')[0] : null
 
     if (compact) {
+        const onProfile = pathname === '/profile'
+        const handleProfileClick = () => {
+            if (onProfile) {
+                // Close all panels and go back to the game
+                setShowLog?.(false)
+                setShowDashboard?.(false)
+                setShowMap?.(false)
+                setShowMenu?.(false)
+                setShowLibrary?.(false)
+                router.push('/')
+            } else {
+                router.push('/profile')
+            }
+        }
         return (
-            <Link href="/profile" title="Profilom" className="flex flex-col items-center gap-0.5 text-[10px] font-semibold text-zinc-500 hover:text-amber-300 transition-colors">
+            <button
+                onClick={handleProfileClick}
+                title={onProfile ? 'Vissza a játékba' : 'Profilom'}
+                className={`flex flex-col items-center gap-0.5 text-[10px] font-semibold transition-colors ${onProfile ? 'text-amber-300' : 'text-zinc-500 hover:text-amber-300'}`}
+            >
                 <RiUserLine size={20} />
                 Profil
-            </Link>
+            </button>
         )
     }
 

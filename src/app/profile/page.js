@@ -3,11 +3,12 @@
 import { useEffect, useState } from 'react'
 import { createClient } from '@/utils/supabase/client'
 import { useRouter } from 'next/navigation'
-import Link from 'next/link'
+import { useGame } from '@/context/GameContext'
 
 export default function ProfilePage() {
     const supabase = createClient()
     const router = useRouter()
+    const { setShowLog, setShowDashboard, setShowMap, setShowMenu, setShowLibrary } = useGame() || {}
 
     const [loading, setLoading] = useState(true)
     const [saving, setSaving] = useState(false)
@@ -17,6 +18,12 @@ export default function ProfilePage() {
 
     useEffect(() => {
         setIsMounted(true)
+        // Close all panels so the game resets to clean state behind the profile
+        setShowLog?.(false)
+        setShowDashboard?.(false)
+        setShowMap?.(false)
+        setShowMenu?.(false)
+        setShowLibrary?.(false)
     }, [])
 
     const [formData, setFormData] = useState({
@@ -43,7 +50,6 @@ export default function ProfilePage() {
     const handleSave = async (e) => {
         e.preventDefault()
 
-        // Validation
         if (formData.birth_year) {
             const year = parseInt(formData.birth_year)
             if (isNaN(year) || year < 1925 || year > 2050) {
@@ -86,18 +92,20 @@ export default function ProfilePage() {
     }
 
     return (
-        <div className="relative min-h-screen bg-zinc-950 text-orange-50/90 p-4 pb-12 bg-[url('/cover/cover.jpg')] bg-cover bg-center bg-no-repeat bg-blend-multiply">
-            <div className="absolute inset-0 bg-black/70 z-0"></div>
+        // Backdrop — click anywhere outside the card to go back
+        <div
+            className="relative min-h-screen bg-zinc-950 text-orange-50/90 p-4 pb-12 bg-[url('/cover/cover.jpg')] bg-cover bg-center bg-no-repeat bg-blend-multiply flex items-start lg:items-center justify-center cursor-pointer"
+            onClick={() => router.back()}
+        >
+            <div className="absolute inset-0 bg-black/70 z-0" />
 
-            <div className="relative z-10 w-full max-w-md mx-auto bg-zinc-900/60 backdrop-blur-md p-8 rounded-2xl shadow-2xl border border-white/5">
-                <div className="flex justify-between items-center mb-8">
+            {/* Card — clicks inside stay inside */}
+            <div
+                className="relative z-10 w-full max-w-md bg-zinc-900/60 backdrop-blur-md p-8 rounded-2xl shadow-2xl border border-white/5 cursor-default"
+                onClick={e => e.stopPropagation()}
+            >
+                <div className="mb-8">
                     <h1 className="text-2xl font-bold text-amber-100">Profilom</h1>
-                    <Link
-                        href="/"
-                        className="text-sm text-amber-400 hover:text-amber-300 transition-colors flex items-center gap-1"
-                    >
-                        <span>&larr;</span> Vissza a játékba
-                    </Link>
                 </div>
 
                 <form onSubmit={handleSave} className="space-y-6">

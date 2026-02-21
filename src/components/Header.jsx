@@ -1,6 +1,6 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useGame } from '@/context/GameContext';
 import UserMenu from '@/components/Auth/UserMenu';
 import {
@@ -10,6 +10,7 @@ import {
 
 export default function Header() {
     const pathname = usePathname();
+    const router = useRouter();
     const {
         showLog, showDashboard, showMap, showMenu, showLibrary,
         setShowMenu, setShowLog, setShowDashboard, setShowMap, setShowLibrary,
@@ -17,6 +18,7 @@ export default function Header() {
 
     if (pathname === '/login') return null;
 
+    const onProfile = pathname === '/profile';
     const showPanel = showLog || showDashboard || showMap || showMenu || showLibrary;
     const activeTab = showMenu ? 'menu' : showLog ? 'log' : showDashboard ? 'dashboard' : showMap ? 'map' : showLibrary ? 'library' : null;
 
@@ -32,12 +34,22 @@ export default function Header() {
         }
     };
 
+    // When on /profile, tab buttons navigate to / first, then open their panel
+    const makeTabAction = (setFn) => () => {
+        if (onProfile) {
+            setFn(true);         // set state (closes others automatically)
+            router.push('/');    // navigate away from profile
+        } else {
+            setFn();             // toggle normally
+        }
+    };
+
     const mobileTabs = [
-        { key: 'menu', icon: <RiMenuLine size={20} />, label: 'Menü', action: () => setShowMenu() },
-        { key: 'log', icon: <RiBookOpenLine size={20} />, label: 'Napló', action: () => setShowLog() },
-        { key: 'dashboard', icon: <RiDashboardLine size={20} />, label: 'Jutalmak', action: () => setShowDashboard() },
-        { key: 'map', icon: <RiMapLine size={20} />, label: 'Térkép', action: () => setShowMap() },
-        { key: 'library', icon: <RiBookLine size={20} />, label: 'Könyvtár', action: () => setShowLibrary() },
+        { key: 'menu', icon: <RiMenuLine size={20} />, label: 'Menü', action: makeTabAction(setShowMenu) },
+        { key: 'log', icon: <RiBookOpenLine size={20} />, label: 'Napló', action: makeTabAction(setShowLog) },
+        { key: 'dashboard', icon: <RiDashboardLine size={20} />, label: 'Jutalmak', action: makeTabAction(setShowDashboard) },
+        { key: 'map', icon: <RiMapLine size={20} />, label: 'Térkép', action: makeTabAction(setShowMap) },
+        { key: 'library', icon: <RiBookLine size={20} />, label: 'Könyvtár', action: makeTabAction(setShowLibrary) },
     ];
 
     return (
@@ -69,12 +81,12 @@ export default function Header() {
                     <button
                         key={key}
                         onClick={action}
-                        className={`flex-1 flex flex-col items-center justify-center gap-0.5 py-2 text-[10px] font-semibold transition-colors ${activeTab === key
+                        className={`flex-1 flex flex-col items-center justify-center gap-0.5 py-2 text-[10px] font-semibold transition-colors ${!onProfile && activeTab === key
                             ? 'text-amber-300'
                             : 'text-zinc-500 hover:text-zinc-300'
                             }`}
                     >
-                        <span className={`transition-colors ${activeTab === key ? 'text-amber-400' : ''}`}>{icon}</span>
+                        <span className={`transition-colors ${!onProfile && activeTab === key ? 'text-amber-400' : ''}`}>{icon}</span>
                         {label}
                     </button>
                 ))}
