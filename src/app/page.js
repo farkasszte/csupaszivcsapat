@@ -9,7 +9,6 @@ import GameLibrary from '@/components/GameLibrary';
 import { useGame } from '@/context/GameContext';
 import {
     RiBookOpenLine,
-    RiGamepadLine,
     RiDashboardLine,
     RiMapLine,
     RiMenuLine,
@@ -59,13 +58,12 @@ export default function Home() {
 
                     {/* Side panel */}
                     {showPanel && (
-                        <div>
+                        <div className="lg:contents">
                             <div
-                                className="lg:sticky lg:top-20 bg-zinc-900/60 backdrop-blur-xl rounded-xl border border-white/5 shadow-2xl overflow-hidden flex flex-col"
-                                style={{ maxHeight: 'calc(100vh - 6rem)' }}
+                                className="lg:sticky lg:top-20 bg-zinc-900/60 backdrop-blur-xl lg:rounded-xl border-0 lg:border border-white/5 shadow-2xl overflow-hidden flex flex-col h-[calc(100vh-4rem)] lg:h-auto lg:max-h-[calc(100vh-6rem)]"
                             >
-                                {/* Tab header */}
-                                <div className="flex items-center px-3 py-2.5 border-b border-white/5 shrink-0 gap-0.5">
+                                {/* Tab header — desktop only; mobile uses bottom nav */}
+                                <div className="hidden lg:flex items-center px-3 py-2.5 border-b border-white/5 shrink-0 gap-0.5">
                                     <button onClick={() => setShowMenu(true)} className={tabCls('menu')}>
                                         <RiMenuLine size={13} /> Játék
                                     </button>
@@ -99,51 +97,6 @@ export default function Home() {
                                 </div>
                             </div>
                         </div>
-                    )}
-                </div>
-
-                {/* Mobile floating buttons */}
-                <div className="fixed bottom-6 right-6 lg:hidden z-50 flex flex-col gap-2 items-end">
-                    {showPanel ? (
-                        <>
-                            {/* Tab switcher row */}
-                            <div className="flex gap-1.5 flex-wrap justify-end">
-                                {[
-                                    { key: 'menu', label: 'Menü', icon: <RiMenuLine size={14} />, action: () => setShowMenu(true) },
-                                    { key: 'log', label: 'Napló', icon: <RiBookOpenLine size={14} />, action: () => setShowLog(true) },
-                                    { key: 'dashboard', label: 'Jellemző', icon: <RiDashboardLine size={14} />, action: () => setShowDashboard(true) },
-                                    { key: 'map', label: 'Térkép', icon: <RiMapLine size={14} />, action: () => setShowMap(true) },
-                                    { key: 'library', label: 'Könyvtár', icon: <RiBookLine size={14} />, action: () => setShowLibrary(true) },
-                                ].map(({ key, label, icon, action }) => (
-                                    <button
-                                        key={key}
-                                        onClick={action}
-                                        className={`flex items-center gap-1.5 px-3 py-2 rounded-full text-xs font-semibold shadow-md transition-all border ${activeTab === key
-                                            ? 'bg-amber-700/70 text-amber-100 border-amber-500/50'
-                                            : 'bg-zinc-800/90 text-zinc-300 border-zinc-600/50'
-                                            }`}
-                                    >
-                                        {icon} {label}
-                                    </button>
-                                ))}
-                            </div>
-
-                            {/* Close panel → back to game */}
-                            <button
-                                onClick={closeAll}
-                                className="flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-semibold shadow-lg transition-all border bg-orange-700/80 text-amber-100 border-orange-500/50 shadow-orange-900/40"
-                            >
-                                <RiGamepadLine size={16} /> Játék
-                            </button>
-                        </>
-                    ) : (
-                        /* Default: single "Menü" button to open the panel */
-                        <button
-                            onClick={() => setShowMenu(true)}
-                            className="flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-semibold shadow-lg transition-all border bg-zinc-800/90 text-amber-200 border-zinc-600/50 shadow-black/40"
-                        >
-                            <RiMenuLine size={16} /> Menü
-                        </button>
                     )}
                 </div>
             </div>

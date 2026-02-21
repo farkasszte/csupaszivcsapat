@@ -3,51 +3,86 @@
 import { usePathname } from 'next/navigation';
 import { useGame } from '@/context/GameContext';
 import UserMenu from '@/components/Auth/UserMenu';
-import { RiLayoutRightLine, RiLayoutLine } from '@remixicon/react';
+import {
+    RiLayoutRightLine, RiLayoutLine,
+    RiMenuLine, RiBookOpenLine, RiDashboardLine, RiMapLine, RiBookLine,
+} from '@remixicon/react';
 
 export default function Header() {
     const pathname = usePathname();
-    const { showLog, showDashboard, showMap, showMenu, setShowMenu, setShowLog, setShowDashboard, setShowMap } = useGame() || {};
+    const {
+        showLog, showDashboard, showMap, showMenu, showLibrary,
+        setShowMenu, setShowLog, setShowDashboard, setShowMap, setShowLibrary,
+    } = useGame() || {};
 
     if (pathname === '/login') return null;
 
-    const showPanel = showLog || showDashboard || showMap || showMenu;
+    const showPanel = showLog || showDashboard || showMap || showMenu || showLibrary;
+    const activeTab = showMenu ? 'menu' : showLog ? 'log' : showDashboard ? 'dashboard' : showMap ? 'map' : showLibrary ? 'library' : null;
 
     const togglePanel = () => {
         if (showPanel) {
-            // Close all
             setShowLog(false);
             setShowDashboard(false);
             setShowMap(false);
             setShowMenu(false);
+            setShowLibrary(false);
         } else {
-            // Open to Menu tab by default
             setShowMenu(true);
         }
     };
 
-    return (
-        <header className="fixed top-0 left-0 right-0 z-50 bg-zinc-950/80 backdrop-blur-md border-b border-amber-900/30 px-4 sm:px-6 py-3 sm:py-4 flex justify-between items-center gap-2">
-            {/* Left: title */}
-            <h1 className="text-base sm:text-xl font-bold bg-linear-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent whitespace-nowrap">
-                Csupaszív Kaland
-            </h1>
+    const mobileTabs = [
+        { key: 'menu', icon: <RiMenuLine size={20} />, label: 'Menü', action: () => setShowMenu() },
+        { key: 'log', icon: <RiBookOpenLine size={20} />, label: 'Napló', action: () => setShowLog() },
+        { key: 'dashboard', icon: <RiDashboardLine size={20} />, label: 'Jutalmak', action: () => setShowDashboard() },
+        { key: 'map', icon: <RiMapLine size={20} />, label: 'Térkép', action: () => setShowMap() },
+        { key: 'library', icon: <RiBookLine size={20} />, label: 'Könyvtár', action: () => setShowLibrary() },
+    ];
 
-            {/* Center: panel toggle (desktop only) */}
-            <button
-                onClick={togglePanel}
-                title={showPanel ? 'Panel bezárása' : 'Panel megnyitása'}
-                className={`hidden lg:flex absolute left-1/2 -translate-x-1/2 items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium rounded border transition-all ${showPanel
+    return (
+        <>
+            {/* ── Desktop header (top bar) ── */}
+            <header className="hidden lg:flex fixed top-0 left-0 right-0 z-50 bg-zinc-950/80 backdrop-blur-md border-b border-amber-900/30 px-6 py-4 justify-between items-center gap-2">
+                <h1 className="text-xl font-bold bg-linear-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent whitespace-nowrap">
+                    Csupaszív Kaland
+                </h1>
+
+                <button
+                    onClick={togglePanel}
+                    title={showPanel ? 'Panel bezárása' : 'Panel megnyitása'}
+                    className={`absolute left-1/2 -translate-x-1/2 flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium rounded border transition-all ${showPanel
                         ? 'bg-amber-600/20 hover:bg-amber-600/40 text-amber-300 border-amber-500/30'
                         : 'bg-zinc-700/30 hover:bg-zinc-700/50 text-zinc-400 border-zinc-600/30'
-                    }`}
-            >
-                {showPanel ? <RiLayoutLine size={14} /> : <RiLayoutRightLine size={14} />}
-                <span>{showPanel ? 'Bezár' : 'Menü'}</span>
-            </button>
+                        }`}
+                >
+                    {showPanel ? <RiLayoutLine size={14} /> : <RiLayoutRightLine size={14} />}
+                    <span>{showPanel ? 'Bezár' : 'Menü'}</span>
+                </button>
 
-            {/* Right: user menu */}
-            <UserMenu />
-        </header>
+                <UserMenu />
+            </header>
+
+            {/* ── Mobile bottom nav bar ── */}
+            <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-zinc-950/95 backdrop-blur-md border-t border-amber-900/30 flex items-stretch">
+                {mobileTabs.map(({ key, icon, label, action }) => (
+                    <button
+                        key={key}
+                        onClick={action}
+                        className={`flex-1 flex flex-col items-center justify-center gap-0.5 py-2 text-[10px] font-semibold transition-colors ${activeTab === key
+                            ? 'text-amber-300'
+                            : 'text-zinc-500 hover:text-zinc-300'
+                            }`}
+                    >
+                        <span className={`transition-colors ${activeTab === key ? 'text-amber-400' : ''}`}>{icon}</span>
+                        {label}
+                    </button>
+                ))}
+                {/* User avatar/menu as last item */}
+                <div className="flex-1 flex flex-col items-center justify-center py-2">
+                    <UserMenu compact />
+                </div>
+            </nav>
+        </>
     );
 }

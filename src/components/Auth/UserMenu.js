@@ -11,7 +11,7 @@ import {
     RiLogoutBoxRLine,
 } from '@remixicon/react'
 
-export default function UserMenu() {
+export default function UserMenu({ compact = false }) {
     const [user, setUser] = useState(null)
     const [isMounted, setIsMounted] = useState(false)
     const [copied, setCopied] = useState(false)
@@ -54,6 +54,14 @@ export default function UserMenu() {
     if (!isMounted) return null;
 
     if (!user) {
+        if (compact) {
+            return (
+                <Link href="/login" title="Belépés" className="flex flex-col items-center gap-0.5 text-[10px] font-semibold text-zinc-500 hover:text-amber-300 transition-colors">
+                    <RiUserLine size={20} />
+                    Belépés
+                </Link>
+            )
+        }
         return (
             <Link
                 href="/login"
@@ -66,6 +74,15 @@ export default function UserMenu() {
 
     const isGuest = user.email?.endsWith('@vendeg.hu')
     const guestCode = isGuest ? user.email.split('@')[0] : null
+
+    if (compact) {
+        return (
+            <Link href="/profile" title="Profilom" className="flex flex-col items-center gap-0.5 text-[10px] font-semibold text-zinc-500 hover:text-amber-300 transition-colors">
+                <RiUserLine size={20} />
+                Profil
+            </Link>
+        )
+    }
 
     return (
         <div className="flex items-center gap-3">
