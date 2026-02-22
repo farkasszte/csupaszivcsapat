@@ -196,15 +196,15 @@ export default function LoginPage() {
             <div className="w-full max-w-4xl space-y-6 sm:space-y-12">
                 {/* Header Section representing the image */}
                 <div className="text-center space-y-3 sm:space-y-4 max-w-2xl mx-auto">
-                    <h1 className="text-3xl sm:text-5xl font-extrabold text-amber-200 font-serif tracking-tight drop-shadow-md">Kiszáradt Legelők</h1>
+                    <h1 className="text-2xl sm:text-5xl font-extrabold bg-linear-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent font-serif tracking-tight drop-shadow-md">Csupaszív kalandok: Homokhátság Hősei</h1>
                     <p className="text-sm sm:text-lg text-zinc-300 leading-relaxed">
-                        A tűző nap égeti a Alföldi pusztát. A föld repedezett, és minden élet vízért könyörög. Souslik barátunk, Pista, kiszáradt torkát érezi.
+                        A tűző nap égeti a homokháti pusztát. A föld repedezett, és minden élet vízért könyörög. Mentsd meg az állatokat Ürge Panni, Szalakóta Szilvia és Túzok tanár úr segítségével!
                     </p>
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-4 sm:gap-8 relative z-10 w-full">
                     {/* Regular Login / Forgot Password */}
-                    <div className="bg-zinc-900/60 backdrop-blur-md p-5 sm:p-8 rounded-2xl border border-white/5">
+                    <div className="bg-zinc-900/60 backdrop-blur-md p-4 sm:p-8 rounded-2xl border border-white/5">
 
                         {showForgotPassword ? (
                             /* ===== Forgot Password View ===== */
@@ -277,18 +277,18 @@ export default function LoginPage() {
                                             />
                                         </div>
 
-                                        <div className="flex gap-4 pt-2">
+                                        <div className="flex flex-col sm:flex-row gap-4 pt-2">
                                             <button
                                                 onClick={handleLogin}
                                                 disabled={loading}
-                                                className="flex-1 py-3 bg-amber-600/20 hover:bg-amber-600/30 text-amber-400 font-semibold rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed border border-amber-500/50 shadow-[0_0_15px_rgba(245,158,11,0.1)] hover:shadow-[0_0_20px_rgba(245,158,11,0.2)]"
+                                                className="w-full sm:flex-1 py-3 bg-amber-600/20 hover:bg-amber-600/30 text-amber-400 font-semibold rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed border border-amber-500/50 shadow-[0_0_15px_rgba(245,158,11,0.1)] hover:shadow-[0_0_20px_rgba(245,158,11,0.2)]"
                                             >
                                                 {loading ? '...' : 'Belépés'}
                                             </button>
                                             <button
                                                 onClick={handleSignUp}
                                                 disabled={loading}
-                                                className="flex-1 py-3 bg-zinc-800/50 hover:bg-zinc-800 text-zinc-300 font-semibold rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed border border-zinc-700/50"
+                                                className="w-full sm:flex-1 py-3 bg-zinc-800/50 hover:bg-zinc-800 text-zinc-300 font-semibold rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed border border-zinc-700/50"
                                             >
                                                 Regisztráció
                                             </button>
@@ -320,7 +320,7 @@ export default function LoginPage() {
                     </div>
 
                     {/* Guest Login */}
-                    <div className="bg-zinc-900/60 backdrop-blur-md p-5 sm:p-8 rounded-2xl border border-white/5 flex flex-col justify-between">
+                    <div className="bg-zinc-900/60 backdrop-blur-md p-4 sm:p-8 rounded-2xl border border-white/5 flex flex-col justify-between">
                         <div>
                             <h2 className="text-xl sm:text-2xl font-bold text-center mb-5 sm:mb-8 text-amber-100">Gyors Játék</h2>
                             <p className="text-sm text-zinc-400 mb-5 sm:mb-8 text-center px-2 sm:px-4 leading-relaxed">
@@ -344,19 +344,19 @@ export default function LoginPage() {
 
                                 <div className="space-y-3">
                                     <label className="block text-sm font-medium text-amber-200/70 text-center">Van már kódod? Folytasd!</label>
-                                    <div className="flex gap-3">
+                                    <div className="flex gap-2 sm:gap-3">
                                         <input
                                             type="text"
                                             value={guestCode}
                                             onChange={(e) => setGuestCode(e.target.value.toLowerCase().slice(0, 8))}
-                                            className="flex-1 px-4 py-3 bg-zinc-950/50 border border-amber-900/30 rounded-xl focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500/50 outline-none text-amber-100 text-center font-mono tracking-[0.2em] uppercase placeholder-zinc-700"
+                                            className="flex-1 px-3 sm:px-4 py-3 bg-zinc-950/50 border border-amber-900/30 rounded-xl focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500/50 outline-none text-amber-100 text-center font-mono tracking-widest sm:tracking-[0.2em] uppercase placeholder-zinc-700 text-sm sm:text-base"
                                             placeholder="8 KARAKTER"
                                             maxLength={8}
                                         />
                                         <button
                                             onClick={handleGuestLogin}
                                             disabled={loading}
-                                            className="px-6 bg-zinc-800 hover:bg-zinc-700 text-amber-50 font-semibold rounded-xl border border-zinc-700 transition-colors shadow-sm"
+                                            className="px-4 sm:px-6 bg-zinc-800 hover:bg-zinc-700 text-amber-50 font-semibold rounded-xl border border-zinc-700 transition-colors shadow-sm text-sm sm:text-base"
                                         >
                                             OK
                                         </button>
@@ -383,7 +383,7 @@ export default function LoginPage() {
                                 <p className="mb-3">{message}</p>
                                 {generatedCode && (
                                     <div className="mt-4 p-4 bg-black/40 rounded-lg inline-block border border-white/5">
-                                        <div className="text-3xl font-mono font-bold tracking-[0.25em] text-orange-400 selection:bg-orange-500/30 uppercase">
+                                        <div className="text-2xl sm:text-3xl font-mono font-bold tracking-[0.1em] sm:tracking-[0.25em] text-orange-400 selection:bg-orange-500/30 uppercase">
                                             {generatedCode}
                                         </div>
                                         <div className="text-xs text-zinc-400 mt-2 font-sans tracking-normal">Ez a te egyedi azonosítód</div>
