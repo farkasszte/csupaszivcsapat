@@ -206,11 +206,11 @@ export const StoryEngine = () => {
     if (!isMounted) return null;
 
     return (
-        <div className={`mx-auto rounded-xl shadow-2xl border border-white/10 relative overflow-hidden transition-all duration-500 transform ${coverUrl ? 'h-full w-auto aspect-9/16 max-w-none' : 'max-w-2xl w-full p-8 bg-zinc-900/60 backdrop-blur-xl'
-            } ${isFading ? 'opacity-0 scale-[0.98] translate-y-1' : 'opacity-100 scale-100 translate-y-0'}`}>
+        <div className={`mx-auto rounded-xl shadow-2xl border border-white/10 relative overflow-hidden transition-all duration-500 transform h-full w-auto aspect-9/16 max-w-none bg-zinc-950 ${isFading ? 'opacity-0 scale-[0.98] translate-y-1' : 'opacity-100 scale-100 translate-y-0'
+            }`}>
 
             {/* Background Image */}
-            {coverUrl && (
+            {coverUrl ? (
                 <img
                     src={coverUrl}
                     alt="Scene"
@@ -218,10 +218,15 @@ export const StoryEngine = () => {
                     style={{ filter: getColorFilterStyle(colorFilter) }}
                     onClick={() => setIsUiHidden(!isUiHidden)}
                 />
+            ) : (
+                <div
+                    className="absolute inset-0 w-full h-full bg-zinc-900 cursor-pointer"
+                    onClick={() => setIsUiHidden(!isUiHidden)}
+                />
             )}
 
             {/* Overlay Container */}
-            <div className={`relative z-10 flex flex-col h-full pointer-events-none ${!coverUrl ? '' : ''}`}>
+            <div className={`relative z-10 flex flex-col h-full pointer-events-none`}>
 
                 {/* Status Messages */}
                 {(error || message) && (
@@ -236,20 +241,18 @@ export const StoryEngine = () => {
                 {/* Spacer pushes content to the bottom */}
                 <div className="flex-1" />
 
-                <div className={`transition-all duration-500 transform ${isUiHidden ? 'opacity-0 translate-y-8 pointer-events-none' : 'opacity-100 translate-y-0 pointer-events-auto'} ${!coverUrl ? '' : 'bg-linear-to-b from-transparent via-black/40 to-black/80'}`}>
+                <div className={`transition-all duration-500 transform ${isUiHidden ? 'opacity-0 translate-y-8 pointer-events-none' : 'opacity-100 translate-y-0 pointer-events-auto'} bg-linear-to-b from-transparent via-black/40 to-black/80`}>
                     {/* Choices Overlay (moves above the text box) */}
-                    {coverUrl && (
-                        <div className="px-3 pb-2 z-20">
-                            <Choices hasImage={true} onHoverChange={setIsChoiceHovered} />
-                        </div>
-                    )}
+                    <div className="px-3 pb-2 z-20 pointer-events-auto">
+                        <Choices hasImage={true} onHoverChange={setIsChoiceHovered} />
+                    </div>
 
                     {/* Text Content in Translucent Box */}
-                    <div className={`p-4 ${coverUrl ? 'm-3 mb-4 bg-black/30 backdrop-blur-md rounded-xl border border-white/10 shadow-xl' : ''}`}>
-                        <h1 className="text-2xl lg:text-3xl font-bold mb-3 text-transparent bg-clip-text bg-linear-to-r from-amber-200 to-orange-200 drop-shadow-sm font-serif pointer-events-auto" dangerouslySetInnerHTML={{ __html: element?.title }}></h1>
+                    <div className={`p-4 m-3 mb-4 bg-black/30 backdrop-blur-md rounded-xl border border-white/10 shadow-xl pointer-events-auto`}>
+                        <h1 className="text-2xl lg:text-3xl font-bold mb-3 text-transparent bg-clip-text bg-linear-to-r from-amber-200 to-orange-200 drop-shadow-sm font-serif" dangerouslySetInnerHTML={{ __html: element?.title }}></h1>
 
                         {/* Text area is internally scrollable if content is very long */}
-                        <div className={`story-content space-y-3 text-sm lg:text-base text-orange-50/90 leading-relaxed font-light tracking-wide overflow-y-auto pointer-events-auto ${coverUrl ? 'max-h-[35vh] pr-2' : 'min-h-[100px]'}`}>
+                        <div className={`story-content space-y-3 text-sm lg:text-base text-orange-50/90 leading-relaxed font-light tracking-wide overflow-y-auto max-h-[35vh] pr-2`}>
                             {contentSegments.map((seg, idx) => {
                                 const visibleInThisSegment = Math.max(0, Math.min(seg.length, totalVisibleChars - seg.startOffset));
                                 return (
@@ -264,8 +267,6 @@ export const StoryEngine = () => {
                         </div>
                     </div>
                 </div>
-
-                {!coverUrl && <Choices hasImage={false} />}
             </div>
         </div>
     );

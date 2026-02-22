@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useGame } from '../context/GameContext';
 
 export const Choices = ({ hasImage, onHoverChange }) => {
-    const { project, currentElementId, navigateTo, resolveBranch, renderRichText } = useGame();
+    const { project, currentElementId, navigateTo, resolveBranch, renderRichText, resetGame } = useGame();
     const [isMounted, setIsMounted] = useState(false);
 
     useEffect(() => {
@@ -69,8 +69,10 @@ export const Choices = ({ hasImage, onHoverChange }) => {
                 ))
             ) : (
                 <button
-                    onClick={() => window.location.reload()}
-                    className={`text-amber-100 font-medium transition-all transform hover:scale-95 shadow-xl backdrop-blur-md border border-white/20 flex-none
+                    onClick={() => resetGame?.()}
+                    onMouseEnter={() => onHoverChange?.(true)}
+                    onMouseLeave={() => onHoverChange?.(false)}
+                    className={`text-amber-100 font-medium transition-all transform hover:scale-95 active:scale-90 shadow-xl backdrop-blur-md border border-white/20 flex-none pointer-events-auto
                         ${hasImage
                             ? 'px-6 py-2 rounded-full bg-red-950/60 hover:bg-red-900/80 text-sm'
                             : 'w-full text-center px-6 py-4 rounded-lg bg-linear-to-r from-red-900/40 to-orange-900/40 hover:from-red-800/60 hover:to-orange-800/60 border-orange-500/20'
