@@ -13,6 +13,7 @@ export const useGameStore = create((set, get) => ({
     variables: { score: 0 },
     history: [],
     storyLog: [],
+    discoveredComponents: [],
     loading: false,
     error: null,
     message: null,
@@ -22,7 +23,22 @@ export const useGameStore = create((set, get) => ({
         set((state) => {
             const newVisits = { ...state.visits };
             newVisits[id] = (newVisits[id] || 0) + 1;
-            return { visits: newVisits };
+
+            // Collect discovered components
+            const element = projectSettings.elements[id];
+            const newDiscovered = [...state.discoveredComponents];
+            if (element?.components) {
+                element.components.forEach(compId => {
+                    if (!newDiscovered.includes(compId)) {
+                        newDiscovered.push(compId);
+                    }
+                });
+            }
+
+            return {
+                visits: newVisits,
+                discoveredComponents: newDiscovered
+            };
         });
     },
 
@@ -122,10 +138,11 @@ export const useGameStore = create((set, get) => ({
     saveGame: async () => {
         set({ loading: true, error: null, message: null });
         try {
-            const { currentElementId, visits, variables, history, storyLog } = get();
+            const { currentElementId, visits, variables, history, storyLog, discoveredComponents } = get();
             // Only persist minimal step data — titles/content are reconstructed from project on load
             const stepsToSave = storyLog.map(({ elementId, choiceMade }) => ({ elementId, choiceMade }));
-            const gameState = { currentElementId, visits, variables, history, storyLog: stepsToSave };
+            const gameState = { currentElementId, visits, variables, history, storyLog: stepsToSave, discoveredComponents };
+
 
             const { error } = await supabase.auth.updateUser({
                 data: { game_state: gameState }
@@ -154,8 +171,10 @@ export const useGameStore = create((set, get) => ({
                     variables: gameState.variables,
                     history: gameState.history,
                     storyLog: gameState.storyLog || [],
+                    discoveredComponents: gameState.discoveredComponents || [],
                     message: 'Játékállás betöltve!'
                 });
+
             } else {
                 set({ error: 'Nincs mentett játékállás.' });
             }
@@ -174,9 +193,11 @@ export const useGameStore = create((set, get) => ({
             variables: { score: 0 },
             history: [],
             storyLog: [{ elementId: startId, choiceMade: null }],
+            discoveredComponents: [],
             error: null,
             message: null
         });
+
         get().visitElement(startId);
     }
 }));

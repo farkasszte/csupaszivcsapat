@@ -19,6 +19,10 @@ export const GameProvider = ({ children }) => {
     const [showMenu, setShowMenu] = useState(false);
     const [showLibrary, setShowLibrary] = useState(false);
     const [lightboxImage, setLightboxImage] = useState(null);
+    const [typewriterSpeed, setTypewriterSpeed] = useState(30);
+
+
+
     const [isMuted, setIsMuted] = useState(false);
     const [colorFilter, setColorFilter] = useState('none');
 
@@ -30,11 +34,15 @@ export const GameProvider = ({ children }) => {
         if (next) { setShowDashboard(false); setShowMap(false); setShowMenu(false); setShowLibrary(false); }
     };
 
+
+
     const toggleDashboard = (val) => {
         const next = val !== undefined ? val : !showDashboard;
         setShowDashboard(next);
         if (next) { setShowLog(false); setShowMap(false); setShowMenu(false); setShowLibrary(false); }
     };
+
+
 
     const toggleMap = (val) => {
         const next = val !== undefined ? val : !showMap;
@@ -42,17 +50,23 @@ export const GameProvider = ({ children }) => {
         if (next) { setShowLog(false); setShowDashboard(false); setShowMenu(false); setShowLibrary(false); }
     };
 
+
+
     const toggleMenu = (val) => {
         const next = val !== undefined ? val : !showMenu;
         setShowMenu(next);
         if (next) { setShowLog(false); setShowDashboard(false); setShowMap(false); setShowLibrary(false); }
     };
 
+
+
     const toggleLibrary = (val) => {
         const next = val !== undefined ? val : !showLibrary;
         setShowLibrary(next);
         if (next) { setShowLog(false); setShowDashboard(false); setShowMap(false); setShowMenu(false); }
     };
+
+
 
     const openLightbox = (url) => setLightboxImage(url);
     const closeLightbox = () => setLightboxImage(null);
@@ -104,7 +118,9 @@ export const GameProvider = ({ children }) => {
         error: store.error,
         message: store.message,
         storyLog: store.storyLog,
+        discoveredComponents: store.discoveredComponents,
         showLog,
+
         setShowLog: toggleLog,
         showDashboard,
         setShowDashboard: toggleDashboard,
@@ -114,7 +130,12 @@ export const GameProvider = ({ children }) => {
         setShowMenu: toggleMenu,
         showLibrary,
         setShowLibrary: toggleLibrary,
+        typewriterSpeed,
+        setTypewriterSpeed,
         navigateTo: store.navigateTo,
+
+
+
         executeScript: store.executeScript,
         evaluate: store.evaluate,
         saveGame: store.saveGame,

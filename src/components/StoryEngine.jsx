@@ -8,10 +8,13 @@ export const StoryEngine = () => {
     const {
         project, currentElementId, executeScript, evaluate, state,
         getAssetUrl, parseRichText, saveGame, loadGame, resetGame,
-        loading, error, message, openLightbox, isMuted, colorFilter
+        loading, error, message, openLightbox, isMuted, colorFilter,
+        typewriterSpeed
     } = useGame();
 
+
     const [contentSegments, setContentSegments] = useState([]);
+    const [totalVisibleChars, setTotalVisibleChars] = useState(0);
     const [isMounted, setIsMounted] = useState(false);
 
     useEffect(() => {
@@ -21,15 +24,55 @@ export const StoryEngine = () => {
     const element = project.elements[currentElementId];
     const audioRef = useRef(null);
 
+    // Parse into segments and calculate offsets
     useEffect(() => {
         if (!element) return;
 
-        // Parse content
         const rawContent = element.content;
         const segments = parseRichText(rawContent);
-        setContentSegments(segments);
 
-    }, [currentElementId, element, state.visits[currentElementId]]);
+        // Enhance segments with text length and cumulative start offsets
+        let currentOffset = 0;
+        const enhancedSegments = segments.map(seg => {
+            const div = document.createElement('div');
+            div.innerHTML = seg.content;
+            const textLen = (div.textContent || "").length;
+            const enhanced = { ...seg, startOffset: currentOffset, length: textLen };
+            currentOffset += textLen;
+            return enhanced;
+        });
+
+        setContentSegments(enhancedSegments);
+
+        // Reset or set to end if typewriter is OFF
+        if (typewriterSpeed === 0) {
+            setTotalVisibleChars(999999);
+        } else {
+            setTotalVisibleChars(0);
+        }
+
+    }, [currentElementId, element, state.visits[currentElementId], typewriterSpeed]);
+
+    // Global typewriter controller
+    useEffect(() => {
+        if (typewriterSpeed === 0 || contentSegments.length === 0) return;
+
+        const totalLength = contentSegments[contentSegments.length - 1].startOffset + contentSegments[contentSegments.length - 1].length;
+        if (totalVisibleChars >= totalLength) return;
+
+        const timer = setInterval(() => {
+            setTotalVisibleChars(prev => {
+                if (prev >= totalLength) {
+                    clearInterval(timer);
+                    return prev;
+                }
+                return prev + 1;
+            });
+        }, typewriterSpeed);
+
+        return () => clearInterval(timer);
+    }, [contentSegments, typewriterSpeed, totalVisibleChars === 0]);
+
 
     // Handle clicks on images in story content
     useEffect(() => {
@@ -131,12 +174,21 @@ export const StoryEngine = () => {
             <h1 className="text-4xl font-bold mb-6 text-transparent bg-clip-text bg-linear-to-r from-amber-200 to-orange-200 drop-shadow-sm font-serif" dangerouslySetInnerHTML={{ __html: element?.title }}></h1>
 
             <div className="story-content space-y-4 text-lg text-orange-50/80 leading-relaxed font-light tracking-wide">
-                {contentSegments.map((seg, idx) => (
-                    seg.type === 'html' ?
-                        <div key={idx} dangerouslySetInnerHTML={{ __html: seg.content }} /> :
-                        <span key={idx}>{seg.content}</span>
-                ))}
+                {contentSegments.map((seg, idx) => {
+                    // How many characters of THIS segment should be visible?
+                    const visibleInThisSegment = Math.max(0, Math.min(seg.length, totalVisibleChars - seg.startOffset));
+
+                    return (
+                        <TypewriterSegment
+                            key={`${currentElementId}-${idx}`}
+                            content={seg.content}
+                            visibleCount={visibleInThisSegment}
+                            isFull={visibleInThisSegment >= seg.length}
+                        />
+                    );
+                })}
             </div>
+
 
             <Choices />
         </div>
@@ -156,3 +208,47 @@ export const getColorFilterStyle = (filterId) => {
     }
 };
 
+const TypewriterSegment = React.memo(({ content, visibleCount, isFull }) => {
+    // If fully visible, just render normally to avoid DOM walking
+    if (isFull) {
+        return <div dangerouslySetInnerHTML={{ __html: content }} />;
+    }
+
+    // Stable HTML truncation
+    const getVisibleHtml = () => {
+        if (visibleCount <= 0) return "";
+
+        const div = document.createElement('div');
+        div.innerHTML = content;
+
+        let count = 0;
+        const walk = (node) => {
+            if (count >= visibleCount) {
+                node.textContent = "";
+                return;
+            }
+            if (node.nodeType === 3) { // Text Node
+                const remaining = visibleCount - count;
+                if (node.textContent.length > remaining) {
+                    node.textContent = node.textContent.slice(0, remaining);
+                }
+                count += node.textContent.length;
+            } else { // Element Node
+                const children = Array.from(node.childNodes);
+                for (let i = 0; i < children.length; i++) {
+                    if (count >= visibleCount) {
+                        node.removeChild(children[i]);
+                    } else {
+                        walk(children[i]);
+                    }
+                }
+            }
+        };
+        walk(div);
+        return div.innerHTML;
+    };
+
+    return <div dangerouslySetInnerHTML={{ __html: getVisibleHtml() }} />;
+});
+
+TypewriterSegment.displayName = 'TypewriterSegment';

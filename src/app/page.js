@@ -7,6 +7,8 @@ import GameMap from '@/components/GameMap';
 import GameMenu from '@/components/GameMenu';
 import GameLibrary from '@/components/GameLibrary';
 import { useGame } from '@/context/GameContext';
+
+
 import { Lightbox } from '@/components/Lightbox';
 import { ColorFilters } from '@/components/ColorFilters';
 
@@ -19,6 +21,8 @@ import {
     RiBookLine,
 } from '@remixicon/react';
 
+
+
 export default function Home() {
     const {
         showLog, setShowLog,
@@ -28,8 +32,12 @@ export default function Home() {
         showLibrary, setShowLibrary,
     } = useGame();
 
+
+
     const showPanel = showLog || showDashboard || showMap || showMenu || showLibrary;
     const activeTab = showMenu ? 'menu' : showLog ? 'log' : showDashboard ? 'dashboard' : showMap ? 'map' : showLibrary ? 'library' : null;
+
+
 
     const closeAll = () => {
         setShowLog(false);
@@ -38,6 +46,8 @@ export default function Home() {
         setShowMenu(false);
         setShowLibrary(false);
     };
+
+
 
     const tabCls = (key) =>
         `flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold transition-colors ${activeTab === key
@@ -92,6 +102,8 @@ export default function Home() {
                                     </button>
                                 </div>
 
+
+
                                 {/* Panel content */}
                                 <div className="overflow-y-auto flex-1 py-2">
                                     {activeTab === 'menu' && <GameMenu />}
@@ -100,6 +112,8 @@ export default function Home() {
                                     {activeTab === 'map' && <GameMap />}
                                     {activeTab === 'library' && <GameLibrary />}
                                 </div>
+
+
                             </div>
                         </div>
                     )}

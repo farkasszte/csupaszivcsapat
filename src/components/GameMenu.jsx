@@ -9,7 +9,8 @@ import {
     RiCloseLine,
     RiVolumeUpLine,
     RiVolumeMuteLine,
-    RiPaletteLine
+    RiPaletteLine,
+    RiTimerLine
 } from '@remixicon/react';
 import { useState } from 'react';
 import { createPortal } from 'react-dom';
@@ -68,7 +69,9 @@ function MobilePreviewModal({ onClose }) {
 export default function GameMenu() {
     const {
         saveGame, loadGame, resetGame, loading, error, message,
-        isMuted, toggleMute, colorFilter, setColorFilter
+        isMuted, toggleMute,
+        colorFilter, setColorFilter,
+        typewriterSpeed, setTypewriterSpeed,
     } = useGame();
     const [showPreview, setShowPreview] = useState(false);
 
@@ -160,7 +163,37 @@ export default function GameMenu() {
                             ))}
                         </div>
                     </div>
+
+                    {/* Typewriter Speed */}
+                    <div className="px-3 py-2 bg-zinc-800/20 rounded-lg border border-white/5">
+                        <div className="flex items-center justify-between mb-2">
+                            <div className="flex items-center gap-2">
+                                <RiTimerLine size={16} className="text-amber-500/70" />
+                                <span className="text-xs font-semibold text-zinc-300">Írógép sebesség</span>
+                            </div>
+                            <span className="text-[10px] font-mono text-amber-500/60 uppercase">
+                                {typewriterSpeed === 0 ? 'KI' : typewriterSpeed <= 20 ? 'Gyors' : typewriterSpeed <= 50 ? 'Közepes' : 'Lassú'}
+                            </span>
+                        </div>
+                        <div className="px-1">
+                            <input
+                                type="range"
+                                min="0"
+                                max="100"
+                                step="10"
+                                value={typewriterSpeed}
+                                onChange={(e) => setTypewriterSpeed(parseInt(e.target.value))}
+                                className="w-full h-1.5 bg-zinc-700 rounded-lg appearance-none cursor-pointer accent-amber-600 focus:outline-none"
+                            />
+                            <div className="flex justify-between mt-1 text-[9px] text-zinc-600 font-medium">
+                                <span>KI</span>
+                                <span>Gyors</span>
+                                <span>Lassú</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
 
                 <div className="border-t border-white/5 my-1" />
 
