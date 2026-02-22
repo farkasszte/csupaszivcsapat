@@ -8,9 +8,10 @@ export const StoryEngine = () => {
     const {
         project, currentElementId, executeScript, evaluate, state,
         getAssetUrl, parseRichText, saveGame, loadGame, resetGame,
-        loading, error, message, openLightbox, isMuted, colorFilter,
+        loading, error, message, clearMessage, openLightbox, isMuted, colorFilter,
         typewriterSpeed, transitionsEnabled, volume
     } = useGame();
+
 
 
 
@@ -27,6 +28,17 @@ export const StoryEngine = () => {
     useEffect(() => {
         setIsMounted(true);
     }, []);
+
+    // Auto-dismiss status messages
+    useEffect(() => {
+        if (error || message) {
+            const timer = setTimeout(() => {
+                clearMessage?.();
+            }, 3000);
+            return () => clearTimeout(timer);
+        }
+    }, [error, message]);
+
 
     const element = project.elements[displayElementId];
     const audioRef = useRef(null);
@@ -192,10 +204,19 @@ export const StoryEngine = () => {
             {/* Status Messages */}
 
             {(error || message) && (
-                <div className={`mb-4 p-2 text-center text-xs rounded border ${error ? 'bg-red-900/40 border-red-800 text-red-200' : 'bg-green-900/40 border-green-800 text-green-200'}`}>
-                    {error || message}
+                <div
+                    className={`mb-4 p-2.5 flex items-center justify-between text-xs rounded-lg border animate-in fade-in duration-300 ${error ? 'bg-red-950/40 border-red-500/20 text-red-200' : 'bg-emerald-950/40 border-emerald-500/20 text-emerald-200'}`}
+                >
+                    <span>{error || message}</span>
+                    <button
+                        onClick={() => clearMessage?.()}
+                        className="ml-2 hover:opacity-70 transition-opacity"
+                    >
+                        ✕
+                    </button>
                 </div>
             )}
+
 
             <div className="mb-6 rounded-lg overflow-hidden shadow-lg border border-white/10 relative group">
                 <img

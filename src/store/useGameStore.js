@@ -5,6 +5,8 @@ import { createClient } from '@/utils/supabase/client'
 
 const arcScript = new ArcScript(projectSettings)
 const supabase = createClient()
+let saveTimer = null;
+
 
 export const useGameStore = create((set, get) => ({
     // State
@@ -17,6 +19,14 @@ export const useGameStore = create((set, get) => ({
     loading: false,
     error: null,
     message: null,
+
+    // Settings
+    volume: 0.5,
+    isMuted: false,
+    typewriterSpeed: 30,
+    transitionsEnabled: true,
+    colorFilter: 'none',
+
 
     // Actions
     visitElement: (id) => {
@@ -135,36 +145,83 @@ export const useGameStore = create((set, get) => ({
     },
 
     // Persistence Actions
-    saveGame: async () => {
-        set({ loading: true, error: null, message: null });
-        try {
-            const { currentElementId, visits, variables, history, storyLog, discoveredComponents } = get();
-            // Only persist minimal step data — titles/content are reconstructed from project on load
-            const stepsToSave = storyLog.map(({ elementId, choiceMade }) => ({ elementId, choiceMade }));
-            const gameState = { currentElementId, visits, variables, history, storyLog: stepsToSave, discoveredComponents };
+    saveGame: async (immediate = false) => {
+        // Clear any pending save
+        if (saveTimer) {
+            clearTimeout(saveTimer);
+            saveTimer = null;
+        }
 
+        const performSave = async () => {
+            set({ loading: true, error: null, message: null });
+            try {
+                const { data: { session } } = await supabase.auth.getSession();
+                if (!session) return;
 
-            const { error } = await supabase.auth.updateUser({
-                data: { game_state: gameState }
-            });
+                const {
+                    currentElementId, visits, variables, history, storyLog, discoveredComponents,
+                    volume, isMuted, typewriterSpeed, transitionsEnabled, colorFilter
+                } = get();
 
-            if (error) throw error;
-            set({ message: 'Játékállás mentve!' });
-        } catch (err) {
-            set({ error: err.message });
-        } finally {
-            set({ loading: false });
+                const stepsToSave = storyLog.map(({ elementId, choiceMade }) => ({ elementId, choiceMade }));
+
+                const gameState = {
+                    currentElementId, visits, variables, history,
+                    storyLog: stepsToSave, discoveredComponents,
+                    settings: { volume, isMuted, typewriterSpeed, transitionsEnabled, colorFilter }
+                };
+
+                const { error } = await supabase
+                    .from('game_saves')
+                    .upsert({
+                        user_id: session.user.id,
+                        game_state: gameState,
+                        updated_at: new Date().toISOString()
+                    }, { onConflict: 'user_id' });
+
+                if (error) {
+                    if (error.status === 429) {
+                        set({ error: 'Túl sok mentési kérés. Kérlek várj pár másodpercet.' });
+                    } else {
+                        throw error;
+                    }
+                }
+            } catch (err) {
+                console.error('Save error:', err);
+                set({ error: err.message });
+            } finally {
+                set({ loading: false });
+            }
+        };
+
+        if (immediate) {
+            await performSave();
+        } else {
+            saveTimer = setTimeout(performSave, 3000);
         }
     },
+
+
+
 
     loadGame: async () => {
         set({ loading: true, error: null, message: null });
         try {
-            const { data: { user }, error: userError } = await supabase.auth.getUser();
-            if (userError) throw userError;
+            const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+            if (sessionError) throw sessionError;
+            if (!session) throw new Error('Bejelentkezés szükséges.');
 
-            const gameState = user.user_metadata?.game_state;
+            const { data, error } = await supabase
+                .from('game_saves')
+                .select('game_state')
+                .eq('user_id', session.user.id)
+                .single();
+
+            if (error && error.code !== 'PGRST116') throw error; // PGRST116 means no row found
+
+            const gameState = data?.game_state;
             if (gameState) {
+                const s = gameState.settings || {};
                 set({
                     currentElementId: gameState.currentElementId,
                     visits: gameState.visits,
@@ -172,18 +229,25 @@ export const useGameStore = create((set, get) => ({
                     history: gameState.history,
                     storyLog: gameState.storyLog || [],
                     discoveredComponents: gameState.discoveredComponents || [],
-                    message: 'Játékállás betöltve!'
+                    volume: s.volume ?? 0.5,
+                    isMuted: s.isMuted ?? false,
+                    typewriterSpeed: s.typewriterSpeed ?? 30,
+                    transitionsEnabled: s.transitionsEnabled ?? true,
+                    colorFilter: s.colorFilter ?? 'none',
                 });
-
             } else {
                 set({ error: 'Nincs mentett játékállás.' });
             }
         } catch (err) {
+            console.error('Load error:', err);
             set({ error: err.message });
         } finally {
             set({ loading: false });
         }
     },
+
+
+
 
     resetGame: () => {
         const startId = projectSettings.startingElement;
@@ -199,5 +263,15 @@ export const useGameStore = create((set, get) => ({
         });
 
         get().visitElement(startId);
-    }
+    },
+
+    // Setting Setters
+    setVolume: (volume) => set({ volume }),
+    setIsMuted: (isMuted) => set({ isMuted }),
+    setTypewriterSpeed: (typewriterSpeed) => set({ typewriterSpeed }),
+    setTransitionsEnabled: (transitionsEnabled) => set({ transitionsEnabled }),
+    setColorFilter: (colorFilter) => set({ colorFilter }),
+    clearMessage: () => set({ error: null, message: null }),
 }));
+
+

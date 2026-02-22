@@ -8,8 +8,8 @@ import {
     RiUserLine,
     RiFileCopyLine,
     RiCheckLine,
-    RiLogoutBoxRLine,
 } from '@remixicon/react'
+
 import { useGame } from '@/context/GameContext'
 
 export default function UserMenu({ compact = false }) {
@@ -77,22 +77,23 @@ export default function UserMenu({ compact = false }) {
 
     const isGuest = user.email?.endsWith('@vendeg.hu')
     const guestCode = isGuest ? user.email.split('@')[0] : null
+    const onProfile = pathname === '/profile'
+
+    const handleProfileClick = () => {
+        if (onProfile) {
+            // Close all panels and go back to the game
+            setShowLog?.(false)
+            setShowDashboard?.(false)
+            setShowMap?.(false)
+            setShowMenu?.(false)
+            setShowLibrary?.(false)
+            router.push('/')
+        } else {
+            router.push('/profile')
+        }
+    }
 
     if (compact) {
-        const onProfile = pathname === '/profile'
-        const handleProfileClick = () => {
-            if (onProfile) {
-                // Close all panels and go back to the game
-                setShowLog?.(false)
-                setShowDashboard?.(false)
-                setShowMap?.(false)
-                setShowMenu?.(false)
-                setShowLibrary?.(false)
-                router.push('/')
-            } else {
-                router.push('/profile')
-            }
-        }
         return (
             <button
                 onClick={handleProfileClick}
@@ -106,11 +107,11 @@ export default function UserMenu({ compact = false }) {
     }
 
     return (
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-6">
             {/* Guest code with copy button */}
             {isGuest && (
                 <span className="hidden md:flex items-center gap-1.5 text-xs text-zinc-500">
-                    Vendég kód: {guestCode}
+                    Vendég kód: <span className="text-amber-200/40 font-mono font-bold">{guestCode}</span>
                     <button
                         onClick={handleCopyCode}
                         title={copied ? 'Másolva!' : 'Kód másolása'}
@@ -129,24 +130,17 @@ export default function UserMenu({ compact = false }) {
                 <span className="text-xs text-zinc-500 hidden md:inline">({user.email})</span>
             )}
 
-            {/* Profile icon link */}
-            <Link
-                href="/profile"
-                title="Profilom"
-                className="p-1.5 text-amber-200/60 hover:text-amber-100 transition-colors rounded"
-            >
-                <RiUserLine size={18} />
-            </Link>
-
-            {/* Logout button */}
+            {/* Profile Toggle Button */}
             <button
-                onClick={handleLogout}
-                title="Kilépés"
-                className="flex items-center gap-2 px-3 py-1.5 bg-zinc-800/50 hover:bg-red-900/40 hover:text-red-400 text-zinc-300 rounded-lg transition-all text-sm font-medium border border-zinc-700 hover:border-red-800"
+                onClick={handleProfileClick}
+                className={`px-4 py-1.5 rounded-lg text-sm font-bold transition-all border ${onProfile
+                    ? 'bg-amber-600/20 text-amber-300 border-amber-500/50 shadow-[0_0_15px_rgba(245,158,11,0.2)]'
+                    : 'text-zinc-400 border-transparent hover:text-amber-200 hover:bg-zinc-800/50'
+                    }`}
             >
-                <RiLogoutBoxRLine size={15} />
-                <span className="hidden sm:inline">Kilépés</span>
+                {onProfile ? 'Vissza a játékba' : 'Profil'}
             </button>
         </div>
     )
 }
+

@@ -19,14 +19,7 @@ export const GameProvider = ({ children }) => {
     const [showMenu, setShowMenu] = useState(false);
     const [showLibrary, setShowLibrary] = useState(false);
     const [lightboxImage, setLightboxImage] = useState(null);
-    const [typewriterSpeed, setTypewriterSpeed] = useState(30);
-    const [transitionsEnabled, setTransitionsEnabled] = useState(true);
-    const [volume, setVolume] = useState(0.5);
 
-
-
-    const [isMuted, setIsMuted] = useState(false);
-    const [colorFilter, setColorFilter] = useState('none');
 
 
 
@@ -73,11 +66,9 @@ export const GameProvider = ({ children }) => {
     const openLightbox = (url) => setLightboxImage(url);
     const closeLightbox = () => setLightboxImage(null);
 
-    const toggleMute = () => setIsMuted(prev => !prev);
+    const toggleMute = () => store.setIsMuted(!store.isMuted);
 
-
-
-    // Initial load - ensuring starting element is visited if no state
+    // Initial load and Auto-Save listeners
     useEffect(() => {
         if (Object.keys(store.visits).length === 0) {
             store.visitElement(projectSettings.startingElement);
@@ -85,7 +76,19 @@ export const GameProvider = ({ children }) => {
         } else if (store.storyLog.length === 0) {
             store.initStoryLog();
         }
+
+        // Auto-save on visibility change (tab switch, minimize)
+        const handleVisibilityChange = () => {
+            if (document.visibilityState === 'hidden') {
+                store.saveGame(true);
+            }
+        };
+
+
+        document.addEventListener('visibilitychange', handleVisibilityChange);
+        return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
     }, []);
+
 
     const getAssetUrl = (assetId) => {
         const asset = projectSettings.assets[assetId];
@@ -132,13 +135,14 @@ export const GameProvider = ({ children }) => {
         setShowMenu: toggleMenu,
         showLibrary,
         setShowLibrary: toggleLibrary,
-        typewriterSpeed,
-        setTypewriterSpeed,
-        transitionsEnabled,
-        setTransitionsEnabled,
-        volume,
-        setVolume,
+        typewriterSpeed: store.typewriterSpeed,
+        setTypewriterSpeed: store.setTypewriterSpeed,
+        transitionsEnabled: store.transitionsEnabled,
+        setTransitionsEnabled: store.setTransitionsEnabled,
+        volume: store.volume,
+        setVolume: store.setVolume,
         navigateTo: store.navigateTo,
+
 
 
 
@@ -149,7 +153,9 @@ export const GameProvider = ({ children }) => {
         saveGame: store.saveGame,
         loadGame: store.loadGame,
         resetGame: store.resetGame,
+        clearMessage: store.clearMessage,
         getAssetUrl,
+
         renderRichText,
         parseRichText,
         parseRichTextReadOnly,
@@ -157,11 +163,12 @@ export const GameProvider = ({ children }) => {
         lightboxImage,
         openLightbox,
         closeLightbox,
-        isMuted,
+        isMuted: store.isMuted,
         toggleMute,
-        colorFilter,
-        setColorFilter
+        colorFilter: store.colorFilter,
+        setColorFilter: store.setColorFilter
     };
+
 
 
 
