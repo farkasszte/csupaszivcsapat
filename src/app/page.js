@@ -8,6 +8,8 @@ import GameMenu from '@/components/GameMenu';
 import GameLibrary from '@/components/GameLibrary';
 import { useGame } from '@/context/GameContext';
 import { Lightbox } from '@/components/Lightbox';
+import { ColorFilters } from '@/components/ColorFilters';
+
 
 import {
     RiBookOpenLine,
@@ -62,8 +64,9 @@ export default function Home() {
                     {showPanel && (
                         <div className="lg:contents">
                             <div
-                                className="lg:sticky lg:top-20 bg-zinc-900/60 backdrop-blur-xl lg:rounded-xl border-0 lg:border border-white/5 shadow-2xl overflow-hidden flex flex-col h-[calc(100vh-4rem)] lg:h-auto lg:max-h-[calc(100vh-6rem)]"
+                                className="lg:sticky lg:top-24 bg-zinc-900/60 backdrop-blur-xl lg:rounded-xl border-0 lg:border border-white/5 shadow-2xl overflow-hidden flex flex-col h-[calc(100vh-4rem)] lg:h-[70vh]"
                             >
+
                                 {/* Tab header — desktop only; mobile uses bottom nav */}
                                 <div className="hidden lg:flex items-center px-3 py-2.5 border-b border-white/5 shrink-0 gap-0.5">
                                     <button onClick={() => setShowMenu(true)} className={tabCls('menu')}>
@@ -103,7 +106,9 @@ export default function Home() {
                 </div>
             </div>
             <Lightbox />
+            <ColorFilters />
         </div>
+
 
     );
 }

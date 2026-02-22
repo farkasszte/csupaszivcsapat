@@ -5,12 +5,15 @@ import { useEffect, useRef } from 'react';
 import { RiArrowRightSLine } from '@remixicon/react';
 
 export default function StoryLog() {
+    const containerRef = useRef(null);
     const { storyLog, project, parseRichTextReadOnly, state } = useGame();
-    const bottomRef = useRef(null);
 
     useEffect(() => {
-        bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+        if (containerRef.current) {
+            containerRef.current.scrollTop = containerRef.current.scrollHeight;
+        }
     }, [storyLog.length]);
+
 
     if (!storyLog || storyLog.length === 0) {
         return (
@@ -21,7 +24,11 @@ export default function StoryLog() {
     }
 
     return (
-        <div className="flex flex-col gap-0 overflow-y-auto pr-1 max-h-full">
+        <div
+            ref={containerRef}
+            className="flex flex-col gap-0 overflow-y-auto pr-1 h-full max-h-[60vh] lg:max-h-[70vh] scroll-smooth"
+        >
+
             {storyLog.map((entry, idx) => {
                 const isCurrent = idx === storyLog.length - 1;
                 const element = project.elements[entry.elementId];
@@ -65,7 +72,7 @@ export default function StoryLog() {
                     </div>
                 );
             })}
-            <div ref={bottomRef} />
         </div>
+
     );
 }

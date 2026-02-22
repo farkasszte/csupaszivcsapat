@@ -1,7 +1,16 @@
 'use client';
 
 import { useGame } from '../context/GameContext';
-import { RiSave3Line, RiDownloadLine, RiRestartLine, RiSmartphoneLine, RiCloseLine } from '@remixicon/react';
+import {
+    RiSave3Line,
+    RiDownloadLine,
+    RiRestartLine,
+    RiSmartphoneLine,
+    RiCloseLine,
+    RiVolumeUpLine,
+    RiVolumeMuteLine,
+    RiPaletteLine
+} from '@remixicon/react';
 import { useState } from 'react';
 import { createPortal } from 'react-dom';
 
@@ -57,8 +66,21 @@ function MobilePreviewModal({ onClose }) {
 }
 
 export default function GameMenu() {
-    const { saveGame, loadGame, resetGame, loading, error, message } = useGame();
+    const {
+        saveGame, loadGame, resetGame, loading, error, message,
+        isMuted, toggleMute, colorFilter, setColorFilter
+    } = useGame();
     const [showPreview, setShowPreview] = useState(false);
+
+    const filters = [
+        { id: 'none', name: 'Nincs' },
+        { id: 'protanopia', name: 'Protanopia' },
+        { id: 'deuteranopia', name: 'Deuteranopia' },
+        { id: 'tritanopia', name: 'Tritanopia' },
+        { id: 'grayscale', name: 'Szürkeárnyalatos' },
+        { id: 'vibrant', name: 'Élénk' },
+    ];
+
 
     return (
         <>
@@ -98,6 +120,47 @@ export default function GameMenu() {
                         <div className="text-xs text-zinc-600 mt-0.5">Mentett állás betöltése</div>
                     </div>
                 </button>
+
+                <div className="border-t border-white/5 my-1" />
+
+                <div className="px-1 py-1">
+                    <h3 className="text-[10px] font-bold uppercase tracking-widest text-zinc-500 mb-3 ml-1">Beállítások</h3>
+
+                    {/* Sound Toggle */}
+                    <div className="flex items-center justify-between px-3 py-2 bg-zinc-800/20 rounded-lg border border-white/5 mb-2">
+                        <div className="flex items-center gap-2">
+                            {isMuted ? <RiVolumeMuteLine size={16} className="text-red-500/70" /> : <RiVolumeUpLine size={16} className="text-amber-500/70" />}
+                            <span className="text-xs font-semibold text-zinc-300">Hangok</span>
+                        </div>
+                        <button
+                            onClick={toggleMute}
+                            className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${isMuted ? 'bg-zinc-700' : 'bg-amber-600/80'}`}
+                        >
+                            <span className={`pointer-events-none inline-block h-4 w-4 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${isMuted ? 'translate-x-0' : 'translate-x-4'}`} />
+                        </button>
+                    </div>
+
+                    {/* Color Filter Selector */}
+                    <div className="px-3 py-2 bg-zinc-800/20 rounded-lg border border-white/5">
+                        <div className="flex items-center gap-2 mb-2">
+                            <RiPaletteLine size={16} className="text-amber-500/70" />
+                            <span className="text-xs font-semibold text-zinc-300">Szín szűrő</span>
+                        </div>
+                        <div className="grid grid-cols-2 gap-1.5">
+                            {filters.map(f => (
+                                <button
+                                    key={f.id}
+                                    onClick={() => setColorFilter(f.id)}
+                                    className={`px-2 py-1 text-[10px] rounded border transition-all ${colorFilter === f.id
+                                        ? 'bg-amber-900/30 border-amber-600/50 text-amber-200 shadow-glow-primary'
+                                        : 'bg-zinc-900/50 border-white/5 text-zinc-500 hover:text-zinc-300'}`}
+                                >
+                                    {f.name}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+                </div>
 
                 <div className="border-t border-white/5 my-1" />
 

@@ -8,7 +8,7 @@ export const StoryEngine = () => {
     const {
         project, currentElementId, executeScript, evaluate, state,
         getAssetUrl, parseRichText, saveGame, loadGame, resetGame,
-        loading, error, message, openLightbox
+        loading, error, message, openLightbox, isMuted, colorFilter
     } = useGame();
 
     const [contentSegments, setContentSegments] = useState([]);
@@ -43,12 +43,17 @@ export const StoryEngine = () => {
         };
 
         container.addEventListener('click', handleImageClick);
-        // Add cursor-pointer to all images in content
+        // Add style to all images in content
         const imgs = container.querySelectorAll('img');
-        imgs.forEach(img => img.classList.add('cursor-pointer', 'hover:opacity-90', 'transition-opacity'));
+        const filterStyle = getColorFilterStyle(colorFilter);
+        imgs.forEach(img => {
+            img.classList.add('cursor-pointer', 'hover:opacity-90', 'transition-opacity');
+            img.style.filter = filterStyle;
+        });
 
         return () => container.removeEventListener('click', handleImageClick);
-    }, [contentSegments, openLightbox]);
+    }, [contentSegments, openLightbox, colorFilter]);
+
 
 
     // Audio Playback
@@ -67,10 +72,13 @@ export const StoryEngine = () => {
             if (url) {
                 const audio = new Audio(url);
                 audio.loop = assetRef.mode === 'loop';
-                audio.volume = 0.5;
-                audio.play().catch(e => console.log("Audio play failed:", e));
+                audio.volume = isMuted ? 0 : 0.5;
+                if (!isMuted) {
+                    audio.play().catch(e => console.log("Audio play failed:", e));
+                }
                 audioRef.current = audio;
             }
+
         }
 
         return () => {
@@ -79,6 +87,19 @@ export const StoryEngine = () => {
             }
         };
     }, [currentElementId, element]);
+
+    // Handle Mute changes
+    useEffect(() => {
+        if (audioRef.current) {
+            audioRef.current.volume = isMuted ? 0 : 0.5;
+            if (isMuted) {
+                audioRef.current.pause();
+            } else if (audioRef.current.paused && element?.assets?.audio) {
+                audioRef.current.play().catch(e => console.log("Audio play resumed failed:", e));
+            }
+        }
+    }, [isMuted]);
+
 
 
     const coverUrl = element?.assets?.cover ? getAssetUrl(element.assets.cover.id) : null;
@@ -100,8 +121,10 @@ export const StoryEngine = () => {
                         src={coverUrl}
                         alt="Scene"
                         className="w-full aspect-video object-cover hover:scale-105 transition-transform duration-700 cursor-pointer"
+                        style={{ filter: getColorFilterStyle(colorFilter) }}
                         onClick={() => openLightbox(coverUrl)}
                     />
+
 
                 </div>
             )}
@@ -119,3 +142,17 @@ export const StoryEngine = () => {
         </div>
     );
 };
+
+// Accessibility Helper
+export const getColorFilterStyle = (filterId) => {
+    switch (filterId) {
+        case 'protanopia': return 'url(#protanopia-filter)';
+        case 'deuteranopia': return 'url(#deuteranopia-filter)';
+        case 'tritanopia': return 'url(#tritanopia-filter)';
+        case 'grayscale': return 'grayscale(100%)';
+        case 'vibrant': return 'saturate(150%)';
+        default: return 'none';
+
+    }
+};
+

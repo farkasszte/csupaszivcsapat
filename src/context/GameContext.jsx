@@ -19,6 +19,9 @@ export const GameProvider = ({ children }) => {
     const [showMenu, setShowMenu] = useState(false);
     const [showLibrary, setShowLibrary] = useState(false);
     const [lightboxImage, setLightboxImage] = useState(null);
+    const [isMuted, setIsMuted] = useState(false);
+    const [colorFilter, setColorFilter] = useState('none');
+
 
 
     const toggleLog = (val) => {
@@ -53,6 +56,9 @@ export const GameProvider = ({ children }) => {
 
     const openLightbox = (url) => setLightboxImage(url);
     const closeLightbox = () => setLightboxImage(null);
+
+    const toggleMute = () => setIsMuted(prev => !prev);
+
 
 
     // Initial load - ensuring starting element is visited if no state
@@ -122,7 +128,12 @@ export const GameProvider = ({ children }) => {
         lightboxImage,
         openLightbox,
         closeLightbox,
+        isMuted,
+        toggleMute,
+        colorFilter,
+        setColorFilter
     };
+
 
 
     return (
