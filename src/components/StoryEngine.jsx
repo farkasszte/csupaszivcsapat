@@ -24,6 +24,8 @@ export const StoryEngine = () => {
     const [displayElementId, setDisplayElementId] = useState(currentElementId);
     const [isFading, setIsFading] = useState(false);
 
+    const [isChoiceHovered, setIsChoiceHovered] = useState(false);
+    const [isUiHidden, setIsUiHidden] = useState(false);
 
     useEffect(() => {
         setIsMounted(true);
@@ -52,6 +54,8 @@ export const StoryEngine = () => {
         if (!transitionsEnabled) {
             setDisplayElementId(currentElementId);
             setIsFading(false);
+            // Reset UI visibility on scene change
+            setIsUiHidden(false);
             return;
         }
 
@@ -64,6 +68,8 @@ export const StoryEngine = () => {
         transitionTimeoutRef.current = setTimeout(() => {
             setDisplayElementId(currentElementId);
             setIsFading(false);
+            // Reset UI visibility on scene change
+            setIsUiHidden(false);
         }, 400); // Duration of fade-out
 
         return () => {
@@ -200,61 +206,67 @@ export const StoryEngine = () => {
     if (!isMounted) return null;
 
     return (
-        <div className={`max-w-2xl mx-auto p-8 bg-zinc-900/60 backdrop-blur-xl rounded-xl shadow-2xl border border-white/5 transition-all duration-500 transform ${isFading ? 'opacity-0 scale-[0.98] translate-y-1' : 'opacity-100 scale-100 translate-y-0'}`}>
-            {/* Status Messages */}
+        <div className={`mx-auto rounded-xl shadow-2xl border border-white/10 relative overflow-hidden transition-all duration-500 transform ${coverUrl ? 'h-full w-auto aspect-9/16 max-w-none' : 'max-w-2xl w-full p-8 bg-zinc-900/60 backdrop-blur-xl'
+            } ${isFading ? 'opacity-0 scale-[0.98] translate-y-1' : 'opacity-100 scale-100 translate-y-0'}`}>
 
-            {(error || message) && (
-                <div
-                    className={`mb-4 p-2.5 flex items-center justify-between text-xs rounded-lg border animate-in fade-in duration-300 ${error ? 'bg-red-950/40 border-red-500/20 text-red-200' : 'bg-emerald-950/40 border-emerald-500/20 text-emerald-200'}`}
-                >
-                    <span>{error || message}</span>
-                    <button
-                        onClick={() => clearMessage?.()}
-                        className="ml-2 hover:opacity-70 transition-opacity"
-                    >
-                        ✕
-                    </button>
-                </div>
-            )}
-
-
-            <div className="mb-6 rounded-lg overflow-hidden shadow-lg border border-white/10 relative group">
+            {/* Background Image */}
+            {coverUrl && (
                 <img
                     src={coverUrl}
                     alt="Scene"
-                    className="w-full aspect-video object-cover hover:scale-105 transition-transform duration-700 cursor-pointer"
+                    className={`absolute inset-0 w-full h-full object-cover cursor-pointer transition-transform duration-1000 ${isChoiceHovered ? 'scale-105' : 'scale-100'}`}
                     style={{ filter: getColorFilterStyle(colorFilter) }}
-                    onClick={() => openLightbox(coverUrl)}
+                    onClick={() => setIsUiHidden(!isUiHidden)}
                 />
+            )}
 
-                {/* Choices Overlay */}
-                <div className="absolute bottom-0 left-0 right-0 p-4 bg-linear-to-t from-zinc-950/80 via-zinc-950/40 to-transparent">
-                    <Choices hasImage={true} />
+            {/* Overlay Container */}
+            <div className={`relative z-10 flex flex-col h-full pointer-events-none ${!coverUrl ? '' : ''}`}>
+
+                {/* Status Messages */}
+                {(error || message) && (
+                    <div className="p-4 pointer-events-auto">
+                        <div className={`p-2.5 flex items-center justify-between text-xs rounded-lg border animate-in fade-in duration-300 ${error ? 'bg-red-950/60 border-red-500/20 text-red-200' : 'bg-emerald-950/60 border-emerald-500/20 text-emerald-200'} backdrop-blur-sm`}>
+                            <span>{error || message}</span>
+                            <button onClick={() => clearMessage?.()} className="ml-2 hover:opacity-70 transition-opacity">✕</button>
+                        </div>
+                    </div>
+                )}
+
+                {/* Spacer pushes content to the bottom */}
+                <div className="flex-1" />
+
+                <div className={`transition-all duration-500 transform ${isUiHidden ? 'opacity-0 translate-y-8 pointer-events-none' : 'opacity-100 translate-y-0 pointer-events-auto'} ${!coverUrl ? '' : 'bg-linear-to-b from-transparent via-black/40 to-black/80'}`}>
+                    {/* Choices Overlay (moves above the text box) */}
+                    {coverUrl && (
+                        <div className="px-3 pb-2 z-20">
+                            <Choices hasImage={true} onHoverChange={setIsChoiceHovered} />
+                        </div>
+                    )}
+
+                    {/* Text Content in Translucent Box */}
+                    <div className={`p-4 ${coverUrl ? 'm-3 mb-4 bg-black/30 backdrop-blur-md rounded-xl border border-white/10 shadow-xl' : ''}`}>
+                        <h1 className="text-2xl lg:text-3xl font-bold mb-3 text-transparent bg-clip-text bg-linear-to-r from-amber-200 to-orange-200 drop-shadow-sm font-serif pointer-events-auto" dangerouslySetInnerHTML={{ __html: element?.title }}></h1>
+
+                        {/* Text area is internally scrollable if content is very long */}
+                        <div className={`story-content space-y-3 text-sm lg:text-base text-orange-50/90 leading-relaxed font-light tracking-wide overflow-y-auto pointer-events-auto ${coverUrl ? 'max-h-[35vh] pr-2' : 'min-h-[100px]'}`}>
+                            {contentSegments.map((seg, idx) => {
+                                const visibleInThisSegment = Math.max(0, Math.min(seg.length, totalVisibleChars - seg.startOffset));
+                                return (
+                                    <TypewriterSegment
+                                        key={`${displayElementId}-${idx}`}
+                                        content={seg.content}
+                                        visibleCount={visibleInThisSegment}
+                                        isFull={visibleInThisSegment >= seg.length}
+                                    />
+                                );
+                            })}
+                        </div>
+                    </div>
                 </div>
+
+                {!coverUrl && <Choices hasImage={false} />}
             </div>
-
-            <h1 className="text-4xl font-bold mb-6 text-transparent bg-clip-text bg-linear-to-r from-amber-200 to-orange-200 drop-shadow-sm font-serif" dangerouslySetInnerHTML={{ __html: element?.title }}></h1>
-
-            <div className="story-content space-y-4 text-lg text-orange-50/80 leading-relaxed font-light tracking-wide min-h-[100px]">
-                {contentSegments.map((seg, idx) => {
-                    // How many characters of THIS segment should be visible?
-                    const visibleInThisSegment = Math.max(0, Math.min(seg.length, totalVisibleChars - seg.startOffset));
-
-                    return (
-                        <TypewriterSegment
-                            key={`${displayElementId}-${idx}`}
-                            content={seg.content}
-                            visibleCount={visibleInThisSegment}
-                            isFull={visibleInThisSegment >= seg.length}
-                        />
-                    );
-                })}
-            </div>
-
-
-
-            {!coverUrl && <Choices hasImage={false} />}
-
         </div>
     );
 };

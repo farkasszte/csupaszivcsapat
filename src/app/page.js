@@ -56,41 +56,43 @@ export default function Home() {
         }`;
 
     return (
-        <div className="min-h-screen bg-zinc-950 text-orange-50/90 bg-[url('/cover/cover.jpg')] bg-cover bg-center bg-no-repeat bg-blend-multiply">
-            <div className="absolute inset-0 bg-black/70 z-0 pointer-events-none" />
+        <div className="fixed inset-0 overflow-hidden bg-zinc-950 text-orange-50/90">
+            {/* Background layers */}
+            <div className="hidden lg:block absolute inset-0 top-[64px] bg-[url('/backgrounds/old-book.png')] bg-cover bg-center bg-no-repeat -z-10" />
+            <div className="hidden lg:block absolute inset-0 top-[64px] bg-black/40 pointer-events-none -z-10" />
 
-            {/* Content */}
-            <div className="relative z-10 w-full max-w-6xl mx-auto px-4 py-8">
-
+            {/* Content Wrapper - Strictly bound between header and bottom */}
+            <div className="absolute top-[52px] lg:top-[64px] bottom-0 left-0 right-0 z-10 flex flex-col items-center justify-center p-4 lg:p-6 overflow-hidden">
                 {/* Layout: side-by-side when panel open, single column otherwise */}
-                <div className={showPanel ? 'grid lg:grid-cols-2 gap-6' : 'max-w-2xl mx-auto'}>
+                <div
+                    className={`w-full max-w-6xl mx-auto flex justify-center items-center gap-6 flex-col lg:flex-row h-full`}
+                    style={{ maxHeight: 'min(80vh, 750px)' }}
+                >
 
                     {/* Game panel — hidden on mobile when side panel is visible */}
-                    <div className={showPanel ? 'hidden lg:block' : 'block'}>
+                    <div className={`flex flex-col justify-center items-center ${showPanel ? 'hidden lg:flex h-full' : 'flex w-full h-full'}`}>
                         <StoryEngine />
                     </div>
 
                     {/* Side panel */}
                     {showPanel && (
-                        <div className="lg:contents">
+                        <div className="h-full flex flex-col justify-center items-center">
                             <div
-                                className="lg:sticky lg:top-24 bg-zinc-900/60 backdrop-blur-xl lg:rounded-xl border-0 lg:border border-white/5 shadow-2xl overflow-hidden flex flex-col h-[calc(100vh-4rem)] lg:h-[70vh]"
+                                className="h-full w-auto aspect-9/16 max-w-none bg-zinc-900/60 backdrop-blur-xl rounded-xl border border-white/5 shadow-2xl overflow-hidden flex flex-col"
                             >
 
                                 {/* Tab header — desktop only; mobile uses bottom nav */}
-                                <div className="hidden lg:flex items-center px-3 py-2.5 border-b border-white/5 shrink-0 gap-0.5">
+                                <div className="hidden lg:flex items-center justify-center flex-wrap px-2 py-2 border-b border-white/5 shrink-0 gap-1">
                                     <button onClick={() => setShowMenu(true)} className={tabCls('menu')}>
                                         <RiMenuLine size={13} /> Játék
                                     </button>
-
-                                    <span className="text-zinc-700 text-xs px-1">|</span>
 
                                     <button onClick={() => setShowLog(true)} className={tabCls('log')}>
                                         <RiBookOpenLine size={13} /> Napló
                                     </button>
 
                                     <button onClick={() => setShowDashboard(true)} className={tabCls('dashboard')}>
-                                        <RiDashboardLine size={13} /> Jutalmak
+                                        <RiDashboardLine size={13} /> Pontok
                                     </button>
 
                                     <button onClick={() => setShowMap(true)} className={tabCls('map')}>
@@ -118,11 +120,9 @@ export default function Home() {
                         </div>
                     )}
                 </div>
-            </div>
+            </div >
             <Lightbox />
             <ColorFilters />
-        </div>
-
-
+        </div >
     );
 }

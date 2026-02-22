@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useGame } from '../context/GameContext';
 
-export const Choices = ({ hasImage }) => {
+export const Choices = ({ hasImage, onHoverChange }) => {
     const { project, currentElementId, navigateTo, resolveBranch, renderRichText } = useGame();
     const [isMounted, setIsMounted] = useState(false);
 
@@ -56,7 +56,9 @@ export const Choices = ({ hasImage }) => {
                     <button
                         key={`${choice.id}-${idx}`}
                         onClick={() => navigateTo(choice.targetId, choice.rawLabel)}
-                        className={`text-amber-100 font-medium transition-all transform hover:scale-105 shadow-xl backdrop-blur-md border border-white/20 hover:border-amber-400/50 flex-none
+                        onMouseEnter={() => onHoverChange?.(true)}
+                        onMouseLeave={() => onHoverChange?.(false)}
+                        className={`text-amber-100 font-medium transition-all transform hover:scale-95 shadow-xl backdrop-blur-md border border-white/20 hover:border-amber-400/50 flex-none
                             ${hasImage
                                 ? 'px-6 py-2 rounded-full bg-zinc-900/60 hover:bg-zinc-800/80 text-sm'
                                 : 'w-full text-left px-6 py-4 rounded-lg bg-linear-to-r from-amber-900/40 to-orange-900/40 hover:from-amber-800/60 hover:to-orange-800/60'
@@ -68,7 +70,7 @@ export const Choices = ({ hasImage }) => {
             ) : (
                 <button
                     onClick={() => window.location.reload()}
-                    className={`text-amber-100 font-medium transition-all transform hover:scale-105 shadow-xl backdrop-blur-md border border-white/20 flex-none
+                    className={`text-amber-100 font-medium transition-all transform hover:scale-95 shadow-xl backdrop-blur-md border border-white/20 flex-none
                         ${hasImage
                             ? 'px-6 py-2 rounded-full bg-red-950/60 hover:bg-red-900/80 text-sm'
                             : 'w-full text-center px-6 py-4 rounded-lg bg-linear-to-r from-red-900/40 to-orange-900/40 hover:from-red-800/60 hover:to-orange-800/60 border-orange-500/20'
