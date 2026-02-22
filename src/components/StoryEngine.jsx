@@ -9,20 +9,54 @@ export const StoryEngine = () => {
         project, currentElementId, executeScript, evaluate, state,
         getAssetUrl, parseRichText, saveGame, loadGame, resetGame,
         loading, error, message, openLightbox, isMuted, colorFilter,
-        typewriterSpeed
+        typewriterSpeed, transitionsEnabled
     } = useGame();
+
 
 
     const [contentSegments, setContentSegments] = useState([]);
     const [totalVisibleChars, setTotalVisibleChars] = useState(0);
     const [isMounted, setIsMounted] = useState(false);
 
+    // Transition states
+    const [displayElementId, setDisplayElementId] = useState(currentElementId);
+    const [isFading, setIsFading] = useState(false);
+
+
     useEffect(() => {
         setIsMounted(true);
     }, []);
 
-    const element = project.elements[currentElementId];
+    const element = project.elements[displayElementId];
     const audioRef = useRef(null);
+    const transitionTimeoutRef = useRef(null);
+
+
+    // Handle scene transitions
+    useEffect(() => {
+        if (currentElementId === displayElementId) return;
+
+        if (!transitionsEnabled) {
+            setDisplayElementId(currentElementId);
+            setIsFading(false);
+            return;
+        }
+
+        // Reset any existing timeout
+        if (transitionTimeoutRef.current) clearTimeout(transitionTimeoutRef.current);
+
+
+        setIsFading(true);
+
+        transitionTimeoutRef.current = setTimeout(() => {
+            setDisplayElementId(currentElementId);
+            setIsFading(false);
+        }, 400); // Duration of fade-out
+
+        return () => {
+            if (transitionTimeoutRef.current) clearTimeout(transitionTimeoutRef.current);
+        };
+    }, [currentElementId]);
 
     // Parse into segments and calculate offsets
     useEffect(() => {
@@ -51,7 +85,8 @@ export const StoryEngine = () => {
             setTotalVisibleChars(0);
         }
 
-    }, [currentElementId, element, state.visits[currentElementId], typewriterSpeed]);
+    }, [displayElementId, element, state.visits[displayElementId], typewriterSpeed]);
+
 
     // Global typewriter controller
     useEffect(() => {
@@ -129,7 +164,7 @@ export const StoryEngine = () => {
                 audioRef.current.pause();
             }
         };
-    }, [currentElementId, element]);
+    }, [displayElementId, element]);
 
     // Handle Mute changes
     useEffect(() => {
@@ -150,8 +185,9 @@ export const StoryEngine = () => {
     if (!isMounted) return null;
 
     return (
-        <div className="max-w-2xl mx-auto p-8 bg-zinc-900/60 backdrop-blur-xl rounded-xl shadow-2xl border border-white/5 transition-all duration-500">
+        <div className={`max-w-2xl mx-auto p-8 bg-zinc-900/60 backdrop-blur-xl rounded-xl shadow-2xl border border-white/5 transition-all duration-500 transform ${isFading ? 'opacity-0 scale-[0.98] translate-y-1' : 'opacity-100 scale-100 translate-y-0'}`}>
             {/* Status Messages */}
+
             {(error || message) && (
                 <div className={`mb-4 p-2 text-center text-xs rounded border ${error ? 'bg-red-900/40 border-red-800 text-red-200' : 'bg-green-900/40 border-green-800 text-green-200'}`}>
                     {error || message}
@@ -173,14 +209,14 @@ export const StoryEngine = () => {
             )}
             <h1 className="text-4xl font-bold mb-6 text-transparent bg-clip-text bg-linear-to-r from-amber-200 to-orange-200 drop-shadow-sm font-serif" dangerouslySetInnerHTML={{ __html: element?.title }}></h1>
 
-            <div className="story-content space-y-4 text-lg text-orange-50/80 leading-relaxed font-light tracking-wide">
+            <div className="story-content space-y-4 text-lg text-orange-50/80 leading-relaxed font-light tracking-wide min-h-[100px]">
                 {contentSegments.map((seg, idx) => {
                     // How many characters of THIS segment should be visible?
                     const visibleInThisSegment = Math.max(0, Math.min(seg.length, totalVisibleChars - seg.startOffset));
 
                     return (
                         <TypewriterSegment
-                            key={`${currentElementId}-${idx}`}
+                            key={`${displayElementId}-${idx}`}
                             content={seg.content}
                             visibleCount={visibleInThisSegment}
                             isFull={visibleInThisSegment >= seg.length}
@@ -188,6 +224,7 @@ export const StoryEngine = () => {
                     );
                 })}
             </div>
+
 
 
             <Choices />

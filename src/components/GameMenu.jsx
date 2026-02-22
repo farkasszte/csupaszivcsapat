@@ -10,9 +10,11 @@ import {
     RiVolumeUpLine,
     RiVolumeMuteLine,
     RiPaletteLine,
-    RiTimerLine
+    RiTimerLine,
+    RiSlideshow3Line,
 } from '@remixicon/react';
 import { useState } from 'react';
+
 import { createPortal } from 'react-dom';
 
 function MobilePreviewModal({ onClose }) {
@@ -72,7 +74,9 @@ export default function GameMenu() {
         isMuted, toggleMute,
         colorFilter, setColorFilter,
         typewriterSpeed, setTypewriterSpeed,
+        transitionsEnabled, setTransitionsEnabled,
     } = useGame();
+
     const [showPreview, setShowPreview] = useState(false);
 
     const filters = [
@@ -141,6 +145,22 @@ export default function GameMenu() {
                         >
                             <span className={`pointer-events-none inline-block h-4 w-4 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${isMuted ? 'translate-x-0' : 'translate-x-4'}`} />
                         </button>
+                    </div>
+
+                    {/* Scene Transitions */}
+                    <div className="px-3 py-2 bg-zinc-800/20 rounded-lg border border-white/5">
+                        <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-2">
+                                <RiSlideshow3Line size={16} className="text-amber-500/70" />
+                                <span className="text-xs font-semibold text-zinc-300">Helyszín áttűnés</span>
+                            </div>
+                            <button
+                                onClick={() => setTransitionsEnabled(!transitionsEnabled)}
+                                className={`h-5 w-9 rounded-full transition-colors relative ${transitionsEnabled ? 'bg-amber-600' : 'bg-zinc-700'}`}
+                            >
+                                <div className={`absolute top-0.5 w-4 h-4 rounded-full bg-white transition-all ${transitionsEnabled ? 'left-4.5' : 'left-0.5'}`} />
+                            </button>
+                        </div>
                     </div>
 
                     {/* Color Filter Selector */}

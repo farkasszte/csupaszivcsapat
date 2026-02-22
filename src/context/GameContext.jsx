@@ -20,6 +20,7 @@ export const GameProvider = ({ children }) => {
     const [showLibrary, setShowLibrary] = useState(false);
     const [lightboxImage, setLightboxImage] = useState(null);
     const [typewriterSpeed, setTypewriterSpeed] = useState(30);
+    const [transitionsEnabled, setTransitionsEnabled] = useState(true);
 
 
 
@@ -132,7 +133,10 @@ export const GameProvider = ({ children }) => {
         setShowLibrary: toggleLibrary,
         typewriterSpeed,
         setTypewriterSpeed,
+        transitionsEnabled,
+        setTransitionsEnabled,
         navigateTo: store.navigateTo,
+
 
 
 
