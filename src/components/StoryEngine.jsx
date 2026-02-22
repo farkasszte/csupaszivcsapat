@@ -9,8 +9,9 @@ export const StoryEngine = () => {
         project, currentElementId, executeScript, evaluate, state,
         getAssetUrl, parseRichText, saveGame, loadGame, resetGame,
         loading, error, message, openLightbox, isMuted, colorFilter,
-        typewriterSpeed, transitionsEnabled
+        typewriterSpeed, transitionsEnabled, volume
     } = useGame();
+
 
 
 
@@ -150,7 +151,8 @@ export const StoryEngine = () => {
             if (url) {
                 const audio = new Audio(url);
                 audio.loop = assetRef.mode === 'loop';
-                audio.volume = isMuted ? 0 : 0.5;
+                audio.volume = isMuted ? 0 : volume;
+
                 if (!isMuted) {
                     audio.play().catch(e => console.log("Audio play failed:", e));
                 }
@@ -166,17 +168,18 @@ export const StoryEngine = () => {
         };
     }, [displayElementId, element]);
 
-    // Handle Mute changes
+    // Handle Mute and Volume changes
     useEffect(() => {
         if (audioRef.current) {
-            audioRef.current.volume = isMuted ? 0 : 0.5;
+            audioRef.current.volume = isMuted ? 0 : volume;
             if (isMuted) {
                 audioRef.current.pause();
             } else if (audioRef.current.paused && element?.assets?.audio) {
                 audioRef.current.play().catch(e => console.log("Audio play resumed failed:", e));
             }
         }
-    }, [isMuted]);
+    }, [isMuted, volume]);
+
 
 
 
@@ -194,19 +197,21 @@ export const StoryEngine = () => {
                 </div>
             )}
 
-            {coverUrl && (
-                <div className="mb-6 rounded-lg overflow-hidden shadow-lg border border-white/10">
-                    <img
-                        src={coverUrl}
-                        alt="Scene"
-                        className="w-full aspect-video object-cover hover:scale-105 transition-transform duration-700 cursor-pointer"
-                        style={{ filter: getColorFilterStyle(colorFilter) }}
-                        onClick={() => openLightbox(coverUrl)}
-                    />
+            <div className="mb-6 rounded-lg overflow-hidden shadow-lg border border-white/10 relative group">
+                <img
+                    src={coverUrl}
+                    alt="Scene"
+                    className="w-full aspect-video object-cover hover:scale-105 transition-transform duration-700 cursor-pointer"
+                    style={{ filter: getColorFilterStyle(colorFilter) }}
+                    onClick={() => openLightbox(coverUrl)}
+                />
 
-
+                {/* Choices Overlay */}
+                <div className="absolute bottom-0 left-0 right-0 p-4 bg-linear-to-t from-zinc-950/80 via-zinc-950/40 to-transparent">
+                    <Choices hasImage={true} />
                 </div>
-            )}
+            </div>
+
             <h1 className="text-4xl font-bold mb-6 text-transparent bg-clip-text bg-linear-to-r from-amber-200 to-orange-200 drop-shadow-sm font-serif" dangerouslySetInnerHTML={{ __html: element?.title }}></h1>
 
             <div className="story-content space-y-4 text-lg text-orange-50/80 leading-relaxed font-light tracking-wide min-h-[100px]">
@@ -227,7 +232,8 @@ export const StoryEngine = () => {
 
 
 
-            <Choices />
+            {!coverUrl && <Choices hasImage={false} />}
+
         </div>
     );
 };

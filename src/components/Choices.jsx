@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useGame } from '../context/GameContext';
 
-export const Choices = () => {
+export const Choices = ({ hasImage }) => {
     const { project, currentElementId, navigateTo, resolveBranch, renderRichText } = useGame();
     const [isMounted, setIsMounted] = useState(false);
 
@@ -50,13 +50,17 @@ export const Choices = () => {
     }).filter(choice => choice !== null);
 
     return (
-        <div className="mt-8 grid gap-4">
+        <div className={`mt-4 ${hasImage ? 'flex flex-wrap gap-2 justify-center' : 'grid gap-4 mt-8'}`}>
             {availableChoices.length > 0 ? (
                 availableChoices.map((choice, idx) => (
                     <button
                         key={`${choice.id}-${idx}`}
                         onClick={() => navigateTo(choice.targetId, choice.rawLabel)}
-                        className="w-full text-left px-6 py-4 bg-linear-to-r from-amber-900/40 to-orange-900/40 hover:from-amber-800/60 hover:to-orange-800/60 rounded-lg text-amber-100 font-medium transition-all transform hover:scale-[1.02] shadow-lg border border-amber-500/20 hover:border-amber-400/40 backdrop-blur-sm"
+                        className={`text-amber-100 font-medium transition-all transform hover:scale-105 shadow-xl backdrop-blur-md border border-white/20 hover:border-amber-400/50 flex-none
+                            ${hasImage
+                                ? 'px-6 py-2 rounded-full bg-zinc-900/60 hover:bg-zinc-800/80 text-sm'
+                                : 'w-full text-left px-6 py-4 rounded-lg bg-linear-to-r from-amber-900/40 to-orange-900/40 hover:from-amber-800/60 hover:to-orange-800/60'
+                            }`}
                     >
                         {choice.label}
                     </button>
@@ -64,7 +68,11 @@ export const Choices = () => {
             ) : (
                 <button
                     onClick={() => window.location.reload()}
-                    className="w-full text-center px-6 py-4 bg-linear-to-r from-red-900/40 to-orange-900/40 hover:from-red-800/60 hover:to-orange-800/60 rounded-lg text-amber-100 font-medium transition-all transform hover:scale-[1.02] shadow-lg border border-orange-500/20 hover:border-orange-400/40 backdrop-blur-sm"
+                    className={`text-amber-100 font-medium transition-all transform hover:scale-105 shadow-xl backdrop-blur-md border border-white/20 flex-none
+                        ${hasImage
+                            ? 'px-6 py-2 rounded-full bg-red-950/60 hover:bg-red-900/80 text-sm'
+                            : 'w-full text-center px-6 py-4 rounded-lg bg-linear-to-r from-red-900/40 to-orange-900/40 hover:from-red-800/60 hover:to-orange-800/60 border-orange-500/20'
+                        }`}
                 >
                     Restart Adventure
                 </button>
@@ -72,3 +80,4 @@ export const Choices = () => {
         </div>
     );
 };
+

@@ -21,6 +21,7 @@ export const GameProvider = ({ children }) => {
     const [lightboxImage, setLightboxImage] = useState(null);
     const [typewriterSpeed, setTypewriterSpeed] = useState(30);
     const [transitionsEnabled, setTransitionsEnabled] = useState(true);
+    const [volume, setVolume] = useState(0.5);
 
 
 
@@ -135,7 +136,10 @@ export const GameProvider = ({ children }) => {
         setTypewriterSpeed,
         transitionsEnabled,
         setTransitionsEnabled,
+        volume,
+        setVolume,
         navigateTo: store.navigateTo,
+
 
 
 

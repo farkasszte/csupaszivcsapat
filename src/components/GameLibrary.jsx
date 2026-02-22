@@ -24,7 +24,9 @@ const EXTERNAL_LINKS = [
 
 export default function GameLibrary() {
     const { project, discoveredComponents, colorFilter, getAssetUrl } = useGame();
-    const components = discoveredComponents ? discoveredComponents.map(id => project.components[id]).filter(Boolean) : [];
+    const components = discoveredComponents
+        ? [...new Set(discoveredComponents)].map(id => ({ ...project.components[id], id })).filter(c => c.name)
+        : [];
     const filterStyle = getColorFilterStyle(colorFilter);
 
     return (

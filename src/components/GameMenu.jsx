@@ -75,7 +75,9 @@ export default function GameMenu() {
         colorFilter, setColorFilter,
         typewriterSpeed, setTypewriterSpeed,
         transitionsEnabled, setTransitionsEnabled,
+        volume, setVolume,
     } = useGame();
+
 
     const [showPreview, setShowPreview] = useState(false);
 
@@ -134,17 +136,35 @@ export default function GameMenu() {
                     <h3 className="text-[10px] font-bold uppercase tracking-widest text-zinc-500 mb-3 ml-1">Beállítások</h3>
 
                     {/* Sound Toggle */}
-                    <div className="flex items-center justify-between px-3 py-2 bg-zinc-800/20 rounded-lg border border-white/5 mb-2">
-                        <div className="flex items-center gap-2">
-                            {isMuted ? <RiVolumeMuteLine size={16} className="text-red-500/70" /> : <RiVolumeUpLine size={16} className="text-amber-500/70" />}
-                            <span className="text-xs font-semibold text-zinc-300">Hangok</span>
+                    <div className="flex flex-col gap-2 px-3 py-2 bg-zinc-800/20 rounded-lg border border-white/5 mb-2">
+                        <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-2">
+                                {isMuted ? <RiVolumeMuteLine size={16} className="text-red-500/70" /> : <RiVolumeUpLine size={16} className="text-amber-500/70" />}
+                                <span className="text-xs font-semibold text-zinc-300">Hangok</span>
+                            </div>
+                            <button
+                                onClick={toggleMute}
+                                className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${isMuted ? 'bg-zinc-700' : 'bg-amber-600/80'}`}
+                            >
+                                <span className={`pointer-events-none inline-block h-4 w-4 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${isMuted ? 'translate-x-0' : 'translate-x-4'}`} />
+                            </button>
                         </div>
-                        <button
-                            onClick={toggleMute}
-                            className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${isMuted ? 'bg-zinc-700' : 'bg-amber-600/80'}`}
-                        >
-                            <span className={`pointer-events-none inline-block h-4 w-4 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${isMuted ? 'translate-x-0' : 'translate-x-4'}`} />
-                        </button>
+
+                        {/* Volume Slider */}
+                        <div className="flex items-center gap-3 mt-1 opacity-80 hover:opacity-100 transition-opacity">
+                            <input
+                                type="range"
+                                min="0"
+                                max="1"
+                                step="0.01"
+                                value={volume}
+                                onChange={(e) => setVolume(parseFloat(e.target.value))}
+                                className="flex-1 accent-amber-600 h-1 bg-zinc-700 rounded-lg appearance-none cursor-pointer"
+                            />
+                            <span className="text-[10px] font-mono text-zinc-500 w-8 text-right">
+                                {Math.round(volume * 100)}%
+                            </span>
+                        </div>
                     </div>
 
                     {/* Scene Transitions */}
