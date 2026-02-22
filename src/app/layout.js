@@ -3,7 +3,7 @@ import { GameProvider } from '@/context/GameContext';
 import "./globals.css";
 
 export const metadata = {
-    title: "Csupaszív Kaland",
+    title: "Csupaszív kalandok: A Homokhátság Hősei",
     description: "Interaktív történetmesélő játék",
 };
 

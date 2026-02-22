@@ -57,7 +57,7 @@ export default function Header() {
             {/* ── Desktop header (top bar) ── */}
             <header className="hidden lg:flex fixed top-0 left-0 right-0 z-50 bg-zinc-950/80 backdrop-blur-md border-b border-amber-900/30 px-6 py-4 justify-between items-center gap-2">
                 <h1 className="text-xl font-bold bg-linear-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent whitespace-nowrap">
-                    Csupaszív Kaland
+                    Csupaszív kalandok: A Homokhátság Hősei
                 </h1>
 
                 <button

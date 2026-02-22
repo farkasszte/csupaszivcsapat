@@ -4,6 +4,13 @@ import { useEffect, useState } from 'react'
 import { createClient } from '@/utils/supabase/client'
 import { useRouter } from 'next/navigation'
 import { useGame } from '@/context/GameContext'
+import {
+    RiFileCopyLine,
+    RiCheckLine,
+    RiLogoutBoxRLine,
+    RiUserShared2Line
+} from '@remixicon/react'
+
 
 export default function ProfilePage() {
     const supabase = createClient()
@@ -12,9 +19,12 @@ export default function ProfilePage() {
 
     const [loading, setLoading] = useState(true)
     const [saving, setSaving] = useState(false)
+    const [user, setUser] = useState(null)
+    const [copied, setCopied] = useState(false)
     const [error, setError] = useState(null)
     const [message, setMessage] = useState(null)
     const [isMounted, setIsMounted] = useState(false)
+
 
     useEffect(() => {
         setIsMounted(true)
@@ -36,6 +46,7 @@ export default function ProfilePage() {
         const getProfile = async () => {
             const { data: { user } } = await supabase.auth.getUser()
             if (user) {
+                setUser(user)
                 setFormData({
                     full_name: user.user_metadata?.full_name || '',
                     gender: user.user_metadata?.gender || '',
@@ -46,6 +57,23 @@ export default function ProfilePage() {
         }
         getProfile()
     }, [supabase])
+
+    const handleLogout = async () => {
+        await supabase.auth.signOut()
+        router.push('/')
+        router.refresh()
+    }
+
+    const handleCopyCode = () => {
+        const code = user?.email?.split('@')[0]
+        if (code) {
+            navigator.clipboard.writeText(code).then(() => {
+                setCopied(true)
+                setTimeout(() => setCopied(false), 2000)
+            })
+        }
+    }
+
 
     const handleSave = async (e) => {
         e.preventDefault()
@@ -167,7 +195,54 @@ export default function ProfilePage() {
                         </p>
                     )}
                 </form>
+
+                {/* Divider */}
+                <div className="my-8 border-t border-white/5" />
+
+                {/* Account Actions */}
+                <div className="space-y-4">
+                    {/* Guest code section */}
+                    {user?.email?.endsWith('@vendeg.hu') && (
+                        <div className="flex flex-col gap-2 p-4 bg-zinc-950/40 border border-amber-900/20 rounded-xl">
+                            <div className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Vendég fiók kódja</div>
+                            <div className="flex items-center justify-between">
+                                <span className="text-lg font-mono text-amber-200 font-bold">{user.email.split('@')[0]}</span>
+                                <button
+                                    onClick={handleCopyCode}
+                                    title={copied ? 'Másolva!' : 'Kód másolása'}
+                                    className={`p-2 rounded-lg transition-all border ${copied
+                                        ? 'text-emerald-400 border-emerald-500/30 bg-emerald-500/10'
+                                        : 'text-zinc-400 border-white/5 bg-zinc-800/50 hover:text-amber-300 hover:border-amber-500/30'
+                                        }`}
+                                >
+                                    {copied ? <RiCheckLine size={18} /> : <RiFileCopyLine size={18} />}
+                                </button>
+                            </div>
+                            <p className="text-[10px] text-zinc-600 leading-relaxed italic">
+                                Jegyzed meg ezt a kódot, ha később máshonnan is folytatni szeretnéd a játékot!
+                            </p>
+                        </div>
+                    )}
+
+                    {/* Email display for regular users */}
+                    {user && !user.email?.endsWith('@vendeg.hu') && (
+                        <div className="flex items-center gap-2 px-1 text-xs text-zinc-500">
+                            <RiUserShared2Line size={14} />
+                            <span>Bejelentkezve: {user.email}</span>
+                        </div>
+                    )}
+
+                    {/* Logout Button */}
+                    <button
+                        onClick={handleLogout}
+                        className="w-full py-3 flex items-center justify-center gap-2 bg-zinc-800/50 hover:bg-red-900/40 border border-zinc-700 hover:border-red-800/50 text-zinc-300 hover:text-red-400 font-medium rounded-xl transition-all"
+                    >
+                        <RiLogoutBoxRLine size={18} />
+                        Kilépés
+                    </button>
+                </div>
             </div>
         </div>
+
     )
 }
