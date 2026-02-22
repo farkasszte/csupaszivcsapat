@@ -18,6 +18,8 @@ export const GameProvider = ({ children }) => {
     const [showMap, setShowMap] = useState(false);
     const [showMenu, setShowMenu] = useState(false);
     const [showLibrary, setShowLibrary] = useState(false);
+    const [lightboxImage, setLightboxImage] = useState(null);
+
 
     const toggleLog = (val) => {
         const next = val !== undefined ? val : !showLog;
@@ -48,6 +50,10 @@ export const GameProvider = ({ children }) => {
         setShowLibrary(next);
         if (next) { setShowLog(false); setShowDashboard(false); setShowMap(false); setShowMenu(false); }
     };
+
+    const openLightbox = (url) => setLightboxImage(url);
+    const closeLightbox = () => setLightboxImage(null);
+
 
     // Initial load - ensuring starting element is visited if no state
     useEffect(() => {
@@ -112,8 +118,12 @@ export const GameProvider = ({ children }) => {
         renderRichText,
         parseRichText,
         parseRichTextReadOnly,
-        resolveBranch: store.resolveBranch
+        resolveBranch: store.resolveBranch,
+        lightboxImage,
+        openLightbox,
+        closeLightbox,
     };
+
 
     return (
         <GameContext.Provider value={value}>

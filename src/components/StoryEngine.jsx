@@ -8,7 +8,7 @@ export const StoryEngine = () => {
     const {
         project, currentElementId, executeScript, evaluate, state,
         getAssetUrl, parseRichText, saveGame, loadGame, resetGame,
-        loading, error, message
+        loading, error, message, openLightbox
     } = useGame();
 
     const [contentSegments, setContentSegments] = useState([]);
@@ -30,6 +30,26 @@ export const StoryEngine = () => {
         setContentSegments(segments);
 
     }, [currentElementId, element, state.visits[currentElementId]]);
+
+    // Handle clicks on images in story content
+    useEffect(() => {
+        const container = document.querySelector('.story-content');
+        if (!container) return;
+
+        const handleImageClick = (e) => {
+            if (e.target.tagName === 'IMG') {
+                openLightbox(e.target.src);
+            }
+        };
+
+        container.addEventListener('click', handleImageClick);
+        // Add cursor-pointer to all images in content
+        const imgs = container.querySelectorAll('img');
+        imgs.forEach(img => img.classList.add('cursor-pointer', 'hover:opacity-90', 'transition-opacity'));
+
+        return () => container.removeEventListener('click', handleImageClick);
+    }, [contentSegments, openLightbox]);
+
 
     // Audio Playback
     useEffect(() => {
@@ -76,7 +96,13 @@ export const StoryEngine = () => {
 
             {coverUrl && (
                 <div className="mb-6 rounded-lg overflow-hidden shadow-lg border border-white/10">
-                    <img src={coverUrl} alt="Scene" className="w-full h-64 object-cover hover:scale-105 transition-transform duration-700" />
+                    <img
+                        src={coverUrl}
+                        alt="Scene"
+                        className="w-full aspect-video object-cover hover:scale-105 transition-transform duration-700 cursor-pointer"
+                        onClick={() => openLightbox(coverUrl)}
+                    />
+
                 </div>
             )}
             <h1 className="text-4xl font-bold mb-6 text-transparent bg-clip-text bg-linear-to-r from-amber-200 to-orange-200 drop-shadow-sm font-serif" dangerouslySetInnerHTML={{ __html: element?.title }}></h1>

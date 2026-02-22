@@ -7,6 +7,8 @@ import GameMap from '@/components/GameMap';
 import GameMenu from '@/components/GameMenu';
 import GameLibrary from '@/components/GameLibrary';
 import { useGame } from '@/context/GameContext';
+import { Lightbox } from '@/components/Lightbox';
+
 import {
     RiBookOpenLine,
     RiDashboardLine,
@@ -100,6 +102,8 @@ export default function Home() {
                     )}
                 </div>
             </div>
+            <Lightbox />
         </div>
+
     );
 }
