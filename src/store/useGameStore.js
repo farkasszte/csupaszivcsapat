@@ -246,6 +246,41 @@ export const useGameStore = create((set, get) => ({
         }
     },
 
+    // Silent auto-load on app startup (no error UI)
+    autoLoad: async () => {
+        try {
+            const { data: { session } } = await supabase.auth.getSession();
+            if (!session) return;
+
+            const { data, error } = await supabase
+                .from('game_saves')
+                .select('game_state')
+                .eq('user_id', session.user.id)
+                .single();
+
+            if (error && error.code !== 'PGRST116') throw error;
+
+            const gameState = data?.game_state;
+            if (gameState) {
+                const s = gameState.settings || {};
+                set({
+                    currentElementId: gameState.currentElementId,
+                    visits: gameState.visits,
+                    variables: gameState.variables,
+                    history: gameState.history,
+                    storyLog: gameState.storyLog || [],
+                    discoveredComponents: gameState.discoveredComponents || [],
+                    volume: s.volume ?? 0.5,
+                    isMuted: s.isMuted ?? false,
+                    typewriterSpeed: s.typewriterSpeed ?? 30,
+                    transitionsEnabled: s.transitionsEnabled ?? true,
+                    colorFilter: s.colorFilter ?? 'none',
+                });
+            }
+        } catch (err) {
+            console.error('Auto-load error:', err);
+        }
+    },
 
 
 
@@ -265,12 +300,12 @@ export const useGameStore = create((set, get) => ({
         get().visitElement(startId);
     },
 
-    // Setting Setters
-    setVolume: (volume) => set({ volume }),
-    setIsMuted: (isMuted) => set({ isMuted }),
-    setTypewriterSpeed: (typewriterSpeed) => set({ typewriterSpeed }),
-    setTransitionsEnabled: (transitionsEnabled) => set({ transitionsEnabled }),
-    setColorFilter: (colorFilter) => set({ colorFilter }),
+    // Setting Setters (each triggers a debounced save)
+    setVolume: (volume) => { set({ volume }); get().saveGame(); },
+    setIsMuted: (isMuted) => { set({ isMuted }); get().saveGame(); },
+    setTypewriterSpeed: (typewriterSpeed) => { set({ typewriterSpeed }); get().saveGame(); },
+    setTransitionsEnabled: (transitionsEnabled) => { set({ transitionsEnabled }); get().saveGame(); },
+    setColorFilter: (colorFilter) => { set({ colorFilter }); get().saveGame(); },
     clearMessage: () => set({ error: null, message: null }),
 }));
 

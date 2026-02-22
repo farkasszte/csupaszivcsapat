@@ -70,12 +70,20 @@ export const GameProvider = ({ children }) => {
 
     // Initial load and Auto-Save listeners
     useEffect(() => {
-        if (Object.keys(store.visits).length === 0) {
-            store.visitElement(projectSettings.startingElement);
-            store.initStoryLog();
-        } else if (store.storyLog.length === 0) {
-            store.initStoryLog();
-        }
+        const init = async () => {
+            // Try to load saved state from Supabase first
+            await store.autoLoad();
+
+            // Read fresh state after autoLoad (React hook snapshot is stale here)
+            const fresh = useGameStore.getState();
+            if (Object.keys(fresh.visits).length === 0) {
+                fresh.visitElement(projectSettings.startingElement);
+                fresh.initStoryLog();
+            } else if (fresh.storyLog.length === 0) {
+                fresh.initStoryLog();
+            }
+        };
+        init();
 
         // Auto-save on visibility change (tab switch, minimize)
         const handleVisibilityChange = () => {
@@ -84,9 +92,17 @@ export const GameProvider = ({ children }) => {
             }
         };
 
+        // Auto-save on page close / refresh
+        const handleBeforeUnload = () => {
+            store.saveGame(true);
+        };
 
         document.addEventListener('visibilitychange', handleVisibilityChange);
-        return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
+        window.addEventListener('beforeunload', handleBeforeUnload);
+        return () => {
+            document.removeEventListener('visibilitychange', handleVisibilityChange);
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+        };
     }, []);
 
 
