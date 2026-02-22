@@ -13,7 +13,7 @@ export default function RootLayout({ children }) {
             <body className="antialiased bg-zinc-950 text-orange-50/90">
                 <GameProvider>
                     <Header />
-                    <main className="pb-16 lg:pb-0 lg:pt-16">
+                    <main className="pb-16 lg:pb-0">
                         {children}
                     </main>
                 </GameProvider>

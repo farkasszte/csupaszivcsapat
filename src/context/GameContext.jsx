@@ -18,6 +18,8 @@ export const GameProvider = ({ children }) => {
     const [showMap, setShowMap] = useState(false);
     const [showMenu, setShowMenu] = useState(false);
     const [showLibrary, setShowLibrary] = useState(false);
+    const [showProfile, setShowProfile] = useState(false);
+    const [lastActiveTab, setLastActiveTab] = useState('menu');
     const [lightboxImage, setLightboxImage] = useState(null);
 
 
@@ -26,7 +28,10 @@ export const GameProvider = ({ children }) => {
     const toggleLog = (val) => {
         const next = val !== undefined ? val : !showLog;
         setShowLog(next);
-        if (next) { setShowDashboard(false); setShowMap(false); setShowMenu(false); setShowLibrary(false); }
+        if (next) {
+            setLastActiveTab('log');
+            setShowDashboard(false); setShowMap(false); setShowMenu(false); setShowLibrary(false); setShowProfile(false);
+        }
     };
 
 
@@ -34,7 +39,10 @@ export const GameProvider = ({ children }) => {
     const toggleDashboard = (val) => {
         const next = val !== undefined ? val : !showDashboard;
         setShowDashboard(next);
-        if (next) { setShowLog(false); setShowMap(false); setShowMenu(false); setShowLibrary(false); }
+        if (next) {
+            setLastActiveTab('dashboard');
+            setShowLog(false); setShowMap(false); setShowMenu(false); setShowLibrary(false); setShowProfile(false);
+        }
     };
 
 
@@ -42,7 +50,10 @@ export const GameProvider = ({ children }) => {
     const toggleMap = (val) => {
         const next = val !== undefined ? val : !showMap;
         setShowMap(next);
-        if (next) { setShowLog(false); setShowDashboard(false); setShowMenu(false); setShowLibrary(false); }
+        if (next) {
+            setLastActiveTab('map');
+            setShowLog(false); setShowDashboard(false); setShowMenu(false); setShowLibrary(false); setShowProfile(false);
+        }
     };
 
 
@@ -50,7 +61,10 @@ export const GameProvider = ({ children }) => {
     const toggleMenu = (val) => {
         const next = val !== undefined ? val : !showMenu;
         setShowMenu(next);
-        if (next) { setShowLog(false); setShowDashboard(false); setShowMap(false); setShowLibrary(false); }
+        if (next) {
+            setLastActiveTab('menu');
+            setShowLog(false); setShowDashboard(false); setShowMap(false); setShowLibrary(false); setShowProfile(false);
+        }
     };
 
 
@@ -58,7 +72,33 @@ export const GameProvider = ({ children }) => {
     const toggleLibrary = (val) => {
         const next = val !== undefined ? val : !showLibrary;
         setShowLibrary(next);
-        if (next) { setShowLog(false); setShowDashboard(false); setShowMap(false); setShowMenu(false); }
+        if (next) {
+            setLastActiveTab('library');
+            setShowLog(false); setShowDashboard(false); setShowMap(false); setShowMenu(false); setShowProfile(false);
+        }
+    };
+
+    const toggleProfile = (val) => {
+        const next = val !== undefined ? val : !showProfile;
+        setShowProfile(next);
+        if (next) {
+            setLastActiveTab('profile');
+            setShowLog(false); setShowDashboard(false); setShowMap(false); setShowMenu(false); setShowLibrary(false);
+        }
+    };
+
+    const togglePanel = () => {
+        const isOpen = showLog || showDashboard || showMap || showMenu || showLibrary || showProfile;
+        if (isOpen) {
+            setShowLog(false); setShowDashboard(false); setShowMap(false); setShowMenu(false); setShowLibrary(false); setShowProfile(false);
+        } else {
+            if (lastActiveTab === 'log') toggleLog(true);
+            else if (lastActiveTab === 'dashboard') toggleDashboard(true);
+            else if (lastActiveTab === 'map') toggleMap(true);
+            else if (lastActiveTab === 'library') toggleLibrary(true);
+            else if (lastActiveTab === 'profile') toggleProfile(true);
+            else toggleMenu(true);
+        }
     };
 
 
@@ -151,6 +191,9 @@ export const GameProvider = ({ children }) => {
         setShowMenu: toggleMenu,
         showLibrary,
         setShowLibrary: toggleLibrary,
+        showProfile,
+        setShowProfile: toggleProfile,
+        togglePanel,
         typewriterSpeed: store.typewriterSpeed,
         setTypewriterSpeed: store.setTypewriterSpeed,
         transitionsEnabled: store.transitionsEnabled,

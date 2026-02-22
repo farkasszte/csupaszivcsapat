@@ -62,25 +62,7 @@ export default function Header() {
             </header>
 
             {/* ── Desktop header (top bar) ── */}
-            <header className="hidden lg:flex fixed top-0 left-0 right-0 z-50 bg-zinc-950/80 backdrop-blur-md border-b border-amber-900/30 px-6 py-4 justify-between items-center gap-2">
-                <h1 className="text-xl font-bold bg-linear-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent whitespace-nowrap">
-                    Csupaszív kalandok: A Homokhátság Hősei
-                </h1>
-
-                <button
-                    onClick={togglePanel}
-                    title={showPanel ? 'Panel bezárása' : 'Panel megnyitása'}
-                    className={`absolute left-1/2 -translate-x-1/2 flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium rounded border transition-all ${showPanel
-                        ? 'bg-amber-600/20 hover:bg-amber-600/40 text-amber-300 border-amber-500/30'
-                        : 'bg-zinc-700/30 hover:bg-zinc-700/50 text-zinc-400 border-zinc-600/30'
-                        }`}
-                >
-                    {showPanel ? <RiLayoutLine size={14} /> : <RiLayoutRightLine size={14} />}
-                    <span>{showPanel ? 'Bezár' : 'Menü'}</span>
-                </button>
-
-                <UserMenu />
-            </header>
+            {/* Removed as per header decommissioning process */}
 
             {/* ── Mobile bottom nav bar ── */}
             <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-zinc-950/95 backdrop-blur-md border-t border-amber-900/30 flex items-stretch">
