@@ -383,7 +383,7 @@ export default function LoginPage() {
                                 <p className="mb-3">{message}</p>
                                 {generatedCode && (
                                     <div className="mt-4 p-4 bg-black/40 rounded-lg inline-block border border-white/5">
-                                        <div className="text-2xl sm:text-3xl font-mono font-bold tracking-[0.1em] sm:tracking-[0.25em] text-orange-400 selection:bg-orange-500/30 uppercase">
+                                        <div className="text-2xl sm:text-3xl font-mono font-bold tracking-widest sm:tracking-[0.25em] text-orange-400 selection:bg-orange-500/30 uppercase">
                                             {generatedCode}
                                         </div>
                                         <div className="text-xs text-zinc-400 mt-2 font-sans tracking-normal">Ez a te egyedi azonosítód</div>

@@ -129,7 +129,7 @@ export default function Home() {
 
 
                                 {/* Panel content */}
-                                <div className="overflow-y-auto flex-1 py-2">
+                                <div className="overflow-y-auto flex-1 py-1 no-scrollbar">
                                     {activeTab === 'profile' && <ProfileView />}
                                     {activeTab === 'menu' && <GameMenu />}
                                     {activeTab === 'log' && <StoryLog />}

@@ -243,12 +243,12 @@ export const StoryEngine = () => {
 
                 <div className={`transition-all duration-500 transform ${isUiHidden ? 'opacity-0 translate-y-8 pointer-events-none' : 'opacity-100 translate-y-0 pointer-events-auto'} bg-linear-to-b from-transparent via-black/40 to-black/80`}>
                     {/* Choices Overlay (moves above the text box) */}
-                    <div className="px-3 pb-2 z-20 pointer-events-auto">
+                    <div className={`px-3 pb-2 z-20 ${isUiHidden ? 'pointer-events-none' : 'pointer-events-auto'}`}>
                         <Choices hasImage={true} onHoverChange={setIsChoiceHovered} />
                     </div>
 
                     {/* Text Content in Translucent Box */}
-                    <div className={`p-4 m-3 mb-4 bg-black/30 backdrop-blur-md rounded-xl border border-white/10 shadow-xl pointer-events-auto`}>
+                    <div className={`p-4 m-3 mb-4 bg-black/30 backdrop-blur-md rounded-xl border border-white/10 shadow-xl ${isUiHidden ? 'pointer-events-none' : 'pointer-events-auto'}`}>
                         <h1 className="text-2xl lg:text-3xl font-bold mb-3 text-transparent bg-clip-text bg-linear-to-r from-amber-200 to-orange-200 drop-shadow-sm font-serif" dangerouslySetInnerHTML={{ __html: element?.title }}></h1>
 
                         {/* Text area is internally scrollable if content is very long */}
