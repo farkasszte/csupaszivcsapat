@@ -101,50 +101,55 @@ export default function UserMenu({ compact = false }) {
     }
 
     return (
-        <div className="flex items-center">
-            {/* Profile Toggle Button */}
-            <button
-                onClick={handleProfileClick}
-                className={`px-2 py-1.5 rounded-lg text-sm font-bold transition-all border ${showProfile
-                    ? 'bg-amber-600/20 text-amber-300 border-amber-500/50 shadow-[0_0_15px_rgba(245,158,11,0.2)]'
-                    : 'text-zinc-400 border-transparent hover:text-amber-200'
-                    }`}
-            >
-                Profil
-            </button>
+        <div className="flex items-center justify-between w-full px-1">
+            {/* Settings Toggle Button (Left) */}
+            <div className="flex-1 flex justify-start">
+                <button
+                    onClick={handleMenuClick}
+                    className={`px-2 py-1.5 rounded-lg text-sm font-bold transition-all border ${showMenu
+                        ? 'bg-amber-600/20 text-amber-300 border-amber-500/50 shadow-[0_0_15px_rgba(245,158,11,0.2)]'
+                        : 'text-zinc-400 border-transparent hover:text-amber-200'
+                        }`}
+                >
+                    Beállítások
+                </button>
+            </div>
 
-            {/* Settings Toggle Button (previously known as Menü) */}
-            <button
-                onClick={handleMenuClick}
-                className={`px-2 py-1.5 rounded-lg text-sm font-bold transition-all border ${showMenu
-                    ? 'bg-amber-600/20 text-amber-300 border-amber-500/50 shadow-[0_0_15px_rgba(245,158,11,0.2)]'
-                    : 'text-zinc-400 border-transparent hover:text-amber-200 hover:bg-zinc-800/50'
-                    }`}
-            >
-                Beállítások
-            </button>
+            {/* Middle section: Guest code or Email */}
+            <div className="flex-1 flex justify-center">
+                {isGuest && (
+                    <span className="hidden md:flex items-center gap-1.5 text-xs text-zinc-500 whitespace-nowrap">
+                        Vendég kód: <span className="text-amber-200/40 font-mono font-bold">{guestCode}</span>
+                        <button
+                            onClick={handleCopyCode}
+                            title={copied ? 'Másolva!' : 'Kód másolása'}
+                            className={`p-1 rounded transition-all ${copied ? 'text-emerald-400' : 'text-zinc-500 hover:text-amber-300'}`}
+                        >
+                            {copied
+                                ? <RiCheckLine size={14} />
+                                : <RiFileCopyLine size={14} />
+                            }
+                        </button>
+                    </span>
+                )}
 
-            {/* Guest code with copy button */}
-            {isGuest && (
-                <span className="hidden md:flex items-center gap-1.5 text-xs text-zinc-500 ml-4">
-                    Vendég kód: <span className="text-amber-200/40 font-mono font-bold">{guestCode}</span>
-                    <button
-                        onClick={handleCopyCode}
-                        title={copied ? 'Másolva!' : 'Kód másolása'}
-                        className={`p-1 rounded transition-all ${copied ? 'text-emerald-400' : 'text-zinc-500 hover:text-amber-300'}`}
-                    >
-                        {copied
-                            ? <RiCheckLine size={14} />
-                            : <RiFileCopyLine size={14} />
-                        }
-                    </button>
-                </span>
-            )}
+                {!isGuest && user && (
+                    <span className="text-xs text-zinc-500 hidden md:inline">({user.email})</span>
+                )}
+            </div>
 
-            {/* Regular email (non-guest) */}
-            {!isGuest && user && (
-                <span className="text-xs text-zinc-500 hidden md:inline ml-4">({user.email})</span>
-            )}
+            {/* Profile Toggle Button (Right) */}
+            <div className="flex-1 flex justify-end">
+                <button
+                    onClick={handleProfileClick}
+                    className={`px-2 py-1.5 rounded-lg text-sm font-bold transition-all border ${showProfile
+                        ? 'bg-amber-600/20 text-amber-300 border-amber-500/50 shadow-[0_0_15px_rgba(245,158,11,0.2)]'
+                        : 'text-zinc-400 border-transparent hover:text-amber-200'
+                        }`}
+                >
+                    Profil
+                </button>
+            </div>
         </div>
     )
 }

@@ -73,36 +73,54 @@ export default function Home() {
 
                 {/* Layout: side-by-side when panel open, single column otherwise */}
                 <div
-                    className={`w-full max-w-6xl mx-auto flex justify-center items-center gap-6 flex-col lg:flex-row h-full`}
-                    style={{ maxHeight: 'min(80vh, 750px)' }}
+                    className={`w-full max-w-6xl mx-auto flex justify-center items-center gap-6 flex-col lg:flex-row h-full relative max-h-[min(80vh,750px)] lg:max-h-[min(80vh,clamp(350px,40vw,750px))]`}
                 >
+                    {/* Shared Desktop Header Row — fixed max-width */}
+                    {showPanel && (
+                        <div className="hidden lg:flex absolute -top-11 left-1/2 -translate-x-1/2 w-full max-w-[780px] items-center justify-between animate-in fade-in slide-in-from-bottom-2 duration-1200">
+                            {/* Title + Hamburger (left) */}
+                            <div className="flex items-center gap-3 shrink-0">
+                                <h1 className="text-lg font-bold bg-linear-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent whitespace-nowrap">
+                                    Csupaszív kalandok: A Homokhátság Hősei
+                                </h1>
+                                <button
+                                    onClick={togglePanel}
+                                    className="p-1.5 rounded-lg transition-all text-amber-400 bg-amber-400/10 scale-90 hover:scale-100"
+                                    title="Panel bezárása"
+                                >
+                                    <RiMenuLine size={18} />
+                                </button>
+                            </div>
+                            {/* UserMenu (right) */}
+                            <div className="flex-1 max-w-md ml-6">
+                                <UserMenu />
+                            </div>
+                        </div>
+                    )}
 
                     {/* Game panel — hidden on mobile when side panel is visible */}
                     <div className={`relative flex flex-col justify-center items-center ${showPanel ? 'hidden lg:flex h-full' : 'flex w-full h-full'}`}>
-                        {/* Title - Absolutely positioned above the panel so it doesn't push it down */}
-                        {/* Title & Hamburger - Absolutely positioned above the panel */}
-                        <div className="hidden lg:flex absolute -top-10 left-1/2 -translate-x-1/2 w-full items-center justify-center gap-4 animate-in fade-in slide-in-from-bottom-2 duration-1200">
-                            <h1 className="text-lg font-bold bg-linear-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent">
-                                Csupaszív kalandok: A Homokhátság Hősei
-                            </h1>
-                            <button
-                                onClick={togglePanel}
-                                className={`p-1.5 rounded-lg transition-all ${showPanel ? 'text-amber-400 bg-amber-400/10' : 'text-zinc-500 hover:text-amber-200 hover:bg-zinc-800/20'} scale-90 hover:scale-100`}
-                                title={showPanel ? "Panel bezárása" : "Menü megnyitása"}
-                            >
-                                <RiMenuLine size={18} />
-                            </button>
-                        </div>
+                        {/* Title & Hamburger — only when panel is CLOSED */}
+                        {!showPanel && (
+                            <div className="hidden lg:flex absolute -top-10 left-1/2 -translate-x-1/2 w-full items-center justify-center gap-4 animate-in fade-in slide-in-from-bottom-2 duration-1200">
+                                <h1 className="text-lg font-bold bg-linear-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent">
+                                    Csupaszív kalandok: A Homokhátság Hősei
+                                </h1>
+                                <button
+                                    onClick={togglePanel}
+                                    className="p-1.5 rounded-lg transition-all text-zinc-500 hover:text-amber-200 hover:bg-zinc-800/20 scale-90 hover:scale-100"
+                                    title="Menü megnyitása"
+                                >
+                                    <RiMenuLine size={18} />
+                                </button>
+                            </div>
+                        )}
                         <StoryEngine />
                     </div>
 
                     {/* Side panel */}
                     {showPanel && (
                         <div className="relative h-full flex flex-col justify-center items-center">
-                            {/* User Menu - Absolutely positioned above the side panel - right aligned */}
-                            <div className="hidden lg:block absolute -top-11 right-0 animate-in fade-in slide-in-from-bottom-2 duration-1200 delay-150">
-                                <UserMenu />
-                            </div>
                             <div
                                 className="h-full w-auto aspect-9/16 max-w-none bg-zinc-900/60 backdrop-blur-xl rounded-xl border border-white/5 shadow-2xl overflow-hidden flex flex-col"
                             >
