@@ -62,7 +62,6 @@ export const StoryEngine = () => {
         // Reset any existing timeout
         if (transitionTimeoutRef.current) clearTimeout(transitionTimeoutRef.current);
 
-
         setIsFading(true);
 
         transitionTimeoutRef.current = setTimeout(() => {
@@ -70,12 +69,12 @@ export const StoryEngine = () => {
             setIsFading(false);
             // Reset UI visibility on scene change
             setIsUiHidden(false);
-        }, 400); // Duration of fade-out
+        }, 500); // Duration matches transition-all duration-500
 
         return () => {
             if (transitionTimeoutRef.current) clearTimeout(transitionTimeoutRef.current);
         };
-    }, [currentElementId]);
+    }, [currentElementId, transitionsEnabled]);
 
     // Parse into segments and calculate offsets
     useEffect(() => {
@@ -206,12 +205,13 @@ export const StoryEngine = () => {
     if (!isMounted) return null;
 
     return (
-        <div className={`mx-auto rounded-xl shadow-2xl border border-white/10 relative overflow-hidden transition-all duration-500 transform h-full w-auto aspect-9/16 max-w-none bg-zinc-950 ${isFading ? 'opacity-0 scale-[0.98] translate-y-1' : 'opacity-100 scale-100 translate-y-0'
+        <div key={displayElementId} className={`mx-auto rounded-xl shadow-2xl border border-white/10 relative overflow-hidden transition-all duration-500 transform h-full w-auto aspect-9/16 max-w-none bg-zinc-950 ${isFading ? 'opacity-0 scale-[0.98] translate-y-1' : 'opacity-100 scale-100 translate-y-0'
             }`}>
 
             {/* Background Image */}
             {coverUrl ? (
                 <img
+                    key={coverUrl}
                     src={coverUrl}
                     alt="Scene"
                     className={`absolute inset-0 w-full h-full object-cover cursor-pointer transition-transform duration-1000 ${isChoiceHovered ? 'scale-105' : 'scale-100'}`}
@@ -220,6 +220,7 @@ export const StoryEngine = () => {
                 />
             ) : (
                 <div
+                    key="no-image"
                     className="absolute inset-0 w-full h-full bg-zinc-900 cursor-pointer"
                     onClick={() => setIsUiHidden(!isUiHidden)}
                 />
@@ -249,8 +250,6 @@ export const StoryEngine = () => {
 
                     {/* Text Content in Translucent Box */}
                     <div className={`p-4 m-3 mb-4 bg-black/30 backdrop-blur-md rounded-xl border border-white/10 shadow-xl ${isUiHidden ? 'pointer-events-none' : 'pointer-events-auto'}`}>
-                        <h1 className="text-2xl lg:text-3xl font-bold mb-3 text-transparent bg-clip-text bg-linear-to-r from-amber-200 to-orange-200 drop-shadow-sm font-serif" dangerouslySetInnerHTML={{ __html: element?.title }}></h1>
-
                         {/* Text area is internally scrollable if content is very long */}
                         <div className={`story-content space-y-3 text-sm lg:text-base text-orange-50/90 leading-relaxed font-light tracking-wide overflow-y-auto max-h-[35vh] pr-2`}>
                             {contentSegments.map((seg, idx) => {

@@ -147,9 +147,16 @@ export const GameProvider = ({ children }) => {
 
 
     const getAssetUrl = (assetId) => {
+        if (!assetId) return null;
         const asset = projectSettings.assets[assetId];
-        if (!asset) return null;
-        const folder = asset.type === 'template-audio' ? 'Audio' : 'Images';
+        if (!asset) {
+            console.warn(`Asset not found: ${assetId}`);
+            return null;
+        }
+        const type = asset.type || '';
+        // Handle both 'template-audio' and generic 'audio' types
+        const isAudio = type.toLowerCase().includes('audio');
+        const folder = isAudio ? 'Audio' : 'Images';
         return `/assets/${folder}/${asset.name}`;
     };
 

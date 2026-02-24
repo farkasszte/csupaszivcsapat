@@ -77,7 +77,7 @@ export default function Home() {
                 >
                     {/* Shared Desktop Header Row — fixed max-width */}
                     {showPanel && (
-                        <div className="hidden lg:flex absolute -top-11 left-1/2 -translate-x-1/2 w-full max-w-[780px] items-center justify-between animate-in fade-in slide-in-from-bottom-2 duration-1200">
+                        <div className="hidden lg:flex absolute -top-11 left-1/2 -translate-x-1/2 w-full max-w-[800px] items-center justify-between animate-in fade-in slide-in-from-bottom-2 duration-1200">
                             {/* Title + Hamburger (left) */}
                             <div className="flex items-center gap-3 shrink-0">
                                 <h1 className="text-lg font-bold bg-linear-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent whitespace-nowrap">

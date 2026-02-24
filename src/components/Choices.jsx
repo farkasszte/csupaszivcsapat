@@ -78,7 +78,7 @@ export const Choices = ({ hasImage, onHoverChange }) => {
                             : 'w-full text-center px-6 py-4 rounded-lg bg-linear-to-r from-red-900/40 to-orange-900/40 hover:from-red-800/60 hover:to-orange-800/60 border-orange-500/20'
                         }`}
                 >
-                    Restart Adventure
+                    Kaland újrakezdése
                 </button>
             )}
         </div>
