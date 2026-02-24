@@ -2,13 +2,14 @@
 
 import { useState, useEffect } from 'react';
 import { useGame } from '../context/GameContext';
-import { RiBookLine, RiExternalLinkLine, RiUser3Line, RiMapPin2Line, RiQuestionMark, RiArrowDownSLine } from '@remixicon/react';
+import { RiBookLine, RiExternalLinkLine, RiUser3Line, RiMapPin2Line, RiQuestionMark, RiArrowDownSLine, RiSearchLine, RiCloseLine } from '@remixicon/react';
 import { getColorFilterStyle } from './StoryEngine';
 
 export default function GameLibrary() {
     const { project, discoveredComponents, colorFilter, getAssetUrl } = useGame();
     const [csvCategories, setCsvCategories] = useState({});
     const [expandedCategories, setExpandedCategories] = useState({});
+    const [searchQuery, setSearchQuery] = useState('');
 
     useEffect(() => {
         Promise.all([
@@ -124,6 +125,27 @@ export default function GameLibrary() {
         : [];
     const filterStyle = getColorFilterStyle(colorFilter);
 
+    // Szűrési logika
+    const filteredCategories = Object.entries(csvCategories).reduce((acc, [category, items]) => {
+        if (!searchQuery.trim()) {
+            acc[category] = items;
+            return acc;
+        }
+
+        const query = searchQuery.toLowerCase();
+        const filteredItems = items.filter(item => {
+            const matchNev = item.nev?.toLowerCase().includes(query);
+            const matchLatinNev = item.latinNev?.toLowerCase().includes(query);
+            const matchVedett = item.vedett?.toLowerCase().includes(query);
+            return matchNev || matchLatinNev || matchVedett;
+        });
+
+        if (filteredItems.length > 0) {
+            acc[category] = filteredItems;
+        }
+        return acc;
+    }, {});
+
     return (
         <div className="flex flex-col gap-6 p-4">
             {/* 1. DISCOVERED ENTRIES SECTION */}
@@ -187,88 +209,118 @@ export default function GameLibrary() {
 
             {/* 2. EXTERNAL LINKS SECTION */}
             <div className="flex flex-col gap-3">
-                <div className="flex items-center gap-1.5 text-[10px] text-zinc-500 uppercase tracking-widest px-1">
-                    <RiBookLine size={10} />
-                    Ajánlott olvasmányok
+                <div className="flex items-center justify-between px-1">
+                    <div className="flex items-center gap-1.5 text-[10px] text-zinc-500 uppercase tracking-widest">
+                        <RiBookLine size={10} />
+                        Homokhátsági természeti enciklopédia
+                    </div>
+                </div>
+
+                {/* Keresőmező */}
+                <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <RiSearchLine size={16} className="text-zinc-500" />
+                    </div>
+                    <input
+                        type="text"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        placeholder="Keresés faj, település vagy kategória alapján..."
+                        className="w-full bg-zinc-800/40 border border-zinc-700/50 hover:border-amber-600/30 focus:border-amber-500/50 rounded-xl py-2.5 pl-9 pr-10 text-xs text-amber-50 placeholder-zinc-500 focus:outline-none transition-all"
+                    />
+                    {searchQuery && (
+                        <button
+                            onClick={() => setSearchQuery('')}
+                            className="absolute inset-y-0 right-0 pr-3 flex items-center text-zinc-500 hover:text-amber-400 transition-colors"
+                        >
+                            <RiCloseLine size={16} />
+                        </button>
+                    )}
                 </div>
 
                 <div className="grid gap-2">
-                    {Object.entries(csvCategories).map(([category, items]) => (
-                        <div key={category} id={`category-${category.replace(/\s+/g, '-')}`} className="flex flex-col gap-1">
-                            <button
-                                onClick={() => toggleCategory(category)}
-                                className="flex items-center justify-between w-full px-4 py-3 bg-zinc-800/40 hover:bg-zinc-800/70 border border-zinc-700/20 rounded-xl transition-all group"
-                            >
-                                <span className="text-xs font-semibold text-amber-200 group-hover:text-amber-100 transition-colors">
-                                    {category} ({items.length})
-                                </span>
-                                <RiArrowDownSLine
-                                    size={16}
-                                    className={`text-zinc-500 group-hover:text-amber-400 transition-transform ${expandedCategories[category] ? 'rotate-180' : ''}`}
-                                />
-                            </button>
-                            {expandedCategories[category] && (
-                                <div className="grid gap-1 pl-4 pr-1 py-1 mt-1 border-l-2 border-zinc-800/50 ml-4 max-h-[300px] overflow-y-auto custom-scrollbar">
-                                    {items.map((link, idx) => (
-                                        <a
-                                            key={`${category}-${idx}`}
-                                            href={link.link}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="flex items-center gap-3 px-4 py-2 bg-zinc-800/20 hover:bg-zinc-800/50 rounded-lg transition-all group border border-transparent hover:border-zinc-700/50"
-                                        >
-                                            <div className="flex-1 min-w-0">
-                                                <div className="text-xs font-semibold text-amber-100/80 group-hover:text-amber-100 transition-colors leading-tight flex items-center gap-2">
-                                                    {link.nev}
-                                                    {link.isTelepules && link.vedett && (
-                                                        <span className="px-1.5 py-0.5 rounded-sm bg-blue-900/40 text-blue-400 text-[9px] uppercase tracking-wider border border-blue-800/30">
-                                                            {link.vedett}
-                                                        </span>
-                                                    )}
-                                                    {link.isTerulet && link.vedett && (
-                                                        <span className="px-1.5 py-0.5 rounded-sm bg-teal-900/40 text-teal-400 text-[9px] uppercase tracking-wider border border-teal-800/30">
-                                                            {link.vedett}
-                                                        </span>
-                                                    )}
-                                                    {!link.isTelepules && !link.isTerulet && !link.isTanosveny && (link.vedett === 'Védett' || link.vedett === 'Fokozottan védett' || link.vedett === 'Igen') && (
-                                                        <span className="px-1.5 py-0.5 rounded-sm bg-emerald-900/40 text-emerald-400 text-[9px] uppercase tracking-wider border border-emerald-800/30">
-                                                            {link.vedett === 'Igen' ? 'Védett' : link.vedett}
-                                                        </span>
-                                                    )}
-                                                </div>
-                                                {link.latinNev && (
-                                                    <div className="text-[10px] text-zinc-400 mt-0.5 italic leading-tight">
-                                                        {link.latinNev}
+                    {Object.keys(filteredCategories).length === 0 ? (
+                        <div className="text-xs text-zinc-500 italic text-center py-4">Nincs találat a keresésre.</div>
+                    ) : (
+                        Object.entries(filteredCategories).map(([category, items]) => {
+                            const isExpanded = searchQuery.trim() !== '' || expandedCategories[category];
+                            return (
+                                <div key={category} id={`category-${category.replace(/\s+/g, '-')}`} className="flex flex-col gap-1">
+                                    <button
+                                        onClick={() => toggleCategory(category)}
+                                        className="flex items-center justify-between w-full px-4 py-3 bg-zinc-800/40 hover:bg-zinc-800/70 border border-zinc-700/20 rounded-xl transition-all group"
+                                    >
+                                        <span className="text-xs font-semibold text-amber-200 group-hover:text-amber-100 transition-colors">
+                                            {category} ({items.length})
+                                        </span>
+                                        <RiArrowDownSLine
+                                            size={16}
+                                            className={`text-zinc-500 group-hover:text-amber-400 transition-transform ${isExpanded ? 'rotate-180' : ''}`}
+                                        />
+                                    </button>
+                                    {isExpanded && (
+                                        <div className="grid gap-1 pl-4 pr-1 py-1 mt-1 border-l-2 border-zinc-800/50 ml-4 max-h-[300px] overflow-y-auto custom-scrollbar">
+                                            {items.map((link, idx) => (
+                                                <a
+                                                    key={`${category}-${idx}`}
+                                                    href={link.link}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="flex items-center gap-3 px-4 py-2 bg-zinc-800/20 hover:bg-zinc-800/50 rounded-lg transition-all group border border-transparent hover:border-zinc-700/50"
+                                                >
+                                                    <div className="flex-1 min-w-0">
+                                                        <div className="text-xs font-semibold text-amber-100/80 group-hover:text-amber-100 transition-colors leading-tight flex items-center gap-2">
+                                                            {link.nev}
+                                                            {link.isTelepules && link.vedett && (
+                                                                <span className="px-1.5 py-0.5 rounded-sm bg-blue-900/40 text-blue-400 text-[9px] uppercase tracking-wider border border-blue-800/30">
+                                                                    {link.vedett}
+                                                                </span>
+                                                            )}
+                                                            {link.isTerulet && link.vedett && (
+                                                                <span className="px-1.5 py-0.5 rounded-sm bg-teal-900/40 text-teal-400 text-[9px] uppercase tracking-wider border border-teal-800/30">
+                                                                    {link.vedett}
+                                                                </span>
+                                                            )}
+                                                            {!link.isTelepules && !link.isTerulet && !link.isTanosveny && (link.vedett === 'Védett' || link.vedett === 'Fokozottan védett' || link.vedett === 'Igen') && (
+                                                                <span className="px-1.5 py-0.5 rounded-sm bg-emerald-900/40 text-emerald-400 text-[9px] uppercase tracking-wider border border-emerald-800/30">
+                                                                    {link.vedett === 'Igen' ? 'Védett' : link.vedett}
+                                                                </span>
+                                                            )}
+                                                        </div>
+                                                        {link.latinNev && (
+                                                            <div className="text-[10px] text-zinc-400 mt-0.5 italic leading-tight">
+                                                                {link.latinNev}
+                                                            </div>
+                                                        )}
+                                                        <div className="text-[10px] text-zinc-500 mt-1.5 flex flex-wrap gap-x-3 gap-y-1">
+                                                            {!link.isTelepules && !link.isTerulet && !link.isTanosveny && link.statusz && link.statusz !== 'Nem fenyegetett' && (
+                                                                <span className="text-red-400/80 flex items-center gap-1">
+                                                                    <div className="w-1 h-1 rounded-full bg-red-500/50"></div>
+                                                                    {link.statusz}
+                                                                </span>
+                                                            )}
+                                                            {link.ertekString && (
+                                                                <span className="text-amber-500/80 flex items-center gap-1">
+                                                                    <div className="w-1 h-1 rounded-full bg-amber-500/50"></div>
+                                                                    {link.ertekString}
+                                                                </span>
+                                                            )}
+                                                        </div>
                                                     </div>
-                                                )}
-                                                <div className="text-[10px] text-zinc-500 mt-1.5 flex flex-wrap gap-x-3 gap-y-1">
-                                                    {!link.isTelepules && !link.isTerulet && !link.isTanosveny && link.statusz && link.statusz !== 'Nem fenyegetett' && (
-                                                        <span className="text-red-400/80 flex items-center gap-1">
-                                                            <div className="w-1 h-1 rounded-full bg-red-500/50"></div>
-                                                            {link.statusz}
-                                                        </span>
-                                                    )}
-                                                    {link.ertekString && (
-                                                        <span className="text-amber-500/80 flex items-center gap-1">
-                                                            <div className="w-1 h-1 rounded-full bg-amber-500/50"></div>
-                                                            {link.ertekString}
-                                                        </span>
-                                                    )}
-                                                </div>
-                                            </div>
-                                            <RiExternalLinkLine
-                                                size={12}
-                                                className="shrink-0 text-zinc-600 group-hover:text-amber-400 transition-colors"
-                                            />
-                                        </a>
-                                    ))}
+                                                    <RiExternalLinkLine
+                                                        size={12}
+                                                        className="shrink-0 text-zinc-600 group-hover:text-amber-400 transition-colors"
+                                                    />
+                                                </a>
+                                            ))}
+                                        </div>
+                                    )}
                                 </div>
-                            )}
-                        </div>
-                    ))}
+                            );
+                        })
+                    )}
                 </div>
             </div>
         </div>
     );
 }
-
