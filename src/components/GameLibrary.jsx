@@ -1,29 +1,124 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { useGame } from '../context/GameContext';
-import { RiBookLine, RiExternalLinkLine, RiUser3Line, RiMapPin2Line, RiQuestionMark } from '@remixicon/react';
+import { RiBookLine, RiExternalLinkLine, RiUser3Line, RiMapPin2Line, RiQuestionMark, RiArrowDownSLine } from '@remixicon/react';
 import { getColorFilterStyle } from './StoryEngine';
-
-const EXTERNAL_LINKS = [
-    {
-        label: 'Európai szalakóta',
-        desc: 'Coracias garrulus',
-        url: 'https://hu.wikipedia.org/wiki/Eur%C3%B3pai_szalak%C3%B3ta',
-    },
-    {
-        label: 'Ürge',
-        desc: 'Spermophilus citellus',
-        url: 'https://hu.wikipedia.org/wiki/%C3%9Crge',
-    },
-    {
-        label: 'Túzok',
-        desc: 'Otis tarda',
-        url: 'https://hu.wikipedia.org/wiki/T%C3%BAzok',
-    },
-];
 
 export default function GameLibrary() {
     const { project, discoveredComponents, colorFilter, getAssetUrl } = useGame();
+    const [csvCategories, setCsvCategories] = useState({});
+    const [expandedCategories, setExpandedCategories] = useState({});
+
+    useEffect(() => {
+        Promise.all([
+            fetch('/gerinces_allatok.csv').then(res => res.text()),
+            fetch('/telepulesek.csv').then(res => res.text()),
+            fetch('/termeszetvedelmi_teruletek.csv').then(res => res.text()),
+            fetch('/tanosvenyek.csv').then(res => res.text())
+        ])
+            .then(([allatokText, telepulesekText, teruletekText, tanosvenyekText]) => {
+                const allatokLines = allatokText.split('\n').filter(line => line.trim() !== '');
+                const allatokData = allatokLines.slice(1).map(line => {
+                    const [kategoria, nev, latinNev, vedett, statusz, ertek, link] = line.split(',');
+                    return {
+                        kategoria: kategoria?.trim(),
+                        nev: nev?.trim(),
+                        latinNev: latinNev?.trim(),
+                        vedett: vedett?.trim(),
+                        statusz: statusz?.trim(),
+                        ertekString: (ertek?.trim() && ertek?.trim() !== '0') ? `Eszmei érték: ${parseInt(ertek.trim()).toLocaleString('hu-HU')} Ft` : null,
+                        link: link?.trim(),
+                        isTelepules: false,
+                        isTerulet: false,
+                        isTanosveny: false
+                    };
+                }).filter(item => item.kategoria && item.nev && item.kategoria !== 'Kategória');
+
+                const telepusLines = telepulesekText.split('\n').filter(line => line.trim() !== '');
+                const telepulesekData = telepusLines.slice(1).map(line => {
+                    const [telepules, varmegye, rang, lakossag, link] = line.split(',');
+                    return {
+                        kategoria: 'Települések',
+                        nev: telepules?.trim(),
+                        latinNev: varmegye?.trim() ? `${varmegye.trim()} vármegye` : null,
+                        vedett: rang?.trim(), // Reuse field for "Rang"
+                        statusz: null,
+                        ertekString: lakossag?.trim() ? `Lakosság: ${parseInt(lakossag.trim()).toLocaleString('hu-HU')} fő` : null,
+                        link: link?.trim(),
+                        isTelepules: true,
+                        isTerulet: false,
+                        isTanosveny: false
+                    };
+                }).filter(item => item.nev && item.nev !== 'Település');
+
+                const teruletekLines = teruletekText.split('\n').filter(line => line.trim() !== '');
+                const teruletekData = teruletekLines.slice(1).map(line => {
+                    const [besorolas, nev, terulet, link] = line.split(',');
+                    return {
+                        kategoria: 'Természetvédelmi területek',
+                        nev: nev?.trim(),
+                        latinNev: null,
+                        vedett: besorolas?.trim(),
+                        statusz: null,
+                        ertekString: terulet?.trim() ? `Terület: ${parseInt(terulet.trim()).toLocaleString('hu-HU')} hektár` : null,
+                        link: link?.trim(),
+                        isTelepules: false,
+                        isTerulet: true,
+                        isTanosveny: false
+                    };
+                }).filter(item => item.nev && item.nev !== 'Terület neve');
+
+                const tanosvenyekLines = tanosvenyekText.split('\n').filter(line => line.trim() !== '');
+                const tanosvenyekData = tanosvenyekLines.slice(1).map(line => {
+                    const [nev, telepules, hossz, link] = line.split(',');
+                    return {
+                        kategoria: 'Tanösvények',
+                        nev: nev?.trim(),
+                        latinNev: telepules?.trim(), // Show település info here
+                        vedett: null,
+                        statusz: null,
+                        ertekString: hossz?.trim() ? `Hossz: ${hossz.trim()} km` : null,
+                        link: link?.trim(),
+                        isTelepules: false,
+                        isTerulet: false,
+                        isTanosveny: true
+                    };
+                }).filter(item => item.nev && item.nev !== 'Tanösvény neve');
+
+                const allData = [...allatokData, ...telepulesekData, ...teruletekData, ...tanosvenyekData];
+
+                const grouped = allData.reduce((acc, curr) => {
+                    if (!acc[curr.kategoria]) {
+                        acc[curr.kategoria] = [];
+                    }
+                    acc[curr.kategoria].push(curr);
+                    return acc;
+                }, {});
+
+                setCsvCategories(grouped);
+            })
+            .catch(err => console.error("Error fetching recommended readings:", err));
+    }, []);
+
+    const toggleCategory = (category) => {
+        setExpandedCategories(prev => {
+            const isExpanding = !prev[category];
+            if (isExpanding) {
+                setTimeout(() => {
+                    const el = document.getElementById(`category-${category.replace(/\s+/g, '-')}`);
+                    if (el) {
+                        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }, 100);
+            }
+            return {
+                ...prev,
+                [category]: isExpanding
+            };
+        });
+    };
+
     const components = discoveredComponents
         ? [...new Set(discoveredComponents)].map(id => ({ ...project.components[id], id })).filter(c => c.name)
         : [];
@@ -98,27 +193,78 @@ export default function GameLibrary() {
                 </div>
 
                 <div className="grid gap-2">
-                    {EXTERNAL_LINKS.map((link) => (
-                        <a
-                            key={link.url}
-                            href={link.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-3 px-4 py-3 bg-zinc-800/40 hover:bg-zinc-800/70 border border-zinc-700/20 hover:border-zinc-600/40 rounded-xl transition-all group"
-                        >
-                            <div className="flex-1 min-w-0">
-                                <div className="text-xs font-semibold text-amber-200 group-hover:text-amber-100 transition-colors">
-                                    {link.label}
+                    {Object.entries(csvCategories).map(([category, items]) => (
+                        <div key={category} id={`category-${category.replace(/\s+/g, '-')}`} className="flex flex-col gap-1">
+                            <button
+                                onClick={() => toggleCategory(category)}
+                                className="flex items-center justify-between w-full px-4 py-3 bg-zinc-800/40 hover:bg-zinc-800/70 border border-zinc-700/20 rounded-xl transition-all group"
+                            >
+                                <span className="text-xs font-semibold text-amber-200 group-hover:text-amber-100 transition-colors">
+                                    {category} ({items.length})
+                                </span>
+                                <RiArrowDownSLine
+                                    size={16}
+                                    className={`text-zinc-500 group-hover:text-amber-400 transition-transform ${expandedCategories[category] ? 'rotate-180' : ''}`}
+                                />
+                            </button>
+                            {expandedCategories[category] && (
+                                <div className="grid gap-1 pl-4 pr-1 py-1 mt-1 border-l-2 border-zinc-800/50 ml-4 max-h-[300px] overflow-y-auto custom-scrollbar">
+                                    {items.map((link, idx) => (
+                                        <a
+                                            key={`${category}-${idx}`}
+                                            href={link.link}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="flex items-center gap-3 px-4 py-2 bg-zinc-800/20 hover:bg-zinc-800/50 rounded-lg transition-all group border border-transparent hover:border-zinc-700/50"
+                                        >
+                                            <div className="flex-1 min-w-0">
+                                                <div className="text-xs font-semibold text-amber-100/80 group-hover:text-amber-100 transition-colors leading-tight flex items-center gap-2">
+                                                    {link.nev}
+                                                    {link.isTelepules && link.vedett && (
+                                                        <span className="px-1.5 py-0.5 rounded-sm bg-blue-900/40 text-blue-400 text-[9px] uppercase tracking-wider border border-blue-800/30">
+                                                            {link.vedett}
+                                                        </span>
+                                                    )}
+                                                    {link.isTerulet && link.vedett && (
+                                                        <span className="px-1.5 py-0.5 rounded-sm bg-teal-900/40 text-teal-400 text-[9px] uppercase tracking-wider border border-teal-800/30">
+                                                            {link.vedett}
+                                                        </span>
+                                                    )}
+                                                    {!link.isTelepules && !link.isTerulet && !link.isTanosveny && (link.vedett === 'Védett' || link.vedett === 'Fokozottan védett' || link.vedett === 'Igen') && (
+                                                        <span className="px-1.5 py-0.5 rounded-sm bg-emerald-900/40 text-emerald-400 text-[9px] uppercase tracking-wider border border-emerald-800/30">
+                                                            {link.vedett === 'Igen' ? 'Védett' : link.vedett}
+                                                        </span>
+                                                    )}
+                                                </div>
+                                                {link.latinNev && (
+                                                    <div className="text-[10px] text-zinc-400 mt-0.5 italic leading-tight">
+                                                        {link.latinNev}
+                                                    </div>
+                                                )}
+                                                <div className="text-[10px] text-zinc-500 mt-1.5 flex flex-wrap gap-x-3 gap-y-1">
+                                                    {!link.isTelepules && !link.isTerulet && !link.isTanosveny && link.statusz && link.statusz !== 'Nem fenyegetett' && (
+                                                        <span className="text-red-400/80 flex items-center gap-1">
+                                                            <div className="w-1 h-1 rounded-full bg-red-500/50"></div>
+                                                            {link.statusz}
+                                                        </span>
+                                                    )}
+                                                    {link.ertekString && (
+                                                        <span className="text-amber-500/80 flex items-center gap-1">
+                                                            <div className="w-1 h-1 rounded-full bg-amber-500/50"></div>
+                                                            {link.ertekString}
+                                                        </span>
+                                                    )}
+                                                </div>
+                                            </div>
+                                            <RiExternalLinkLine
+                                                size={12}
+                                                className="shrink-0 text-zinc-600 group-hover:text-amber-400 transition-colors"
+                                            />
+                                        </a>
+                                    ))}
                                 </div>
-                                <div className="text-[10px] text-zinc-600 mt-0.5 italic">
-                                    {link.desc}
-                                </div>
-                            </div>
-                            <RiExternalLinkLine
-                                size={12}
-                                className="shrink-0 text-zinc-600 group-hover:text-amber-400 transition-colors"
-                            />
-                        </a>
+                            )}
+                        </div>
                     ))}
                 </div>
             </div>
