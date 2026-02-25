@@ -3,13 +3,15 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useGame } from '../context/GameContext';
 import { Choices } from './Choices';
+import { RiSearchLine } from '@remixicon/react';
 
 export const StoryEngine = () => {
     const {
         project, currentElementId, executeScript, evaluate, state,
         getAssetUrl, parseRichText, saveGame, loadGame, resetGame,
         loading, error, message, clearMessage, openLightbox, isMuted, colorFilter,
-        typewriterSpeed, transitionsEnabled, volume
+        typewriterSpeed, transitionsEnabled, volume,
+        recentDiscoveries, clearRecentDiscovery
     } = useGame();
 
 
@@ -26,6 +28,41 @@ export const StoryEngine = () => {
 
     const [isChoiceHovered, setIsChoiceHovered] = useState(false);
     const [isUiHidden, setIsUiHidden] = useState(false);
+
+    const [activeDiscoveryId, setActiveDiscoveryId] = useState(null);
+    const discoveryTimerRef = useRef(null);
+
+    // Process new discoveries purely from the store
+    useEffect(() => {
+        // If we're already showing a capsule, don't interrupt it
+        if (activeDiscoveryId) return;
+
+        // If there are discoveries waiting and we aren't showing one
+        if (recentDiscoveries && recentDiscoveries.length > 0) {
+            const nextDiscovery = recentDiscoveries[0].id;
+
+            // 1. Immediately remove it from the global store so we don't process it again
+            clearRecentDiscovery(nextDiscovery);
+
+            // 2. Set it as active to trigger the UI capsule
+            setActiveDiscoveryId(nextDiscovery);
+
+            // 3. Clear the UI capsule after 3 seconds
+            if (discoveryTimerRef.current) clearTimeout(discoveryTimerRef.current);
+            discoveryTimerRef.current = setTimeout(() => {
+                setActiveDiscoveryId(null);
+            }, 3000);
+        }
+    }, [recentDiscoveries, activeDiscoveryId, clearRecentDiscovery]);
+
+    // Cleanup timer on unmount
+    useEffect(() => {
+        return () => {
+            if (discoveryTimerRef.current) clearTimeout(discoveryTimerRef.current);
+        };
+    }, []);
+
+    const activeDiscoveryComponent = activeDiscoveryId && project?.components ? project.components[activeDiscoveryId] : null;
 
     useEffect(() => {
         setIsMounted(true);
@@ -207,6 +244,18 @@ export const StoryEngine = () => {
     return (
         <div key={displayElementId} className={`mx-auto rounded-xl shadow-2xl border border-white/10 relative overflow-hidden transition-all duration-500 transform h-full w-auto aspect-9/16 max-w-none bg-zinc-950 ${isFading ? 'opacity-0 scale-[0.98] translate-y-1' : 'opacity-100 scale-100 translate-y-0'
             }`}>
+
+            {/* Discovery Capsule */}
+            {activeDiscoveryComponent && (
+                <div key={activeDiscoveryId} className="absolute top-6 left-1/2 -translate-x-1/2 z-50 pointer-events-none animate-in slide-in-from-top-4 fade-in duration-500">
+                    <div className="bg-zinc-800/90 backdrop-blur-md border border-amber-500/30 shadow-[0_0_20px_rgba(245,158,11,0.2)] rounded-full px-5 py-2.5 flex items-center gap-3">
+                        <RiSearchLine size={16} className="text-amber-400" />
+                        <span className="text-xs font-bold tracking-wider text-amber-50 uppercase whitespace-nowrap">
+                            Új felfedezés: <span className="text-amber-300">{activeDiscoveryComponent.name}</span>
+                        </span>
+                    </div>
+                </div>
+            )}
 
             {/* Background Image */}
             {coverUrl ? (

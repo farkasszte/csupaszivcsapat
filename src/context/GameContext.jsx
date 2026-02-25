@@ -187,6 +187,8 @@ export const GameProvider = ({ children }) => {
         message: store.message,
         storyLog: store.storyLog,
         discoveredComponents: store.discoveredComponents,
+        recentDiscoveries: store.recentDiscoveries,
+        clearRecentDiscovery: store.clearRecentDiscovery,
         showLog,
 
         setShowLog: toggleLog,

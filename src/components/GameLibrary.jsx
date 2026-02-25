@@ -1,8 +1,9 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { useGame } from '../context/GameContext';
-import { RiBookLine, RiExternalLinkLine, RiUser3Line, RiMapPin2Line, RiQuestionMark, RiArrowDownSLine, RiSearchLine, RiCloseLine } from '@remixicon/react';
+import { RiBookLine, RiExternalLinkLine, RiUser3Line, RiMapPin2Line, RiQuestionMark, RiArrowDownSLine, RiSearchLine, RiCloseLine, RiPlayCircleLine } from '@remixicon/react';
 import { getColorFilterStyle } from './StoryEngine';
 
 export default function GameLibrary() {
@@ -10,6 +11,7 @@ export default function GameLibrary() {
     const [csvCategories, setCsvCategories] = useState({});
     const [expandedCategories, setExpandedCategories] = useState({});
     const [searchQuery, setSearchQuery] = useState('');
+    const [activeVideoUrl, setActiveVideoUrl] = useState(null);
 
     useEffect(() => {
         Promise.all([
@@ -169,10 +171,19 @@ export default function GameLibrary() {
                                 attr => attr.cId === comp.id && (attr.name.toLowerCase() === 'description' || attr.name.toLowerCase() === 'info')
                             );
 
+                            const videoAttr = Object.values(project.attributes).find(
+                                attr => attr.cId === comp.id && (attr.name.toLowerCase() === 'videourl' || attr.name.toLowerCase() === 'video')
+                            );
+                            let videoUrl = null;
+                            if (videoAttr) {
+                                videoUrl = videoAttr.value?.data ? videoAttr.value.data.replace(/<[^>]*>?/gm, '').trim() : null;
+                            }
+
                             return (
                                 <div
                                     key={comp.id}
-                                    className="group bg-zinc-800/30 hover:bg-zinc-800/50 border border-white/5 hover:border-amber-600/20 rounded-xl overflow-hidden transition-all duration-300"
+                                    onClick={() => videoUrl && setActiveVideoUrl(videoUrl)}
+                                    className={`group bg-zinc-800/30 hover:bg-zinc-800/50 border border-white/5 hover:border-amber-600/20 rounded-xl overflow-hidden transition-all duration-300 ${videoUrl ? 'cursor-pointer' : ''}`}
                                 >
                                     <div className="flex gap-3 p-2.5">
                                         <div className="shrink-0 w-14 h-14 rounded-lg overflow-hidden border border-white/10 bg-zinc-950 flex items-center justify-center relative">
@@ -183,8 +194,12 @@ export default function GameLibrary() {
                                                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                                                     style={{ filter: filterStyle }}
                                                 />
+                                            ) : videoUrl ? (
+                                                <RiPlayCircleLine size={24} className="text-amber-500/70 group-hover:text-amber-400 transition-colors opacity-80" />
+                                            ) : isCharacter ? (
+                                                <RiUser3Line size={18} className="text-zinc-700" />
                                             ) : (
-                                                isCharacter ? <RiUser3Line size={18} className="text-zinc-700" /> : <RiMapPin2Line size={18} className="text-zinc-700" />
+                                                <RiMapPin2Line size={18} className="text-zinc-700" />
                                             )}
                                         </div>
 
@@ -321,6 +336,30 @@ export default function GameLibrary() {
                     )}
                 </div>
             </div>
+
+            {/* VIDEO PLAYER OVERLAY */}
+            {activeVideoUrl && typeof document !== 'undefined' && createPortal(
+                <div className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-0 sm:p-4 backdrop-blur-sm animate-in fade-in duration-300">
+                    <button
+                        onClick={() => setActiveVideoUrl(null)}
+                        className="fixed top-4 right-4 sm:top-6 sm:right-6 w-10 h-10 rounded-full bg-zinc-800/50 text-white flex items-center justify-center hover:bg-zinc-700 transition-colors z-[110] border border-white/10"
+                    >
+                        <RiCloseLine size={24} />
+                    </button>
+
+                    <div className="relative w-full h-full flex flex-col items-center justify-center overflow-hidden">
+                        <video
+                            src={activeVideoUrl}
+                            autoPlay
+                            controls
+                            playsInline
+                            className="bg-black object-contain origin-center transition-transform duration-500 shadow-2xl landscape:w-full landscape:h-full portrait:w-[100vh] portrait:h-[100vw] portrait:max-w-[none] portrait:rotate-90 sm:portrait:w-full sm:portrait:h-full sm:portrait:rotate-0"
+                            onEnded={() => setActiveVideoUrl(null)}
+                        />
+                    </div>
+                </div>,
+                document.body
+            )}
         </div>
     );
 }

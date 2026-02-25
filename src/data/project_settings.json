@@ -1,166 +1,183 @@
 {
-    "startingElement": "33dad7dc-ab41-4bf7-9961-0d91ac33fc6f",
-    "boards": {
-        "2ad15ff6-f2ba-4f1d-9d9d-68938c683d7e": {
-            "name": "Root",
-            "root": true,
-            "children": [
-                "630fdb8a-48d6-473e-9974-2460f7eb2b41"
-            ]
-        },
-        "630fdb8a-48d6-473e-9974-2460f7eb2b41": {
-            "name": "Main Board",
-            "notes": [],
-            "jumpers": [],
-            "branches": [],
-            "elements": [
-                "33dad7dc-ab41-4bf7-9961-0d91ac33fc6f",
-                "f9b27081-469e-4e39-9b4e-fff2f4d63ac6"
-            ],
-            "connections": [
-                "4d5bd181-2419-4946-b381-b37c6dc6b74d"
-            ]
-        }
+  "startingElement": "33dad7dc-ab41-4bf7-9961-0d91ac33fc6f",
+  "boards": {
+    "2ad15ff6-f2ba-4f1d-9d9d-68938c683d7e": {
+      "name": "Root",
+      "root": true,
+      "children": [
+        "630fdb8a-48d6-473e-9974-2460f7eb2b41"
+      ]
     },
-    "notes": {},
-    "elements": {
-        "33dad7dc-ab41-4bf7-9961-0d91ac33fc6f": {
-            "theme": "default",
-            "components": [],
-            "outputs": [
-                "4d5bd181-2419-4946-b381-b37c6dc6b74d"
-            ],
-            "assets": {
-                "cover": {
-                    "id": "941f16e4-6db5-4650-af6f-8ea3129bd3a6"
-                }
-            },
-            "attributes": [
-                "f718a82a-0c55-486e-9ad6-db2b9e629cc6"
-            ],
-            "content": "<p>M\u00f3rahalom hat\u00e1r\u00e1ban, ahol a homoki sztyepp\u00e9k tal\u00e1lkoznak a nedves vizeny\u0151s r\u00e9tekkel, k\u00fcl\u00f6n\u00f6s t\u00e1rsas\u00e1g gy\u00fclekezett a Nagysz\u00e9ks\u00f3s-t\u00f3n\u00e1l. T\u00fazok Tan\u00e1r \u00far, a puszta tekint\u00e9lyes \u0151re, sz\u00e1rnyait megigaz\u00edtva v\u00e1rta tan\u00edtv\u00e1nyait.<\/p>",
-            "title": "<p>M\u00f3rahalom hat\u00e1r\u00e1ban...<\/p>"
-        },
-        "f9b27081-469e-4e39-9b4e-fff2f4d63ac6": {
-            "theme": "default",
-            "components": [],
-            "outputs": [],
-            "assets": {
-                "cover": {
-                    "id": "187bf22a-f930-43e6-96e9-f7d3fd7b1f96"
-                }
-            },
-            "content": "<p>\u2014 Megj\u00f6tt\u00fcnk! \u2014 sikkantott fel \u00dcrge Panni, ahogy kidugta az orr\u00e1t a homokb\u00f3l. Mellette egy \u00e9gsz\u00ednk\u00e9k villan\u00e1ssal landolt Szalak\u00f3ta Szilvia.<\/p>",
-            "title": ""
+    "630fdb8a-48d6-473e-9974-2460f7eb2b41": {
+      "name": "Main Board",
+      "notes": [],
+      "jumpers": [],
+      "branches": [],
+      "elements": [
+        "33dad7dc-ab41-4bf7-9961-0d91ac33fc6f",
+        "f9b27081-469e-4e39-9b4e-fff2f4d63ac6"
+      ],
+      "connections": [
+        "4d5bd181-2419-4946-b381-b37c6dc6b74d"
+      ]
+    }
+  },
+  "notes": {},
+  "elements": {
+    "33dad7dc-ab41-4bf7-9961-0d91ac33fc6f": {
+      "theme": "default",
+      "components": [],
+      "outputs": [
+        "4d5bd181-2419-4946-b381-b37c6dc6b74d"
+      ],
+      "assets": {
+        "cover": {
+          "id": "941f16e4-6db5-4650-af6f-8ea3129bd3a6"
         }
+      },
+      "attributes": [
+        "f718a82a-0c55-486e-9ad6-db2b9e629cc6"
+      ],
+      "content": "<p>Mórahalom határában, ahol a homoki sztyeppék találkoznak a nedves vizenyős rétekkel, különös társaság gyülekezett a Nagyszéksós-tónál. Túzok Tanár úr, a puszta tekintélyes őre, szárnyait megigazítva várta tanítványait.</p>",
+      "title": "<p>Mórahalom határában...</p>"
     },
-    "jumpers": {},
-    "connections": {
-        "4d5bd181-2419-4946-b381-b37c6dc6b74d": {
-            "targetFace": "left",
-            "type": "Bezier",
-            "targetType": "elements",
-            "targetid": "f9b27081-469e-4e39-9b4e-fff2f4d63ac6",
-            "sourceid": "33dad7dc-ab41-4bf7-9961-0d91ac33fc6f",
-            "theme": "default",
-            "sourceType": "elements",
-            "label": "Tovább"
+    "f9b27081-469e-4e39-9b4e-fff2f4d63ac6": {
+      "theme": "default",
+      "components": [
+        "comp_video_elso_talalkozas"
+      ],
+      "outputs": [],
+      "assets": {
+        "cover": {
+          "id": "187bf22a-f930-43e6-96e9-f7d3fd7b1f96"
         }
+      },
+      "content": "<p>— Megjöttünk! — sikkantott fel Ürge Panni, ahogy kidugta az orrát a homokból. Mellette egy égszínkék villanással landolt Szalakóta Szilvia.</p>",
+      "title": ""
+    }
+  },
+  "jumpers": {},
+  "connections": {
+    "4d5bd181-2419-4946-b381-b37c6dc6b74d": {
+      "targetFace": "left",
+      "type": "Bezier",
+      "targetType": "elements",
+      "targetid": "f9b27081-469e-4e39-9b4e-fff2f4d63ac6",
+      "sourceid": "33dad7dc-ab41-4bf7-9961-0d91ac33fc6f",
+      "theme": "default",
+      "sourceType": "elements",
+      "label": "Tovább"
+    }
+  },
+  "branches": {},
+  "components": {
+    "65005bda-15d0-41c5-867f-68c118829f08": {
+      "root": true,
+      "children": [
+        "06cf39c0-44c5-4721-85bb-34c812ac4beb",
+        "0b36838c-9009-43a8-9744-2bfbf455337b",
+        "6b236d74-f906-4def-badc-2c1e92743add"
+      ],
+      "name": "Root"
     },
-    "branches": {},
-    "components": {
-        "65005bda-15d0-41c5-867f-68c118829f08": {
-            "root": true,
-            "children": [
-                "06cf39c0-44c5-4721-85bb-34c812ac4beb",
-                "0b36838c-9009-43a8-9744-2bfbf455337b",
-                "6b236d74-f906-4def-badc-2c1e92743add"
-            ],
-            "name": "Root"
-        },
-        "6b236d74-f906-4def-badc-2c1e92743add": {
-            "attributes": [],
-            "assets": {
-                "cover": {
-                    "id": "f982d61b-d324-40e4-b9cb-d75f81930462",
-                    "type": "image"
-                }
-            },
-            "name": "T\u00fazok tan\u00e1r \u00far"
-        },
-        "0b36838c-9009-43a8-9744-2bfbf455337b": {
-            "attributes": [],
-            "assets": {
-                "cover": {
-                    "id": "a6100a2e-fd99-4573-b350-35b9f1edacc1",
-                    "type": "image"
-                }
-            },
-            "name": "Szalak\u00f3ta Szilvia"
-        },
-        "06cf39c0-44c5-4721-85bb-34c812ac4beb": {
-            "attributes": [],
-            "assets": {
-                "cover": {
-                    "id": "7efc1786-0c2f-4457-8634-98b5b5b6aa55",
-                    "type": "image"
-                }
-            },
-            "name": "\u00dcrge Panni"
+    "6b236d74-f906-4def-badc-2c1e92743add": {
+      "attributes": [],
+      "assets": {
+        "cover": {
+          "id": "f982d61b-d324-40e4-b9cb-d75f81930462",
+          "type": "image"
         }
+      },
+      "name": "Túzok tanár úr"
     },
-    "attributes": {
-        "f718a82a-0c55-486e-9ad6-db2b9e629cc6": {
-            "name": "Szerepl\u0151",
-            "cType": "elements",
-            "value": {
-                "data": [
-                    "6b236d74-f906-4def-badc-2c1e92743add"
-                ],
-                "type": "component-list"
-            },
-            "cId": "33dad7dc-ab41-4bf7-9961-0d91ac33fc6f"
+    "0b36838c-9009-43a8-9744-2bfbf455337b": {
+      "attributes": [],
+      "assets": {
+        "cover": {
+          "id": "a6100a2e-fd99-4573-b350-35b9f1edacc1",
+          "type": "image"
         }
+      },
+      "name": "Szalakóta Szilvia"
     },
-    "assets": {
-        "647d0495-341f-42b2-8788-b47dace22bf8": {
-            "root": true,
-            "children": [
-                "187bf22a-f930-43e6-96e9-f7d3fd7b1f96",
-                "7efc1786-0c2f-4457-8634-98b5b5b6aa55",
-                "a6100a2e-fd99-4573-b350-35b9f1edacc1",
-                "f982d61b-d324-40e4-b9cb-d75f81930462",
-                "941f16e4-6db5-4650-af6f-8ea3129bd3a6"
-            ]
-        },
-        "941f16e4-6db5-4650-af6f-8ea3129bd3a6": {
-            "type": "image",
-            "name": "Gemini_Generated_Image_27zat527zat527za.webp"
-        },
-        "f982d61b-d324-40e4-b9cb-d75f81930462": {
-            "type": "image",
-            "name": "ref3nobg.png"
-        },
-        "7efc1786-0c2f-4457-8634-98b5b5b6aa55": {
-            "type": "image",
-            "name": "ref1nobg.png"
-        },
-        "a6100a2e-fd99-4573-b350-35b9f1edacc1": {
-            "type": "image",
-            "name": "ref2nobg.png"
-        },
-        "187bf22a-f930-43e6-96e9-f7d3fd7b1f96": {
-            "type": "image",
-            "name": "Gemini_Generated_Image_dnun7hdnun7hdnun.webp"
+    "06cf39c0-44c5-4721-85bb-34c812ac4beb": {
+      "attributes": [],
+      "assets": {
+        "cover": {
+          "id": "7efc1786-0c2f-4457-8634-98b5b5b6aa55",
+          "type": "image"
         }
+      },
+      "name": "Ürge Panni"
     },
-    "variables": {
-        "747d0495-341f-42b2-8788-b47dace22bf8": {
-            "root": true,
-            "children": []
-        }
+    "comp_video_elso_talalkozas": {
+      "id": "comp_video_elso_talalkozas",
+      "name": "első találkozás",
+      "attributes": {
+        "videoUrl": "/assets/Videos/1.mp4"
+      }
+    }
+  },
+  "attributes": {
+    "f718a82a-0c55-486e-9ad6-db2b9e629cc6": {
+      "name": "Szereplő",
+      "cType": "elements",
+      "value": {
+        "data": [
+          "6b236d74-f906-4def-badc-2c1e92743add"
+        ],
+        "type": "component-list"
+      },
+      "cId": "33dad7dc-ab41-4bf7-9961-0d91ac33fc6f"
     },
-    "conditions": {},
-    "name": "Csupasziv1",
-    "cover": null
+    "attr_video_1": {
+      "id": "attr_video_1",
+      "name": "videoUrl",
+      "value": {
+        "data": "<p>/assets/Videos/1.mp4</p>"
+      },
+      "cId": "comp_video_elso_talalkozas"
+    }
+  },
+  "assets": {
+    "647d0495-341f-42b2-8788-b47dace22bf8": {
+      "root": true,
+      "children": [
+        "187bf22a-f930-43e6-96e9-f7d3fd7b1f96",
+        "7efc1786-0c2f-4457-8634-98b5b5b6aa55",
+        "a6100a2e-fd99-4573-b350-35b9f1edacc1",
+        "f982d61b-d324-40e4-b9cb-d75f81930462",
+        "941f16e4-6db5-4650-af6f-8ea3129bd3a6"
+      ]
+    },
+    "941f16e4-6db5-4650-af6f-8ea3129bd3a6": {
+      "type": "image",
+      "name": "Gemini_Generated_Image_27zat527zat527za.webp"
+    },
+    "f982d61b-d324-40e4-b9cb-d75f81930462": {
+      "type": "image",
+      "name": "ref3nobg.png"
+    },
+    "7efc1786-0c2f-4457-8634-98b5b5b6aa55": {
+      "type": "image",
+      "name": "ref1nobg.png"
+    },
+    "a6100a2e-fd99-4573-b350-35b9f1edacc1": {
+      "type": "image",
+      "name": "ref2nobg.png"
+    },
+    "187bf22a-f930-43e6-96e9-f7d3fd7b1f96": {
+      "type": "image",
+      "name": "Gemini_Generated_Image_dnun7hdnun7hdnun.webp"
+    }
+  },
+  "variables": {
+    "747d0495-341f-42b2-8788-b47dace22bf8": {
+      "root": true,
+      "children": []
+    }
+  },
+  "conditions": {},
+  "name": "Csupasziv1",
+  "cover": null
 }

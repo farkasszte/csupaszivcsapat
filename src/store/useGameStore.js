@@ -16,6 +16,7 @@ export const useGameStore = create((set, get) => ({
     history: [],
     storyLog: [],
     discoveredComponents: [],
+    recentDiscoveries: [],
     loading: false,
     error: null,
     message: null,
@@ -37,19 +38,28 @@ export const useGameStore = create((set, get) => ({
             // Collect discovered components
             const element = projectSettings.elements[id];
             const newDiscovered = [...state.discoveredComponents];
+            const newRecents = [...(state.recentDiscoveries || [])];
             if (element?.components) {
                 element.components.forEach(compId => {
                     if (!newDiscovered.includes(compId)) {
                         newDiscovered.push(compId);
+                        newRecents.push({ id: compId, timestamp: Date.now() });
                     }
                 });
             }
 
             return {
                 visits: newVisits,
-                discoveredComponents: newDiscovered
+                discoveredComponents: newDiscovered,
+                recentDiscoveries: newRecents
             };
         });
+    },
+
+    clearRecentDiscovery: (compId) => {
+        set((state) => ({
+            recentDiscoveries: (state.recentDiscoveries || []).filter(d => d.id !== compId)
+        }));
     },
 
     navigateTo: (targetId, choiceLabel = null) => {
@@ -293,6 +303,7 @@ export const useGameStore = create((set, get) => ({
             history: [],
             storyLog: [{ elementId: startId, choiceMade: null }],
             discoveredComponents: [],
+            recentDiscoveries: [],
             error: null,
             message: null
         });
