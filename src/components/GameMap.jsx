@@ -7,9 +7,9 @@ import { RiMapPinLine, RiArrowRightSLine } from '@remixicon/react';
 const SCENES = [
     {
         id: '81a30674-aa09-4eb8-8484-59298d37f984',
-        name: 'The stone passage',
-        label: 'Kőfolyosó',
-        description: 'A kő folyosó, ahol csepeg a víz.',
+        name: 'The meeting',
+        label: 'Az első találkozás',
+        description: 'Ahol a hősök találkoznak.',
     },
     {
         id: '59370898-e089-46cd-b7cf-072b79a76453',
@@ -41,7 +41,7 @@ export default function GameMap() {
 
             {/* Scene links */}
             <div className="space-y-2">
-                <div className="flex items-center gap-1.5 text-xs text-zinc-500 uppercase tracking-widest px-1 mb-3">
+                <div className="flex items-center gap-1.5 text-xs text-[#FDF5E6] uppercase tracking-widest px-1 mb-3">
                     <RiMapPinLine size={12} />
                     Jelenetek
                 </div>
@@ -52,16 +52,16 @@ export default function GameMap() {
                         className="w-full flex items-center gap-3 px-4 py-3 bg-amber-900/10 hover:bg-amber-900/25 border border-amber-700/15 hover:border-amber-600/30 rounded-xl transition-all text-left group"
                     >
                         <div className="flex-1 min-w-0">
-                            <div className="text-sm font-semibold text-amber-200 group-hover:text-amber-100 transition-colors">
+                            <div className="text-sm font-semibold text-[#FDF5E6] group-hover:text-[#FDF5E6] transition-colors">
                                 {scene.label}
                             </div>
-                            <div className="text-xs text-zinc-500 mt-0.5 truncate">
+                            <div className="text-xs text-[#FDF5E6] mt-0.5 truncate">
                                 {scene.name}
                             </div>
                         </div>
                         <RiArrowRightSLine
                             size={16}
-                            className="shrink-0 text-zinc-600 group-hover:text-amber-400 transition-colors"
+                            className="shrink-0 text-[#FDF5E6] group-hover:text-[#FDF5E6] transition-colors"
                         />
                     </button>
                 ))}

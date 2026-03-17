@@ -113,8 +113,8 @@ export default function ProfilePage() {
 
     if (loading) {
         return (
-            <div className="min-h-screen bg-zinc-950 text-orange-50/90 flex items-center justify-center">
-                <div className="animate-pulse text-xl text-amber-200">Betöltés...</div>
+            <div className="min-h-screen bg-zinc-950 text-[#FDF5E6] flex items-center justify-center">
+                <div className="animate-pulse text-xl text-[#FDF5E6]">Betöltés...</div>
             </div>
         )
     }
@@ -122,7 +122,7 @@ export default function ProfilePage() {
     return (
         // Backdrop — click anywhere outside the card to go back
         <div
-            className="relative min-h-screen bg-zinc-950 text-orange-50/90 p-4 pb-12 bg-[url('/cover/cover.jpg')] bg-cover bg-center bg-no-repeat bg-blend-multiply flex items-start lg:items-center justify-center cursor-pointer"
+            className="relative min-h-screen bg-zinc-950 text-[#FDF5E6] p-4 pb-12 bg-[url('/cover/cover.jpg')] bg-cover bg-center bg-no-repeat bg-blend-multiply flex items-start lg:items-center justify-center cursor-pointer"
             onClick={() => router.back()}
         >
             <div className="absolute inset-0 bg-black/70 z-0" />
@@ -133,27 +133,27 @@ export default function ProfilePage() {
                 onClick={e => e.stopPropagation()}
             >
                 <div className="mb-8">
-                    <h1 className="text-2xl font-bold text-amber-100">Profilom</h1>
+                    <h1 className="text-2xl font-bold text-[#FDF5E6]">Profilom</h1>
                 </div>
 
                 <form onSubmit={handleSave} className="space-y-6">
                     <div>
-                        <label className="block text-sm font-medium text-amber-200/70 mb-2">Teljes név</label>
+                        <label className="block text-sm font-medium text-[#FDF5E6] mb-2">Teljes név</label>
                         <input
                             type="text"
                             value={formData.full_name}
                             onChange={(e) => setFormData({ ...formData, full_name: e.target.value })}
-                            className="w-full px-4 py-3 bg-zinc-950/50 border border-amber-900/30 rounded-xl focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500/50 transition-all outline-none text-amber-50 placeholder-zinc-600"
+                            className="w-full px-4 py-3 bg-zinc-950/50 border border-amber-900/30 rounded-xl focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500/50 transition-all outline-none text-[#FDF5E6] placeholder-zinc-600"
                             placeholder="Minta János"
                         />
                     </div>
 
                     <div>
-                        <label className="block text-sm font-medium text-amber-200/70 mb-2">Nem</label>
+                        <label className="block text-sm font-medium text-[#FDF5E6] mb-2">Nem</label>
                         <select
                             value={formData.gender}
                             onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
-                            className="w-full px-4 py-3 bg-zinc-950/50 border border-amber-900/30 rounded-xl focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500/50 transition-all outline-none text-amber-50 appearance-none"
+                            className="w-full px-4 py-3 bg-zinc-950/50 border border-amber-900/30 rounded-xl focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500/50 transition-all outline-none text-[#FDF5E6] appearance-none"
                         >
                             <option value="" className="bg-zinc-900">Válassz...</option>
                             <option value="male" className="bg-zinc-900">Férfi</option>
@@ -163,13 +163,13 @@ export default function ProfilePage() {
                     </div>
 
                     <div>
-                        <label className="block text-sm font-medium text-amber-200/70 mb-2">Születési év</label>
+                        <label className="block text-sm font-medium text-[#FDF5E6] mb-2">Születési év</label>
                         <input
                             type="text"
                             inputMode="numeric"
                             value={formData.birth_year}
                             onChange={(e) => setFormData({ ...formData, birth_year: e.target.value.replace(/\D/g, '').slice(0, 4) })}
-                            className="w-full px-4 py-3 bg-zinc-950/50 border border-amber-900/30 rounded-xl focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500/50 transition-all outline-none text-amber-50 placeholder-zinc-600"
+                            className="w-full px-4 py-3 bg-zinc-950/50 border border-amber-900/30 rounded-xl focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500/50 transition-all outline-none text-[#FDF5E6] placeholder-zinc-600"
                             placeholder="1990"
                             maxLength={4}
                         />
@@ -178,19 +178,19 @@ export default function ProfilePage() {
                     <button
                         type="submit"
                         disabled={saving}
-                        className="w-full py-3 bg-amber-600/20 hover:bg-amber-600/30 text-amber-400 font-semibold rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed border border-amber-500/50 shadow-[0_0_15px_rgba(245,158,11,0.1)] hover:shadow-[0_0_20px_rgba(245,158,11,0.2)]"
+                        className="w-full py-3 bg-amber-600/20 hover:bg-amber-600/30 text-[#FDF5E6] font-semibold rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed border border-amber-500/50 shadow-[0_0_15px_rgba(245,158,11,0.1)] hover:shadow-[0_0_20px_rgba(245,158,11,0.2)]"
                     >
                         {saving ? 'Mentés...' : 'Mentés'}
                     </button>
 
                     {error && (
-                        <p className="text-red-300 text-sm text-center bg-red-950/50 p-3 rounded-xl border border-red-900/50">
+                        <p className="text-[#FDF5E6] text-sm text-center bg-red-950/50 p-3 rounded-xl border border-red-900/50">
                             {error}
                         </p>
                     )}
 
                     {message && (
-                        <p className="text-emerald-300 text-sm text-center bg-emerald-950/50 p-3 rounded-xl border border-emerald-900/50">
+                        <p className="text-[#FDF5E6] text-sm text-center bg-emerald-950/50 p-3 rounded-xl border border-emerald-900/50">
                             {message}
                         </p>
                     )}
@@ -204,21 +204,21 @@ export default function ProfilePage() {
                     {/* Guest code section */}
                     {user?.email?.endsWith('@vendeg.hu') && (
                         <div className="flex flex-col gap-2 p-4 bg-zinc-950/40 border border-amber-900/20 rounded-xl">
-                            <div className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Vendég fiók kódja</div>
+                            <div className="text-[10px] font-bold text-[#FDF5E6] uppercase tracking-widest">Vendég fiók kódja</div>
                             <div className="flex items-center justify-between">
-                                <span className="text-lg font-mono text-amber-200 font-bold">{user.email.split('@')[0]}</span>
+                                <span className="text-lg font-mono text-[#FDF5E6] font-bold">{user.email.split('@')[0]}</span>
                                 <button
                                     onClick={handleCopyCode}
                                     title={copied ? 'Másolva!' : 'Kód másolása'}
                                     className={`p-2 rounded-lg transition-all border ${copied
-                                        ? 'text-emerald-400 border-emerald-500/30 bg-emerald-500/10'
-                                        : 'text-zinc-400 border-white/5 bg-zinc-800/50 hover:text-amber-300 hover:border-amber-500/30'
+                                        ? 'text-[#FDF5E6] border-emerald-500/30 bg-emerald-500/10'
+                                        : 'text-[#FDF5E6] border-white/5 bg-zinc-800/50 hover:text-[#FDF5E6] hover:border-amber-500/30'
                                         }`}
                                 >
                                     {copied ? <RiCheckLine size={18} /> : <RiFileCopyLine size={18} />}
                                 </button>
                             </div>
-                            <p className="text-[10px] text-zinc-600 leading-relaxed italic">
+                            <p className="text-[10px] text-[#FDF5E6] leading-relaxed italic">
                                 Jegyzed meg ezt a kódot, ha később máshonnan is folytatni szeretnéd a játékot!
                             </p>
                         </div>
@@ -226,7 +226,7 @@ export default function ProfilePage() {
 
                     {/* Email display for regular users */}
                     {user && !user.email?.endsWith('@vendeg.hu') && (
-                        <div className="flex items-center gap-2 px-1 text-xs text-zinc-500">
+                        <div className="flex items-center gap-2 px-1 text-xs text-[#FDF5E6]">
                             <RiUserShared2Line size={14} />
                             <span>Bejelentkezve: {user.email}</span>
                         </div>
@@ -235,7 +235,7 @@ export default function ProfilePage() {
                     {/* Logout Button */}
                     <button
                         onClick={handleLogout}
-                        className="w-full py-3 flex items-center justify-center gap-2 bg-zinc-800/50 hover:bg-red-900/40 border border-zinc-700 hover:border-red-800/50 text-zinc-300 hover:text-red-400 font-medium rounded-xl transition-all"
+                        className="w-full py-3 flex items-center justify-center gap-2 bg-zinc-800/50 hover:bg-red-900/40 border border-zinc-700 hover:border-red-800/50 text-[#FDF5E6] hover:text-[#FDF5E6] font-medium rounded-xl transition-all"
                     >
                         <RiLogoutBoxRLine size={18} />
                         Kilépés

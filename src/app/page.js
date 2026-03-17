@@ -58,15 +58,13 @@ export default function Home() {
 
     const tabCls = (key) =>
         `flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold transition-colors ${activeTab === key
-            ? 'bg-amber-900/30 text-amber-200'
-            : 'text-zinc-500 hover:text-zinc-300'
+            ? 'bg-amber-900/30 text-[#FDF5E6]'
+            : 'text-[#FDF5E6] hover:text-[#FDF5E6]'
         }`;
 
     return (
-        <div className="fixed inset-0 overflow-hidden bg-zinc-950 text-orange-50/90">
+        <div className="fixed inset-0 overflow-hidden text-[#FDF5E6]">
             {/* Background layers */}
-            <div className="hidden lg:block absolute inset-0 bg-[url('/backgrounds/old-book.webp')] bg-cover bg-center bg-no-repeat -z-10" />
-            <div className="hidden lg:block absolute inset-0 bg-black/40 pointer-events-none -z-10" />
 
             {/* Content Wrapper - Strictly bound between header and bottom */}
             <div className="absolute top-[52px] lg:top-0 bottom-0 left-0 right-0 z-10 flex flex-col items-center justify-center p-4 lg:p-6 overflow-hidden">
@@ -80,12 +78,12 @@ export default function Home() {
                         <div className="hidden lg:flex absolute -top-11 left-1/2 -translate-x-1/2 w-full max-w-[800px] items-center justify-between animate-in fade-in slide-in-from-bottom-2 duration-1200">
                             {/* Title + Hamburger (left) */}
                             <div className="flex items-center gap-3 shrink-0">
-                                <h1 className="text-lg font-bold bg-linear-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent whitespace-nowrap">
+                                <h1 className="text-lg font-bold text-[#FDF5E6] whitespace-nowrap">
                                     Csupaszív kalandok: A Homokhátság Hősei
                                 </h1>
                                 <button
                                     onClick={togglePanel}
-                                    className="p-1.5 rounded-lg transition-all text-amber-400 bg-amber-400/10 scale-90 hover:scale-100"
+                                    className="p-1.5 rounded-lg transition-all text-[#FDF5E6] bg-amber-400/10 scale-90 hover:scale-100"
                                     title="Panel bezárása"
                                 >
                                     <RiMenuLine size={18} />
@@ -103,12 +101,12 @@ export default function Home() {
                         {/* Title & Hamburger — only when panel is CLOSED */}
                         {!showPanel && (
                             <div className="hidden lg:flex absolute -top-10 left-1/2 -translate-x-1/2 w-full items-center justify-center gap-4 animate-in fade-in slide-in-from-bottom-2 duration-1200">
-                                <h1 className="text-lg font-bold bg-linear-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent">
+                                <h1 className="text-lg font-bold text-[#FDF5E6]">
                                     Csupaszív kalandok: A Homokhátság Hősei
                                 </h1>
                                 <button
                                     onClick={togglePanel}
-                                    className="p-1.5 rounded-lg transition-all text-zinc-500 hover:text-amber-200 hover:bg-zinc-800/20 scale-90 hover:scale-100"
+                                    className="p-1.5 rounded-lg transition-all text-[#FDF5E6] hover:text-[#FDF5E6] hover:bg-zinc-800/20 scale-90 hover:scale-100"
                                     title="Menü megnyitása"
                                 >
                                     <RiMenuLine size={18} />
@@ -122,7 +120,7 @@ export default function Home() {
                     {showPanel && (
                         <div className="relative h-full flex flex-col justify-center items-center">
                             <div
-                                className="h-full w-auto aspect-9/16 max-w-none bg-zinc-900/60 backdrop-blur-xl rounded-xl border border-white/5 shadow-2xl overflow-hidden flex flex-col"
+                                className="h-full w-full max-w-[420px] sm:w-auto sm:max-w-none sm:aspect-[9/16] lg:h-full lg:w-auto lg:max-w-none bg-zinc-900/60 backdrop-blur-xl rounded-xl border border-white/5 shadow-2xl overflow-hidden flex flex-col"
                             >
 
                                 {/* Tab header — desktop only; mobile uses bottom nav */}

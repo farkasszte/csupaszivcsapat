@@ -96,17 +96,9 @@ export const StoryEngine = () => {
             return;
         }
 
-        // Reset any existing timeout
-        if (transitionTimeoutRef.current) clearTimeout(transitionTimeoutRef.current);
-
-        setIsFading(true);
-
-        transitionTimeoutRef.current = setTimeout(() => {
-            setDisplayElementId(currentElementId);
-            setIsFading(false);
-            // Reset UI visibility on scene change
-            setIsUiHidden(false);
-        }, 500); // Duration matches transition-all duration-500
+        setDisplayElementId(currentElementId);
+        setIsFading(false);
+        setIsUiHidden(false);
 
         return () => {
             if (transitionTimeoutRef.current) clearTimeout(transitionTimeoutRef.current);
@@ -238,39 +230,98 @@ export const StoryEngine = () => {
 
 
     const coverUrl = element?.assets?.cover ? getAssetUrl(element.assets.cover.id) : null;
+    let videoUrl = null;
+    if (element?.components) {
+        element.components.forEach(compId => {
+            const comp = project.components?.[compId];
+            if (comp?.attributes?.videoUrl) {
+                videoUrl = comp.attributes.videoUrl;
+            }
+        });
+    }
+
+    const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+    const prevMediaRef = useRef({ type: null, url: null });
+
+    // Reset loaded state when video source changes
+    useEffect(() => {
+        if (videoUrl) {
+            setIsVideoLoaded(false);
+        }
+    }, [videoUrl]);
+
+    // Track the last successfully loaded media to use as a fallback background
+    useEffect(() => {
+        if (!videoUrl && coverUrl) {
+            prevMediaRef.current = { type: 'image', url: coverUrl };
+        } else if (videoUrl && isVideoLoaded) {
+            prevMediaRef.current = { type: 'video', url: videoUrl };
+        }
+    }, [videoUrl, coverUrl, isVideoLoaded]);
 
     if (!isMounted) return null;
 
     return (
-        <div key={displayElementId} className={`mx-auto rounded-xl shadow-2xl border border-white/10 relative overflow-hidden transition-all duration-500 transform h-full w-auto aspect-9/16 max-w-none bg-zinc-950 ${isFading ? 'opacity-0 scale-[0.98] translate-y-1' : 'opacity-100 scale-100 translate-y-0'
-            }`}>
+        <div key={displayElementId} className={`mx-auto rounded-xl shadow-2xl border border-white/10 relative overflow-hidden h-full w-full max-w-[420px] sm:w-auto sm:max-w-none sm:aspect-[9/16] lg:h-full lg:w-auto lg:max-w-none bg-zinc-950`}>
 
             {/* Discovery Capsule */}
             {activeDiscoveryComponent && (
                 <div key={activeDiscoveryId} className="absolute top-6 left-1/2 -translate-x-1/2 z-50 pointer-events-none animate-in slide-in-from-top-4 fade-in duration-500">
                     <div className="bg-zinc-800/90 backdrop-blur-md border border-amber-500/30 shadow-[0_0_20px_rgba(245,158,11,0.2)] rounded-full px-5 py-2.5 flex items-center gap-3">
-                        <RiSearchLine size={16} className="text-amber-400" />
-                        <span className="text-xs font-bold tracking-wider text-amber-50 uppercase whitespace-nowrap">
-                            Új felfedezés: <span className="text-amber-300">{activeDiscoveryComponent.name}</span>
+                        <RiSearchLine size={16} className="text-[#FDF5E6]" />
+                        <span className="text-xs font-bold tracking-wider text-[#FDF5E6] uppercase whitespace-nowrap">
+                            Új felfedezés: <span className="text-[#FDF5E6]">{activeDiscoveryComponent.name}</span>
                         </span>
                     </div>
                 </div>
             )}
 
-            {/* Background Image */}
-            {coverUrl ? (
+            {/* Persistent Background Layer for smooth load transitions */}
+            {prevMediaRef.current.url && (
+                prevMediaRef.current.type === 'video' ? (
+                    <video
+                        src={prevMediaRef.current.url}
+                        autoPlay loop muted playsInline
+                        className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+                        style={{ filter: getColorFilterStyle(colorFilter) }}
+                    />
+                ) : (
+                    <img
+                        src={prevMediaRef.current.url}
+                        alt="Previous Scene"
+                        className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+                        style={{ filter: getColorFilterStyle(colorFilter) }}
+                    />
+                )
+            )}
+
+            {/* Background Image or Video */}
+            {videoUrl ? (
+                <video
+                    key={videoUrl}
+                    src={videoUrl}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    onCanPlay={() => setIsVideoLoaded(true)}
+                    className={`absolute inset-0 w-full h-full object-cover cursor-pointer transition-all duration-300 ${isChoiceHovered ? 'scale-105' : 'scale-100'} ${isVideoLoaded ? 'opacity-100' : 'opacity-0'}`}
+                    style={{ filter: getColorFilterStyle(colorFilter) }}
+                    onClick={() => setIsUiHidden(!isUiHidden)}
+                />
+            ) : coverUrl ? (
                 <img
                     key={coverUrl}
                     src={coverUrl}
                     alt="Scene"
-                    className={`absolute inset-0 w-full h-full object-cover cursor-pointer transition-transform duration-1000 ${isChoiceHovered ? 'scale-105' : 'scale-100'}`}
+                    className={`absolute inset-0 w-full h-full object-cover cursor-pointer transition-transform duration-1000 z-10 ${isChoiceHovered ? 'scale-105' : 'scale-100'}`}
                     style={{ filter: getColorFilterStyle(colorFilter) }}
                     onClick={() => setIsUiHidden(!isUiHidden)}
                 />
             ) : (
                 <div
                     key="no-image"
-                    className="absolute inset-0 w-full h-full bg-zinc-900 cursor-pointer"
+                    className="absolute inset-0 w-full h-full bg-zinc-900 cursor-pointer z-10"
                     onClick={() => setIsUiHidden(!isUiHidden)}
                 />
             )}
@@ -281,7 +332,7 @@ export const StoryEngine = () => {
                 {/* Status Messages */}
                 {(error || message) && (
                     <div className="p-4 pointer-events-auto">
-                        <div className={`p-2.5 flex items-center justify-between text-xs rounded-lg border animate-in fade-in duration-300 ${error ? 'bg-red-950/60 border-red-500/20 text-red-200' : 'bg-emerald-950/60 border-emerald-500/20 text-emerald-200'} backdrop-blur-sm`}>
+                        <div className={`p-2.5 flex items-center justify-between text-xs rounded-lg border animate-in fade-in duration-300 ${error ? 'bg-red-950/60 border-red-500/20 text-[#FDF5E6]' : 'bg-emerald-950/60 border-emerald-500/20 text-[#FDF5E6]'} backdrop-blur-sm`}>
                             <span>{error || message}</span>
                             <button onClick={() => clearMessage?.()} className="ml-2 hover:opacity-70 transition-opacity">✕</button>
                         </div>
@@ -300,7 +351,7 @@ export const StoryEngine = () => {
                     {/* Text Content in Translucent Box */}
                     <div className={`p-4 m-3 mb-4 bg-black/30 backdrop-blur-md rounded-xl border border-white/10 shadow-xl ${isUiHidden ? 'pointer-events-none' : 'pointer-events-auto'}`}>
                         {/* Text area is internally scrollable if content is very long */}
-                        <div className={`story-content space-y-3 text-sm lg:text-base text-orange-50/90 leading-relaxed font-light tracking-wide overflow-y-auto max-h-[35vh] pr-2`}>
+                        <div className={`story-content space-y-3 text-sm lg:text-base text-[#FDF5E6] leading-relaxed font-light tracking-wide overflow-y-auto max-h-[35vh] pr-2`}>
                             {contentSegments.map((seg, idx) => {
                                 const visibleInThisSegment = Math.max(0, Math.min(seg.length, totalVisibleChars - seg.startOffset));
                                 return (

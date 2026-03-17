@@ -11,9 +11,9 @@ export default function PlayerDashboard() {
     // Level Logic
     const LEVELS = [
         { min: 0, title: 'Kezdő Megfigyelő', icon: RiFootprintLine, color: 'text-blue-400' },
-        { min: 10, title: 'Természetbarát', icon: RiLeafLine, color: 'text-green-500' },
-        { min: 25, title: 'Mentőcsapat-tag', icon: RiHeartLine, color: 'text-orange-500' },
-        { min: 50, title: 'A Vadon Hőse', icon: RiEarthLine, color: 'text-emerald-400' },
+        { min: 10, title: 'Természetbarát', icon: RiLeafLine, color: 'text-[#FDF5E6]' },
+        { min: 25, title: 'Mentőcsapat-tag', icon: RiHeartLine, color: 'text-[#FDF5E6]' },
+        { min: 50, title: 'A Vadon Hőse', icon: RiEarthLine, color: 'text-[#FDF5E6]' },
     ];
 
 
@@ -52,18 +52,18 @@ export default function PlayerDashboard() {
                             <currentLevel.icon size={20} />
                         </div>
                         <div>
-                            <div className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Rangod</div>
+                            <div className="text-[10px] font-bold text-[#FDF5E6] uppercase tracking-widest">Rangod</div>
                             <div className={`text-xl font-serif font-bold ${currentLevel.color}`}>{currentLevel.title}</div>
                         </div>
                     </div>
 
                     <div className="mt-6">
                         <div className="flex justify-between items-end mb-2">
-                            <span className="text-3xl font-extrabold text-amber-100 font-serif tracking-tight">
-                                {score} <span className="text-xs uppercase text-zinc-600 tracking-widest ml-1">pont</span>
+                            <span className="text-3xl font-extrabold text-[#FDF5E6] font-serif tracking-tight">
+                                {score} <span className="text-xs uppercase text-[#FDF5E6] tracking-widest ml-1">pont</span>
                             </span>
                             {nextLevel && (
-                                <span className="text-[10px] text-zinc-500 italic">
+                                <span className="text-[10px] text-[#FDF5E6] italic">
                                     Következő: {nextLevel.title} ({nextLevel.min} pont)
                                 </span>
                             )}
@@ -84,21 +84,21 @@ export default function PlayerDashboard() {
             {/* Stats Grid */}
             <div className="grid grid-cols-2 gap-3">
                 <div className="bg-zinc-800/30 border border-white/5 rounded-xl p-4 flex flex-col items-center justify-center transition-all hover:bg-zinc-800/50">
-                    <RiUser3Line size={18} className="text-emerald-500/50 mb-2" />
-                    <div className="text-xl font-bold text-zinc-200">{discoveredChars} / {totalChars}</div>
-                    <div className="text-[9px] text-zinc-500 uppercase font-semibold tracking-tighter">Szereplők</div>
+                    <RiUser3Line size={18} className="text-[#FDF5E6] mb-2" />
+                    <div className="text-xl font-bold text-[#FDF5E6]">{discoveredChars} / {totalChars}</div>
+                    <div className="text-[9px] text-[#FDF5E6] uppercase font-semibold tracking-tighter">Szereplők</div>
                 </div>
                 <div className="bg-zinc-800/30 border border-white/5 rounded-xl p-4 flex flex-col items-center justify-center transition-all hover:bg-zinc-800/50">
                     <RiMapPin2Line size={18} className="text-blue-500/50 mb-2" />
-                    <div className="text-xl font-bold text-zinc-200">{discoveredLocs} / {totalLocs}</div>
-                    <div className="text-[9px] text-zinc-500 uppercase font-semibold tracking-tighter">Helyszínek</div>
+                    <div className="text-xl font-bold text-[#FDF5E6]">{discoveredLocs} / {totalLocs}</div>
+                    <div className="text-[9px] text-[#FDF5E6] uppercase font-semibold tracking-tighter">Helyszínek</div>
                 </div>
             </div>
 
 
             {/* Hint */}
             <div className="px-2 py-3 bg-emerald-900/5 border border-emerald-900/20 rounded-lg">
-                <p className="text-[10px] text-emerald-200/40 text-center italic leading-relaxed">
+                <p className="text-[10px] text-[#FDF5E6] text-center italic leading-relaxed">
                     Figyelj az állatok jelzéseire és hozz bölcs döntéseket a megmentésükért!
                 </p>
             </div>

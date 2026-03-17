@@ -59,7 +59,7 @@ export default function UserMenu({ compact = false }) {
     if (!user) {
         if (compact) {
             return (
-                <Link href="/login" title="Belépés" className="flex flex-col items-center gap-0.5 text-[10px] font-semibold text-zinc-500 hover:text-amber-300 transition-colors">
+                <Link href="/login" title="Belépés" className="flex flex-col items-center gap-0.5 text-[10px] font-semibold text-[#FDF5E6] hover:text-[#FDF5E6] transition-colors">
                     <RiUserLine size={20} />
                     Belépés
                 </Link>
@@ -68,7 +68,7 @@ export default function UserMenu({ compact = false }) {
         return (
             <Link
                 href="/login"
-                className="px-4 py-2 bg-amber-600/20 hover:bg-amber-600/30 text-amber-400 font-semibold rounded-lg transition-colors text-sm border border-amber-500/50 shadow-[0_0_15px_rgba(245,158,11,0.1)]"
+                className="px-4 py-2 bg-amber-600/20 hover:bg-amber-600/30 text-[#FDF5E6] font-semibold rounded-lg transition-colors text-sm border border-amber-500/50 shadow-[0_0_15px_rgba(245,158,11,0.1)]"
             >
                 Belépés
             </Link>
@@ -92,7 +92,7 @@ export default function UserMenu({ compact = false }) {
             <button
                 onClick={handleProfileClick}
                 title={onProfile ? 'Vissza a játékba' : 'Profilom'}
-                className={`flex flex-col items-center gap-0.5 text-[10px] font-semibold transition-colors ${onProfile ? 'text-amber-300' : 'text-zinc-500 hover:text-amber-300'}`}
+                className={`flex flex-col items-center gap-0.5 text-[10px] font-semibold transition-colors ${onProfile ? 'text-[#FDF5E6]' : 'text-[#FDF5E6] hover:text-[#FDF5E6]'}`}
             >
                 <RiUserLine size={20} />
                 Profil
@@ -107,8 +107,8 @@ export default function UserMenu({ compact = false }) {
                 <button
                     onClick={handleMenuClick}
                     className={`px-2 py-1.5 rounded-lg text-sm font-bold transition-all border ${showMenu
-                        ? 'bg-amber-600/20 text-amber-300 border-amber-500/50 shadow-[0_0_15px_rgba(245,158,11,0.2)]'
-                        : 'text-zinc-400 border-transparent hover:text-amber-200'
+                        ? 'bg-amber-600/20 text-[#FDF5E6] border-amber-500/50 shadow-[0_0_15px_rgba(245,158,11,0.2)]'
+                        : 'text-[#FDF5E6] border-transparent hover:text-[#FDF5E6]'
                         }`}
                 >
                     Beállítások
@@ -118,12 +118,12 @@ export default function UserMenu({ compact = false }) {
             {/* Middle section: Guest code or Email */}
             <div className="flex-1 flex justify-center">
                 {isGuest && (
-                    <span className="hidden md:flex items-center gap-1.5 text-xs text-zinc-500 whitespace-nowrap">
-                        Vendég kód: <span className="text-amber-200/40 font-mono font-bold">{guestCode}</span>
+                    <span className="hidden md:flex items-center gap-1.5 text-xs text-[#FDF5E6] whitespace-nowrap">
+                        Vendég kód: <span className="text-[#FDF5E6] font-mono font-bold">{guestCode}</span>
                         <button
                             onClick={handleCopyCode}
                             title={copied ? 'Másolva!' : 'Kód másolása'}
-                            className={`p-1 rounded transition-all ${copied ? 'text-emerald-400' : 'text-zinc-500 hover:text-amber-300'}`}
+                            className={`p-1 rounded transition-all ${copied ? 'text-[#FDF5E6]' : 'text-[#FDF5E6] hover:text-[#FDF5E6]'}`}
                         >
                             {copied
                                 ? <RiCheckLine size={14} />
@@ -134,7 +134,7 @@ export default function UserMenu({ compact = false }) {
                 )}
 
                 {!isGuest && user && (
-                    <span className="text-xs text-zinc-500 hidden md:inline">({user.email})</span>
+                    <span className="text-xs text-[#FDF5E6] hidden md:inline">({user.email})</span>
                 )}
             </div>
 
@@ -143,8 +143,8 @@ export default function UserMenu({ compact = false }) {
                 <button
                     onClick={handleProfileClick}
                     className={`px-2 py-1.5 rounded-lg text-sm font-bold transition-all border ${showProfile
-                        ? 'bg-amber-600/20 text-amber-300 border-amber-500/50 shadow-[0_0_15px_rgba(245,158,11,0.2)]'
-                        : 'text-zinc-400 border-transparent hover:text-amber-200'
+                        ? 'bg-amber-600/20 text-[#FDF5E6] border-amber-500/50 shadow-[0_0_15px_rgba(245,158,11,0.2)]'
+                        : 'text-[#FDF5E6] border-transparent hover:text-[#FDF5E6]'
                         }`}
                 >
                     Profil
