@@ -58,7 +58,7 @@ export const Choices = ({ hasImage, onHoverChange }) => {
                         onClick={() => navigateTo(choice.targetId, choice.rawLabel)}
                         onMouseEnter={() => onHoverChange?.(true)}
                         onMouseLeave={() => onHoverChange?.(false)}
-                        className={`text-[#FDF5E6] font-medium transition-all transform hover:scale-95 shadow-xl backdrop-blur-md border border-white/20 hover:border-amber-400/50 flex-none
+                        className={`text-[#FDF5E6] font-medium transition-all transform hover:scale-95 shadow-xl backdrop-blur-md border border-white/20 hover:border-amber-400/50 whitespace-normal max-w-full
                             ${hasImage
                                 ? 'px-6 py-2 rounded-full bg-zinc-900/60 hover:bg-zinc-800/80 text-sm'
                                 : 'w-full text-left px-6 py-4 rounded-lg bg-linear-to-r from-amber-900/40 to-orange-900/40 hover:from-amber-800/60 hover:to-orange-800/60'
@@ -72,7 +72,7 @@ export const Choices = ({ hasImage, onHoverChange }) => {
                     onClick={() => resetGame?.()}
                     onMouseEnter={() => onHoverChange?.(true)}
                     onMouseLeave={() => onHoverChange?.(false)}
-                    className={`text-[#FDF5E6] font-medium transition-all transform hover:scale-95 active:scale-90 shadow-xl backdrop-blur-md border border-white/20 flex-none pointer-events-auto
+                    className={`text-[#FDF5E6] font-medium transition-all transform hover:scale-95 active:scale-90 shadow-xl backdrop-blur-md border border-white/20 whitespace-normal pointer-events-auto max-w-full
                         ${hasImage
                             ? 'px-6 py-2 rounded-full bg-red-950/60 hover:bg-red-900/80 text-sm'
                             : 'w-full text-center px-6 py-4 rounded-lg bg-linear-to-r from-red-900/40 to-orange-900/40 hover:from-red-800/60 hover:to-orange-800/60 border-orange-500/20'
