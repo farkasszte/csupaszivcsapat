@@ -146,7 +146,7 @@ export default function Home() {
 
 
                                  {/* Tab content */}
-                                <div className="flex-1 min-h-0 flex flex-col no-scrollbar">
+                                <div className="flex-1 min-h-0 flex flex-col overflow-y-auto no-scrollbar">
                                     {activeTab === 'profile' && <ProfileView />}
                                     {activeTab === 'menu' && <GameMenu />}
                                     {activeTab === 'log' && <StoryLog />}
