@@ -59,12 +59,12 @@ export default function Home() {
 
     const tabCls = (key) =>
         `flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold transition-colors ${activeTab === key
-            ? 'bg-amber-900/30 text-[#FDF5E6]'
-            : 'text-[#FDF5E6] hover:text-[#FDF5E6]'
+            ? 'bg-white/50 text-[#3e2723] shadow-sm'
+            : 'text-[#3e2723]/80 hover:text-[#3e2723] hover:bg-white/20'
         }`;
 
     return (
-        <div className="fixed inset-0 overflow-hidden text-[#FDF5E6]">
+        <div className="fixed inset-0 overflow-hidden text-[#3e2723]">
             {/* Background layers */}
 
             {/* Content Wrapper - Strictly bound between header and bottom */}
@@ -79,12 +79,12 @@ export default function Home() {
                         <div className="hidden lg:flex absolute -top-11 left-1/2 -translate-x-1/2 w-full max-w-[800px] items-center justify-between animate-in fade-in slide-in-from-bottom-2 duration-1200">
                             {/* Title + Hamburger (left) */}
                             <div className="flex items-center gap-3 shrink-0">
-                                <h1 className="text-lg font-bold text-[#FDF5E6] whitespace-nowrap">
+                                <h1 className="text-lg font-bold text-[#3e2723] whitespace-nowrap">
                                     Csupaszív kalandok: A Homokhátság Hősei
                                 </h1>
                                 <button
                                     onClick={togglePanel}
-                                    className="p-1.5 rounded-lg transition-all text-[#FDF5E6] bg-amber-400/10 scale-90 hover:scale-100"
+                                    className="p-1.5 rounded-lg transition-all text-[#3e2723] bg-white/40 shadow-sm scale-90 hover:scale-100"
                                     title="Panel bezárása"
                                 >
                                     <RiMenuLine size={18} />
@@ -102,12 +102,12 @@ export default function Home() {
                         {/* Title & Hamburger — only when panel is CLOSED */}
                         {!showPanel && (
                             <div className="hidden lg:flex absolute -top-10 left-1/2 -translate-x-1/2 w-full items-center justify-center gap-4 animate-in fade-in slide-in-from-bottom-2 duration-1200">
-                                <h1 className="text-lg font-bold text-[#FDF5E6]">
+                                <h1 className="text-lg font-bold text-[#3e2723]">
                                     Csupaszív kalandok: A Homokhátság Hősei
                                 </h1>
                                 <button
                                     onClick={togglePanel}
-                                    className="p-1.5 rounded-lg transition-all text-[#FDF5E6] hover:text-[#FDF5E6] hover:bg-zinc-800/20 scale-90 hover:scale-100"
+                                    className="p-1.5 rounded-lg transition-all text-[#3e2723] hover:bg-white/40 scale-90 hover:scale-100"
                                     title="Menü megnyitása"
                                 >
                                     <RiMenuLine size={18} />
@@ -121,11 +121,11 @@ export default function Home() {
                     {showPanel && (
                         <div className="relative h-full flex flex-col justify-center items-center">
                             <div
-                                className="h-full w-full max-w-[420px] sm:w-auto sm:max-w-none sm:aspect-9/16 lg:h-full lg:w-auto lg:max-w-none bg-zinc-900/60 backdrop-blur-xl rounded-xl border border-white/5 shadow-2xl overflow-hidden flex flex-col"
+                                className="h-full w-full max-w-[420px] sm:w-auto sm:max-w-none sm:aspect-9/16 lg:h-full lg:w-auto lg:max-w-none bg-white/20 backdrop-blur-md rounded-xl border border-white/30 shadow-2xl overflow-hidden flex flex-col"
                             >
 
                                 {/* Tab header — desktop only; mobile uses bottom nav */}
-                                <div className="hidden lg:flex items-center justify-center flex-wrap px-2 py-2 border-b border-white/5 shrink-0 gap-1">
+                                <div className="hidden lg:flex items-center justify-center flex-wrap px-2 py-2 border-b border-[#3e2723]/10 shrink-0 gap-1">
                                     <button onClick={() => setShowLog(true)} className={tabCls('log')}>
                                         <RiBookOpenLine size={13} /> Napló
                                     </button>

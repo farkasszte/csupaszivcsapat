@@ -262,7 +262,7 @@ export const StoryEngine = () => {
     if (!isMounted) return null;
 
     return (
-        <div key={displayElementId} className="mx-auto rounded-xl shadow-2xl border border-white/5 relative overflow-hidden h-full w-full max-w-[420px] sm:w-auto sm:max-w-none sm:aspect-9/16 lg:h-full lg:w-auto lg:max-w-none bg-zinc-900/60 backdrop-blur-xl flex flex-col">
+        <div key={displayElementId} className="mx-auto rounded-xl shadow-2xl border border-white/30 relative overflow-hidden h-full w-full max-w-[420px] sm:w-auto sm:max-w-none sm:aspect-9/16 lg:h-full lg:w-auto lg:max-w-none bg-white/20 backdrop-blur-md flex flex-col">
 
             {/* Single Scrollable Webpage Container */}
             <div className="flex-1 overflow-y-auto no-scrollbar">
@@ -273,10 +273,10 @@ export const StoryEngine = () => {
                         {/* Discovery Capsule (Overlay on media) */}
                         {activeDiscoveryComponent && (
                             <div key={activeDiscoveryId} className="absolute top-8 left-1/2 -translate-x-1/2 z-50 pointer-events-none animate-in slide-in-from-top-4 fade-in duration-500">
-                                <div className="bg-zinc-800/90 backdrop-blur-md border border-amber-500/30 shadow-[0_0_20px_rgba(245,158,11,0.2)] rounded-full px-4 py-2 flex items-center gap-2">
-                                    <RiSearchLine size={14} className="text-[#FDF5E6]" />
-                                    <span className="text-[10px] font-bold tracking-wider text-[#FDF5E6] uppercase whitespace-nowrap">
-                                        Új felfedezés: <span className="text-[#FDF5E6]">{activeDiscoveryComponent.name}</span>
+                                <div className="bg-white/80 backdrop-blur-md border border-[#3e2723]/30 shadow-lg rounded-full px-4 py-2 flex items-center gap-2">
+                                    <RiSearchLine size={14} className="text-[#3e2723]" />
+                                    <span className="text-[10px] font-bold tracking-wider text-[#3e2723] uppercase whitespace-nowrap">
+                                        Új felfedezés: <span className="text-[#3e2723]">{activeDiscoveryComponent.name}</span>
                                     </span>
                                 </div>
                             </div>
@@ -307,10 +307,10 @@ export const StoryEngine = () => {
                 {/* Discovery Capsule (If no media is present, show it above text) */}
                 {(!videoUrl && !coverUrl && activeDiscoveryComponent) && (
                     <div className="px-6 pt-6 self-center z-50 pointer-events-none animate-in slide-in-from-top-2 fade-in duration-500">
-                        <div className="bg-zinc-800/90 backdrop-blur-md border border-amber-500/30 shadow-[0_0_20px_rgba(245,158,11,0.2)] rounded-full px-4 py-2 flex items-center gap-2 mx-auto w-fit">
-                            <RiSearchLine size={14} className="text-[#FDF5E6]" />
-                            <span className="text-[10px] font-bold tracking-wider text-[#FDF5E6] uppercase whitespace-nowrap">
-                                Új felfedezés: <span className="text-[#FDF5E6]">{activeDiscoveryComponent.name}</span>
+                        <div className="bg-white/80 backdrop-blur-md border border-[#3e2723]/30 shadow-lg rounded-full px-4 py-2 flex items-center gap-2 mx-auto w-fit">
+                            <RiSearchLine size={14} className="text-[#3e2723]" />
+                            <span className="text-[10px] font-bold tracking-wider text-[#3e2723] uppercase whitespace-nowrap">
+                                Új felfedezés: <span className="text-[#3e2723]">{activeDiscoveryComponent.name}</span>
                             </span>
                         </div>
                     </div>
@@ -321,14 +321,14 @@ export const StoryEngine = () => {
                     {/* Status Messages */}
                     {(error || message) && (
                         <div className="mb-6 animate-in fade-in duration-300">
-                            <div className={`p-3 flex items-center justify-between text-xs rounded-lg border ${error ? 'bg-red-950/40 border-red-500/20 text-[#FDF5E6]' : 'bg-emerald-950/40 border-emerald-500/20 text-[#FDF5E6]'}`}>
+                            <div className={`p-3 flex items-center justify-between text-xs rounded-lg border ${error ? 'bg-red-100 border-red-500 text-red-900' : 'bg-emerald-100 border-emerald-500 text-emerald-900'}`}>
                                 <span>{error || message}</span>
                                 <button onClick={() => clearMessage?.()} className="ml-2 hover:opacity-70 transition-opacity">✕</button>
                             </div>
                         </div>
                     )}
 
-                    <div className="story-content space-y-4 text-xs lg:text-sm text-justify text-[#FDF5E6] leading-relaxed">
+                    <div className="story-content space-y-4 text-xs lg:text-sm text-justify text-[#3e2723] leading-relaxed">
                         {contentSegments.map((seg, idx) => {
                             const visibleInThisSegment = Math.max(0, Math.min(seg.length, totalVisibleChars - seg.startOffset));
                             return (
