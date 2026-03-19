@@ -3,13 +3,13 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useGame } from '../context/GameContext';
 import { Choices } from './Choices';
-import { RiSearchLine } from '@remixicon/react';
+import { RiSearchLine, RiBookOpenLine } from '@remixicon/react';
 
 export const StoryEngine = () => {
     const {
-        project, currentElementId, executeScript, evaluate, state,
-        getAssetUrl, parseRichText, saveGame, loadGame, resetGame,
-        loading, error, message, clearMessage, openLightbox, isMuted, colorFilter,
+        project, currentElementId, state,
+        getAssetUrl, parseRichText, error,
+        message, clearMessage, openLightbox, isMuted, colorFilter,
         typewriterSpeed, transitionsEnabled, volume,
         recentDiscoveries, clearRecentDiscovery
     } = useGame();
@@ -96,17 +96,9 @@ export const StoryEngine = () => {
             return;
         }
 
-        // Reset any existing timeout
-        if (transitionTimeoutRef.current) clearTimeout(transitionTimeoutRef.current);
-
-        setIsFading(true);
-
-        transitionTimeoutRef.current = setTimeout(() => {
-            setDisplayElementId(currentElementId);
-            setIsFading(false);
-            // Reset UI visibility on scene change
-            setIsUiHidden(false);
-        }, 500); // Duration matches transition-all duration-500
+        setDisplayElementId(currentElementId);
+        setIsFading(false);
+        setIsUiHidden(false);
 
         return () => {
             if (transitionTimeoutRef.current) clearTimeout(transitionTimeoutRef.current);
@@ -238,83 +230,124 @@ export const StoryEngine = () => {
 
 
     const coverUrl = element?.assets?.cover ? getAssetUrl(element.assets.cover.id) : null;
+    let videoUrl = null;
+    if (element?.components) {
+        element.components.forEach(compId => {
+            const comp = project.components?.[compId];
+            if (comp?.attributes?.videoUrl) {
+                videoUrl = comp.attributes.videoUrl;
+            }
+        });
+    }
+
+    const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+    const prevMediaRef = useRef({ type: null, url: null });
+
+    // Reset loaded state when video source changes
+    useEffect(() => {
+        if (videoUrl) {
+            setIsVideoLoaded(false);
+        }
+    }, [videoUrl]);
+
+    // Track the last successfully loaded media to use as a fallback background
+    useEffect(() => {
+        if (!videoUrl && coverUrl) {
+            prevMediaRef.current = { type: 'image', url: coverUrl };
+        } else if (videoUrl && isVideoLoaded) {
+            prevMediaRef.current = { type: 'video', url: videoUrl };
+        }
+    }, [videoUrl, coverUrl, isVideoLoaded]);
 
     if (!isMounted) return null;
 
     return (
-        <div key={displayElementId} className={`mx-auto rounded-xl shadow-2xl border border-white/10 relative overflow-hidden transition-all duration-500 transform h-full w-auto aspect-9/16 max-w-none bg-zinc-950 ${isFading ? 'opacity-0 scale-[0.98] translate-y-1' : 'opacity-100 scale-100 translate-y-0'
-            }`}>
+        <div key={displayElementId} className="mx-auto rounded-xl shadow-2xl border border-white/5 relative overflow-hidden h-full w-full max-w-[420px] sm:w-auto sm:max-w-none sm:aspect-9/16 lg:h-full lg:w-auto lg:max-w-none bg-zinc-900/60 backdrop-blur-xl flex flex-col">
 
-            {/* Discovery Capsule */}
-            {activeDiscoveryComponent && (
-                <div key={activeDiscoveryId} className="absolute top-6 left-1/2 -translate-x-1/2 z-50 pointer-events-none animate-in slide-in-from-top-4 fade-in duration-500">
-                    <div className="bg-zinc-800/90 backdrop-blur-md border border-amber-500/30 shadow-[0_0_20px_rgba(245,158,11,0.2)] rounded-full px-5 py-2.5 flex items-center gap-3">
-                        <RiSearchLine size={16} className="text-amber-400" />
-                        <span className="text-xs font-bold tracking-wider text-amber-50 uppercase whitespace-nowrap">
-                            Új felfedezés: <span className="text-amber-300">{activeDiscoveryComponent.name}</span>
-                        </span>
+            {/* Single Scrollable Webpage Container */}
+            <div className="flex-1 overflow-y-auto no-scrollbar">
+
+                {/* 1. Picture/Video (Top) - Only render if media exists */}
+                {(videoUrl || coverUrl) && (
+                    <div className="relative w-full px-4 pt-4 overflow-hidden">
+                        {/* Discovery Capsule (Overlay on media) */}
+                        {activeDiscoveryComponent && (
+                            <div key={activeDiscoveryId} className="absolute top-8 left-1/2 -translate-x-1/2 z-50 pointer-events-none animate-in slide-in-from-top-4 fade-in duration-500">
+                                <div className="bg-zinc-800/90 backdrop-blur-md border border-amber-500/30 shadow-[0_0_20px_rgba(245,158,11,0.2)] rounded-full px-4 py-2 flex items-center gap-2">
+                                    <RiSearchLine size={14} className="text-[#FDF5E6]" />
+                                    <span className="text-[10px] font-bold tracking-wider text-[#FDF5E6] uppercase whitespace-nowrap">
+                                        Új felfedezés: <span className="text-[#FDF5E6]">{activeDiscoveryComponent.name}</span>
+                                    </span>
+                                </div>
+                            </div>
+                        )}
+
+                        {/* Media content */}
+                        {videoUrl ? (
+                            <video
+                                key={videoUrl}
+                                src={videoUrl}
+                                autoPlay loop muted playsInline
+                                onCanPlay={() => setIsVideoLoaded(true)}
+                                className={`w-full h-auto rounded-xl border border-white/5 transition-opacity duration-300 ${isVideoLoaded ? 'opacity-100' : 'opacity-0'}`}
+                                style={{ filter: getColorFilterStyle(colorFilter) }}
+                            />
+                        ) : (
+                            <img
+                                key={coverUrl}
+                                src={coverUrl}
+                                alt="Scene"
+                                className="w-full h-auto rounded-xl border border-white/5 shadow-2xl"
+                                style={{ filter: getColorFilterStyle(colorFilter) }}
+                            />
+                        )}
                     </div>
-                </div>
-            )}
+                )}
 
-            {/* Background Image */}
-            {coverUrl ? (
-                <img
-                    key={coverUrl}
-                    src={coverUrl}
-                    alt="Scene"
-                    className={`absolute inset-0 w-full h-full object-cover cursor-pointer transition-transform duration-1000 ${isChoiceHovered ? 'scale-105' : 'scale-100'}`}
-                    style={{ filter: getColorFilterStyle(colorFilter) }}
-                    onClick={() => setIsUiHidden(!isUiHidden)}
-                />
-            ) : (
-                <div
-                    key="no-image"
-                    className="absolute inset-0 w-full h-full bg-zinc-900 cursor-pointer"
-                    onClick={() => setIsUiHidden(!isUiHidden)}
-                />
-            )}
-
-            {/* Overlay Container */}
-            <div className={`relative z-10 flex flex-col h-full pointer-events-none`}>
-
-                {/* Status Messages */}
-                {(error || message) && (
-                    <div className="p-4 pointer-events-auto">
-                        <div className={`p-2.5 flex items-center justify-between text-xs rounded-lg border animate-in fade-in duration-300 ${error ? 'bg-red-950/60 border-red-500/20 text-red-200' : 'bg-emerald-950/60 border-emerald-500/20 text-emerald-200'} backdrop-blur-sm`}>
-                            <span>{error || message}</span>
-                            <button onClick={() => clearMessage?.()} className="ml-2 hover:opacity-70 transition-opacity">✕</button>
+                {/* Discovery Capsule (If no media is present, show it above text) */}
+                {(!videoUrl && !coverUrl && activeDiscoveryComponent) && (
+                    <div className="px-6 pt-6 self-center z-50 pointer-events-none animate-in slide-in-from-top-2 fade-in duration-500">
+                        <div className="bg-zinc-800/90 backdrop-blur-md border border-amber-500/30 shadow-[0_0_20px_rgba(245,158,11,0.2)] rounded-full px-4 py-2 flex items-center gap-2 mx-auto w-fit">
+                            <RiSearchLine size={14} className="text-[#FDF5E6]" />
+                            <span className="text-[10px] font-bold tracking-wider text-[#FDF5E6] uppercase whitespace-nowrap">
+                                Új felfedezés: <span className="text-[#FDF5E6]">{activeDiscoveryComponent.name}</span>
+                            </span>
                         </div>
                     </div>
                 )}
 
-                {/* Spacer pushes content to the bottom */}
-                <div className="flex-1" />
-
-                <div className={`transition-all duration-500 transform ${isUiHidden ? 'opacity-0 translate-y-8 pointer-events-none' : 'opacity-100 translate-y-0 pointer-events-auto'} bg-linear-to-b from-transparent via-black/40 to-black/80`}>
-                    {/* Choices Overlay (moves above the text box) */}
-                    <div className={`px-3 pb-2 z-20 ${isUiHidden ? 'pointer-events-none' : 'pointer-events-auto'}`}>
-                        <Choices hasImage={true} onHoverChange={setIsChoiceHovered} />
-                    </div>
-
-                    {/* Text Content in Translucent Box */}
-                    <div className={`p-4 m-3 mb-4 bg-black/30 backdrop-blur-md rounded-xl border border-white/10 shadow-xl ${isUiHidden ? 'pointer-events-none' : 'pointer-events-auto'}`}>
-                        {/* Text area is internally scrollable if content is very long */}
-                        <div className={`story-content space-y-3 text-sm lg:text-base text-orange-50/90 leading-relaxed font-light tracking-wide overflow-y-auto max-h-[35vh] pr-2`}>
-                            {contentSegments.map((seg, idx) => {
-                                const visibleInThisSegment = Math.max(0, Math.min(seg.length, totalVisibleChars - seg.startOffset));
-                                return (
-                                    <TypewriterSegment
-                                        key={`${displayElementId}-${idx}`}
-                                        content={seg.content}
-                                        visibleCount={visibleInThisSegment}
-                                        isFull={visibleInThisSegment >= seg.length}
-                                    />
-                                );
-                            })}
+                {/* 2. Story Text (Middle) */}
+                <div className="px-4 py-4">
+                    {/* Status Messages */}
+                    {(error || message) && (
+                        <div className="mb-6 animate-in fade-in duration-300">
+                            <div className={`p-3 flex items-center justify-between text-xs rounded-lg border ${error ? 'bg-red-950/40 border-red-500/20 text-[#FDF5E6]' : 'bg-emerald-950/40 border-emerald-500/20 text-[#FDF5E6]'}`}>
+                                <span>{error || message}</span>
+                                <button onClick={() => clearMessage?.()} className="ml-2 hover:opacity-70 transition-opacity">✕</button>
+                            </div>
                         </div>
+                    )}
+
+                    <div className="story-content space-y-4 text-xs lg:text-sm text-justify text-[#FDF5E6] leading-relaxed">
+                        {contentSegments.map((seg, idx) => {
+                            const visibleInThisSegment = Math.max(0, Math.min(seg.length, totalVisibleChars - seg.startOffset));
+                            return (
+                                <TypewriterSegment
+                                    key={`${displayElementId}-${idx}`}
+                                    content={seg.content}
+                                    visibleCount={visibleInThisSegment}
+                                    isFull={visibleInThisSegment >= seg.length}
+                                />
+                            );
+                        })}
                     </div>
                 </div>
+
+                {/* 3. Choices (Bottom) */}
+                <div className="px-4 pb-8">
+                    <Choices hasImage={false} onHoverChange={setIsChoiceHovered} />
+                </div>
+
             </div>
         </div>
     );

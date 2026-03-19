@@ -2,13 +2,13 @@
 
 @theme {
   /* Core Colors */
-  --color-primary: var(--color-orange-500);
-  --color-primary-light: var(--color-orange-400);
-  --color-primary-dark: var(--color-orange-600);
+  --color-primary: #d2b48c;
+  --color-primary-light: #f5f5dc;
+  --color-primary-dark: #8b4513;
 
   /* Semantic Surface Tokens (desert theme) */
-  --color-surface: var(--color-zinc-900);
-  --color-surface-card: oklch(0.15 0.005 60 / 0.6);
+  --color-surface: #3e2723;
+  --color-surface-card: rgba(210, 180, 140, 0.15);
   --color-surface-dark: var(--color-zinc-950);
   --color-border-subtle: oklch(1 0 0 / 0.05);
   --color-border-accent: oklch(0.45 0.15 60 / 0.3);
@@ -27,25 +27,41 @@
   --shadow-glow-primary-lg: 0 0 25px rgba(249, 115, 22, 0.6);
 }
 
-:root {
-  --background: var(--color-zinc-950);
-  --foreground: oklch(0.97 0.02 70 / 0.9);
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans);
-  -webkit-font-smoothing: antialiased;
-}
+/* Body background is managed in layout.js */
 
 /* Utility to hide scrollbar but keep functionality */
 @layer utilities {
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
+
   .no-scrollbar {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
   }
+}
+
+.biophilic-card {
+  background: rgba(255, 255, 255, 0.03) !important;
+  backdrop-filter: blur(20px) !important;
+  border-radius: 40px 15px 40px 15px !important;
+  padding: 35px;
+  border: 1px solid rgba(225, 193, 110, 0.2) !important;
+  color: #fdf5e6 !important;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('https://www.transparenttextures.com');
+  opacity: 0.1;
+  pointer-events: none;
+  z-index: -1;
 }

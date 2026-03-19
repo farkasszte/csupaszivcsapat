@@ -107,20 +107,20 @@ Madarak,Halászsas,Pandion haliaetus,Fokozottan védett,Nem fenyegetett,500000,h
 Madarak,Kabasólyom,Falco subbuteo,Védett,Nem fenyegetett,50000,https://hu.wikipedia.org/wiki/Kabasólyom
 Madarak,Kék vércse,Falco vespertinus,Fokozottan védett,Sebezhető,500000,https://hu.wikipedia.org/wiki/Kék_vércse
 Madarak,Vörös vércse,Falco tinnunculus,Védett,Nem fenyegetett,50000,https://hu.wikipedia.org/wiki/Vörös_vércse
-Madarak,Fogoly,Perdix perdix,Védett,Nem fenyegetett,10000,https://hu.wikipedia.org/wiki/Fogoly
+Madarak,Fogoly,Perdix perdix,Védett,Nem fenyegetett,10000,https://hu.wikipedia.org/wiki/Fogoly_(madárfaj)
 Madarak,Fürj,Coturnix coturnix,Védett,Nem fenyegetett,50000,https://hu.wikipedia.org/wiki/Fürj
 Madarak,Fácán,Phasianus colchicus,Nem,Nem fenyegetett,0,https://hu.wikipedia.org/wiki/Fácán
-Madarak,Daru,Grus grus,Védett,Nem fenyegetett,50000,https://hu.wikipedia.org/wiki/Daru
+Madarak,Daru,Grus grus,Védett,Nem fenyegetett,50000,https://hu.wikipedia.org/wiki/Daru_(madár)
 Madarak,Guvat,Rallus aquaticus,Védett,Nem fenyegetett,50000,https://hu.wikipedia.org/wiki/Guvat
 Madarak,Pettyes vízicsibe,Porzana porzana,Védett,Nem fenyegetett,50000,https://hu.wikipedia.org/wiki/Pettyes_vízicsibe
 Madarak,Vízityúk,Gallinula chloropus,Védett,Nem fenyegetett,10000,https://hu.wikipedia.org/wiki/Vízityúk
-Madarak,Szárcsa,Fulica atra,Nem,Nem fenyegetett,0,https://hu.wikipedia.org/wiki/Szárcsa
+Madarak,Szárcsa,Fulica atra,Nem,Nem fenyegetett,0,https://hu.wikipedia.org/wiki/Szárcsa_(madár)
 Madarak,Bíbic,Vanellus vanellus,Védett,Mérsékelten fenyegetett,50000,https://hu.wikipedia.org/wiki/Bíbic
 Madarak,Nagy póling,Numenius arquata,Fokozottan védett,Mérsékelten fenyegetett,500000,https://hu.wikipedia.org/wiki/Nagy_póling
 Madarak,Nagy goda,Limosa limosa,Fokozottan védett,Mérsékelten fenyegetett,250000,https://hu.wikipedia.org/wiki/Nagy_goda
 Madarak,Piroslábú cankó,Tringa totanus,Védett,Nem fenyegetett,50000,https://hu.wikipedia.org/wiki/Piroslábú_cankó
 Madarak,Erdei cankó,Tringa ochropus,Védett,Nem fenyegetett,50000,https://hu.wikipedia.org/wiki/Erdei_cankó
-Madarak,Billegető cankó,Tringa hypoleucos,Védett,Nem fenyegetett,50000,https://hu.wikipedia.org/wiki/Billegető_cankó
+Madarak,Billegető cankó,Tringa hypoleucos,Védett,Nem fenyegetett,50000,https://hu.wikipedia.org/wiki/Billegetőcankó
 Madarak,Közép sárszalonka,Gallinago gallinago,Védett,Nem fenyegetett,10000,https://hu.wikipedia.org/wiki/Sárszalonka
 Madarak,Kis sárszalonka,Lymnocryptes minimus,Védett,Nem fenyegetett,50000,https://hu.wikipedia.org/wiki/Kis_sárszalonka
 Madarak,Pajzsoscankó,Philomachus pugnax,Védett,Nem fenyegetett,50000,https://hu.wikipedia.org/wiki/Pajzsoscankó
@@ -154,7 +154,7 @@ Madarak,Szajkó,Garrulus glandarius,Nem,Nem fenyegetett,0,https://hu.wikipedia.o
 Madarak,Szarka,Pica pica,Nem,Nem fenyegetett,0,https://hu.wikipedia.org/wiki/Szarka
 Madarak,Dolmányos varjú,Corvus corone cornix,Nem,Nem fenyegetett,0,https://hu.wikipedia.org/wiki/Dolmányos_varjú
 Madarak,Vetési varjú,Corvus frugilegus,Védett,Nem fenyegetett,50000,https://hu.wikipedia.org/wiki/Vetési_varjú
-Madarak,Csóka,Corvus monedula,Védett,Nem fenyegetett,10000,https://hu.wikipedia.org/wiki/Csóka
+Madarak,Csóka,Corvus monedula,Védett,Nem fenyegetett,10000,https://hu.wikipedia.org/wiki/Csóka_(madár)
 Madarak,Holló,Corvus corax,Védett,Nem fenyegetett,50000,https://hu.wikipedia.org/wiki/Holló
 Madarak,Kék cinege,Parus caeruleus,Védett,Nem fenyegetett,25000,https://hu.wikipedia.org/wiki/Kék_cinege
 Madarak,Széncinege,Parus major,Védett,Nem fenyegetett,25000,https://hu.wikipedia.org/wiki/Széncinege
@@ -173,7 +173,7 @@ Madarak,Nádirigó,Acrocephalus arundinaceus,Védett,Nem fenyegetett,25000,https
 Madarak,Cerregő nádiposzáta,Acrocephalus scirpaceus,Védett,Nem fenyegetett,25000,https://hu.wikipedia.org/wiki/Cserregő_nádiposzáta
 Madarak,Foltos nádiposzáta,Acrocephalus schoenobaenus,Védett,Nem fenyegetett,25000,https://hu.wikipedia.org/wiki/Foltos_nádiposzáta
 Madarak,Kis poszáta,Sylvia curruca,Védett,Nem fenyegetett,25000,https://hu.wikipedia.org/wiki/Kis_poszáta
-Madarak,Csilp-csalp füzike,Phylloscopus collybita,Védett,Nem fenyegetett,25000,https://hu.wikipedia.org/wiki/Csilp-csalp_füzike
+Madarak,Csilp-csalp füzike,Phylloscopus collybita,Védett,Nem fenyegetett,25000,https://hu.wikipedia.org/wiki/Csilpcsalpfüzike
 Madarak,Sárgafejű királyka,Regulus regulus,Védett,Nem fenyegetett,25000,https://hu.wikipedia.org/wiki/Sárgafejű_királyka
 Madarak,Szürke légykapó,Muscicapa striata,Védett,Nem fenyegetett,50000,https://hu.wikipedia.org/wiki/Szürke_légykapó
 Madarak,Réti pityer,Anthus pratensis,Védett,Nem fenyegetett,25000,https://hu.wikipedia.org/wiki/Réti_pityer
@@ -186,7 +186,7 @@ Madarak,Seregély,Sturnus vulgaris,Nem,Nem fenyegetett,0,https://hu.wikipedia.or
 Madarak,Házi veréb,Passer domesticus,Nem,Nem fenyegetett,0,https://hu.wikipedia.org/wiki/Házi_veréb
 Madarak,Mezei veréb,Passer montanus,Védett,Nem fenyegetett,25000,https://hu.wikipedia.org/wiki/Mezei_veréb
 Madarak,Zöldike,Chloris chloris,Védett,Nem fenyegetett,25000,https://hu.wikipedia.org/wiki/Zöldike
-Madarak,Tengelic,Carduelis carduelis,Védett,Nem fenyegetett,25000,https://hu.wikipedia.org/wiki/Tengelic
+Madarak,Tengelic,Carduelis carduelis,Védett,Nem fenyegetett,25000,https://hu.wikipedia.org/wiki/Tengelic_(madár)
 Madarak,Csicsörke,Serinus serinus,Védett,Nem fenyegetett,25000,https://hu.wikipedia.org/wiki/Csicsörke
 Madarak,Süvöltő,Pyrrhula pyrrhula,Védett,Nem fenyegetett,25000,https://hu.wikipedia.org/wiki/Süvöltő
 Madarak,Sordély,Emberiza calandra,Védett,Nem fenyegetett,25000,https://hu.wikipedia.org/wiki/Sordély

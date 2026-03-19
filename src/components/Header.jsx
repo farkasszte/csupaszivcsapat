@@ -3,10 +3,7 @@
 import { usePathname, useRouter } from 'next/navigation';
 import { useGame } from '@/context/GameContext';
 import UserMenu from '@/components/Auth/UserMenu';
-import {
-    RiLayoutRightLine, RiLayoutLine,
-    RiMenuLine, RiBookOpenLine, RiDashboardLine, RiMapLine, RiBookLine,
-} from '@remixicon/react';
+import { RiMenuLine, RiBookOpenLine, RiDashboardLine, RiMapLine, RiBookLine } from '@remixicon/react';
 
 export default function Header() {
     const pathname = usePathname();
@@ -56,7 +53,7 @@ export default function Header() {
         <>
             {/* ── Mobile top header (title only) ── */}
             <header className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-zinc-950/80 backdrop-blur-md border-b border-amber-900/30 px-6 py-4 flex justify-center items-center">
-                <h1 className="text-sm font-bold bg-linear-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent text-center">
+                <h1 className="text-sm font-bold text-[#FDF5E6] text-center">
                     Csupaszív kalandok: A Homokhátság Hősei
                 </h1>
             </header>
@@ -71,11 +68,11 @@ export default function Header() {
                         key={key}
                         onClick={action}
                         className={`flex-1 flex flex-col items-center justify-center gap-0.5 py-2 text-[10px] font-semibold transition-colors ${!onProfile && activeTab === key
-                            ? 'text-amber-300'
-                            : 'text-zinc-500 hover:text-zinc-300'
+                            ? 'text-[#FDF5E6]'
+                            : 'text-[#FDF5E6] hover:text-[#FDF5E6]'
                             }`}
                     >
-                        <span className={`transition-colors ${!onProfile && activeTab === key ? 'text-amber-400' : ''}`}>{icon}</span>
+                        <span className={`transition-colors ${!onProfile && activeTab === key ? 'text-[#FDF5E6]' : ''}`}>{icon}</span>
                         {label}
                     </button>
                 ))}
