@@ -3,10 +3,7 @@
 import { usePathname, useRouter } from 'next/navigation';
 import { useGame } from '@/context/GameContext';
 import UserMenu from '@/components/Auth/UserMenu';
-import {
-    RiLayoutRightLine, RiLayoutLine,
-    RiMenuLine, RiBookOpenLine, RiDashboardLine, RiMapLine, RiBookLine,
-} from '@remixicon/react';
+import { RiMenuLine, RiBookOpenLine, RiDashboardLine, RiMapLine, RiBookLine } from '@remixicon/react';
 
 export default function Header() {
     const pathname = usePathname();

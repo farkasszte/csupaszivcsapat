@@ -1,7 +1,8 @@
 'use client';
 
 import { StoryEngine } from '@/components/StoryEngine';
-import StoryLog from '@/components/StoryLog';
+import dynamic from 'next/dynamic';
+const StoryLog = dynamic(() => import('@/components/StoryLog'), { ssr: false });
 import PlayerDashboard from '@/components/PlayerDashboard';
 import GameMap from '@/components/GameMap';
 import GameMenu from '@/components/GameMenu';
@@ -120,7 +121,7 @@ export default function Home() {
                     {showPanel && (
                         <div className="relative h-full flex flex-col justify-center items-center">
                             <div
-                                className="h-full w-full max-w-[420px] sm:w-auto sm:max-w-none sm:aspect-[9/16] lg:h-full lg:w-auto lg:max-w-none bg-zinc-900/60 backdrop-blur-xl rounded-xl border border-white/5 shadow-2xl overflow-hidden flex flex-col"
+                                className="h-full w-full max-w-[420px] sm:w-auto sm:max-w-none sm:aspect-9/16 lg:h-full lg:w-auto lg:max-w-none bg-zinc-900/60 backdrop-blur-xl rounded-xl border border-white/5 shadow-2xl overflow-hidden flex flex-col"
                             >
 
                                 {/* Tab header — desktop only; mobile uses bottom nav */}
@@ -144,8 +145,8 @@ export default function Home() {
 
 
 
-                                {/* Panel content */}
-                                <div className="overflow-y-auto flex-1 py-1 no-scrollbar">
+                                 {/* Tab content */}
+                                <div className="flex-1 min-h-0 flex flex-col no-scrollbar">
                                     {activeTab === 'profile' && <ProfileView />}
                                     {activeTab === 'menu' && <GameMenu />}
                                     {activeTab === 'log' && <StoryLog />}
