@@ -60,8 +60,8 @@ export const Choices = ({ hasImage, onHoverChange }) => {
                         onMouseLeave={() => onHoverChange?.(false)}
                         className={`text-[#FDF5E6] text-base italic transition-all transform hover:scale-102 shadow-xl backdrop-blur-md border border-white/20 hover:border-amber-400/50 whitespace-normal max-w-full
                             ${hasImage
-                                ? 'px-2 py-2 rounded-full bg-zinc-900/60 hover:bg-zinc-800/80 text-sm'
-                                : 'w-full text-left px-4 py-4 rounded-lg bg-linear-to-r from-amber-900/40 to-orange-900/40 hover:from-amber-800/60 hover:to-orange-800/60'
+                                ? 'px-2 py-2 rounded-full bg-white/40 hover:bg-white/60 text-sm'
+                                : 'w-full text-left px-4 py-4 rounded-lg bg-linear-to-r from-white/40 to-white/20 hover:from-white/60 hover:to-white/40'
                             }`}
                     >
                         {choice.label}
@@ -72,10 +72,10 @@ export const Choices = ({ hasImage, onHoverChange }) => {
                     onClick={() => resetGame?.()}
                     onMouseEnter={() => onHoverChange?.(true)}
                     onMouseLeave={() => onHoverChange?.(false)}
-                    className={`text-[#FDF5E6] text-xs transition-all transform hover:scale-95 active:scale-90 shadow-xl backdrop-blur-md border border-white/20 whitespace-normal pointer-events-auto max-w-full
+                    className={`text-red-900 font-semibold text-xs transition-all transform hover:scale-95 active:scale-90 shadow-xl backdrop-blur-md border border-red-500/30 whitespace-normal pointer-events-auto max-w-full
                         ${hasImage
-                            ? 'px-6 py-2 rounded-full bg-red-950/60 hover:bg-red-900/80 text-sm'
-                            : 'w-full text-center px-6 py-4 rounded-lg bg-linear-to-r from-red-900/40 to-orange-900/40 hover:from-red-800/60 hover:to-orange-800/60 border-orange-500/20'
+                            ? 'px-6 py-2 rounded-full bg-red-100/80 hover:bg-red-200/90 text-sm'
+                            : 'w-full text-center px-6 py-4 rounded-lg bg-linear-to-r from-red-100/80 to-red-200/80 hover:from-red-200/80 hover:to-red-300/80'
                         }`}
                 >
                     Kaland újrakezdése
