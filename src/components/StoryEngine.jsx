@@ -328,7 +328,7 @@ export const StoryEngine = ({ hideMedia = false }) => {
                         </div>
                     )}
 
-                    <div className="story-content space-y-4 text-xs lg:text-sm text-justify text-[#FDF5E6] leading-relaxed">
+                    <div className="story-content space-y-4 text-xs lg:text-base text-justify text-[#FDF5E6] leading-relaxed">
                         {contentSegments.map((seg, idx) => {
                             const visibleInThisSegment = Math.max(0, Math.min(seg.length, totalVisibleChars - seg.startOffset));
                             return (

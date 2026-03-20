@@ -58,7 +58,7 @@ export const Choices = ({ hasImage, onHoverChange }) => {
                         onClick={() => navigateTo(choice.targetId, choice.rawLabel)}
                         onMouseEnter={() => onHoverChange?.(true)}
                         onMouseLeave={() => onHoverChange?.(false)}
-                        className={`text-[#FDF5E6] text-sm italic transition-all transform hover:scale-102 shadow-xl backdrop-blur-md border border-white/20 hover:border-amber-400/50 whitespace-normal max-w-full
+                        className={`text-[#FDF5E6] text-base italic transition-all transform hover:scale-102 shadow-xl backdrop-blur-md border border-white/20 hover:border-amber-400/50 whitespace-normal max-w-full
                             ${hasImage
                                 ? 'px-2 py-2 rounded-full bg-zinc-900/60 hover:bg-zinc-800/80 text-sm'
                                 : 'w-full text-left px-4 py-4 rounded-lg bg-linear-to-r from-amber-900/40 to-orange-900/40 hover:from-amber-800/60 hover:to-orange-800/60'

@@ -24,6 +24,7 @@ import {
     RiBookLine,
     RiUserLine,
     RiSettings4Line,
+    RiImageLine,
 } from '@remixicon/react';
 
 
@@ -37,6 +38,7 @@ export default function Home() {
         showMenu, setShowMenu,
         showLibrary, setShowLibrary,
         showProfile, setShowProfile,
+        showImages, setShowImages,
         togglePanel,
         currentElementId,
         getAssetUrl,
@@ -57,8 +59,8 @@ export default function Home() {
 
 
 
-    const showPanel = showLog || showDashboard || showMap || showMenu || showLibrary || showProfile;
-    const activeTab = showMenu ? 'menu' : showLog ? 'log' : showDashboard ? 'dashboard' : showMap ? 'map' : showLibrary ? 'library' : showProfile ? 'profile' : null;
+    const showPanel = showLog || showDashboard || showMap || showMenu || showLibrary || showProfile || showImages;
+    const activeTab = showMenu ? 'menu' : showLog ? 'log' : showDashboard ? 'dashboard' : showMap ? 'map' : showLibrary ? 'library' : showProfile ? 'profile' : showImages ? 'images' : null;
 
 
 
@@ -69,6 +71,7 @@ export default function Home() {
         setShowMenu(false);
         setShowLibrary(false);
         setShowProfile(false);
+        setShowImages(false);
     };
 
 
@@ -109,6 +112,10 @@ export default function Home() {
 
                             {/* Tabs (Right) */}
                             <div className="flex items-center gap-1 bg-zinc-900/40 backdrop-blur-md p-1 rounded-xl border border-white/5 no-scrollbar scrollbar-hide ml-auto">
+                                <button onClick={() => setShowImages(true)} className={tabCls('images')}>
+                                    <RiImageLine size={14} /> <span>Képek</span>
+                                </button>
+                                <div className="w-px h-4 bg-white/10 mx-1 shrink-0" />
                                 <button onClick={() => setShowLog(true)} className={tabCls('log')}>
                                     <RiBookOpenLine size={14} /> <span>Napló</span>
                                 </button>
@@ -132,26 +139,7 @@ export default function Home() {
                         </div>
                     )}
 
-                    <div className={`hidden lg:flex relative h-full flex-col justify-center items-center animate-in fade-in slide-in-from-left-4 duration-700 shrink-0`}>
-                        <div className="h-full w-fit max-w-[420px] overflow-hidden flex flex-col p-2">
-                            <div className="flex-1 min-h-0 flex flex-col justify-center">
-                                {project?.elements?.[currentElementId]?.assets?.cover ? (
-                                    <div className="relative group overflow-hidden rounded-xl h-full w-fit mx-auto transition-transform duration-700 hover:scale-[1.02]">
-                                        <img
-                                            src={getAssetUrl(project.elements[currentElementId].assets.cover.id)}
-                                            alt="Scene"
-                                            className="h-full w-auto object-contain transition-transform duration-700 block"
-                                            style={{ filter: typeof getColorFilterStyle === 'function' ? getColorFilterStyle(colorFilter) : 'none' }}
-                                        />
-                                    </div>
-                                ) : (
-                                    <div className="aspect-9/16 bg-zinc-800/40 rounded-lg border border-dashed border-white/10 flex items-center justify-center">
-                                        <span className="text-[10px] text-white/20 uppercase tracking-widest">Nincs kép</span>
-                                    </div>
-                                )}
-                            </div>
-                        </div>
-                    </div>
+
 
                     {/* 2. Game panel — middle on desktop, main on mobile */}
                     <div className={`relative flex flex-col justify-center items-center ${showPanel ? 'hidden lg:flex h-full flex-1' : 'flex w-full h-full'}`}>
@@ -193,6 +181,24 @@ export default function Home() {
                                     {activeTab === 'dashboard' && <PlayerDashboard />}
                                     {activeTab === 'map' && <GameMap />}
                                     {activeTab === 'library' && <GameLibrary />}
+                                    {activeTab === 'images' && (
+                                        <div className="flex-1 min-h-0 flex flex-col justify-center p-4">
+                                            {project?.elements?.[currentElementId]?.assets?.cover ? (
+                                                <div className="relative group overflow-hidden rounded-xl h-full w-fit mx-auto transition-transform duration-700">
+                                                    <img
+                                                        src={getAssetUrl(project.elements[currentElementId].assets.cover.id)}
+                                                        alt="Scene"
+                                                        className="h-full w-auto object-contain transition-transform duration-700 block"
+                                                        style={{ filter: typeof getColorFilterStyle === 'function' ? getColorFilterStyle(colorFilter) : 'none' }}
+                                                    />
+                                                </div>
+                                            ) : (
+                                                <div className="aspect-9/16 bg-zinc-800/40 rounded-lg border border-dashed border-white/10 flex items-center justify-center">
+                                                    <span className="text-[10px] text-white/20 uppercase tracking-widest">Nincs kép</span>
+                                                </div>
+                                            )}
+                                        </div>
+                                    )}
                                 </div>
 
 
