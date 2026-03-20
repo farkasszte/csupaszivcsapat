@@ -93,7 +93,7 @@ export default function GameMenu() {
 
     return (
         <>
-            <div className="flex flex-col gap-3 p-4">
+            <div className="flex flex-col gap-3 p-4 max-h-full overflow-y-auto no-scrollbar">
                 {/* Status message */}
                 {(error || message) && (
                     <div

@@ -339,10 +339,10 @@ export default function GameLibrary() {
 
             {/* VIDEO PLAYER OVERLAY */}
             {activeVideoUrl && typeof document !== 'undefined' && createPortal(
-                <div className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-0 sm:p-4 backdrop-blur-sm animate-in fade-in duration-300">
+                <div className="fixed inset-0 z-100 bg-black/95 flex items-center justify-center p-0 sm:p-4 backdrop-blur-sm animate-in fade-in duration-300">
                     <button
                         onClick={() => setActiveVideoUrl(null)}
-                        className="fixed top-4 right-4 sm:top-6 sm:right-6 w-10 h-10 rounded-full bg-zinc-800/50 text-[#FDF5E6] flex items-center justify-center hover:bg-zinc-700 transition-colors z-[110] border border-white/10"
+                        className="fixed top-4 right-4 sm:top-6 sm:right-6 w-10 h-10 rounded-full bg-zinc-800/50 text-[#FDF5E6] flex items-center justify-center hover:bg-zinc-700 transition-colors z-110 border border-white/10"
                     >
                         <RiCloseLine size={24} />
                     </button>
@@ -353,7 +353,7 @@ export default function GameLibrary() {
                             autoPlay
                             controls
                             playsInline
-                            className="bg-black object-contain origin-center transition-transform duration-500 shadow-2xl landscape:w-full landscape:h-full portrait:w-[100vh] portrait:h-[100vw] portrait:max-w-[none] portrait:rotate-90 sm:portrait:w-full sm:portrait:h-full sm:portrait:rotate-0"
+                            className="bg-black object-contain origin-center transition-transform duration-500 shadow-2xl landscape:w-full landscape:h-full portrait:w-[100vh] portrait:h-[100vw] portrait:max-w-none portrait:rotate-90 sm:portrait:w-full sm:portrait:h-full sm:portrait:rotate-0"
                             onEnded={() => setActiveVideoUrl(null)}
                         />
                     </div>

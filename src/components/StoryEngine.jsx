@@ -5,7 +5,7 @@ import { useGame } from '../context/GameContext';
 import { Choices } from './Choices';
 import { RiSearchLine, RiBookOpenLine } from '@remixicon/react';
 
-export const StoryEngine = () => {
+export const StoryEngine = ({ hideMedia = false }) => {
     const {
         project, currentElementId, state,
         getAssetUrl, parseRichText, error,
@@ -262,14 +262,14 @@ export const StoryEngine = () => {
     if (!isMounted) return null;
 
     return (
-        <div key={displayElementId} className="mx-auto rounded-xl shadow-2xl border border-white/30 relative overflow-hidden h-full w-full max-w-[420px] sm:w-auto sm:max-w-none sm:aspect-9/16 lg:h-full lg:w-auto lg:max-w-none bg-white/20 backdrop-blur-md flex flex-col">
+        <div key={displayElementId} className={`mx-auto rounded-xl shadow-2xl border border-white/5 relative overflow-hidden h-full w-full max-w-[420px] sm:w-auto sm:max-w-none sm:aspect-9/16 lg:h-full lg:w-auto lg:max-w-none bg-zinc-900/60 backdrop-blur-xl flex flex-col ${hideMedia ? 'lg:aspect-auto' : ''}`}>
 
             {/* Single Scrollable Webpage Container */}
             <div className="flex-1 overflow-y-auto no-scrollbar">
 
-                {/* 1. Picture/Video (Top) - Only render if media exists */}
+                {/* 1. Picture/Video (Top) - Only render if media exists and hideMedia is false on LG */}
                 {(videoUrl || coverUrl) && (
-                    <div className="relative w-full px-4 pt-4 overflow-hidden">
+                    <div className={`relative w-full px-4 pt-4 overflow-hidden ${hideMedia ? 'lg:hidden' : ''}`}>
                         {/* Discovery Capsule (Overlay on media) */}
                         {activeDiscoveryComponent && (
                             <div key={activeDiscoveryId} className="absolute top-8 left-1/2 -translate-x-1/2 z-50 pointer-events-none animate-in slide-in-from-top-4 fade-in duration-500">
@@ -328,7 +328,7 @@ export const StoryEngine = () => {
                         </div>
                     )}
 
-                    <div className="story-content space-y-4 text-xs lg:text-sm text-justify text-[#3e2723] leading-relaxed">
+                    <div className="story-content space-y-4 text-xs lg:text-base text-justify text-[#FDF5E6] leading-relaxed">
                         {contentSegments.map((seg, idx) => {
                             const visibleInThisSegment = Math.max(0, Math.min(seg.length, totalVisibleChars - seg.startOffset));
                             return (

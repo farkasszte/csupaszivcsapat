@@ -19,6 +19,7 @@ export const GameProvider = ({ children }) => {
     const [showMenu, setShowMenu] = useState(false);
     const [showLibrary, setShowLibrary] = useState(false);
     const [showProfile, setShowProfile] = useState(false);
+    const [showImages, setShowImages] = useState(false);
     const [lastActiveTab, setLastActiveTab] = useState('menu');
     const [lightboxImage, setLightboxImage] = useState(null);
 
@@ -30,7 +31,7 @@ export const GameProvider = ({ children }) => {
         setShowLog(next);
         if (next) {
             setLastActiveTab('log');
-            setShowDashboard(false); setShowMap(false); setShowMenu(false); setShowLibrary(false); setShowProfile(false);
+            setShowDashboard(false); setShowMap(false); setShowMenu(false); setShowLibrary(false); setShowProfile(false); setShowImages(false);
         }
     };
 
@@ -41,7 +42,7 @@ export const GameProvider = ({ children }) => {
         setShowDashboard(next);
         if (next) {
             setLastActiveTab('dashboard');
-            setShowLog(false); setShowMap(false); setShowMenu(false); setShowLibrary(false); setShowProfile(false);
+            setShowLog(false); setShowMap(false); setShowMenu(false); setShowLibrary(false); setShowProfile(false); setShowImages(false);
         }
     };
 
@@ -52,7 +53,7 @@ export const GameProvider = ({ children }) => {
         setShowMap(next);
         if (next) {
             setLastActiveTab('map');
-            setShowLog(false); setShowDashboard(false); setShowMenu(false); setShowLibrary(false); setShowProfile(false);
+            setShowLog(false); setShowDashboard(false); setShowMenu(false); setShowLibrary(false); setShowProfile(false); setShowImages(false);
         }
     };
 
@@ -63,7 +64,7 @@ export const GameProvider = ({ children }) => {
         setShowMenu(next);
         if (next) {
             setLastActiveTab('menu');
-            setShowLog(false); setShowDashboard(false); setShowMap(false); setShowLibrary(false); setShowProfile(false);
+            setShowLog(false); setShowDashboard(false); setShowMap(false); setShowLibrary(false); setShowProfile(false); setShowImages(false);
         }
     };
 
@@ -74,7 +75,7 @@ export const GameProvider = ({ children }) => {
         setShowLibrary(next);
         if (next) {
             setLastActiveTab('library');
-            setShowLog(false); setShowDashboard(false); setShowMap(false); setShowMenu(false); setShowProfile(false);
+            setShowLog(false); setShowDashboard(false); setShowMap(false); setShowMenu(false); setShowProfile(false); setShowImages(false);
         }
     };
 
@@ -83,20 +84,30 @@ export const GameProvider = ({ children }) => {
         setShowProfile(next);
         if (next) {
             setLastActiveTab('profile');
-            setShowLog(false); setShowDashboard(false); setShowMap(false); setShowMenu(false); setShowLibrary(false);
+            setShowLog(false); setShowDashboard(false); setShowMap(false); setShowMenu(false); setShowLibrary(false); setShowImages(false);
+        }
+    };
+
+    const toggleImages = (val) => {
+        const next = val !== undefined ? val : !showImages;
+        setShowImages(next);
+        if (next) {
+            setLastActiveTab('images');
+            setShowLog(false); setShowDashboard(false); setShowMap(false); setShowMenu(false); setShowLibrary(false); setShowProfile(false);
         }
     };
 
     const togglePanel = () => {
-        const isOpen = showLog || showDashboard || showMap || showMenu || showLibrary || showProfile;
+        const isOpen = showLog || showDashboard || showMap || showMenu || showLibrary || showProfile || showImages;
         if (isOpen) {
-            setShowLog(false); setShowDashboard(false); setShowMap(false); setShowMenu(false); setShowLibrary(false); setShowProfile(false);
+            setShowLog(false); setShowDashboard(false); setShowMap(false); setShowMenu(false); setShowLibrary(false); setShowProfile(false); setShowImages(false);
         } else {
             if (lastActiveTab === 'log') toggleLog(true);
             else if (lastActiveTab === 'dashboard') toggleDashboard(true);
             else if (lastActiveTab === 'map') toggleMap(true);
             else if (lastActiveTab === 'library') toggleLibrary(true);
             else if (lastActiveTab === 'profile') toggleProfile(true);
+            else if (lastActiveTab === 'images') toggleImages(true);
             else toggleMenu(true);
         }
     };
@@ -202,6 +213,8 @@ export const GameProvider = ({ children }) => {
         setShowLibrary: toggleLibrary,
         showProfile,
         setShowProfile: toggleProfile,
+        showImages,
+        setShowImages: toggleImages,
         togglePanel,
         typewriterSpeed: store.typewriterSpeed,
         setTypewriterSpeed: store.setTypewriterSpeed,
