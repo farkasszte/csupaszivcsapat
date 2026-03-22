@@ -11,14 +11,18 @@ export const StoryEngine = () => {
         getAssetUrl, parseRichText, error,
         message, clearMessage, openLightbox, isMuted, colorFilter,
         typewriterSpeed, transitionsEnabled, volume,
-        recentDiscoveries, clearRecentDiscovery
+        recentDiscoveries, clearRecentDiscovery,
+        showLog, showDashboard, showMap, showMenu, showLibrary, showProfile
     } = useGame();
+
+    const showPanel = showLog || showDashboard || showMap || showMenu || showLibrary || showProfile;
 
 
 
 
 
     const [contentSegments, setContentSegments] = useState([]);
+    const [currentStep, setCurrentStep] = useState(0);
     const [totalVisibleChars, setTotalVisibleChars] = useState(0);
     const [isMounted, setIsMounted] = useState(false);
 
@@ -112,39 +116,39 @@ export const StoryEngine = () => {
         const rawContent = element.content;
         const segments = parseRichText(rawContent);
 
-        // Enhance segments with text length and cumulative start offsets
-        let currentOffset = 0;
+        // Enhance segments with text length
         const enhancedSegments = segments.map(seg => {
             const div = document.createElement('div');
             div.innerHTML = seg.content;
             const textLen = (div.textContent || "").length;
-            const enhanced = { ...seg, startOffset: currentOffset, length: textLen };
-            currentOffset += textLen;
-            return enhanced;
+            return { ...seg, length: textLen };
         });
 
         setContentSegments(enhancedSegments);
+        setCurrentStep(0);
+    }, [displayElementId, element]);
 
-        // Reset or set to end if typewriter is OFF
+    // Typewriter visibility reset
+    useEffect(() => {
         if (typewriterSpeed === 0) {
             setTotalVisibleChars(999999);
         } else {
             setTotalVisibleChars(0);
         }
+    }, [displayElementId, currentStep, typewriterSpeed, element, state.visits[displayElementId]]);
 
-    }, [displayElementId, element, state.visits[displayElementId], typewriterSpeed]);
-
-
-    // Global typewriter controller
+    // Global typewriter controller per step
     useEffect(() => {
         if (typewriterSpeed === 0 || contentSegments.length === 0) return;
+        
+        const currentSeg = contentSegments[currentStep];
+        if (!currentSeg) return;
 
-        const totalLength = contentSegments[contentSegments.length - 1].startOffset + contentSegments[contentSegments.length - 1].length;
-        if (totalVisibleChars >= totalLength) return;
+        if (totalVisibleChars >= currentSeg.length) return;
 
         const timer = setInterval(() => {
             setTotalVisibleChars(prev => {
-                if (prev >= totalLength) {
+                if (prev >= currentSeg.length) {
                     clearInterval(timer);
                     return prev;
                 }
@@ -153,7 +157,7 @@ export const StoryEngine = () => {
         }, typewriterSpeed);
 
         return () => clearInterval(timer);
-    }, [contentSegments, typewriterSpeed, totalVisibleChars === 0]);
+    }, [contentSegments, currentStep, typewriterSpeed, totalVisibleChars === 0]);
 
 
     // Handle clicks on images in story content
@@ -259,20 +263,33 @@ export const StoryEngine = () => {
         }
     }, [videoUrl, coverUrl, isVideoLoaded]);
 
+    // Use the Túzok image exclusively for the first intro node
+    const isIntro = displayElementId === "e3d27f29-240f-42ff-84a5-77e3e0727d38";
+    const activeCoverUrl = isIntro ? "/assets/Images/tuzok_tanar_ur.png" : coverUrl;
+
     if (!isMounted) return null;
 
     return (
-        <div key={displayElementId} className="mx-auto rounded-xl shadow-2xl border border-white/30 relative overflow-hidden h-full w-full max-w-[420px] sm:w-auto sm:max-w-none sm:aspect-9/16 lg:h-full lg:w-auto lg:max-w-none bg-white/20 backdrop-blur-md flex flex-col">
-
-            {/* Single Scrollable Webpage Container */}
-            <div className="flex-1 overflow-y-auto no-scrollbar">
-
-                {/* 1. Picture/Video (Top) - Only render if media exists */}
-                {(videoUrl || coverUrl) && (
-                    <div className="relative w-full px-4 pt-4 overflow-hidden">
-                        {/* Discovery Capsule (Overlay on media) */}
+        <div key={displayElementId} className="w-full h-full flex flex-col lg:flex-row items-stretch lg:items-center justify-center relative z-0">
+            
+            {/* Left Image Section / Top on Mobile */}
+            <div className="w-full lg:w-[40%] flex justify-center items-end lg:items-center relative z-0 pt-8 lg:pt-0 -mb-8 lg:mb-0">
+                {activeDiscoveryComponent && (!videoUrl && !activeCoverUrl) && (
+                     // Discovery fallback if no media
+                     <div className="absolute top-4 left-1/2 -translate-x-1/2 z-50 pointer-events-none animate-in fade-in duration-500">
+                         <div className="bg-white/80 backdrop-blur-md border border-[#3e2723]/30 shadow-lg rounded-full px-4 py-2 flex items-center gap-2 mx-auto w-fit">
+                            <RiSearchLine size={14} className="text-[#3e2723]" />
+                            <span className="text-[10px] font-bold tracking-wider text-[#3e2723] uppercase whitespace-nowrap">
+                                Új felfedezés: <span className="text-[#3e2723]">{activeDiscoveryComponent.name}</span>
+                            </span>
+                        </div>
+                     </div>
+                )}
+                
+                {(videoUrl || activeCoverUrl) && (
+                    <div className="relative w-full overflow-visible flex justify-center">
                         {activeDiscoveryComponent && (
-                            <div key={activeDiscoveryId} className="absolute top-8 left-1/2 -translate-x-1/2 z-50 pointer-events-none animate-in slide-in-from-top-4 fade-in duration-500">
+                            <div key={activeDiscoveryId} className="absolute -top-10 left-1/2 -translate-x-1/2 z-50 pointer-events-none animate-in slide-in-from-top-4 fade-in duration-500">
                                 <div className="bg-white/80 backdrop-blur-md border border-[#3e2723]/30 shadow-lg rounded-full px-4 py-2 flex items-center gap-2">
                                     <RiSearchLine size={14} className="text-[#3e2723]" />
                                     <span className="text-[10px] font-bold tracking-wider text-[#3e2723] uppercase whitespace-nowrap">
@@ -281,73 +298,77 @@ export const StoryEngine = () => {
                                 </div>
                             </div>
                         )}
-
-                        {/* Media content */}
                         {videoUrl ? (
                             <video
                                 key={videoUrl}
                                 src={videoUrl}
                                 autoPlay loop muted playsInline
                                 onCanPlay={() => setIsVideoLoaded(true)}
-                                className={`w-full h-auto rounded-xl border border-white/5 transition-opacity duration-300 ${isVideoLoaded ? 'opacity-100' : 'opacity-0'}`}
+                                className={`w-full max-w-[400px] lg:max-w-none h-auto lg:max-h-[80vh] lg:h-full object-contain rounded-xl transition-opacity duration-300 ${isVideoLoaded ? 'opacity-100' : 'opacity-0'}`}
                                 style={{ filter: getColorFilterStyle(colorFilter) }}
                             />
                         ) : (
                             <img
-                                key={coverUrl}
-                                src={coverUrl}
+                                key={activeCoverUrl}
+                                src={activeCoverUrl}
                                 alt="Scene"
-                                className="w-full h-auto rounded-xl border border-white/5 shadow-2xl"
+                                className="w-full max-w-[400px] lg:max-w-none h-auto lg:h-full lg:max-h-[80vh] object-contain mx-auto drop-shadow-2xl"
                                 style={{ filter: getColorFilterStyle(colorFilter) }}
                             />
                         )}
                     </div>
                 )}
+            </div>
 
-                {/* Discovery Capsule (If no media is present, show it above text) */}
-                {(!videoUrl && !coverUrl && activeDiscoveryComponent) && (
-                    <div className="px-6 pt-6 self-center z-50 pointer-events-none animate-in slide-in-from-top-2 fade-in duration-500">
-                        <div className="bg-white/80 backdrop-blur-md border border-[#3e2723]/30 shadow-lg rounded-full px-4 py-2 flex items-center gap-2 mx-auto w-fit">
-                            <RiSearchLine size={14} className="text-[#3e2723]" />
-                            <span className="text-[10px] font-bold tracking-wider text-[#3e2723] uppercase whitespace-nowrap">
-                                Új felfedezés: <span className="text-[#3e2723]">{activeDiscoveryComponent.name}</span>
-                            </span>
+            {/* Right Dialogue Section / Bottom on Mobile */}
+            <div className="w-full lg:w-[60%] flex flex-col justify-end lg:justify-center p-4 lg:p-8 relative z-10 lg:min-h-full">
+                
+                <div className="biophilic-card w-full mx-auto mt-auto lg:mt-auto mb-4 lg:mb-12 max-w-3xl lg:mr-8 rounded-2xl shadow-2xl border border-white/30 bg-white/20 backdrop-blur-md flex flex-col max-h-[50vh] lg:max-h-[60vh] overflow-hidden">
+                    
+                    {/* Story Text (Middle - Scrollable) */}
+                    <div className="flex-1 overflow-y-auto no-scrollbar flex flex-col items-stretch pb-4 p-6 sm:p-8 lg:p-10">
+                        {/* Status Messages */}
+                        {(error || message) && (
+                            <div className="mb-6 shrink-0 animate-in fade-in duration-300">
+                                <div className={`p-3 flex items-center justify-between text-xs rounded-lg border ${error ? 'bg-red-100 border-red-500 text-red-900' : 'bg-emerald-100 border-emerald-500 text-emerald-900'}`}>
+                                    <span>{error || message}</span>
+                                    <button onClick={() => clearMessage?.()} className="ml-2 hover:opacity-70 transition-opacity">✕</button>
+                                </div>
+                            </div>
+                        )}
+
+                        <div className="story-content space-y-4 sm:space-y-6 text-base sm:text-lg lg:text-[19px] text-[#3e2723] leading-[1.7] sm:leading-[1.8] lg:leading-[2] tracking-wide text-justify animate-in fade-in duration-500">
+                            {contentSegments.length > 0 && contentSegments[currentStep] && (
+                                <TypewriterSegment
+                                    key={`${displayElementId}-${currentStep}`}
+                                    content={contentSegments[currentStep].content}
+                                    visibleCount={totalVisibleChars}
+                                    isFull={totalVisibleChars >= contentSegments[currentStep].length}
+                                />
+                            )}
                         </div>
                     </div>
-                )}
 
-                {/* 2. Story Text (Middle) */}
-                <div className="px-4 py-4">
-                    {/* Status Messages */}
-                    {(error || message) && (
-                        <div className="mb-6 animate-in fade-in duration-300">
-                            <div className={`p-3 flex items-center justify-between text-xs rounded-lg border ${error ? 'bg-red-100 border-red-500 text-red-900' : 'bg-emerald-100 border-emerald-500 text-emerald-900'}`}>
-                                <span>{error || message}</span>
-                                <button onClick={() => clearMessage?.()} className="ml-2 hover:opacity-70 transition-opacity">✕</button>
-                            </div>
+                    {/* Pagination Controls */}
+                    {contentSegments.length > 0 && currentStep < contentSegments.length - 1 && (
+                        <div className="shrink-0 flex justify-end px-6 pb-6 sm:px-8 sm:pb-8 lg:px-10 lg:pb-10 pt-4 mt-auto bg-gradient-to-t from-white/10 to-transparent border-t border-[#3e2723]/10">
+                            <button 
+                                onClick={() => setCurrentStep(prev => prev + 1)}
+                                className="px-8 py-3 sm:px-10 sm:py-4 bg-[#4F7942] hover:bg-[#3d5e33] text-[#FDF5E6] text-base sm:text-lg font-bold rounded-xl transition-all shadow-lg hover:shadow-xl hover:-translate-y-1 block"
+                            >
+                                Tovább
+                            </button>
                         </div>
                     )}
 
-                    <div className="story-content space-y-4 text-xs lg:text-sm text-justify text-[#3e2723] leading-relaxed">
-                        {contentSegments.map((seg, idx) => {
-                            const visibleInThisSegment = Math.max(0, Math.min(seg.length, totalVisibleChars - seg.startOffset));
-                            return (
-                                <TypewriterSegment
-                                    key={`${displayElementId}-${idx}`}
-                                    content={seg.content}
-                                    visibleCount={visibleInThisSegment}
-                                    isFull={visibleInThisSegment >= seg.length}
-                                />
-                            );
-                        })}
-                    </div>
-                </div>
+                    {/* Choices (Bottom) */}
+                    {contentSegments.length > 0 && currentStep === contentSegments.length - 1 && (
+                        <div className="shrink-0 px-6 pb-6 sm:px-8 sm:pb-8 lg:px-10 lg:pb-10 pt-6 animate-in fade-in slide-in-from-bottom-2 duration-500 mt-auto bg-gradient-to-t from-white/10 to-transparent border-t border-[#3e2723]/10">
+                            <Choices hasImage={false} onHoverChange={setIsChoiceHovered} />
+                        </div>
+                    )}
 
-                {/* 3. Choices (Bottom) */}
-                <div className="px-4 pb-8">
-                    <Choices hasImage={false} onHoverChange={setIsChoiceHovered} />
                 </div>
-
             </div>
         </div>
     );

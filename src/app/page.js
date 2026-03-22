@@ -68,23 +68,23 @@ export default function Home() {
             {/* Background layers */}
 
             {/* Content Wrapper - Strictly bound between header and bottom */}
-            <div className="absolute top-[52px] lg:top-0 bottom-0 left-0 right-0 z-10 flex flex-col items-center justify-center p-4 lg:p-6 overflow-hidden">
+            <div className="absolute top-[52px] lg:top-8 bottom-0 left-0 right-0 z-10 flex flex-col items-center justify-center p-4 lg:p-6 overflow-hidden">
 
                 {/* Layout: side-by-side when panel open, single column otherwise */}
                 <div
-                    className={`w-full max-w-6xl mx-auto flex justify-center items-center gap-6 flex-col lg:flex-row h-full relative max-h-[min(80vh,750px)] lg:max-h-[min(80vh,clamp(350px,40vw,750px))]`}
+                    className={`w-full mx-auto flex justify-center items-center h-full relative ${showPanel ? 'max-w-[1400px] gap-4 flex-col lg:flex-row lg:max-h-[75vh]' : 'max-w-7xl max-h-[100vh] lg:max-h-[85vh]'}`}
                 >
                     {/* Shared Desktop Header Row — fixed max-width */}
                     {showPanel && (
-                        <div className="hidden lg:flex absolute -top-11 left-1/2 -translate-x-1/2 w-full max-w-[800px] items-center justify-between animate-in fade-in slide-in-from-bottom-2 duration-1200">
+                        <div className="hidden lg:flex absolute -top-[50px] left-1/2 -translate-x-1/2 w-full max-w-[800px] items-center justify-between animate-in fade-in slide-in-from-bottom-2 duration-1200 z-50">
                             {/* Title + Hamburger (left) */}
                             <div className="flex items-center gap-3 shrink-0">
-                                <h1 className="text-lg font-bold text-[#3e2723] whitespace-nowrap">
+                                <h1 className="text-lg font-bold text-[#FDF5E6] drop-shadow-md bg-white/20 px-3 py-1 rounded-xl backdrop-blur-md border border-white/20 whitespace-nowrap">
                                     Csupaszív kalandok: A Homokhátság Hősei
                                 </h1>
                                 <button
                                     onClick={togglePanel}
-                                    className="p-1.5 rounded-lg transition-all text-[#3e2723] bg-white/40 shadow-sm scale-90 hover:scale-100"
+                                    className="p-1.5 rounded-lg transition-all text-[#FDF5E6] hover:bg-white/40 bg-white/20 backdrop-blur-md shadow-sm border border-white/20 scale-90 hover:scale-100"
                                     title="Panel bezárása"
                                 >
                                     <RiMenuLine size={18} />
@@ -98,16 +98,16 @@ export default function Home() {
                     )}
 
                     {/* Game panel — hidden on mobile when side panel is visible */}
-                    <div className={`relative flex flex-col justify-center items-center ${showPanel ? 'hidden lg:flex h-full' : 'flex w-full h-full'}`}>
+                    <div className={`relative flex flex-col justify-center items-center w-full h-full ${showPanel ? 'hidden lg:flex flex-1 min-w-0' : ''}`}>
                         {/* Title & Hamburger — only when panel is CLOSED */}
                         {!showPanel && (
-                            <div className="hidden lg:flex absolute -top-10 left-1/2 -translate-x-1/2 w-full items-center justify-center gap-4 animate-in fade-in slide-in-from-bottom-2 duration-1200">
-                                <h1 className="text-lg font-bold text-[#3e2723]">
+                            <div className="hidden lg:flex absolute top-2 left-4 w-auto items-center justify-center gap-4 animate-in fade-in duration-1000 z-50">
+                                <h1 className="text-lg font-bold text-[#FDF5E6] drop-shadow-md bg-white/20 px-3 py-1 rounded-xl backdrop-blur-md border border-white/20">
                                     Csupaszív kalandok: A Homokhátság Hősei
                                 </h1>
                                 <button
                                     onClick={togglePanel}
-                                    className="p-1.5 rounded-lg transition-all text-[#3e2723] hover:bg-white/40 scale-90 hover:scale-100"
+                                    className="p-1.5 rounded-lg transition-all text-[#FDF5E6] hover:bg-white/40 bg-white/20 backdrop-blur-md shadow-sm border border-white/20 scale-90 hover:scale-100"
                                     title="Menü megnyitása"
                                 >
                                     <RiMenuLine size={18} />
