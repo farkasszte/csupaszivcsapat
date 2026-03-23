@@ -78,12 +78,12 @@ export default function Home() {
 
     const tabCls = (key) =>
         `flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold transition-colors ${activeTab === key
-            ? 'bg-white/50 text-[#3e2723] shadow-sm'
-            : 'text-[#3e2723]/80 hover:text-[#3e2723] hover:bg-white/20'
+            ? 'bg-white/50 text-surface shadow-sm'
+            : 'text-surface/80 hover:text-surface hover:bg-white/20'
         }`;
 
     return (
-        <div className="fixed inset-0 overflow-hidden text-[#3e2723]">
+        <div className="fixed inset-0 overflow-hidden text-surface">
             {/* Background layers */}
 
             {/* Content Wrapper - Strictly bound between header and bottom */}
@@ -167,7 +167,7 @@ export default function Home() {
                             >
 
                                 {/* Tab header — desktop only; mobile uses bottom nav */}
-                                <div className="hidden lg:flex items-center justify-center flex-wrap px-2 py-2 border-b border-[#3e2723]/10 shrink-0 gap-1">
+                                <div className="hidden lg:flex items-center justify-center flex-wrap px-2 py-2 border-b border-surface/10 shrink-0 gap-1">
                                     <button onClick={() => setShowLog(true)} className={tabCls('log')}>
                                         <RiBookOpenLine size={13} /> Napló
                                     </button>
@@ -187,7 +187,7 @@ export default function Home() {
 
 
 
-                                 {/* Tab content */}
+                                {/* Tab content */}
                                 <div className="flex-1 min-h-0 flex flex-col overflow-y-auto no-scrollbar">
                                     {activeTab === 'profile' && <ProfileView />}
                                     {activeTab === 'menu' && <GameMenu />}

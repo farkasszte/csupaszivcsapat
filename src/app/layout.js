@@ -10,7 +10,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
     return (
         <html lang="hu">
-            <body className="antialiased min-h-screen bg-fixed text-[#3e2723] bg-gradient-to-b from-[#87ceeb] to-[#f5deb3]">
+            <body className="antialiased min-h-screen bg-fixed text-surface bg-linear-to-b from-[#87ceeb] to-[#f5deb3]">
                 <GameProvider>
                     <Header />
                     <main className="pb-16 lg:pb-0">
