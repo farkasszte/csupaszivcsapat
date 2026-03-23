@@ -20,27 +20,33 @@ const SCENES = [
 ];
 
 export default function GameMap() {
-    const { navigateTo, setShowMap } = useGame();
+    const { colorFilter } = useGame();
 
-    const handleNavigate = (id) => {
-        navigateTo(id);
-        setShowMap(false);
+    const getColorFilterStyle = (filterId) => {
+        switch (filterId) {
+            case 'protanopia': return 'url(#protanopia-filter)';
+            case 'deuteranopia': return 'url(#deuteranopia-filter)';
+            case 'tritanopia': return 'url(#tritanopia-filter)';
+            case 'grayscale': return 'grayscale(100%)';
+            case 'vibrant': return 'saturate(150%)';
+            default: return 'none';
+        }
     };
 
     return (
-        <div className="flex flex-col gap-4 p-4">
-            {/* Map image */}
-            <div className="rounded-xl overflow-hidden border border-white/10 shadow-lg">
+        <div className="flex-1 min-h-0 flex flex-col justify-center p-4">
+            {/* Map image — styled like the Images tab */}
+            <div className="relative group overflow-hidden rounded-xl h-full w-fit mx-auto transition-transform duration-700">
                 <img
-                    src="/cover/cover.jpg"
+                    src="/maps/1.webp"
                     alt="Térkép"
-                    className="w-full object-cover"
-                    style={{ maxHeight: '220px', objectPosition: 'center' }}
+                    className="h-full w-auto object-contain transition-transform duration-700 block"
+                    style={{ filter: getColorFilterStyle(colorFilter) }}
                 />
             </div>
 
-            {/* Scene links */}
-            <div className="space-y-2">
+            {/* Scene links — Hidden for now as requested
+            <div className="space-y-2 mt-4">
                 <div className="flex items-center gap-1.5 text-xs text-[#FDF5E6] uppercase tracking-widest px-1 mb-3">
                     <RiMapPinLine size={12} />
                     Jelenetek
@@ -66,6 +72,7 @@ export default function GameMap() {
                     </button>
                 ))}
             </div>
+            */}
         </div>
     );
 }

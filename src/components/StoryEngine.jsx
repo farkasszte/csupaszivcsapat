@@ -5,7 +5,7 @@ import { useGame } from '../context/GameContext';
 import { Choices } from './Choices';
 import { RiSearchLine, RiBookOpenLine } from '@remixicon/react';
 
-export const StoryEngine = () => {
+export const StoryEngine = ({ hideMedia = false }) => {
     const {
         project, currentElementId, state,
         getAssetUrl, parseRichText, error,
