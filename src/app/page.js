@@ -111,7 +111,7 @@ export default function Home() {
                             </div>
 
                             {/* Tabs (Right) */}
-                            <div className="flex items-center gap-1 bg-zinc-900/40 backdrop-blur-md p-1 rounded-xl border border-white/5 no-scrollbar scrollbar-hide ml-auto">
+                            <div className="flex items-center gap-1 bg-zinc-800/40 backdrop-blur-md p-1 rounded-xl border border-white/5 no-scrollbar scrollbar-hide ml-auto">
                                 <button onClick={() => setShowImages(true)} className={tabCls('images')}>
                                     <RiImageLine size={14} /> <span>Képek</span>
                                 </button>

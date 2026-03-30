@@ -41,7 +41,7 @@ export default function PlayerDashboard() {
     return (
         <div className="flex flex-col gap-6 p-4">
             {/* Main Level Card */}
-            <div className="relative overflow-hidden bg-zinc-900/40 border border-white/5 rounded-2xl p-6 shadow-2xl">
+            <div className="relative overflow-hidden bg-zinc-800/40 border border-white/5 rounded-2xl p-6 shadow-2xl">
                 <div className="absolute top-0 right-0 p-4 opacity-10">
                     <currentLevel.icon size={120} />
                 </div>

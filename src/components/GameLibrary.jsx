@@ -241,7 +241,7 @@ export default function GameLibrary() {
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         placeholder="Keresés faj, település vagy kategória alapján..."
-                        className="w-full bg-zinc-800/40 border border-zinc-700/50 hover:border-amber-600/30 focus:border-amber-500/50 rounded-xl py-2.5 pl-9 pr-10 text-xs text-[#FDF5E6] placeholder-zinc-500 focus:outline-none transition-all"
+                        className="w-full bg-zinc-800/40 border border-zinc-700/50 hover:border-amber-600/30 focus:border-white/40 rounded-xl py-2.5 pl-9 pr-10 text-xs text-[#FDF5E6] placeholder-zinc-500 focus:outline-none transition-all"
                     />
                     {searchQuery && (
                         <button

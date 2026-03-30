@@ -81,7 +81,7 @@ export default function ResetPasswordPage() {
                 </div>
 
                 {/* Card */}
-                <div className="bg-zinc-900/60 backdrop-blur-md p-6 sm:p-8 rounded-2xl border border-white/5">
+                <div className="bg-zinc-800/60 backdrop-blur-md p-6 sm:p-8 rounded-2xl border border-white/5">
                     {message ? (
                         <div className="text-[#FDF5E6] text-sm bg-emerald-950/50 p-6 rounded-xl border border-emerald-900/50 text-center shadow-lg">
                             <p>{message}</p>
@@ -110,7 +110,7 @@ export default function ResetPasswordPage() {
                                         type="password"
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
-                                        className="w-full px-4 py-3 bg-zinc-950/50 border border-amber-900/30 rounded-xl focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500/50 transition-all outline-none text-[#FDF5E6] placeholder-zinc-600"
+                                        className="w-full px-4 py-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl focus:ring-2 focus:ring-white/40 focus:border-white/40 transition-all outline-none text-[#3e2723] placeholder-[#3e2723]/50"
                                         placeholder="••••••••"
                                         autoFocus
                                         minLength={6}
@@ -125,7 +125,7 @@ export default function ResetPasswordPage() {
                                         type="password"
                                         value={confirmPassword}
                                         onChange={(e) => setConfirmPassword(e.target.value)}
-                                        className="w-full px-4 py-3 bg-zinc-950/50 border border-amber-900/30 rounded-xl focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500/50 transition-all outline-none text-[#FDF5E6] placeholder-zinc-600"
+                                        className="w-full px-4 py-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl focus:ring-2 focus:ring-white/40 focus:border-white/40 transition-all outline-none text-[#3e2723] placeholder-[#3e2723]/50"
                                         placeholder="••••••••"
                                         minLength={6}
                                     />
@@ -140,7 +140,7 @@ export default function ResetPasswordPage() {
                                 <button
                                     type="submit"
                                     disabled={loading}
-                                    className="w-full py-3 bg-amber-600/20 hover:bg-amber-600/30 text-[#FDF5E6] font-semibold rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed border border-amber-500/50 shadow-[0_0_15px_rgba(245,158,11,0.1)] hover:shadow-[0_0_20px_rgba(245,158,11,0.2)]"
+                                    className="w-full py-3 bg-white/10 hover:bg-white/20 text-[#FDF5E6] font-semibold rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed border border-white/20 shadow-sm"
                                 >
                                     {loading ? '...' : 'Jelszó mentése'}
                                 </button>

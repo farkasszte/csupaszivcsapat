@@ -19,8 +19,8 @@
   --color-text-muted: var(--color-zinc-500);
 
   /* Fonts */
-  --font-sans: 'Inter', system-ui, sans-serif;
-  --font-serif: 'Georgia', 'Times New Roman', serif;
+  --font-sans: var(--font-montserrat), 'Inter', system-ui, sans-serif;
+  --font-serif: var(--font-montserrat), 'Georgia', 'Times New Roman', serif;
 
   /* Custom Glow Shadows */
   --shadow-glow-primary: 0 0 15px rgba(249, 115, 22, 0.4);
@@ -41,6 +41,11 @@
     scrollbar-width: none;
     /* Firefox */
   }
+}
+
+/* Force Montserrat on all descendant elements in the dialogue panel */
+.story-content, .story-content *, .story-content-log, .story-content-log * {
+  font-family: var(--font-montserrat), sans-serif !important;
 }
 
 .biophilic-card {

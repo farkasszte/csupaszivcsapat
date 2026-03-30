@@ -154,7 +154,7 @@ export default function StoryLog() {
                                     <div
                                         key={sIdx}
                                         dangerouslySetInnerHTML={{ __html: seg.content }}
-                                        className="mb-3 last:mb-0"
+                                        className="story-content-log mb-3 last:mb-0"
                                     />
                                 ))}
                             </div>

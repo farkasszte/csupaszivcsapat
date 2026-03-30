@@ -129,7 +129,7 @@ export default function ProfilePage() {
 
             {/* Card — clicks inside stay inside */}
             <div
-                className="relative z-10 w-full max-w-md bg-zinc-900/60 backdrop-blur-md p-8 rounded-2xl shadow-2xl border border-white/5 cursor-default"
+                className="relative z-10 w-full max-w-md bg-zinc-800/60 backdrop-blur-md p-8 rounded-2xl shadow-2xl border border-white/5 cursor-default"
                 onClick={e => e.stopPropagation()}
             >
                 <div className="mb-8">
@@ -143,7 +143,7 @@ export default function ProfilePage() {
                             type="text"
                             value={formData.full_name}
                             onChange={(e) => setFormData({ ...formData, full_name: e.target.value })}
-                            className="w-full px-4 py-3 bg-zinc-950/50 border border-amber-900/30 rounded-xl focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500/50 transition-all outline-none text-[#FDF5E6] placeholder-zinc-600"
+                            className="w-full px-4 py-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl focus:ring-2 focus:ring-white/40 focus:border-white/40 transition-all outline-none text-[#3e2723] placeholder-[#3e2723]/50"
                             placeholder="Minta János"
                         />
                     </div>
@@ -153,12 +153,12 @@ export default function ProfilePage() {
                         <select
                             value={formData.gender}
                             onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
-                            className="w-full px-4 py-3 bg-zinc-950/50 border border-amber-900/30 rounded-xl focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500/50 transition-all outline-none text-[#FDF5E6] appearance-none"
+                            className="w-full px-4 py-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl focus:ring-2 focus:ring-white/40 focus:border-white/40 transition-all outline-none text-[#3e2723] appearance-none"
                         >
-                            <option value="" className="bg-zinc-900">Válassz...</option>
-                            <option value="male" className="bg-zinc-900">Férfi</option>
-                            <option value="female" className="bg-zinc-900">Nő</option>
-                            <option value="other" className="bg-zinc-900">Egyéb</option>
+                            <option value="" className="bg-zinc-800">Válassz...</option>
+                            <option value="male" className="bg-zinc-800">Férfi</option>
+                            <option value="female" className="bg-zinc-800">Nő</option>
+                            <option value="other" className="bg-zinc-800">Egyéb</option>
                         </select>
                     </div>
 
@@ -169,7 +169,7 @@ export default function ProfilePage() {
                             inputMode="numeric"
                             value={formData.birth_year}
                             onChange={(e) => setFormData({ ...formData, birth_year: e.target.value.replace(/\D/g, '').slice(0, 4) })}
-                            className="w-full px-4 py-3 bg-zinc-950/50 border border-amber-900/30 rounded-xl focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500/50 transition-all outline-none text-[#FDF5E6] placeholder-zinc-600"
+                            className="w-full px-4 py-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl focus:ring-2 focus:ring-white/40 focus:border-white/40 transition-all outline-none text-[#3e2723] placeholder-[#3e2723]/50"
                             placeholder="1990"
                             maxLength={4}
                         />
@@ -178,7 +178,7 @@ export default function ProfilePage() {
                     <button
                         type="submit"
                         disabled={saving}
-                        className="w-full py-3 bg-amber-600/20 hover:bg-amber-600/30 text-[#FDF5E6] font-semibold rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed border border-amber-500/50 shadow-[0_0_15px_rgba(245,158,11,0.1)] hover:shadow-[0_0_20px_rgba(245,158,11,0.2)]"
+                        className="w-full py-3 bg-white/10 hover:bg-white/20 text-[#FDF5E6] font-semibold rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed border border-white/20 shadow-sm"
                     >
                         {saving ? 'Mentés...' : 'Mentés'}
                     </button>
@@ -203,7 +203,7 @@ export default function ProfilePage() {
                 <div className="space-y-4">
                     {/* Guest code section */}
                     {user?.email?.endsWith('@vendeg.hu') && (
-                        <div className="flex flex-col gap-2 p-4 bg-zinc-950/40 border border-amber-900/20 rounded-xl">
+                        <div className="flex flex-col gap-2 p-4 bg-white/5 border border-white/10 rounded-xl">
                             <div className="text-[10px] font-bold text-[#FDF5E6] uppercase tracking-widest">Vendég fiók kódja</div>
                             <div className="flex items-center justify-between">
                                 <span className="text-lg font-mono text-[#FDF5E6] font-bold">{user.email.split('@')[0]}</span>
@@ -212,7 +212,7 @@ export default function ProfilePage() {
                                     title={copied ? 'Másolva!' : 'Kód másolása'}
                                     className={`p-2 rounded-lg transition-all border ${copied
                                         ? 'text-[#FDF5E6] border-emerald-500/30 bg-emerald-500/10'
-                                        : 'text-[#FDF5E6] border-white/5 bg-zinc-800/50 hover:text-[#FDF5E6] hover:border-amber-500/30'
+                                        : 'text-[#FDF5E6] border-white/5 bg-white/10 hover:text-[#FDF5E6] hover:bg-white/20 hover:border-white/30'
                                         }`}
                                 >
                                     {copied ? <RiCheckLine size={18} /> : <RiFileCopyLine size={18} />}

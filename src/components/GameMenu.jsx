@@ -37,7 +37,7 @@ function MobilePreviewModal({ onClose }) {
                 </button>
 
                 {/* Phone shell */}
-                <div className="bg-zinc-900 rounded-[3rem] border-4 border-zinc-700 shadow-[0_0_80px_rgba(0,0,0,0.8)] overflow-hidden"
+                <div className="bg-zinc-800 rounded-[3rem] border-4 border-zinc-700 shadow-[0_0_80px_rgba(0,0,0,0.8)] overflow-hidden"
                     style={{ width: 360 + 16, padding: 4 }}>
                     {/* Notch bar */}
                     <div className="flex justify-center items-center py-2">

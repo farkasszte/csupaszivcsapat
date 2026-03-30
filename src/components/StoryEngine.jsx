@@ -273,7 +273,7 @@ export const StoryEngine = ({ hideMedia = false }) => {
         <div key={displayElementId} className="w-full h-full flex flex-col lg:flex-row items-stretch lg:items-center justify-center relative z-0">
             
             {/* Left Image Section / Top on Mobile */}
-            <div className="w-full lg:w-[40%] flex justify-center items-end lg:items-center relative z-0 pt-8 lg:pt-0 -mb-8 lg:mb-0">
+            <div className="w-full lg:w-[40%] flex justify-center items-end lg:items-center relative z-0 pt-20 lg:pt-0 -mb-8 lg:mb-0">
                 {activeDiscoveryComponent && (!videoUrl && !activeCoverUrl) && (
                      // Discovery fallback if no media
                      <div className="absolute top-4 left-1/2 -translate-x-1/2 z-50 pointer-events-none animate-in fade-in duration-500">
@@ -308,13 +308,23 @@ export const StoryEngine = ({ hideMedia = false }) => {
                                 style={{ filter: getColorFilterStyle(colorFilter) }}
                             />
                         ) : (
-                            <img
-                                key={activeCoverUrl}
-                                src={activeCoverUrl}
-                                alt="Scene"
-                                className="w-full max-w-[400px] lg:max-w-none h-auto lg:h-full lg:max-h-[80vh] object-contain mx-auto drop-shadow-2xl"
-                                style={{ filter: getColorFilterStyle(colorFilter) }}
-                            />
+                            <div className={`w-full mx-auto drop-shadow-2xl ${
+                                isIntro ? 'max-w-[400px] lg:max-w-none' : 'max-w-[250px] lg:max-w-[300px] mt-2 lg:mt-0'
+                            }`}>
+                                <div className={`w-full ${isIntro ? '' : 'rounded-2xl overflow-hidden'}`}>
+                                    <img
+                                        key={activeCoverUrl}
+                                        src={activeCoverUrl}
+                                        alt="Scene"
+                                        className={`w-full h-auto ${
+                                            isIntro
+                                                ? 'lg:h-full lg:max-h-[80vh] object-contain'
+                                                : 'object-cover scale-[1.06]'
+                                        }`}
+                                        style={{ filter: getColorFilterStyle(colorFilter) }}
+                                    />
+                                </div>
+                            </div>
                         )}
                     </div>
                 )}

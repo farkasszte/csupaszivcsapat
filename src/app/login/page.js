@@ -202,9 +202,9 @@ export default function LoginPage() {
                     </p>
                 </div>
 
-                <div className="grid md:grid-cols-2 gap-4 sm:gap-8 relative z-10 w-full">
+                <div className="grid md:grid-cols-2 gap-6 sm:gap-10 relative z-10 w-full">
                     {/* Regular Login / Forgot Password */}
-                    <div className="biophilic-card p-4 sm:p-8">
+                    <div className="bg-white/5 backdrop-blur-2xl border border-white/10 shadow-2xl rounded-[2rem] p-6 sm:p-10">
 
                         {showForgotPassword ? (
                             /* ===== Forgot Password View ===== */
@@ -225,7 +225,7 @@ export default function LoginPage() {
                                             type="email"
                                             value={forgotEmail}
                                             onChange={(e) => setForgotEmail(e.target.value)}
-                                            className="w-full px-4 py-3 bg-zinc-950/50 border border-amber-900/30 rounded-xl focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500/50 transition-all outline-none text-[#FDF5E6] placeholder-zinc-600"
+                                            className="w-full px-4 py-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl focus:ring-2 focus:ring-white/40 focus:border-white/40 transition-all outline-none text-[#3e2723] placeholder-[#3e2723]/50"
                                             placeholder="pelda@email.hu"
                                             autoFocus
                                         />
@@ -233,7 +233,7 @@ export default function LoginPage() {
                                     <button
                                         type="submit"
                                         disabled={loading}
-                                        className="w-full py-3 bg-amber-600/20 hover:bg-amber-600/30 text-[#FDF5E6] font-semibold rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed border border-amber-500/50 shadow-[0_0_15px_rgba(245,158,11,0.1)] hover:shadow-[0_0_20px_rgba(245,158,11,0.2)]"
+                                        className="w-full py-3.5 bg-gradient-to-r from-emerald-500 to-lime-400 hover:from-emerald-400 hover:to-lime-300 text-zinc-950 font-bold rounded-xl transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-lime-500/25 disabled:opacity-50 disabled:cursor-not-allowed"
                                     >
                                         {loading ? '...' : 'Link küldése'}
                                     </button>
@@ -252,7 +252,7 @@ export default function LoginPage() {
                                                 type="email"
                                                 value={email}
                                                 onChange={(e) => setEmail(e.target.value)}
-                                                className="w-full px-4 py-3 bg-zinc-950/50 border border-amber-900/30 rounded-xl focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500/50 transition-all outline-none text-[#FDF5E6] placeholder-zinc-600"
+                                                className="w-full px-4 py-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl focus:ring-2 focus:ring-white/40 focus:border-white/40 transition-all outline-none text-[#3e2723] placeholder-[#3e2723]/50"
                                                 placeholder="pelda@email.hu"
                                             />
                                         </div>
@@ -272,38 +272,38 @@ export default function LoginPage() {
                                                 type="password"
                                                 value={password}
                                                 onChange={(e) => setPassword(e.target.value)}
-                                                className="w-full px-4 py-3 bg-zinc-950/50 border border-amber-900/30 rounded-xl focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500/50 transition-all outline-none text-[#FDF5E6] placeholder-zinc-600"
+                                                className="w-full px-4 py-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl focus:ring-2 focus:ring-white/40 focus:border-white/40 transition-all outline-none text-[#3e2723] placeholder-[#3e2723]/50"
                                                 placeholder="••••••••"
                                             />
                                         </div>
 
-                                        <div className="flex flex-col sm:flex-row gap-4 pt-2">
+                                        <div className="flex flex-col sm:flex-row gap-4 pt-4">
                                             <button
                                                 onClick={handleLogin}
                                                 disabled={loading}
-                                                className="w-full sm:flex-1 py-3 bg-amber-600/20 hover:bg-amber-600/30 text-[#FDF5E6] font-semibold rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed border border-amber-500/50 shadow-[0_0_15px_rgba(245,158,11,0.1)] hover:shadow-[0_0_20px_rgba(245,158,11,0.2)]"
+                                                className="w-full sm:flex-1 py-3.5 bg-gradient-to-r from-emerald-500 to-lime-400 hover:from-emerald-400 hover:to-lime-300 text-zinc-950 font-bold rounded-xl transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-lime-500/25 disabled:opacity-50 disabled:cursor-not-allowed"
                                             >
                                                 {loading ? '...' : 'Belépés'}
                                             </button>
                                             <button
                                                 onClick={handleSignUp}
                                                 disabled={loading}
-                                                className="w-full sm:flex-1 py-3 bg-zinc-800/50 hover:bg-zinc-800 text-[#FDF5E6] font-semibold rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed border border-zinc-700/50"
+                                                className="w-full sm:flex-1 py-3.5 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-xl transition-all border border-white/20 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
                                             >
                                                 Regisztráció
                                             </button>
                                         </div>
 
                                         <div className="relative py-2">
-                                            <div className="absolute inset-0 flex items-center"><span className="w-full border-t border-zinc-800"></span></div>
-                                            <div className="relative flex justify-center text-xs uppercase"><span className="bg-zinc-900/60 px-2 text-[#FDF5E6] rounded-sm">VAGY</span></div>
+                                            <div className="absolute inset-0 flex items-center"><span className="w-full border-t border-emerald-900/50"></span></div>
+                                            <div className="relative flex justify-center text-xs uppercase"><span className="bg-emerald-900/50 px-2 text-emerald-100 rounded-sm">VAGY</span></div>
                                         </div>
 
                                         <button
                                             onClick={handleGoogleLogin}
                                             disabled={loading}
                                             type="button"
-                                            className="w-full py-3 bg-zinc-800 hover:bg-zinc-700 text-[#FDF5E6] font-semibold rounded-xl transition-colors disabled:opacity-50 flex items-center justify-center gap-3 border border-zinc-700 shadow-sm"
+                                            className="w-full py-3 bg-emerald-900/60 hover:bg-emerald-900/80 text-emerald-50 font-semibold rounded-full transition-colors disabled:opacity-50 flex items-center justify-center gap-3 border border-emerald-400/50 shadow-sm"
                                         >
                                             <svg className="w-5 h-5" viewBox="0 0 24 24">
                                                 <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
@@ -320,7 +320,7 @@ export default function LoginPage() {
                     </div>
 
                     {/* Guest Login */}
-                    <div className="biophilic-card p-4 sm:p-8 flex flex-col justify-between">
+                    <div className="bg-white/5 backdrop-blur-2xl border border-white/10 shadow-2xl rounded-[2rem] p-6 sm:p-10 flex flex-col justify-between">
                         <div>
                             <h2 className="text-xl sm:text-2xl font-bold text-center mb-5 sm:mb-8 text-[#FDF5E6]">Gyors Játék</h2>
                             <p className="text-sm text-[#FDF5E6] mb-5 sm:mb-8 text-center px-2 sm:px-4 leading-relaxed">
@@ -331,15 +331,15 @@ export default function LoginPage() {
                                 <button
                                     onClick={handleGuestSignUp}
                                     disabled={loading}
-                                    className="w-full py-4 bg-orange-700/20 hover:bg-orange-700/30 text-[#FDF5E6] font-bold rounded-xl transition-all disabled:opacity-50 border-2 border-orange-500/60 shadow-[0_0_20px_rgba(249,115,22,0.15)] hover:shadow-[0_0_30px_rgba(249,115,22,0.25)] flex flex-col items-center justify-center gap-1"
+                                    className="w-full py-4 bg-gradient-to-r from-emerald-500 to-lime-400 hover:from-emerald-400 hover:to-lime-300 text-zinc-950 font-extrabold rounded-2xl transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 shadow-lg shadow-lime-500/30 flex flex-col items-center justify-center gap-1 border border-lime-300/50"
                                 >
-                                    <span className="text-lg">Kezdjük el</span>
-                                    <span className="text-xs text-[#FDF5E6] font-normal">Új vendég fiókkal</span>
+                                    <span className="text-xl drop-shadow-sm">Kezdjük el</span>
+                                    <span className="text-xs text-zinc-800 font-semibold tracking-wide uppercase">Új vendég fiókkal</span>
                                 </button>
 
                                 <div className="relative py-2">
-                                    <div className="absolute inset-0 flex items-center"><span className="w-full border-t border-zinc-800"></span></div>
-                                    <div className="relative flex justify-center text-xs uppercase"><span className="bg-zinc-900/60 px-2 text-[#FDF5E6] rounded-sm">VAGY</span></div>
+                                    <div className="absolute inset-0 flex items-center"><span className="w-full border-t border-emerald-900/50"></span></div>
+                                    <div className="relative flex justify-center text-xs uppercase"><span className="bg-emerald-900/50 px-2 text-emerald-100 rounded-sm">VAGY</span></div>
                                 </div>
 
                                 <div className="space-y-3">
@@ -349,14 +349,14 @@ export default function LoginPage() {
                                             type="text"
                                             value={guestCode}
                                             onChange={(e) => setGuestCode(e.target.value.toLowerCase().slice(0, 8))}
-                                            className="flex-1 px-3 sm:px-4 py-3 bg-zinc-950/50 border border-amber-900/30 rounded-xl focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500/50 outline-none text-[#FDF5E6] text-center font-mono tracking-widest sm:tracking-[0.2em] uppercase placeholder-zinc-700 text-sm sm:text-base"
+                                            className="flex-1 px-3 sm:px-4 py-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl focus:ring-2 focus:ring-emerald-400/50 focus:border-emerald-400/50 outline-none text-emerald-50 text-center font-mono tracking-widest sm:tracking-[0.2em] uppercase placeholder-zinc-700 text-sm sm:text-base"
                                             placeholder="8 KARAKTER"
                                             maxLength={8}
                                         />
                                         <button
                                             onClick={handleGuestLogin}
                                             disabled={loading}
-                                            className="px-4 sm:px-6 bg-zinc-800 hover:bg-zinc-700 text-[#FDF5E6] font-semibold rounded-xl border border-zinc-700 transition-colors shadow-sm text-sm sm:text-base"
+                                            className="px-6 sm:px-8 bg-gradient-to-r from-emerald-500 to-lime-400 hover:from-emerald-400 hover:to-lime-300 text-zinc-950 font-bold rounded-xl transition-all hover:scale-[1.05] active:scale-[0.95] shadow-lg shadow-lime-500/25 text-sm sm:text-base border-none"
                                         >
                                             OK
                                         </button>
