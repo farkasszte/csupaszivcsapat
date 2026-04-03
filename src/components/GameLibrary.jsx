@@ -316,7 +316,7 @@ export default function GameLibrary() {
                                                             )}
                                                             {link.ertekString && (
                                                                 <span className="text-[#FDF5E6] flex items-center gap-1">
-                                                                    <div className="w-1 h-1 rounded-full bg-amber-500/50"></div>
+                                                                    <div className="w-1 h-1 rounded-full bg-emerald-500/50"></div>
                                                                     {link.ertekString}
                                                                 </span>
                                                             )}

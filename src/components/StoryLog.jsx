@@ -110,7 +110,7 @@ export default function StoryLog() {
 
     if (!storyLog || storyLog.length === 0) {
         return (
-            <div className="flex items-center justify-center h-32 text-[#FDF5E6] text-sm">
+            <div className="flex items-center justify-center h-32 text-zinc-900 font-medium text-sm">
                 Még nincs bejegyzés.
             </div>
         );
@@ -140,14 +140,14 @@ export default function StoryLog() {
                             className={`flex flex-col border-b border-white/5 last:border-0 ${isCurrent ? 'mb-2' : 'opacity-70 mb-4'}`}
                         >
                             {/* Body text with inline image icon */}
-                            <div className={`px-4 py-2 text-xs lg:text-sm text-justify leading-relaxed ${isCurrent ? 'text-[#FDF5E6]' : 'text-[#FDF5E6]/80'}`}>
+                            <div className={`px-4 py-2 text-xs lg:text-sm text-justify leading-relaxed font-medium ${isCurrent ? 'text-zinc-900' : 'text-zinc-900/80'}`}>
                                 {coverUrl && (
                                     <button
                                         onClick={() => openLightbox?.(coverUrl)}
-                                        className="float-left mr-3 mb-1 w-10 h-10 rounded-lg bg-zinc-800/80 hover:bg-zinc-700 hover:text-amber-400 flex items-center justify-center transition-all shadow-lg border border-white/10"
+                                        className="float-left mr-3 mb-1 w-10 h-10 rounded-lg bg-white hover:bg-zinc-100 hover:text-[#3d5e33] flex items-center justify-center transition-all shadow-md border border-white/20"
                                         title="Kép megnyitása teljes képernyőn"
                                     >
-                                        <SlPicture size={20} className="text-amber-500" />
+                                        <SlPicture size={20} className="text-[#4F7942]" />
                                     </button>
                                 )}
                                 {segments.map((seg, sIdx) => (
@@ -161,7 +161,7 @@ export default function StoryLog() {
 
                             {/* Choice made */}
                             {entry.choiceMade && (
-                                <div className="flex items-start gap-1.5 px-4 pb-2 text-xs text-[#FDF5E6]/90 italic">
+                                <div className="flex items-start gap-1.5 px-4 pb-2 text-xs text-zinc-900/90 italic font-semibold">
                                     <RiArrowRightSLine size={14} className="mt-0.5 shrink-0 text-amber-500/50" />
                                     <span>{entry.choiceMade}</span>
                                 </div>
@@ -175,17 +175,17 @@ export default function StoryLog() {
 
             {/* Export Buttons Footer */}
             <div className="flex items-center gap-3 px-4 py-2 z-20 mt-auto">
-                <span className="text-xs text-[#FDF5E6]/60 mr-auto font-bold px-1">Mese mentése</span>
+                <span className="text-xs text-zinc-900/60 mr-auto font-bold px-1">Mese mentése</span>
                 <button
                     onClick={exportToDocx}
-                    className="p-2 rounded-lg text-[#FDF5E6]/60 hover:text-blue-400"
+                    className="p-2 rounded-lg text-zinc-900/60 hover:text-blue-600 transition-colors"
                     title="Word (.docx)"
                 >
                     <RiFileWordLine size={18} />
                 </button>
                 <button
                     onClick={exportToPdf}
-                    className="p-2 rounded-lg text-[#FDF5E6]/60 hover:text-red-400"
+                    className="p-2 rounded-lg text-zinc-900/60 hover:text-red-600 transition-colors"
                     title="PDF (.pdf)"
                 >
                     <RiFilePdfLine size={18} />
