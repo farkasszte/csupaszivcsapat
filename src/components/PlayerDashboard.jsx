@@ -11,9 +11,9 @@ export default function PlayerDashboard() {
     // Level Logic
     const LEVELS = [
         { min: 0, title: 'Kezdő Megfigyelő', icon: RiFootprintLine, color: 'text-[#4F7942]' },
-        { min: 10, title: 'Természetbarát', icon: RiLeafLine, color: 'text-[#FDF5E6]' },
-        { min: 25, title: 'Mentőcsapat-tag', icon: RiHeartLine, color: 'text-[#FDF5E6]' },
-        { min: 50, title: 'A Vadon Hőse', icon: RiEarthLine, color: 'text-[#FDF5E6]' },
+        { min: 10, title: 'Természetbarát', icon: RiLeafLine, color: 'text-white' },
+        { min: 25, title: 'Mentőcsapat-tag', icon: RiHeartLine, color: 'text-white' },
+        { min: 50, title: 'A Vadon Hőse', icon: RiEarthLine, color: 'text-white' },
     ];
 
 
@@ -59,8 +59,8 @@ export default function PlayerDashboard() {
 
                     <div className="mt-6">
                         <div className="flex justify-between items-end mb-2">
-                            <span className="text-3xl font-extrabold text-[#FDF5E6] font-serif tracking-tight drop-shadow-sm">
-                                {score} <span className="text-xs uppercase text-[#FDF5E6] tracking-widest ml-1">pont</span>
+                            <span className="text-3xl font-extrabold text-white font-serif tracking-tight drop-shadow-sm">
+                                {score} <span className="text-xs uppercase text-white tracking-widest ml-1">pont</span>
                             </span>
                             {nextLevel && (
                                 <span className="text-[10px] text-[#4F7942] font-bold italic drop-shadow-sm">
@@ -85,12 +85,12 @@ export default function PlayerDashboard() {
             <div className="grid grid-cols-2 gap-3">
                 <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-4 flex flex-col items-center justify-center transition-all hover:bg-white/10 shadow-md">
                     <RiUser3Line size={18} className="text-[#4F7942] drop-shadow-sm mb-2" />
-                    <div className="text-xl font-bold text-[#FDF5E6] drop-shadow-sm">{discoveredChars} / {totalChars}</div>
+                    <div className="text-xl font-bold text-white drop-shadow-sm">{discoveredChars} / {totalChars}</div>
                     <div className="text-[9px] text-[#4F7942] uppercase font-bold tracking-tighter drop-shadow-sm">Szereplők</div>
                 </div>
                 <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-4 flex flex-col items-center justify-center transition-all hover:bg-white/10 shadow-md">
                     <RiMapPin2Line size={18} className="text-[#4F7942] drop-shadow-sm mb-2" />
-                    <div className="text-xl font-bold text-[#FDF5E6] drop-shadow-sm">{discoveredLocs} / {totalLocs}</div>
+                    <div className="text-xl font-bold text-white drop-shadow-sm">{discoveredLocs} / {totalLocs}</div>
                     <div className="text-[9px] text-[#4F7942] uppercase font-bold tracking-tighter drop-shadow-sm">Helyszínek</div>
                 </div>
             </div>

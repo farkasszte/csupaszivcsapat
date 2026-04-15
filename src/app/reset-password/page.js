@@ -70,40 +70,40 @@ export default function ResetPasswordPage() {
     if (!isMounted) return null
 
     return (
-        <div className="min-h-screen bg-zinc-950 text-[#FDF5E6] font-sans flex flex-col items-center justify-center p-4 py-8">
+        <div className="min-h-screen bg-zinc-950 text-white font-sans flex flex-col items-center justify-center p-4 py-8">
             <div className="w-full max-w-md space-y-6">
                 {/* Header */}
                 <div className="text-center space-y-3">
-                    <h1 className="text-3xl sm:text-4xl font-extrabold text-[#FDF5E6] font-serif tracking-tight drop-shadow-md">
+                    <h1 className="text-3xl sm:text-4xl font-extrabold text-white font-serif tracking-tight drop-shadow-md">
                         Kiszáradt Legelők
                     </h1>
-                    <p className="text-sm text-[#FDF5E6]">Jelszó visszaállítása</p>
+                    <p className="text-sm text-white">Jelszó visszaállítása</p>
                 </div>
 
                 {/* Card */}
                 <div className="bg-zinc-800/60 backdrop-blur-md p-6 sm:p-8 rounded-2xl border border-white/5">
                     {message ? (
-                        <div className="text-[#FDF5E6] text-sm bg-emerald-950/50 p-6 rounded-xl border border-emerald-900/50 text-center shadow-lg">
+                        <div className="text-white text-sm bg-emerald-950/50 p-6 rounded-xl border border-emerald-900/50 text-center shadow-lg">
                             <p>{message}</p>
                         </div>
                     ) : !sessionReady ? (
                         <div className="text-center space-y-4">
-                            <p className="text-[#FDF5E6] text-sm">
+                            <p className="text-white text-sm">
                                 Az e-mailben lévő linkre kattintva megérkeztél ide. Várakozás a hitelesítésre...
                             </p>
-                            <p className="text-[#FDF5E6] text-xs">
+                            <p className="text-white text-xs">
                                 Ha ez az oldal nem töltődik be helyesen, kérjük kattints újra az e-mailben lévő linkre.
                             </p>
                         </div>
                     ) : (
                         <>
-                            <h2 className="text-xl sm:text-2xl font-bold text-center mb-6 text-[#FDF5E6]">
+                            <h2 className="text-xl sm:text-2xl font-bold text-center mb-6 text-white">
                                 Új jelszó megadása
                             </h2>
 
                             <form className="space-y-5" onSubmit={handleResetPassword}>
                                 <div>
-                                    <label className="block text-sm font-medium text-[#FDF5E6] mb-2">
+                                    <label className="block text-sm font-medium text-white mb-2">
                                         Új jelszó
                                     </label>
                                     <input
@@ -118,7 +118,7 @@ export default function ResetPasswordPage() {
                                 </div>
 
                                 <div>
-                                    <label className="block text-sm font-medium text-[#FDF5E6] mb-2">
+                                    <label className="block text-sm font-medium text-white mb-2">
                                         Jelszó megerősítése
                                     </label>
                                     <input
@@ -132,7 +132,7 @@ export default function ResetPasswordPage() {
                                 </div>
 
                                 {error && (
-                                    <div className="text-[#FDF5E6] text-sm bg-red-950/50 p-4 rounded-xl border border-red-900/50 text-center">
+                                    <div className="text-white text-sm bg-red-950/50 p-4 rounded-xl border border-red-900/50 text-center">
                                         {error}
                                     </div>
                                 )}
@@ -140,7 +140,7 @@ export default function ResetPasswordPage() {
                                 <button
                                     type="submit"
                                     disabled={loading}
-                                    className="w-full py-3 bg-white/10 hover:bg-white/20 text-[#FDF5E6] font-semibold rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed border border-white/20 shadow-sm"
+                                    className="w-full py-3 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed border border-white/20 shadow-sm"
                                 >
                                     {loading ? '...' : 'Jelszó mentése'}
                                 </button>
@@ -149,7 +149,7 @@ export default function ResetPasswordPage() {
                     )}
                 </div>
 
-                <p className="text-center text-[#FDF5E6] text-xs">
+                <p className="text-center text-white text-xs">
                     Csupaszív Csapat &copy; 2026
                 </p>
             </div>

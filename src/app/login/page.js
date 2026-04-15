@@ -191,13 +191,13 @@ export default function LoginPage() {
     if (!isMounted) return null
 
     return (
-        <div className="min-h-screen text-[#FDF5E6] font-sans flex flex-col items-center justify-center p-4 py-8">
+        <div className="min-h-screen text-white font-sans flex flex-col items-center justify-center p-4 py-8">
 
             <div className="w-full max-w-4xl space-y-6 sm:space-y-12">
                 {/* Header Section representing the image */}
                 <div className="text-center space-y-3 sm:space-y-4 max-w-2xl mx-auto">
-                    <h1 className="text-2xl sm:text-5xl font-extrabold text-[#FDF5E6] tracking-tight drop-shadow-md">Csupaszív kalandok: Homokhátság Hősei</h1>
-                    <p className="text-sm sm:text-lg text-[#FDF5E6] leading-relaxed">
+                    <h1 className="text-2xl sm:text-5xl font-extrabold text-white tracking-tight drop-shadow-md">Csupaszív kalandok: Homokhátság Hősei</h1>
+                    <p className="text-sm sm:text-lg text-white leading-relaxed">
                         A tűző nap égeti a homokháti pusztát. A föld repedezett, és minden élet vízért könyörög. Mentsd meg az állatokat Ürge Panni, Szalakóta Szilvia és Túzok tanár úr segítségével!
                     </p>
                 </div>
@@ -211,16 +211,16 @@ export default function LoginPage() {
                             <>
                                 <button
                                     onClick={() => { setShowForgotPassword(false); setError(null); setMessage(null) }}
-                                    className="flex items-center gap-1 text-xs text-[#FDF5E6] hover:text-[#FDF5E6] transition-colors mb-6"
+                                    className="flex items-center gap-1 text-xs text-white hover:text-white transition-colors mb-6"
                                 >
                                     ← Vissza a bejelentkezéshez
                                 </button>
-                                <h2 className="text-xl sm:text-2xl font-bold text-center mb-2 text-[#FDF5E6]">Jelszó visszaállítása</h2>
-                                <p className="text-sm text-[#FDF5E6] text-center mb-6">Add meg az e-mail címedet és küldünk egy visszaállítási linket.</p>
+                                <h2 className="text-xl sm:text-2xl font-bold text-center mb-2 text-white">Jelszó visszaállítása</h2>
+                                <p className="text-sm text-white text-center mb-6">Add meg az e-mail címedet és küldünk egy visszaállítási linket.</p>
 
                                 <form className="space-y-5" onSubmit={handleForgotPassword}>
                                     <div>
-                                        <label className="block text-sm font-medium text-[#FDF5E6] mb-2">E-mail cím</label>
+                                        <label className="block text-sm font-medium text-white mb-2">E-mail cím</label>
                                         <input
                                             type="email"
                                             value={forgotEmail}
@@ -242,12 +242,12 @@ export default function LoginPage() {
                         ) : (
                             /* ===== Regular Login View ===== */
                             <>
-                                <h2 className="text-xl sm:text-2xl font-bold text-center mb-5 sm:mb-8 text-[#FDF5E6]">Bejelentkezés</h2>
+                                <h2 className="text-xl sm:text-2xl font-bold text-center mb-5 sm:mb-8 text-white">Bejelentkezés</h2>
 
                                 <form className="space-y-6">
                                     <div className="space-y-5">
                                         <div>
-                                            <label className="block text-sm font-medium text-[#FDF5E6] mb-2">E-mail cím</label>
+                                            <label className="block text-sm font-medium text-white mb-2">E-mail cím</label>
                                             <input
                                                 type="email"
                                                 value={email}
@@ -259,11 +259,11 @@ export default function LoginPage() {
 
                                         <div>
                                             <div className="flex items-center justify-between mb-2">
-                                                <label className="block text-sm font-medium text-[#FDF5E6]">Jelszó</label>
+                                                <label className="block text-sm font-medium text-white">Jelszó</label>
                                                 <button
                                                     type="button"
                                                     onClick={() => { setShowForgotPassword(true); setError(null); setMessage(null); setForgotEmail(email) }}
-                                                    className="text-xs text-[#FDF5E6] hover:text-[#FDF5E6] transition-colors"
+                                                    className="text-xs text-white hover:text-white transition-colors"
                                                 >
                                                     Elfelejtett jelszó?
                                                 </button>
@@ -322,8 +322,8 @@ export default function LoginPage() {
                     {/* Guest Login */}
                     <div className="bg-white/5 backdrop-blur-2xl border border-white/10 shadow-2xl rounded-[2rem] p-6 sm:p-10 flex flex-col justify-between">
                         <div>
-                            <h2 className="text-xl sm:text-2xl font-bold text-center mb-5 sm:mb-8 text-[#FDF5E6]">Gyors Játék</h2>
-                            <p className="text-sm text-[#FDF5E6] mb-5 sm:mb-8 text-center px-2 sm:px-4 leading-relaxed">
+                            <h2 className="text-xl sm:text-2xl font-bold text-center mb-5 sm:mb-8 text-white">Gyors Játék</h2>
+                            <p className="text-sm text-white mb-5 sm:mb-8 text-center px-2 sm:px-4 leading-relaxed">
                                 Nincs fiókod? Lépj be vendégként és próbáld ki a játékot egy egyedi kóddal.
                             </p>
 
@@ -343,7 +343,7 @@ export default function LoginPage() {
                                 </div>
 
                                 <div className="space-y-3">
-                                    <label className="block text-sm font-medium text-[#FDF5E6] text-center">Van már kódod? Folytasd!</label>
+                                    <label className="block text-sm font-medium text-white text-center">Van már kódod? Folytasd!</label>
                                     <div className="flex gap-2 sm:gap-3">
                                         <input
                                             type="text"
@@ -365,7 +365,7 @@ export default function LoginPage() {
                             </div>
                         </div>
 
-                        <div className="mt-8 text-center text-[#FDF5E6] text-sm">
+                        <div className="mt-8 text-center text-white text-sm">
                             Csupaszív Csapat &copy; 2026
                         </div>
                     </div>
@@ -373,20 +373,20 @@ export default function LoginPage() {
                     {/* Status Messages */}
                     <div className="md:col-span-2 relative z-20">
                         {error && (
-                            <div className="text-[#FDF5E6] text-sm bg-red-950/50 p-4 rounded-xl border border-red-900/50 mb-4 text-center shadow-lg backdrop-blur-sm">
+                            <div className="text-white text-sm bg-red-950/50 p-4 rounded-xl border border-red-900/50 mb-4 text-center shadow-lg backdrop-blur-sm">
                                 {error}
                             </div>
                         )}
 
                         {message && (
-                            <div className="text-[#FDF5E6] text-sm bg-emerald-950/50 p-6 rounded-xl border border-emerald-900/50 text-center shadow-lg backdrop-blur-sm">
+                            <div className="text-white text-sm bg-emerald-950/50 p-6 rounded-xl border border-emerald-900/50 text-center shadow-lg backdrop-blur-sm">
                                 <p className="mb-3">{message}</p>
                                 {generatedCode && (
                                     <div className="mt-4 p-4 bg-black/40 rounded-lg inline-block border border-white/5">
-                                        <div className="text-2xl sm:text-3xl font-mono font-bold tracking-widest sm:tracking-[0.25em] text-[#FDF5E6] selection:bg-orange-500/30 uppercase">
+                                        <div className="text-2xl sm:text-3xl font-mono font-bold tracking-widest sm:tracking-[0.25em] text-white selection:bg-orange-500/30 uppercase">
                                             {generatedCode}
                                         </div>
-                                        <div className="text-xs text-[#FDF5E6] mt-2 font-sans tracking-normal">Ez a te egyedi azonosítód</div>
+                                        <div className="text-xs text-white mt-2 font-sans tracking-normal">Ez a te egyedi azonosítód</div>
                                     </div>
                                 )}
                             </div>

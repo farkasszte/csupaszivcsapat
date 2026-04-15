@@ -31,7 +31,7 @@ function MobilePreviewModal({ onClose }) {
                 {/* Close button */}
                 <button
                     onClick={onClose}
-                    className="absolute -top-10 right-0 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-zinc-800/90 border border-zinc-600/50 text-[#FDF5E6] hover:text-[#FDF5E6] text-xs transition-colors"
+                    className="absolute -top-10 right-0 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-zinc-800/90 border border-zinc-600/50 text-white hover:text-white text-xs transition-colors"
                 >
                     <RiCloseLine size={14} /> Bezárás
                 </button>
@@ -61,7 +61,7 @@ function MobilePreviewModal({ onClose }) {
                     </div>
                 </div>
 
-                <p className="mt-3 text-xs text-[#FDF5E6]">360 × 780 – kattints hátra a bezáráshoz</p>
+                <p className="mt-3 text-xs text-white">360 × 780 – kattints hátra a bezáráshoz</p>
             </div>
         </div>,
         document.body
@@ -98,7 +98,7 @@ export default function GameMenu() {
                 {(error || message) && (
                     <div
                         className={`text-xs text-center px-3 py-2 rounded-lg border ${error
-                            ? 'bg-red-100 border-red-500 text-red-900'
+                            ? 'bg-red-100 border-red-500 text-[#4F7942]'
                             : 'bg-emerald-100 border-emerald-500 text-emerald-900'
                             }`}
                     >
@@ -109,40 +109,40 @@ export default function GameMenu() {
                 <button
                     onClick={saveGame}
                     disabled={loading}
-                    className="flex items-center gap-3 px-4 py-3 bg-white/20 hover:bg-white/40 backdrop-blur-md border border-white/30 shadow-sm rounded-xl transition-all text-left group disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="flex items-center gap-3 px-4 py-3 bg-white/40 hover:bg-white/50 backdrop-blur-md border border-[#4F7942]/10 shadow-sm rounded-xl transition-all text-left group disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                    <RiSave3Line size={16} className="shrink-0 text-[#3e2723] transition-colors" />
+                    <RiSave3Line size={16} className="shrink-0 text-[#4F7942] transition-colors" />
                     <div className="flex-1">
-                        <div className="text-sm font-semibold text-[#3e2723] transition-colors">Mentés</div>
-                        <div className="text-xs text-[#3e2723] mt-0.5 opacity-80">Játékállás mentése a fiókba</div>
+                        <div className="text-sm font-semibold text-[#4F7942] transition-colors">Mentés</div>
+                        <div className="text-xs text-[#4F7942] mt-0.5 opacity-80">Játékállás mentése a fiókba</div>
                     </div>
                 </button>
 
                 <button
                     onClick={loadGame}
                     disabled={loading}
-                    className="flex items-center gap-3 px-4 py-3 bg-white/20 hover:bg-white/40 backdrop-blur-md border border-white/30 shadow-sm rounded-xl transition-all text-left group disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="flex items-center gap-3 px-4 py-3 bg-white/40 hover:bg-white/50 backdrop-blur-md border border-[#4F7942]/10 shadow-sm rounded-xl transition-all text-left group disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                    <RiDownloadLine size={16} className="shrink-0 text-[#3e2723] transition-colors" />
+                    <RiDownloadLine size={16} className="shrink-0 text-[#4F7942] transition-colors" />
                     <div className="flex-1">
-                        <div className="text-sm font-semibold text-[#3e2723] transition-colors">Visszatöltés</div>
-                        <div className="text-xs text-[#3e2723] mt-0.5 opacity-80">Mentett állás betöltése</div>
+                        <div className="text-sm font-semibold text-[#4F7942] transition-colors">Visszatöltés</div>
+                        <div className="text-xs text-[#4F7942] mt-0.5 opacity-80">Mentett állás betöltése</div>
                     </div>
                 </button>
 
-                <div className="p-3 bg-white/20 backdrop-blur-md rounded-xl border border-white/30 shadow-sm mt-1">
-                    <h3 className="text-[10px] font-bold uppercase tracking-widest text-[#3e2723] mb-3 ml-1">Beállítások</h3>
+                <div className="p-3 bg-white/40 backdrop-blur-md rounded-xl border border-[#4F7942]/10 shadow-sm mt-1">
+                    <h3 className="text-[10px] font-bold uppercase tracking-widest text-[#4F7942] mb-3 ml-1">Beállítások</h3>
 
                     {/* Sound Toggle */}
-                    <div className="flex flex-col gap-2 px-3 py-2 bg-white/30 rounded-lg mb-2">
+                    <div className="flex flex-col gap-2 px-3 py-2 bg-white/40 rounded-lg mb-2">
                         <div className="flex items-center justify-between">
                             <div className="flex items-center gap-2">
-                                {isMuted ? <RiVolumeMuteLine size={16} className="text-[#3e2723]" /> : <RiVolumeUpLine size={16} className="text-[#3e2723]" />}
-                                <span className="text-xs font-semibold text-[#3e2723]">Hangok</span>
+                                {isMuted ? <RiVolumeMuteLine size={16} className="text-[#4F7942]" /> : <RiVolumeUpLine size={16} className="text-[#4F7942]" />}
+                                <span className="text-xs font-semibold text-[#4F7942]">Hangok</span>
                             </div>
                             <button
                                 onClick={toggleMute}
-                                className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${isMuted ? 'bg-[#3e2723]/20' : 'bg-[#87ceeb]'}`}
+                                className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${isMuted ? 'bg-[#4F7942]/20' : 'bg-[#4F7942]'}`}
                             >
                                 <span className={`pointer-events-none inline-block h-4 w-4 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${isMuted ? 'translate-x-0' : 'translate-x-4'}`} />
                             </button>
@@ -157,24 +157,24 @@ export default function GameMenu() {
                                 step="0.01"
                                 value={volume}
                                 onChange={(e) => setVolume(parseFloat(e.target.value))}
-                                className="flex-1 accent-[#87ceeb] h-1 bg-[#3e2723]/20 rounded-lg appearance-none cursor-pointer"
+                                className="flex-1 accent-[#4F7942] h-1 bg-[#4F7942]/20 rounded-lg appearance-none cursor-pointer"
                             />
-                            <span className="text-[10px] font-mono text-[#3e2723] w-8 text-right">
+                            <span className="text-[10px] font-mono text-[#4F7942] w-8 text-right">
                                 {Math.round(volume * 100)}%
                             </span>
                         </div>
                     </div>
 
                     {/* Scene Transitions */}
-                    <div className="px-3 py-2 bg-white/30 rounded-lg">
+                    <div className="px-3 py-2 bg-white/40 rounded-lg">
                         <div className="flex items-center justify-between">
                             <div className="flex items-center gap-2">
-                                <RiSlideshow3Line size={16} className="text-[#3e2723]" />
-                                <span className="text-xs font-semibold text-[#3e2723]">Helyszín áttűnés</span>
+                                <RiSlideshow3Line size={16} className="text-[#4F7942]" />
+                                <span className="text-xs font-semibold text-[#4F7942]">Helyszín áttűnés</span>
                             </div>
                             <button
                                 onClick={() => setTransitionsEnabled(!transitionsEnabled)}
-                                className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${transitionsEnabled ? 'bg-[#87ceeb]' : 'bg-[#3e2723]/20'}`}
+                                className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${transitionsEnabled ? 'bg-[#4F7942]' : 'bg-[#4F7942]/20'}`}
                             >
                                 <div className={`pointer-events-none inline-block h-4 w-4 rounded-full bg-white shadow transform ring-0 transition duration-200 ease-in-out ${transitionsEnabled ? 'translate-x-4' : 'translate-x-0'}`} />
                             </button>
@@ -182,10 +182,10 @@ export default function GameMenu() {
                     </div>
 
                     {/* Color Filter Selector */}
-                    <div className="px-3 py-2 mt-2 bg-white/30 rounded-lg">
+                    <div className="px-3 py-2 mt-2 bg-white/40 rounded-lg">
                         <div className="flex items-center gap-2 mb-2">
-                            <RiPaletteLine size={16} className="text-[#3e2723]" />
-                            <span className="text-xs font-semibold text-[#3e2723]">Szín szűrő</span>
+                            <RiPaletteLine size={16} className="text-[#4F7942]" />
+                            <span className="text-xs font-semibold text-[#4F7942]">Szín szűrő</span>
                         </div>
                         <div className="grid grid-cols-2 gap-1.5">
                             {filters.map(f => (
@@ -193,8 +193,8 @@ export default function GameMenu() {
                                     key={f.id}
                                     onClick={() => setColorFilter(f.id)}
                                     className={`px-2 py-1 text-[10px] rounded border transition-all ${colorFilter === f.id
-                                        ? 'bg-white/80 border-[#3e2723]/30 text-[#3e2723] shadow-sm font-bold'
-                                        : 'bg-white/20 border-[#3e2723]/10 text-[#3e2723] hover:bg-white/40'}`}
+                                        ? 'bg-white/50 border-[#4F7942]/30 text-[#4F7942] shadow-sm font-bold'
+                                        : 'bg-white/40 border-[#4F7942]/10 text-[#4F7942] hover:bg-white/50'}`}
                                 >
                                     {f.name}
                                 </button>
@@ -203,13 +203,13 @@ export default function GameMenu() {
                     </div>
 
                     {/* Typewriter Speed */}
-                    <div className="px-3 py-2 mt-2 bg-white/30 rounded-lg">
+                    <div className="px-3 py-2 mt-2 bg-white/40 rounded-lg">
                         <div className="flex items-center justify-between mb-2">
                             <div className="flex items-center gap-2">
-                                <RiTimerLine size={16} className="text-[#3e2723]" />
-                                <span className="text-xs font-semibold text-[#3e2723]">Írógép sebesség</span>
+                                <RiTimerLine size={16} className="text-[#4F7942]" />
+                                <span className="text-xs font-semibold text-[#4F7942]">Írógép sebesség</span>
                             </div>
-                            <span className="text-[10px] font-mono text-[#3e2723] uppercase">
+                            <span className="text-[10px] font-mono text-[#4F7942] uppercase">
                                 {typewriterSpeed === 0 ? 'KI' : typewriterSpeed <= 20 ? 'Gyors' : typewriterSpeed <= 50 ? 'Közepes' : 'Lassú'}
                             </span>
                         </div>
@@ -221,9 +221,9 @@ export default function GameMenu() {
                                 step="10"
                                 value={typewriterSpeed}
                                 onChange={(e) => setTypewriterSpeed(parseInt(e.target.value))}
-                                className="w-full h-1.5 bg-[#3e2723]/20 rounded-lg appearance-none cursor-pointer accent-[#87ceeb] focus:outline-none"
+                                className="w-full h-1.5 bg-[#4F7942]/20 rounded-lg appearance-none cursor-pointer accent-[#4F7942] focus:outline-none"
                             />
-                            <div className="flex justify-between mt-1 text-[9px] text-[#3e2723] font-medium opacity-70">
+                            <div className="flex justify-between mt-1 text-[9px] text-[#4F7942] font-medium opacity-70">
                                 <span>KI</span>
                                 <span>Gyors</span>
                                 <span>Lassú</span>
@@ -235,16 +235,16 @@ export default function GameMenu() {
                 {/* Mobile preview button */}
                 <button
                     onClick={() => setShowPreview(true)}
-                    className="flex items-center gap-3 px-4 py-3 bg-white/20 hover:bg-white/40 backdrop-blur-md border border-white/30 shadow-sm rounded-xl transition-all text-left group mt-1"
+                    className="flex items-center gap-3 px-4 py-3 bg-white/40 hover:bg-white/50 backdrop-blur-md border border-[#4F7942]/10 shadow-sm rounded-xl transition-all text-left group mt-1"
                 >
-                    <RiSmartphoneLine size={16} className="shrink-0 text-[#3e2723] transition-colors" />
+                    <RiSmartphoneLine size={16} className="shrink-0 text-[#4F7942] transition-colors" />
                     <div className="flex-1">
-                        <div className="text-sm font-semibold text-[#3e2723] transition-colors">Mobil előnézet</div>
-                        <div className="text-xs text-[#3e2723] mt-0.5 opacity-80">Teljes oldal 360 × 780 px-en</div>
+                        <div className="text-sm font-semibold text-[#4F7942] transition-colors">Mobil előnézet</div>
+                        <div className="text-xs text-[#4F7942] mt-0.5 opacity-80">Teljes oldal 360 × 780 px-en</div>
                     </div>
                 </button>
 
-                <div className="border-t border-[#3e2723]/10 my-1" />
+                <div className="border-t border-[#4F7942]/10 my-1" />
 
                 <button
                     onClick={() => {
@@ -253,12 +253,12 @@ export default function GameMenu() {
                         }
                     }}
                     disabled={loading}
-                    className="flex items-center gap-3 px-4 py-3 bg-red-100/60 hover:bg-red-200/60 border border-red-500/20 hover:border-red-500/40 rounded-xl transition-all text-left group disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="flex items-center gap-3 px-4 py-3 bg-white/40 hover:bg-white/50 border border-[#4F7942]/10 hover:border-[#4F7942]/30 rounded-xl transition-all text-left group disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                    <RiRestartLine size={16} className="shrink-0 text-red-900 transition-colors" />
+                    <RiRestartLine size={16} className="shrink-0 text-[#4F7942] transition-colors" />
                     <div className="flex-1">
-                        <div className="text-sm font-semibold text-red-900 transition-colors">Újrakezdés</div>
-                        <div className="text-xs text-red-900 mt-0.5 opacity-80">Visszatérés az elejére</div>
+                        <div className="text-sm font-semibold text-[#4F7942] transition-colors">Újrakezdés</div>
+                        <div className="text-xs text-[#4F7942] mt-0.5 opacity-80">Visszatérés az elejére</div>
                     </div>
                 </button>
             </div>

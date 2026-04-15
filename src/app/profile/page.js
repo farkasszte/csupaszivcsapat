@@ -113,8 +113,8 @@ export default function ProfilePage() {
 
     if (loading) {
         return (
-            <div className="min-h-screen bg-zinc-950 text-[#FDF5E6] flex items-center justify-center">
-                <div className="animate-pulse text-xl text-[#FDF5E6]">Betöltés...</div>
+            <div className="min-h-screen bg-zinc-950 text-white flex items-center justify-center">
+                <div className="animate-pulse text-xl text-white">Betöltés...</div>
             </div>
         )
     }
@@ -122,7 +122,7 @@ export default function ProfilePage() {
     return (
         // Backdrop — click anywhere outside the card to go back
         <div
-            className="relative min-h-screen bg-zinc-950 text-[#FDF5E6] p-4 pb-12 bg-[url('/cover/cover.jpg')] bg-cover bg-center bg-no-repeat bg-blend-multiply flex items-start lg:items-center justify-center cursor-pointer"
+            className="relative min-h-screen bg-zinc-950 text-white p-4 pb-12 bg-[url('/cover/cover.jpg')] bg-cover bg-center bg-no-repeat bg-blend-multiply flex items-start lg:items-center justify-center cursor-pointer"
             onClick={() => router.back()}
         >
             <div className="absolute inset-0 bg-black/70 z-0" />
@@ -133,12 +133,12 @@ export default function ProfilePage() {
                 onClick={e => e.stopPropagation()}
             >
                 <div className="mb-8">
-                    <h1 className="text-2xl font-bold text-[#FDF5E6]">Profilom</h1>
+                    <h1 className="text-2xl font-bold text-white">Profilom</h1>
                 </div>
 
                 <form onSubmit={handleSave} className="space-y-6">
                     <div>
-                        <label className="block text-sm font-medium text-[#FDF5E6] mb-2">Teljes név</label>
+                        <label className="block text-sm font-medium text-white mb-2">Teljes név</label>
                         <input
                             type="text"
                             value={formData.full_name}
@@ -149,7 +149,7 @@ export default function ProfilePage() {
                     </div>
 
                     <div>
-                        <label className="block text-sm font-medium text-[#FDF5E6] mb-2">Nem</label>
+                        <label className="block text-sm font-medium text-white mb-2">Nem</label>
                         <select
                             value={formData.gender}
                             onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
@@ -163,7 +163,7 @@ export default function ProfilePage() {
                     </div>
 
                     <div>
-                        <label className="block text-sm font-medium text-[#FDF5E6] mb-2">Születési év</label>
+                        <label className="block text-sm font-medium text-white mb-2">Születési év</label>
                         <input
                             type="text"
                             inputMode="numeric"
@@ -178,19 +178,19 @@ export default function ProfilePage() {
                     <button
                         type="submit"
                         disabled={saving}
-                        className="w-full py-3 bg-white/10 hover:bg-white/20 text-[#FDF5E6] font-semibold rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed border border-white/20 shadow-sm"
+                        className="w-full py-3 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed border border-white/20 shadow-sm"
                     >
                         {saving ? 'Mentés...' : 'Mentés'}
                     </button>
 
                     {error && (
-                        <p className="text-[#FDF5E6] text-sm text-center bg-red-950/50 p-3 rounded-xl border border-red-900/50">
+                        <p className="text-white text-sm text-center bg-red-950/50 p-3 rounded-xl border border-red-900/50">
                             {error}
                         </p>
                     )}
 
                     {message && (
-                        <p className="text-[#FDF5E6] text-sm text-center bg-emerald-950/50 p-3 rounded-xl border border-emerald-900/50">
+                        <p className="text-white text-sm text-center bg-emerald-950/50 p-3 rounded-xl border border-emerald-900/50">
                             {message}
                         </p>
                     )}
@@ -204,21 +204,21 @@ export default function ProfilePage() {
                     {/* Guest code section */}
                     {user?.email?.endsWith('@vendeg.hu') && (
                         <div className="flex flex-col gap-2 p-4 bg-white/5 border border-white/10 rounded-xl">
-                            <div className="text-[10px] font-bold text-[#FDF5E6] uppercase tracking-widest">Vendég fiók kódja</div>
+                            <div className="text-[10px] font-bold text-white uppercase tracking-widest">Vendég fiók kódja</div>
                             <div className="flex items-center justify-between">
-                                <span className="text-lg font-mono text-[#FDF5E6] font-bold">{user.email.split('@')[0]}</span>
+                                <span className="text-lg font-mono text-white font-bold">{user.email.split('@')[0]}</span>
                                 <button
                                     onClick={handleCopyCode}
                                     title={copied ? 'Másolva!' : 'Kód másolása'}
                                     className={`p-2 rounded-lg transition-all border ${copied
-                                        ? 'text-[#FDF5E6] border-emerald-500/30 bg-emerald-500/10'
-                                        : 'text-[#FDF5E6] border-white/5 bg-white/10 hover:text-[#FDF5E6] hover:bg-white/20 hover:border-white/30'
+                                        ? 'text-white border-emerald-500/30 bg-emerald-500/10'
+                                        : 'text-white border-white/5 bg-white/10 hover:text-white hover:bg-white/20 hover:border-white/30'
                                         }`}
                                 >
                                     {copied ? <RiCheckLine size={18} /> : <RiFileCopyLine size={18} />}
                                 </button>
                             </div>
-                            <p className="text-[10px] text-[#FDF5E6] leading-relaxed italic">
+                            <p className="text-[10px] text-white leading-relaxed italic">
                                 Jegyzed meg ezt a kódot, ha később máshonnan is folytatni szeretnéd a játékot!
                             </p>
                         </div>
@@ -226,7 +226,7 @@ export default function ProfilePage() {
 
                     {/* Email display for regular users */}
                     {user && !user.email?.endsWith('@vendeg.hu') && (
-                        <div className="flex items-center gap-2 px-1 text-xs text-[#FDF5E6]">
+                        <div className="flex items-center gap-2 px-1 text-xs text-white">
                             <RiUserShared2Line size={14} />
                             <span>Bejelentkezve: {user.email}</span>
                         </div>
@@ -235,7 +235,7 @@ export default function ProfilePage() {
                     {/* Logout Button */}
                     <button
                         onClick={handleLogout}
-                        className="w-full py-3 flex items-center justify-center gap-2 bg-zinc-800/50 hover:bg-red-900/40 border border-zinc-700 hover:border-red-800/50 text-[#FDF5E6] hover:text-[#FDF5E6] font-medium rounded-xl transition-all"
+                        className="w-full py-3 flex items-center justify-center gap-2 bg-zinc-800/50 hover:bg-red-900/40 border border-zinc-700 hover:border-red-800/50 text-white hover:text-white font-medium rounded-xl transition-all"
                     >
                         <RiLogoutBoxRLine size={18} />
                         Kilépés

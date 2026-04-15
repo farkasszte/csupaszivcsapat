@@ -336,7 +336,7 @@ export const StoryEngine = ({ hideMedia = false }) => {
                 <div className="biophilic-card w-full mx-auto mt-auto lg:mt-auto mb-4 lg:mb-12 max-w-3xl lg:mr-8 rounded-2xl shadow-2xl border border-white/30 bg-white/20 backdrop-blur-md flex flex-col max-h-[50vh] lg:max-h-[60vh] overflow-hidden">
                     
                     {/* Story Text (Middle - Scrollable) */}
-                    <div className="flex-1 overflow-y-auto no-scrollbar flex flex-col items-stretch pb-4 p-6 sm:p-8 lg:p-10">
+                    <div className="flex-1 min-h-0 overflow-y-auto no-scrollbar flex flex-col items-stretch pb-4 p-6 sm:p-8 lg:p-10">
                         {/* Status Messages */}
                         {(error || message) && (
                             <div className="mb-6 shrink-0 animate-in fade-in duration-300">
@@ -364,7 +364,7 @@ export const StoryEngine = ({ hideMedia = false }) => {
                         <div className="shrink-0 flex justify-end px-6 pb-6 sm:px-8 sm:pb-8 lg:px-10 lg:pb-10 pt-4 mt-auto bg-gradient-to-t from-white/10 to-transparent border-t border-[#3e2723]/10">
                             <button 
                                 onClick={() => setCurrentStep(prev => prev + 1)}
-                                className="px-8 py-3 sm:px-10 sm:py-4 bg-[#4F7942] hover:bg-[#3d5e33] text-[#FDF5E6] text-base sm:text-lg font-bold rounded-xl transition-all shadow-lg hover:shadow-xl hover:-translate-y-1 block"
+                                className="px-8 py-3 sm:px-10 sm:py-4 bg-[#4F7942] hover:bg-[#3d5e33] text-white text-base sm:text-lg font-bold rounded-xl transition-all shadow-lg hover:shadow-xl hover:-translate-y-1 block"
                             >
                                 Tovább
                             </button>

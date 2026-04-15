@@ -100,7 +100,7 @@ export default function ProfileView() {
     if (loading) {
         return (
             <div className="p-8 flex items-center justify-center">
-                <div className="animate-pulse text-xl text-[#FDF5E6]">Betöltés...</div>
+                <div className="animate-pulse text-xl text-white">Betöltés...</div>
             </div>
         )
     }
@@ -108,29 +108,29 @@ export default function ProfileView() {
     return (
         <div className="p-6 space-y-8 animate-in fade-in duration-500">
             <div>
-                <h1 className="text-2xl font-bold text-[#FDF5E6] mb-2">Profilom</h1>
-                <p className="text-xs text-[#FDF5E6] italic">Módosítsd adataidat az élmény személyre szabásához.</p>
+                <h1 className="text-2xl font-bold text-white mb-2">Profilom</h1>
+                <p className="text-xs text-white italic">Módosítsd adataidat az élmény személyre szabásához.</p>
             </div>
 
             <form onSubmit={handleSave} className="space-y-6">
                 <div>
-                    <label className="block text-[10px] uppercase tracking-widest font-bold text-[#FDF5E6] mb-2">Teljes név</label>
+                    <label className="block text-[10px] uppercase tracking-widest font-bold text-white mb-2">Teljes név</label>
                     <input
                         type="text"
                         value={formData.full_name}
                         onChange={(e) => setFormData({ ...formData, full_name: e.target.value })}
-                        className="w-full px-4 py-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl focus:ring-2 focus:ring-white/40 focus:border-white/40 transition-all outline-none text-[#3e2723] placeholder-[#3e2723]/50"
+                        className="w-full px-4 py-3 bg-white/90 backdrop-blur-md shadow-sm rounded-xl focus:ring-2 focus:ring-white/40 focus:border-white/40 transition-all outline-none text-[#3e2723] placeholder-[#3e2723]/50"
                         placeholder="Minta János"
                     />
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
                     <div>
-                        <label className="block text-[10px] uppercase tracking-widest font-bold text-[#FDF5E6] mb-2">Nem</label>
+                        <label className="block text-[10px] uppercase tracking-widest font-bold text-white mb-2">Nem</label>
                         <select
                             value={formData.gender}
                             onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
-                            className="w-full px-4 py-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl focus:ring-2 focus:ring-white/40 focus:border-white/40 transition-all outline-none text-[#3e2723] appearance-none"
+                            className="w-full px-4 py-3 bg-white/90 backdrop-blur-md shadow-sm rounded-xl focus:ring-2 focus:ring-white/40 focus:border-white/40 transition-all outline-none text-[#3e2723] appearance-none"
                         >
                             <option value="" className="bg-[#ebd7b1] text-[#3e2723]">Válassz...</option>
                             <option value="male" className="bg-[#ebd7b1] text-[#3e2723]">Férfi</option>
@@ -140,13 +140,13 @@ export default function ProfileView() {
                     </div>
 
                     <div>
-                        <label className="block text-[10px] uppercase tracking-widest font-bold text-[#FDF5E6] mb-2">Születési év</label>
+                        <label className="block text-[10px] uppercase tracking-widest font-bold text-white mb-2">Születési év</label>
                         <input
                             type="text"
                             inputMode="numeric"
                             value={formData.birth_year}
                             onChange={(e) => setFormData({ ...formData, birth_year: e.target.value.replace(/\D/g, '').slice(0, 4) })}
-                            className="w-full px-4 py-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl focus:ring-2 focus:ring-white/40 focus:border-white/40 transition-all outline-none text-[#3e2723] placeholder-[#3e2723]/50"
+                            className="w-full px-4 py-3 bg-white/90 backdrop-blur-md shadow-sm rounded-xl focus:ring-2 focus:ring-white/40 focus:border-white/40 transition-all outline-none text-[#3e2723] placeholder-[#3e2723]/50"
                             placeholder="1990"
                             maxLength={4}
                         />
@@ -156,19 +156,19 @@ export default function ProfileView() {
                 <button
                     type="submit"
                     disabled={saving}
-                    className="w-full py-3 bg-white/10 hover:bg-white/20 text-[#FDF5E6] font-semibold rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed border border-white/20 shadow-sm"
+                    className="w-full py-3 bg-white/90 hover:bg-white/20 text-white font-semibold rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-sm shadow-sm"
                 >
                     {saving ? 'Mentés...' : 'Mentés'}
                 </button>
 
                 {error && (
-                    <p className="text-[#FDF5E6] text-sm text-center bg-red-950/50 p-3 rounded-xl border border-red-900/50">
+                    <p className="text-white text-sm text-center bg-red-950/50 p-3 rounded-xl border border-red-900/50">
                         {error}
                     </p>
                 )}
 
                 {message && (
-                    <p className="text-[#FDF5E6] text-sm text-center bg-emerald-950/50 p-3 rounded-xl border border-emerald-900/50">
+                    <p className="text-white text-sm text-center bg-emerald-950/50 p-3 rounded-xl border border-emerald-900/50">
                         {message}
                     </p>
                 )}
@@ -190,7 +190,7 @@ export default function ProfileView() {
                                 title={copied ? 'Másolva!' : 'Kód másolása'}
                                 className={`p-2 rounded-lg transition-all border ${copied
                                     ? 'text-black border-emerald-500/30 bg-emerald-500/10'
-                                    : 'text-black border-white/5 bg-white/10 hover:text-black hover:bg-white/20 hover:border-white/30'
+                                    : 'text-black border-white/5 bg-white/90 hover:text-black hover:bg-white/20 hover:border-white/30'
                                     }`}
                             >
                                 {copied ? <RiCheckLine size={18} /> : <RiFileCopyLine size={18} />}
@@ -201,7 +201,7 @@ export default function ProfileView() {
 
                 {/* Email display for regular users */}
                 {user && !user.email?.endsWith('@vendeg.hu') && (
-                    <div className="flex items-center gap-2 px-1 text-xs text-[#FDF5E6]">
+                    <div className="flex items-center gap-2 px-1 text-xs text-white">
                         <RiUserShared2Line size={14} />
                         <span>Bejelentkezve: {user.email}</span>
                     </div>
@@ -210,7 +210,7 @@ export default function ProfileView() {
                 {/* Logout Button */}
                 <button
                     onClick={handleLogout}
-                    className="w-full py-3 flex items-center justify-center gap-2 bg-zinc-800/50 hover:bg-red-900/40 border border-zinc-700 hover:border-red-800/50 text-[#FDF5E6] hover:text-[#FDF5E6] font-medium rounded-xl transition-all"
+                    className="w-full py-3 flex items-center justify-center gap-2 bg-zinc-800/50 hover:bg-red-900/40 border border-zinc-700 hover:border-red-800/50 text-white hover:text-white font-medium rounded-xl transition-all"
                 >
                     <RiLogoutBoxRLine size={18} />
                     Kilépés a fiókból

@@ -1,601 +1,732 @@
 {
-    "startingElement": "e3d27f29-240f-42ff-84a5-77e3e0727d38",
-    "boards": {
-        "2ad15ff6-f2ba-4f1d-9d9d-68938c683d7e": {
-            "name": "Root",
-            "root": true,
-            "children": [
-                "d079dad4-e594-45f7-89c3-34f21421b029",
-                "630fdb8a-48d6-473e-9974-2460f7eb2b41"
-            ]
-        },
-        "630fdb8a-48d6-473e-9974-2460f7eb2b41": {
-            "name": "1. t\u00f6rt\u00e9net",
-            "notes": [],
-            "jumpers": [],
-            "branches": [],
-            "elements": [
-                "e3d27f29-240f-42ff-84a5-77e3e0727d38",
-                "fe971f02-67fc-4743-94ec-848b88571d20",
-                "fda49ff1-f479-4992-996e-6d647135fce7",
-                "3a94d1f5-90a1-47d0-ae55-538698518a54",
-                "4f6e511d-5685-48a3-8987-6e1f68a6a176",
-                "58d89f79-b210-44d0-97c0-da7548c44bea",
-                "4eb5d1d8-1300-4455-975d-58734ee1c3ab",
-                "1a172247-7afa-40b9-89d6-8c0e0da50723",
-                "7abcf11a-98fb-4bd5-9aef-1e74986e647a",
-                "fa5c0e5e-b53e-4615-9813-b5e86f571a8f",
-                "886e56eb-a8ea-41e0-a3cc-b617589e586a",
-                "b5536964-f6e0-4dc0-b80c-b3bd575287f2",
-                "02b00992-5b63-4fc3-bd14-d131e67c2298",
-                "ecd0081f-adac-4c4e-ad0d-b1ecccccb296",
-                "cc4f9157-3398-4f48-974f-1c6e7b89905c",
-                "630d71ca-547a-44e5-8ec4-830c3d1648ee"
-            ],
-            "connections": [
-                "8022a626-6585-4482-8711-f02117bf7ea3",
-                "ba84953b-3836-4a8a-bae8-684ad7d5a743",
-                "acda64e4-3d8a-4353-858f-fd27d886a684",
-                "f8600f3b-bb83-4816-9914-0e96b713e7f2",
-                "85f356e9-3358-4735-a546-a6b589a3392a",
-                "3ef3d88b-4257-4401-b372-e2888eab8eec",
-                "3f66392f-a5b1-4cc4-be9a-882964beb036",
-                "b005bb30-c076-42a3-a654-403e725039e1",
-                "e514296f-c259-48bd-a49f-3a176771a391",
-                "a5619d61-653b-475c-ae5c-5a897899e1ca",
-                "f6536b5b-242f-4111-8bdc-d1634bff4e8d",
-                "95428eb7-eb78-4855-be75-89cb58a83503",
-                "d53148f0-0257-4ea8-92ef-44dc9a39efcb",
-                "bbb55b0e-6193-43ac-a2e7-dca390f63234",
-                "e7d9d119-85ae-4344-a253-66350b4ae559",
-                "31084b25-a558-4383-9e95-6177c413d759",
-                "07ecc8bb-83f6-486f-9ee8-e588297c90bb",
-                "cfb8e2f3-294c-467a-8e89-d24ce01b12a1",
-                "1537a160-1c83-4d17-8e70-2249380fe731",
-                "6cac28c6-f940-4487-907a-91e1d71035df",
-                "cfff1bbe-d742-44a4-b26d-da046ca01a5c"
-            ]
-        },
-        "a1d6536d-5104-440a-bfc1-c5189026a510": {
-            "name": "Kezd\u0151 pr\u00f3b\u00e1lkoz\u00e1s",
-            "notes": [],
-            "jumpers": [],
-            "branches": [],
-            "elements": [
-                "08ceed66-0613-4d20-8e50-e9b0d08a1082",
-                "4b9b4a07-4244-4631-bee4-cfd19aa3ef94"
-            ],
-            "connections": [
-                "118bf399-7f7f-4f6b-8e91-ac863ba81355"
-            ]
-        },
-        "ad76224a-16b1-4af0-bea2-e15474d225dc": {
-            "name": "Sztori teszt1",
-            "notes": [],
-            "jumpers": [],
-            "branches": [],
-            "elements": [
-                "6716312d-7f05-4ef9-8954-68362d2012be",
-                "bf4ac53a-9afb-417e-9672-e9c9f8dd8681",
-                "c0cf9637-de11-4dc6-aaa3-e9649d56b434"
-            ],
-            "connections": [
-                "91363283-a5d3-4362-b4c3-d1c2842663fc",
-                "5609fc97-99ed-46bf-a65e-546bd5b1923d"
-            ]
-        },
-        "d079dad4-e594-45f7-89c3-34f21421b029": {
-            "name": "Tesztek",
-            "children": [
-                "ad76224a-16b1-4af0-bea2-e15474d225dc",
-                "a1d6536d-5104-440a-bfc1-c5189026a510"
-            ]
-        }
+  "startingElement": "e3d27f29-240f-42ff-84a5-77e3e0727d38",
+  "boards": {
+    "2ad15ff6-f2ba-4f1d-9d9d-68938c683d7e": {
+      "name": "Root",
+      "root": true,
+      "children": [
+        "d079dad4-e594-45f7-89c3-34f21421b029",
+        "630fdb8a-48d6-473e-9974-2460f7eb2b41"
+      ]
     },
-    "notes": {},
-    "elements": {
-        "08ceed66-0613-4d20-8e50-e9b0d08a1082": {
-            "theme": "default",
-            "assets": {
-                "cover": {
-                    "id": "941f16e4-6db5-4650-af6f-8ea3129bd3a6"
-                }
-            },
-            "outputs": [
-                "118bf399-7f7f-4f6b-8e91-ac863ba81355"
-            ],
-            "components": [],
-            "content": "<p>M\u00f3rahalom hat\u00e1r\u00e1ban, ahol a homoki sztyepp\u00e9k tal\u00e1lkoznak a nedves vizeny\u0151s r\u00e9tekkel, k\u00fcl\u00f6n\u00f6s t\u00e1rsas\u00e1g gy\u00fclekezett a Nagysz\u00e9ks\u00f3s-t\u00f3n\u00e1l. T\u00fazok Tan\u00e1r \u00far, a puszta tekint\u00e9lyes \u0151re, sz\u00e1rnyait megigaz\u00edtva v\u00e1rta tan\u00edtv\u00e1nyait.<\/p>",
-            "title": "<p>M\u00f3rahalom hat\u00e1r\u00e1ban...<\/p>"
-        },
-        "1a172247-7afa-40b9-89d6-8c0e0da50723": {
-            "theme": "brown",
-            "outputs": [
-                "f6536b5b-242f-4111-8bdc-d1634bff4e8d"
-            ],
-            "components": [],
-            "content": "<p>A talpaimmal szorosan \u00e1tkulcsolom a vastag t\u00f6lgyfa \u00e1gat, amit T\u00fazok tan\u00e1r \u00farral k\u00f6z\u00f6sen illesztett\u00fcnk a fogaskerekek k\u00f6z\u00e9. Az olaj, amit a tany\u00e1r\u00f3l hoztunk, feket\u00e9n csillog a rozsd\u00e1s m\u00e9lyed\u00e9sekben, mintha csak arra v\u00e1rna, hogy v\u00e9gre munk\u00e1hoz l\u00e1sson. Megfesz\u00edtem minden apr\u00f3 izmomat, a tan\u00e1r \u00far pedig sz\u00e9les sz\u00e1rnyaival \u00e9s neh\u00e9z test\u00e9vel seg\u00edt nekem; \u00e9rzem, ahogy a fa rostjai halkan ny\u00f6sz\u00f6r\u00f6gnek a nyom\u00e1s alatt, de most nem a t\u00f6r\u00e9s, hanem a gy\u0151zelem \u00edze van a leveg\u0151ben.<\/p><p>Hirtelen egy \u00e9les pattan\u00e1s has\u00edt bele a puszta csendj\u00e9be, \u00e9s a neh\u00e9z ker\u00e9k lassan elfordul a kez\u00fcnk alatt. A zsilip f\u00e9mes sz\u00e1ja, ami eddig szorosan z\u00e1rva maradt a szomjaz\u00f3 t\u00e1j el\u0151tt, most megny\u00edlik, \u00e9s a m\u00e9lyb\u0151l felt\u00f6r az els\u0151, gurgul\u00e1z\u00f3 v\u00edzsug\u00e1r. A v\u00edz illata \u00fagy csap meg minket, mint egy h\u0171v\u00f6s \u00e9rint\u00e9s a d\u00e9li h\u0151s\u00e9gben; ahogy v\u00e9gre megkezdi \u00fatj\u00e1t a Nagysz\u00e9ks\u00f3s-t\u00f3 repedezett medre fel\u00e9.<\/p><p>Szalak\u00f3ta Szilvia ujjongva csap le mell\u00e9nk a magasb\u00f3l, az\u00fark\u00e9k sz\u00e1rnyai megvillannak a felver\u0151d\u0151 v\u00edzcseppek f\u00e9ny\u00e9ben. \u201eN\u00e9zz\u00e9tek, a f\u00f6ld inni kezd!\u201d \u2013 rikoltja, \u00e9s val\u00f3ban, a porsz\u00e1raz meder moh\u00f3n nyeli el az els\u0151 kortyokat, m\u00e9ly, s\u00f6t\u00e9t foltokat rajzolva a talajra. T\u00fazok tan\u00e1r \u00far b\u00f6lcs tekintettel figyeli az \u00e1rad\u00e1st; tudja, hogy ez m\u00e9g csak a kezdet, de a t\u00f3 sz\u00edve ma \u00fajra dobbant egyet.<\/p>",
-            "title": "<p>2.2\/2<\/p>"
-        },
-        "3a94d1f5-90a1-47d0-ae55-538698518a54": {
-            "theme": "orange",
-            "outputs": [
-                "85f356e9-3358-4735-a546-a6b589a3392a"
-            ],
-            "components": [],
-            "content": "<p>Bercihez sietek, aki a t\u00f3 sz\u00e9l\u00e9n \u00e1ll, feje m\u00e9lyre l\u00f3g, szem\u00e9b\u0151l m\u00e9ly b\u00e1gyadts\u00e1g \u00e1rad. A b\u0151re \u00fagy fesz\u00fcl a h\u00e1t\u00e1n, mint a napon felejtett, kisz\u00e1radt s\u00e1r, a b\u00f6g\u00f6ly\u00f6k pedig s\u0171r\u0171 felh\u0151ben keringenek az elgy\u00f6t\u00f6rt teste k\u00f6r\u00fcl. Elvezetem a zsiliphez, \u0151 pedig neh\u00e9zkesen mell\u00e9m v\u00e1nszorog. Megmutatom neki a rozsd\u00e1s kereket, a bivaly pedig hatalmas erej\u00e9t megfesz\u00edtve, sz\u00e9les homlok\u00e1val nekit\u00e1maszkodik a hideg vasnak.<\/p><p>A szerkezet \u00e9lesen felcsikordul, egyetlen f\u00e1jdalmas f\u00e9mes hangot ad, de a ker\u00e9k meg sem moccan. Berci l\u00e1bai tehetetlen\u00fcl megcs\u00fasznak a porlad\u00f3 talajon, neh\u00e9z zih\u00e1l\u00e1sa messzire elhallatszik a n\u00e9ma puszt\u00e1ban. A hatalmas \u00e1llat v\u00e9g\u00fcl meg\u00e1ll, remeg\u0151 inakkal, habz\u00f3 sz\u00e1jjal n\u00e9z r\u00e1m; az ereje, ami m\u00e1skor hegyeket mozgatna meg, most kev\u00e9s a h\u0151s\u00e9gt\u0151l megk\u00f6v\u00fclt szerkezet ellen.<\/p><p>T\u00fazok tan\u00e1r \u00far szomor\u00faan hajtja le a fej\u00e9t, mik\u00f6zben Berci f\u00e1jdalmasan b\u0151g egyet, \u00e9s visszaballag az \u00e1rny\u00e9k n\u00e9lk\u00fcli n\u00e1das sz\u00e9l\u00e9re. \u201eA puszta most olyan kem\u00e9ny, mint az ac\u00e9l, Panni\u201d \u2013 suttogja a mentorom. \u201eA nyers er\u0151 n\u00e9ha csak m\u00e9g jobban befesz\u00edti a rozsd\u00e1t, ha a t\u00e1j nem akar engedni.\u201d Egyed\u00fcl maradtunk a n\u00e9ma zsilipn\u00e9l, \u00e9s a nap \u00fagy nehezedik a h\u00e1tunkra, mint egy izz\u00f3 vaskupola.<\/p>",
-            "title": "<p>2.1\/1<\/p>"
-        },
-        "4b9b4a07-4244-4631-bee4-cfd19aa3ef94": {
-            "theme": "default",
-            "assets": {
-                "cover": {
-                    "id": "187bf22a-f930-43e6-96e9-f7d3fd7b1f96"
-                }
-            },
-            "outputs": [],
-            "components": [],
-            "content": "<p>\u2014 Megj\u00f6tt\u00fcnk! \u2014 sikkantott fel \u00dcrge Panni, ahogy kidugta az orr\u00e1t a homokb\u00f3l. Mellette egy \u00e9gsz\u00ednk\u00e9k villan\u00e1ssal landolt Szalak\u00f3ta Szilvia.<\/p>",
-            "title": null
-        },
-        "4eb5d1d8-1300-4455-975d-58734ee1c3ab": {
-            "theme": "orange",
-            "outputs": [
-                "95428eb7-eb78-4855-be75-89cb58a83503"
-            ],
-            "components": [],
-            "content": "<p>Berci neh\u00e9zkesen v\u00e1nszorog a zsiliphez, pat\u00e1i nyom\u00e1n porzik a szikes f\u00f6ld. Szemei f\u00e1radtak a h\u0151s\u00e9gt\u0151l, de amikor megl\u00e1tja az olajt\u00f3l feket\u00e1ll\u00f3 fogaskerekeket, megfesz\u00edti hatalmas nyakizmait. Szilvia b\u00edztat\u00f3an csattog a sz\u00e1rny\u00e1val a bivaly szarvai k\u00f6z\u00f6tt, \u00e9n pedig a zsilip k\u00e1v\u00e1ja mell\u00e9 h\u00faz\u00f3dva figyelem, ahogy az \u00f3ri\u00e1s sz\u00e9les homlok\u00e1val nekit\u00e1maszkodik a vasnak. A leveg\u0151 megremeg a fesz\u00fclts\u00e9gt\u0151l, Berci zih\u00e1l\u00e1sa pedig megt\u00f6lti a csatorna n\u00e9mas\u00e1g\u00e1t.<\/p><p>Hirtelen \u00e9les, de m\u00e1r nem f\u00e1jdalmas csikordul\u00e1s hallatszik. A ker\u00e9k, ami eddig mozd\u00edthatatlanul dacolt vel\u00fcnk, lassan forogni kezd a bivaly ereje alatt. Az olaj tette a dolg\u00e1t: a rozsda elengedte a f\u00e9met. Egy m\u00e9ly, bugyog\u00f3 hang t\u00f6r fel a m\u00e9lyb\u0151l, \u00e9s a zsilip alatt megcsillan az els\u0151 v\u00e9kony, ez\u00fcst\u00f6s v\u00edzsug\u00e1r. A v\u00edz illata azonnal sz\u00e9t\u00e1rad a forr\u00f3s\u00e1gban, friss \u00e9s \u00e9des, mint egy r\u00e9g elfeledett \u00edg\u00e9ret.<\/p><p>T\u00fazok tan\u00e1r \u00far el\u00e9gedetten b\u00f3lint, mik\u00f6zben Berci megk\u00f6nnyebb\u00fclten f\u00faj egyet az orr\u00e1n kereszt\u00fcl, apr\u00f3 porfelh\u0151t kavarva. \u201eL\u00e1tod, Panni, az er\u0151 \u00e9s a gondoskod\u00e1s egy\u00fctt nyitja meg a j\u00f6v\u0151t\u201d \u2013 mondja b\u00f6lcsen, mik\u00f6zben a v\u00edz lassan h\u00edzni kezd a csatorna alj\u00e1n. A t\u00e1j l\u00e1zas l\u00e9legz\u00e9se egy pillanatra megnyugszik, ahogy az els\u0151 korty nedvess\u00e9g el\u00e9ri a repedezett, szomjas f\u00f6ldet.<\/p>",
-            "title": "<p>2.2\/1<\/p>"
-        },
-        "4f6e511d-5685-48a3-8987-6e1f68a6a176": {
-            "theme": "gold",
-            "outputs": [
-                "3f66392f-a5b1-4cc4-be9a-882964beb036"
-            ],
-            "components": [],
-            "content": "<p>T\u00fazok tan\u00e1r \u00farral a k\u00f6zeli erd\u0151s\u00e1v sz\u00e9l\u00e9re siet\u00fcnk, ahol a kisz\u00e1radt f\u00e1k sz\u00fcrke \u00e1gaikat ny\u00fajtj\u00e1k az \u00e9g fel\u00e9, mintha v\u00edz\u00e9rt k\u00f6ny\u00f6r\u00f6gn\u00e9nek. Kiv\u00e1lasztjuk a legvastagabb, legsz\u00edv\u00f3sabb darabokat, \u00e9s visszavonszoljuk \u0151ket a zsiliphez, mik\u00f6zben a talpamat szinte \u00e9geti a porsivatag. Be\u00e9kelj\u00fck az \u00e1gat a fogaskerekek k\u00f6z\u00e9, \u00e9s minden s\u00falyunkkal r\u00e1nehezed\u00fcnk, b\u00edzva a fizika t\u00f6rv\u00e9nyeiben. Hallom, ahogy a fa rostjai megfesz\u00fclnek, T\u00fazok tan\u00e1r \u00far pedig m\u00e9lyet s\u00f3hajt: \u201eAz \u00e9sz n\u00e9ha hatalmasabb a nyers er\u0151n\u00e9l, Panni, de a rozsda n\u00e9ha m\u00e9g az \u00e9szn\u00e9l is makacsabb.\u201d<\/p><p>Egy hirtelen, \u00e9les reccsen\u00e9s has\u00edt bele a puszta csendj\u00e9be. Az \u00e1g kett\u00e9t\u00f6rik a kezeink k\u00f6z\u00f6tt, mint egy sz\u00e1raz n\u00e1dsz\u00e1l, \u00e9s mi tehetetlen\u00fcl huppanunk a forr\u00f3 porba. A zsilip kereke tov\u00e1bbra is n\u00e9m\u00e1n, mozdulatlanul vigyorog r\u00e1nk a rozsd\u00e1s fogaival; a t\u00e1j bez\u00e1rta kapuit el\u0151tt\u00fcnk. Szilvia a fejem f\u00f6l\u00f6tt k\u00f6r\u00f6z, \u00e1rny\u00e9ka pillanatra \u00e1tsuhan a repedezett f\u00f6ld\u00f6n, de a f\u00e9m nem enged. \u00dagy t\u0171nik, a mi apr\u00f3 vil\u00e1gunk eszk\u00f6zei m\u00e1r nem elegend\u0151ek ahhoz, hogy \u00fajra \u00e9letet lehelj\u00fcnk a t\u00f3ba.<\/p><p>N\u00e9zem a tikkadt horizontot, ahol a d\u00e9lib\u00e1b \u00fagy t\u00e1ncol, mintha g\u00fanyol\u00f3dna rajtunk. Berci messzir\u0151l felb\u0151g, a hangja tele van f\u00e1jdalommal, Szilvia pedig k\u00e9ts\u00e9gbeesetten csapkod a sz\u00e1rnyaival. \u201eL\u00e1ssuk be, Panni\u201d \u2013 mondja halk, komoly hangon T\u00fazok tan\u00e1r \u00far, \u00e9s a t\u00e1voli tanya\u00e9p\u00fclet fel\u00e9 n\u00e9z, aminek a b\u00e1dogteteje vak\u00edt\u00f3an csillog a napon. \u201eOlyan seg\u00edts\u00e9g kell, aminek nem csak ereje, de szersz\u00e1mai is vannak a rozsda ellen.\u201d<\/p>",
-            "title": "<p>2.1\/3<\/p>"
-        },
-        "58d89f79-b210-44d0-97c0-da7548c44bea": {
-            "theme": "moss",
-            "outputs": [
-                "e514296f-c259-48bd-a49f-3a176771a391",
-                "a5619d61-653b-475c-ae5c-5a897899e1ca"
-            ],
-            "components": [],
-            "content": "<p>Meg\u00e1llunk a tanya ker\u00edt\u00e9s\u00e9n\u00e9l, ahol a homokot nemcsak a sz\u00e9l, hanem az emberi l\u00e1bnyomok is felkavarj\u00e1k. A sz\u00edvem \u00fagy ver a bord\u00e1im k\u00f6z\u00f6tt, mint egy csapd\u00e1ba esett kismad\u00e1r, mert az emberek vil\u00e1ga sz\u00e1munkra mindig rejt\u00e9lyes \u00e9s f\u00e9lelmetes. De Szilvia nem habozik, egyenesen a gazda v\u00e1lla mell\u00e9 sz\u00e1ll a ker\u00edt\u00e9sre, \u00e9n pedig T\u00fazok tan\u00e1r \u00far sz\u00e1rnya m\u00f6g\u00e9 h\u00faz\u00f3dva figyelem az \u00f6reg f\u00e9rfit. Az arca olyan bar\u00e1zd\u00e1lt, mint a kisz\u00e1radt t\u00f3meder, de amikor r\u00e1nk n\u00e9z, a szemeiben nem vad\u00e1szt\u00fczet, hanem ugyanazt a neh\u00e9z szomor\u00fas\u00e1got l\u00e1tom, amit a mi\u00e9nkben. T\u00fazok tan\u00e1r \u00far m\u00e9lt\u00f3s\u00e1gteljesen b\u00f3lint, a gazda pedig, mintha \u00e9rten\u00e9 a puszta n\u00e9ma seg\u00e9lyki\u00e1lt\u00e1s\u00e1t, beballag a f\u00e9szerbe, \u00e9s egy s\u0171r\u0171, fekete folyad\u00e9kkal teli kann\u00e1val t\u00e9r vissza.<\/p><p>Vissza\u00e9rve a zsiliphez, a neh\u00e9z illat\u00fa olajat \u00f3vatosan a fogaskerekek k\u00f6z\u00e9 csorgatom. A rozsda moh\u00f3n issza be a folyad\u00e9kot, mintha maga a vas is szomjazna a megv\u00e1lt\u00e1sra. Ahogy a fekete cseppek el\u00e9rik a szerkezet legm\u00e9lyebb pontjait, a f\u00e9m sz\u00edne megv\u00e1ltozik, \u00e9s a fojtogat\u00f3, v\u00f6r\u00f6s p\u00e1nc\u00e9l engedni kezd a szor\u00edt\u00e1s\u00e1b\u00f3l. \u00c9rzem a mancsom alatt, ahogy a ker\u00e9k m\u00e1r nem ellens\u00e9gesen merev, hanem v\u00e1rakoz\u00f3n fesz\u00fcl; az olaj utat t\u00f6rt a mozdulatlans\u00e1gban. Most m\u00e1r nem a rozsd\u00e1val harcolunk, hanem a zsilip s\u00faly\u00e1val, ami k\u00e9szen \u00e1ll arra, hogy \u00fajra \u00e9letet engedjen a t\u00e1jba.<\/p>",
-            "title": "<p>2.1\/4<\/p>"
-        },
-        "6716312d-7f05-4ef9-8954-68362d2012be": {
-            "theme": "default",
-            "outputs": [
-                "91363283-a5d3-4362-b4c3-d1c2842663fc"
-            ],
-            "components": [],
-            "content": "<p>A talpaim alatt a f\u00f6ld m\u00e1r nem h\u0171v\u00f6s mened\u00e9k, hanem egy l\u00e1zasan l\u00e9legz\u0151 t\u00e1j. M\u00e9lyebbre \u00e1sok, mint tavaly, de a nedvess\u00e9g illata egyre t\u00e1volodik, mintha a vil\u00e1g elfelejtette volna a v\u00edz \u00edz\u00e9t. A f\u0171sz\u00e1lak, amik r\u00e9gen l\u00e9d\u00fas erd\u0151k\u00e9nt vettek k\u00f6r\u00fcl, most s\u00e1rga szil\u00e1nkokk\u00e9nt karcolj\u00e1k az oldalam. Minden r\u00e1g\u00e1s \u00e9rdes \u00e9s porszag\u00fa.<\/p><p>Fent a peremen Szalak\u00f3ta v\u00e1rakozik, tollai k\u00f6z\u00f6tt a t\u00e1voli vizek p\u00e1r\u00e1j\u00e1nak h\u0171lt hely\u00e9vel. Azt mondja, a csatorn\u00e1k medre m\u00e1r csak repedezett seb a puszta test\u00e9n, \u00e9s a tany\u00e1k v\u00e1ly\u00fai is konganak az \u00fcress\u00e9gt\u0151l. T\u00fazok, a b\u00f6lcs, csak \u00e1ll a remeg\u0151 forr\u00f3s\u00e1gban, \u00e9s a t\u00e1volt n\u00e9zi. Szerinte a puszta nem halt meg, csak elaludt a szomj\u00fas\u00e1gt\u00f3l, \u00e9s v\u00e1rja, hogy valaki \u00fajra megtan\u00edtsa a f\u00f6ldet a v\u00edz megtart\u00e1s\u00e1ra.<\/p>",
-            "title": "<p>1.<\/p>"
-        },
-        "7abcf11a-98fb-4bd5-9aef-1e74986e647a": {
-            "theme": "pink",
-            "outputs": [
-                "d53148f0-0257-4ea8-92ef-44dc9a39efcb",
-                "cfff1bbe-d742-44a4-b26d-da046ca01a5c"
-            ],
-            "components": [],
-            "content": "<p>V\u00e9gre l\u00e1tom Bercit, ahogy neh\u00e9zkesen bel\u00e9p az els\u0151 s\u00f6t\u00e9t t\u00f3cs\u00e1ba, amit a zsilipb\u0151l \u00e9rkez\u0151 v\u00edz rajzolt a meder fenek\u00e9re. A s\u00e1r hangosan cuppan a hatalmas pat\u00e1k alatt, \u00e9s l\u00e1tom, ahogy az \u00f3ri\u00e1s bivaly v\u00e9gre megnyugszik: a h\u0171v\u00f6s iszap bebor\u00edtja repedezett b\u0151r\u00e9t, el\u0171zve a b\u00f6g\u00f6ly\u00f6ket \u00e9s a l\u00e1zat. Berci neh\u00e9z test\u00e9vel g\u00e1zol a s\u0171r\u0171ben, a n\u00e1das sz\u00e1raz sz\u00e1rai pedig ropogva adj\u00e1k meg magukat a s\u00faly\u00e1nak, helyet szor\u00edtva a v\u00edznek \u00e9s a friss hajt\u00e1soknak.<\/p><p>T\u00fazok tan\u00e1r \u00far azonban nem a dagony\u00e1t n\u00e9zi, hanem a t\u00e1volabbi, kop\u00e1r szigeteket, ahol a gulip\u00e1nok \u00e9s a sz\u00e9ki lil\u00e9k f\u00e9szkelnek. \u201eA v\u00edz m\u00e9g t\u00fal lass\u00fa, Panni, \u00e9s a mederben felgy\u0171lt hordal\u00e9k megakasztja az \u00fatj\u00e1t\u201d \u2013 mondja, \u00e9s a hangja olyan m\u00e9ly, mint a k\u00f6zelg\u0151 vihar. \u201eN\u00e9zd ott a n\u00e1das sz\u00e9l\u00e9t! A v\u00f6r\u00f6s bund\u00e1k m\u00e1r v\u00e1rakoznak. Ha a v\u00edz nem \u00f6leli k\u00f6rbe a szigeteket s\u00f6t\u00e9ted\u00e9sig, a r\u00f3k\u00e1k sz\u00e1raz l\u00e1bbal s\u00e9t\u00e1lnak be a f\u00e9szkekhez, \u00e9s Guli\u00e9knak nem marad kit nevelni\u00fck.\u201d<\/p><p>\u00c9rzem, ahogy a torkomban dobog a sz\u00edvem a f\u00e9lelemt\u0151l a kis fi\u00f3k\u00e1k\u00e9rt. A v\u00edz ugyan elindult, de a meder tele van r\u00e9gi gallyakkal \u00e9s \u00f6ssze\u00e1llt s\u00e1rral, ami g\u00e1tat vet az \u00e1rad\u00e1snak a legfontosabb helyeken. Ha nem v\u00e1gunk utat a v\u00edznek a szigetek fel\u00e9, Berci boldogs\u00e1ga csak f\u00e9l gy\u0151zelem lesz, \u00e9s a puszta ma \u00e9jjel \u00fajra elvesz\u00edt valamit, ami p\u00f3tolhatatlan.<\/p>",
-            "title": "<p>2.3<\/p>"
-        },
-        "bf4ac53a-9afb-417e-9672-e9c9f8dd8681": {
-            "theme": "default",
-            "outputs": [
-                "5609fc97-99ed-46bf-a65e-546bd5b1923d"
-            ],
-            "components": [],
-            "content": "<p>Fesz\u00fclnek az izmaim, ahogy a kisz\u00e1radt f\u00f6ldet fesz\u00edtem. A felsz\u00edn m\u00e1r csak forr\u00f3 por, de lent, a gy\u00f6kerek k\u00f6z\u00f6tt m\u00e9g ott bujk\u00e1l a h\u0171v\u00f6s \u00e1lom. A karmaim alatt a homok csikorog, mintha a puszta tiltakozna a bolygat\u00e1s ellen. Minden egyes centim\u00e9ter\u00e9rt meg kell k\u00fczdenem, de a szomj\u00fas\u00e1g hajt el\u0151re, m\u00e9lyebbre, ahol a n\u00f6v\u00e9nyek m\u00e9g kapaszkodnak az \u00e9letbe.<\/p><p>Szalak\u00f3ta fentr\u0151l figyeli a porfelh\u0151t, amit kavarok. Azt mondja, a k\u00f6zeli tany\u00e1k mellett a kutak m\u00e1r csak furcsa, m\u00e9ly sebek a f\u00f6ld\u00f6n, amikb\u0151l nem j\u00f6n fel t\u00f6bb\u00e9 a v\u00edz \u00e9neke. T\u00fazok a t\u00e1volban egy mag\u00e1nyos bokor \u00e1rny\u00e9k\u00e1ba h\u00faz\u00f3dik. Szerinte hi\u00e1ba \u00e1sok m\u00e9lyre, ha a felh\u0151k elfelejtik az utat hozz\u00e1nk, a f\u00f6ld v\u00e9g\u00fcl eg\u00e9szen k\u0151kem\u00e9nny\u00e9 v\u00e1lik, \u00e9s elz\u00e1rja el\u0151l\u00fcnk a kincseit.<\/p>",
-            "title": "<p>1.1<\/p>"
-        },
-        "c0cf9637-de11-4dc6-aaa3-e9649d56b434": {
-            "theme": "default",
-            "outputs": [],
-            "components": [],
-            "content": "<p><\/p><p>\u00dcrge napl\u00f3ja: M\u00e9lyre \u00e1stam, oda, ahol a vil\u00e1g zaja m\u00e1r csak tompa morajl\u00e1s. A kamra t\u00e1gas, a falai h\u0171v\u00f6sek, de ez a h\u0171v\u00f6s nem \u00e9ltet, csak v\u00e1rakozik. A s\u00f6t\u00e9tben hallom a saj\u00e1t sz\u00edvver\u00e9semet; minden dobban\u00e1s egy-egy kortyot k\u00f6vetelne, amit nem tudok megadni neki. A felsz\u00edn felettem l\u00e1zasan l\u00fcktet, a nap kegyetlen ujjaival a bej\u00e1ratig ny\u00fal, mintha ki akarna r\u00e1ngatni az \u00e1rny\u00e9kb\u00f3l.<\/p><p>Kintr\u0151l Szalak\u00f3ta hangja sz\u0171r\u0151dik be, v\u00e9konyan \u00e9s \u00e9lesen. Azt mondja, a k\u00f6zeli gyepeken a f\u0171 m\u00e1r nem hajlong, hanem porr\u00e1 omlik minden l\u00e9p\u00e9sn\u00e9l. T\u00fazok a j\u00e1ratom k\u00f6zel\u00e9ben pihen meg, \u00e9rzi a m\u00e9lys\u00e9g nyugalm\u00e1t, de figyelmeztet: a f\u00f6ld alatti mag\u00e1ny csak od\u00fa, nem otthon, ha a gy\u00f6kerek elsz\u00e1radnak k\u00f6r\u00fcl\u00f6tt\u00fcnk. A tartal\u00e9kaim fogynak, \u00e9s a falak, amik eddig megv\u00e9dtek, most fojtogatni kezdenek az \u00e1llott leveg\u0151vel.<\/p>",
-            "title": "<p>1.1.1<\/p>"
-        },
-        "e3d27f29-240f-42ff-84a5-77e3e0727d38": {
-            "theme": "cyan",
-            "assets": {
-                "cover": {
-                    "id": "941f16e4-6db5-4650-af6f-8ea3129bd3a6"
-                }
-            },
-            "outputs": [
-                "8022a626-6585-4482-8711-f02117bf7ea3"
-            ],
-            "components": [],
-            "content": "<p>A talpaim alatt repedezik a f\u00f6ld, mintha a t\u00e1j l\u00e1zasan l\u00e9legezne, \u00e9s minden erej\u00e9vel pr\u00f3b\u00e1ln\u00e1 visszatartani az utols\u00f3 csepp nedvess\u00e9get. A Nagysz\u00e9ks\u00f3s-t\u00f3 medre fel\u0151l nem h\u0171v\u00f6s p\u00e1ra, hanem forr\u00f3 porszag\u00fa sz\u00e9l \u00e9rkezik, ami \u00f6sszek\u00f3colja a sz\u0151r\u00f6met. A f\u0171sz\u00e1lak, amik tavaly ilyenkor m\u00e9g h\u00fasosak \u00e9s \u00e9desek voltak, most s\u00e1rga szil\u00e1nkokk\u00e9nt sz\u00farj\u00e1k az \u00ednyemet; alig tal\u00e1lok benn\u00fck annyi nedvess\u00e9get, hogy elnyomjam a torkomban l\u00fcktet\u0151 szomj\u00fas\u00e1got.<\/p><p>Szalak\u00f3ta Szilvia hirtelen huppan le mell\u00e9m a kisz\u00e1radt vadvir\u00e1g k\u00f3r\u00f3j\u00e1ra, az\u00fark\u00e9k tollai fak\u00f3n verik vissza a k\u00f6ny\u00f6rtelen f\u00e9nyt. \u201ePanni, nagy a baj, Berci b\u0151re m\u00e1r cserepesre sz\u00e1radt, \u00e9s a b\u00f6g\u00f6ly\u00f6k elevenen eszik meg, mert nincs s\u00e1r, amiben megdagony\u00e1zhatna!\u201d \u2013 hadarja, \u00e9s a sz\u00e1rnyaival a t\u00f3 k\u00f6zepe fel\u00e9 mutat, ahol a n\u00e1das \u00fagy terjeszkedik, mint egy fal\u00e1nk z\u00f6ld hadsereg. T\u00fazok tan\u00e1r \u00far m\u00e9lt\u00f3s\u00e1gteljesen l\u00e9pdel mell\u00e9nk, tekintete a messzes\u00e9gbe v\u00e9sz. \u201eA v\u00edz az \u00e9leter\u0151, fiam\u201d \u2013 mondja m\u00e9ly, zeng\u0151 hangon. \u201eHa Berci nem tudja visszataposni a n\u00e1dat, a t\u00f3 v\u00e9gleg elt\u0171nik, \u00e9s Guli\u00e9knak sem marad t\u00f6bb\u00e9 sek\u00e9ly v\u00edz, ahol \u00e9lelmet sz\u0171rhetn\u00e9nek. A s\u00e1r az \u0151 b\u00f6lcs\u0151j\u00fck, de v\u00edz n\u00e9lk\u00fcl csak egy kem\u00e9ny, \u00e9lettelen p\u00e1nc\u00e9l marad ut\u00e1na.\u201d<\/p><p>N\u00e9zem a t\u00e1volban \u00e1ll\u00f3 bivalyokat, ahogy tehetetlen\u00fcl keresik az \u00e1rny\u00e9kot, \u00e9s hallom a gulip\u00e1nok panaszos ki\u00e1lt\u00e1s\u00e1t a kop\u00e1r meder felett. Ha nem tesz\u00fcnk valamit a v\u00edzp\u00f3tl\u00e1s\u00e9rt vagy a n\u00e1das meg\u00e1ll\u00edt\u00e1s\u00e1\u00e9rt, hamarosan csak a por marad ut\u00e1nunk, amit a sz\u00e9l hord sz\u00e9t a puszt\u00e1ban.<\/p>",
-            "title": "<p>2.<\/p>"
-        },
-        "fda49ff1-f479-4992-996e-6d647135fce7": {
-            "theme": "brown",
-            "outputs": [
-                "acda64e4-3d8a-4353-858f-fd27d886a684"
-            ],
-            "components": [],
-            "content": "<p>Szilvia sz\u00fcntelen\u00fcl cik\u00e1zik a t\u00e1voli, zavaros pocsolya \u00e9s a zsilip k\u00f6z\u00f6tt. Apr\u00f3 cs\u0151r\u00e9ben csak p\u00e1r cseppet hoz, amik gy\u00e9m\u00e1ntk\u00e9nt f\u00e9nylenek a porban, miel\u0151tt elnyeln\u00e9 \u0151ket a v\u00f6r\u00f6s rozsda. \u00c9n a bund\u00e1mat m\u00e1rtom a langyos, iszapos v\u00edzbe, majd a fogaskerekek k\u00f6z\u00e9 pr\u00e9selem magam, hogy \u00e1tadjam a nedvess\u00e9get a megk\u00f6v\u00fclt s\u00e1rnak. A h\u00e1tamat \u00e9geti a nap, a l\u00e1bam alatt pedig szinte forr a talaj, de csak d\u00f6rzs\u00f6l\u00f6m a f\u00e9met, h\u00e1tha megenyh\u00fcl.<\/p><p>Hi\u00e1ba minden igyekezet\u00fcnk, a t\u00e1j l\u00e1zas szomj\u00fas\u00e1ga er\u0151sebb n\u00e1lunk. Mire Szilvia vissza\u00e9r a k\u00f6vetkez\u0151 adaggal, az el\u0151z\u0151 cseppek m\u00e1r el is illantak a forr\u00f3 vasr\u00f3l, mintha sosem l\u00e9teztek volna. A s\u00e1r nem puhul meg, csak m\u00e9g kem\u00e9nyebb p\u00e1nc\u00e9ll\u00e1 k\u00f6t a h\u0151s\u00e9gben; a term\u00e9szet most nem adja oda a titkait ilyen k\u00f6nnyen. T\u00fazok tan\u00e1r \u00far szomor\u00faan n\u00e9zi remeg\u0151 mancsaimat, \u00e9s halkan megsz\u00f3lal: \u201ePanni, a puszta most t\u00f6bbet k\u00e9r t\u0151l\u00fcnk, mint amit a sz\u00e1rnyunkon vagy a bund\u00e1nkban el tudunk hozni. M\u00e1s utat kell tal\u00e1lnunk, miel\u0151tt az utols\u00f3 v\u00edzt\u00fck\u00f6r is az \u00e9g \u00e1ldozat\u00e1v\u00e1 v\u00e1lik.\u201d<\/p><p>Meg\u00e1llok, \u00e9s a zih\u00e1l\u00f3 t\u00fcd\u0151mben \u00e9rzem a por karcos \u00edz\u00e9t. A zsilip tov\u00e1bbra is mozdulatlan marad, a ker\u00e9k pedig n\u00e9m\u00e1n mered r\u00e1nk a h\u0151s\u00e9gben. Az id\u0151nk fogy, \u00e9s a Nagysz\u00e9ks\u00f3s-t\u00f3 medre egyre ink\u00e1bb egy kisz\u00e1radt, repedezett sebre eml\u00e9keztet, amit csak egy nagyobb er\u0151 vagy egy okosabb terv gy\u00f3gy\u00edthatna be.<\/p>",
-            "title": "<p>2.1\/2<\/p>"
-        },
-        "fe971f02-67fc-4743-94ec-848b88571d20": {
-            "theme": "cyan",
-            "assets": {
-                "cover": {
-                    "id": "187bf22a-f930-43e6-96e9-f7d3fd7b1f96"
-                }
-            },
-            "outputs": [
-                "ba84953b-3836-4a8a-bae8-684ad7d5a743",
-                "f8600f3b-bb83-4816-9914-0e96b713e7f2",
-                "3ef3d88b-4257-4401-b372-e2888eab8eec",
-                "b005bb30-c076-42a3-a654-403e725039e1"
-            ],
-            "components": [],
-            "content": "<p>A talpaim alatt megny\u00edl\u00f3 m\u00e9ly reped\u00e9sek k\u00f6z\u00f6tt cik\u00e1zom, a tikkaszt\u00f3 h\u0151s\u00e9gben minden mozdulat neh\u00e9z, mintha \u00f3loms\u00falyokat k\u00f6tn\u00e9nek a l\u00e1bamra. Szilvia a magasb\u00f3l rikolt, a sz\u00e1rnyaival egy rozsd\u00e1s, f\u00e9lig f\u00f6ldbe s\u00fcllyedt vasszerkezet fel\u00e9 mutat, ami \u00fagy meredezik ki a csatorna partj\u00e1b\u00f3l, mint egy r\u00e9gi, elfeledett \u00f3ri\u00e1s foga. Ez a zsilip: egykor az\u00e9rt \u00e9p\u00edtett\u00e9k, hogy elvezesse innen a vizet, de most ez az egyetlen rem\u00e9ny\u00fcnk, hogy meg\u00e1ll\u00edtsuk a t\u00e1j lass\u00fa elv\u00e9rz\u00e9s\u00e9t.<\/p><p>T\u00fazok tan\u00e1r \u00far m\u00e9lt\u00f3s\u00e1gteljesen l\u00e9pdel a csatorna sz\u00e9l\u00e9n, tollai rezegnek a forr\u00f3 leveg\u0151ben, ahogy a zsilip kerek\u00e9t n\u00e9zi. \u201eL\u00e1tod, Panni, az ember n\u00e9ha elfelejti, hogy a v\u00edz nem v\u00e9letlen\u00fcl t\u0171nik el, hanem mert mi nem vigy\u00e1zunk r\u00e1\u201d \u2013 suttogja, \u00e9s a tekintete a t\u00e1voli horizontra r\u00e9ved.<\/p>",
-            "title": "<p>2.1<\/p>"
-        },
-        "fa5c0e5e-b53e-4615-9813-b5e86f571a8f": {
-            "theme": "lightBlue",
-            "components": [],
-            "outputs": [
-                "bbb55b0e-6193-43ac-a2e7-dca390f63234"
-            ],
-            "content": "<p>Pille \u00e9s Guli remegve \u00e1llnak a sziget sz\u00e9l\u00e9n, ahol a por m\u00e1r belepte a f\u00e9ltve \u0151rz\u00f6tt toj\u00e1sokat. \u201ePanni, a r\u00f3ka m\u00e1r a sz\u00e9lcsatorn\u00e1ban van, \u00e9rzi az \u00e9let szag\u00e1t!\u201d \u2013 suttogja Pille, apr\u00f3 teste \u00fagy r\u00e1zk\u00f3dik, mint a sz\u00e1raz f\u0171sz\u00e1l a puszt\u00e1ban. Guli felfel\u00e9 \u00edvelt, kecses cs\u0151r\u00e9vel vadul mutogat a s\u00f6t\u00e9ted\u0151 n\u00e1das fel\u00e9, ahol egy v\u00f6r\u00f6s \u00e1rny\u00e9k oson. \u201eHa nem \u00e9r ide a v\u00edz, hajnalra csak \u00fcres h\u00e9jakat tal\u00e1ltok a f\u00e9szkek hely\u00e9n!\u201d \u2013 mondja rekedten, \u00e9s a hangj\u00e1ban ott l\u00fcktet az eg\u00e9sz puszta f\u00e9lelme. T\u00fazok tan\u00e1r \u00far l\u00e9p el\u0151 a hom\u00e1lyb\u00f3l, hangja nyugodt \u00e9s m\u00e9ly, mint a f\u00f6ld alatti vizek moraja: \u201eHa nincs falunk v\u00edzb\u0151l, \u00e9p\u00edt\u00fcnk falat a ravaszs\u00e1gb\u00f3l. Panni, Pille, Guli! \u00c9p\u00edt\u00fcnk t\u00edz hamis f\u00e9szket. Mire a ragadoz\u00f3 v\u00e9g\u00e9re \u00e9r a sornak, a v\u00edz tal\u00e1n m\u00e1r k\u00f6rbe\u00f6leli az igazit.\u201d<\/p><p>Mancsaimmal hordom a sz\u00e1raz \u00e1gakat \u00e9s a tapad\u00f3s, neh\u00e9z sarat a meder sz\u00e9l\u00e9re, v\u00e1rakat emel\u00fcnk a sz\u00fcrk\u00fcletben a pusztul\u00e1s \u00fatj\u00e1ba. Pille \u00fcgyesen kavicsokat \u00e9s elhullatott tollakat sz\u00f3r a kupacok tetej\u00e9re, hogy megt\u00e9vessze a ragadoz\u00f3 szem\u00e9t, Guli pedig a cs\u0151r\u00e9vel form\u00e1zza meg a f\u00e9szekm\u00e9lyed\u00e9seket. \u201eN\u00e9zd, Panni, pont olyanok, mint az eny\u00e9m!\u201d \u2013 suttogja Pille, \u00e9s egy pillanatra felcsillan a rem\u00e9ny a szem\u00e9ben. Szalak\u00f3ta Szilvia k\u00f6zben a tany\u00e1r\u00f3l hozott bivalysz\u0151rt sz\u00f3rja sz\u00e9t a csalikn\u00e1l, hogy az idegen szag v\u00e9gk\u00e9pp \u00f6sszezavarja a vad\u00e1sz orr\u00e1t. \u201eAz id\u0151nk kev\u00e9s, a v\u00edz pedig m\u00e9g mindig a hordal\u00e9k fogs\u00e1g\u00e1ban k\u00fczd\u201d \u2013 figyelmeztet Szilvia, mik\u00f6zben az\u00fark\u00e9k sz\u00e1rnyai beleolvadnak az \u00e9jszak\u00e1ba.<\/p><p>A t\u00e1j l\u00e1zas l\u00e9legz\u00e9se mostanra halk suttog\u00e1ss\u00e1 szel\u00edd\u00fclt a h\u0171v\u00f6s\u00f6d\u0151 est\u00e9ben, de a f\u00f6ld szomj\u00fas\u00e1ga m\u00e9g mindig fojtogat\u00f3. A csalikupacok \u00fagy \u00e1llnak a hom\u00e1lyban, mint n\u00e9ma \u0151rszemek, v\u00e9dve a j\u00f6v\u0151t a v\u00f6r\u00f6sbund\u00e1s \u00e1rny\u00e9kt\u00f3l. \u00c9rzem a torkomban a port \u00e9s a gyomromban a korg\u00e1st, mert a nagy munk\u00e1ban elfelejtett\u00fcnk enni, de a szigetek biztons\u00e1ga most mindenn\u00e9l t\u00f6bbet \u00e9r. A t\u00e1volban a zsilip fel\u0151l \u00e9rkez\u0151 v\u00edz halkan mormog, mintha biztatna minket: tartsunk ki, am\u00edg el nem \u00e9ri a szomjas medret.<\/p>",
-            "title": null
-        },
-        "886e56eb-a8ea-41e0-a3cc-b617589e586a": {
-            "theme": "lightBlue",
-            "components": [],
-            "outputs": [
-                "1537a160-1c83-4d17-8e70-2249380fe731"
-            ],
-            "content": "<p>A hold sarl\u00f3ja alatt a v\u00f6r\u00f6s \u00e1rny\u00e9k meg\u00e1llt az els\u0151 s\u00e1rkupacunkn\u00e1l. Csak egyetlen, g\u00fanyos szippant\u00e1st tett a leveg\u0151be, majd a feje k\u00f6ny\u00f6rtelen\u00fcl az igazi f\u00e9szkek fel\u00e9 fordult; a ravaszs\u00e1ga \u00e1tl\u00e1tott a mi k\u00e9ts\u00e9gbeesett tr\u00fckk\u00fcnk\u00f6n. A bivalysz\u0151r szaga nem tudta elnyomni az \u00e9l\u0151 toj\u00e1sok l\u00fcktet\u00e9s\u00e9t, a v\u00edz pedig, hi\u00e1ba k\u00fczd\u00f6tt a mederben, m\u00e9g mindig t\u00fal messze j\u00e1rt ahhoz, hogy \u00e1th\u00e1ghatatlan falat emeljen a szigetek k\u00f6r\u00e9.<\/p><p>\u201ePanni, a r\u00f3ka m\u00e1r az igazi f\u00e9szket szimatolja!\u201d \u2013 suttogta Pille, \u00e9s \u00e9reztem, ahogy az apr\u00f3 mad\u00e1r teste remeg mellettem a s\u00f6t\u00e9tben. Guli k\u00e9ts\u00e9gbeesetten fesz\u00fclt neki a v\u00edznek, de a l\u00e1bai m\u00e9g a s\u00e1rba ragadtak, a ragadoz\u00f3 pedig m\u00e1r nem t\u00e1g\u00edtott. T\u00fazok tan\u00e1r \u00far m\u00e9ly hangja zizzent fel a h\u00e1tam m\u00f6g\u00f6tt, mint a sz\u00e1raz n\u00e1das: \u201eAz id\u0151nk elfogyott a tr\u00fckk\u00f6kh\u00f6z, gyerekek. A v\u00edz t\u00fal lass\u00fa, a r\u00f3ka pedig t\u00fal \u00e9hes. Ha nem tal\u00e1lunk azonnal egy m\u00e1sik utat, a hajnal m\u00e1r csak \u00fcres h\u00e9jakat tal\u00e1l a szigeten.\u201d<\/p><p>N\u00e9ztem a lassan k\u00fasz\u00f3 v\u00edzt\u00fckr\u00f6t \u00e9s a fenyeget\u0151 v\u00f6r\u00f6s szemp\u00e1rt a hom\u00e1lyban. A t\u00e1j l\u00e1zasan l\u00e9legzett k\u00f6r\u00fcl\u00f6tt\u00fcnk, minden egyes m\u00e1sodperc egy-egy s\u00falyos sz\u00edvver\u00e9snek t\u0171nt a puszta n\u00e9mas\u00e1g\u00e1ban. Valamit tenn\u00fcnk kell, \u00e9s gyorsabban, mint ahogy a v\u00edz folyik, mert a Nagysz\u00e9ks\u00f3s-t\u00f3 j\u00f6v\u0151je most egyetlen elsz\u00e1nt mozdulaton m\u00falik.<\/p>",
-            "title": null
-        },
-        "b5536964-f6e0-4dc0-b80c-b3bd575287f2": {
-            "theme": "green",
-            "components": [],
-            "outputs": [
-                "e7d9d119-85ae-4344-a253-66350b4ae559",
-                "31084b25-a558-4383-9e95-6177c413d759"
-            ],
-            "content": "<p>A v\u00edz csak gy\u0171lik a l\u00e1bam alatt, de nem mozdul a szigetek fel\u00e9. A hordal\u00e9k, a sz\u00e1raz gallyak \u00e9s a megk\u00f6v\u00fclt iszap s\u0171r\u0171 g\u00e1tat vont az \u00e9let \u00fatja el\u00e9, mik\u00f6zben a puszta l\u00e1zasan l\u00e9legzik k\u00f6r\u00fcl\u00f6tt\u00fcnk a f\u00fclledt alkonyatban. Szilvia k\u00e9ts\u00e9gbeesetten verdes a fejem felett, tekintete a n\u00e1das sz\u00e9l\u00e9t f\u00fcrk\u00e9szi, ahol a v\u00f6r\u00f6s \u00e1rny\u00e9k m\u00e1r t\u00fcrelmetlen\u00fcl oson. \u201ePanni, ha a v\u00edz nem t\u00f6r \u00e1t ezen a falon, a szigetek v\u00e9dtelenek maradnak!\u201d \u2013 ki\u00e1ltja, \u00e9s a hangja \u00e9lesen has\u00edt bele a v\u00e1rakoz\u00f3 csendbe. T\u00fazok tan\u00e1r \u00far lehajtja m\u00e9lt\u00f3s\u00e1gteljes fej\u00e9t, cs\u0151r\u00e9vel a s\u0171r\u0171, fekete iszapot kotorja, de a torlasz meg sem moccan az ereje alatt.<\/p><p>Hirtelen egy rozsd\u00e1s villan\u00e1st veszek \u00e9szre a csatorna partj\u00e1n, f\u00e9lig betemetve a homokba. Egy r\u00e9gi, g\u00f6rbe vaskamp\u00f3 az, ami \u00fagy mered ki a f\u00f6ldb\u0151l, mint egy elfeledett \u00f3ri\u00e1s ujja. Odaszaladok, mancsaimmal kikaparom a f\u00e9m hideg test\u00e9t, \u00e9s Szilvi\u00e1val k\u00f6z\u00f6sen a g\u00e1t al\u00e1 pr\u00f3b\u00e1ljuk fesz\u00edteni. Tan\u00e1r \u00far is mell\u00e9nk \u00e1ll, minden s\u00faly\u00e1t a vasra veti, de a kamp\u00f3 mozdulatlan marad a szor\u00edt\u00e1sunkban. Hi\u00e1ba tal\u00e1ltuk meg a megold\u00e1st, a mi apr\u00f3 izmaink ehhez a harchoz kevesek; a vaskamp\u00f3 s\u00falya \u00e9s a meder ellen\u00e1ll\u00e1sa nagyobb n\u00e1lunk.<\/p><p>\u201eL\u00e1tod, fiam, az \u00e9sz felismerte a szersz\u00e1mot, de a test\u00fcnk elv\u00e9sz a feladat s\u00falya alatt\u201d \u2013 mondja T\u00fazok tan\u00e1r \u00far, \u00e9s a hangja olyan komoly, mint a k\u00f6zelg\u0151 \u00e9jszaka. N\u00e9zem a mancsaimat, amik tehetetlen\u00fcl cs\u00fasznak le a rozsd\u00e1s f\u00e9men, \u00e9s hallom a szomjas f\u00f6ld halk reccsen\u00e9seit. A kulcs itt van a kez\u00fcnkben, m\u00e9gis el\u00e9rhetetlen, am\u00edg nem tal\u00e1lunk egy er\u0151t, amely k\u00e9pes kimozd\u00edtani a t\u00e1jat a dermedts\u00e9g\u00e9b\u0151l. A v\u00edz mormogva torl\u00f3dik a h\u00e1tunk m\u00f6g\u00f6tt, \u00e9s minden elvesztegetett pillanat a r\u00f3ka l\u00e9pteit gyors\u00edtja a v\u00e9dtelen f\u00e9szkek fel\u00e9.<\/p>",
-            "title": null
-        },
-        "02b00992-5b63-4fc3-bd14-d131e67c2298": {
-            "theme": "green",
-            "components": [],
-            "outputs": [
-                "07ecc8bb-83f6-486f-9ee8-e588297c90bb"
-            ],
-            "content": "<p>A rozsd\u00e1s vasat szor\u00edtom, a kamp\u00f3 hideg foga m\u00e1r beleharapott egy s\u00f6t\u00e9t, iszapos gallyba, ami keresztbe \u00e1llt a v\u00edz \u00fatj\u00e1ban. Guli mellettem fesz\u00fcl, de ketten csak apr\u00f3 porszemek vagyunk a medret elz\u00e1r\u00f3 s\u00falyos torlasz ellen; a zsilip fel\u0151l \u00e9rkez\u0151 v\u00edz t\u00fcrelmetlen\u00fcl mormog a h\u00e1tunk m\u00f6g\u00f6tt, de a g\u00e1t nem t\u00e1gul. Guli ekkor a magasba v\u00e1g\u00f3dik, \u00e9s \u00e9les, fuvol\u00e1z\u00f3 h\u00edv\u00f3jelet ad ki, ami messzire zeng a l\u00e1zasan l\u00e9legz\u0151 puszta felett. Percek alatt tucatnyi gulip\u00e1n csap le mell\u00e9nk, a sz\u00e1rnyaik suhog\u00e1sa bet\u00f6lti a csendet, \u00e9s mindannyian a kamp\u00f3 sz\u00e1r\u00e1ba kapaszkodnak, hogy egy\u00fctt r\u00e1ngassuk ki a v\u00edz \u00fatj\u00e1b\u00f3l a neh\u00e9z akad\u00e1lyokat.<\/p><p>Minden er\u0151nket beleadjuk, a vas \u00e9lesen nyikordul a hordal\u00e9k szor\u00edt\u00e1s\u00e1ban, ahogy pr\u00f3b\u00e1ljuk kiford\u00edtani a meder m\u00e9ly\u00e9n fekv\u0151 r\u00f6nk\u00f6ket. Hi\u00e1ba a gulip\u00e1nok serege \u00e9s a k\u00f6z\u00f6s akarat, a kamp\u00f3 csak remeg a s\u00e1rban, de a gallyak s\u0171r\u0171n fon\u00f3dnak \u00f6ssze, mint egy g\u00f6rcs\u00f6s, makacs k\u00e9z, amit nem tudunk sz\u00e9tfesz\u00edteni. Az \u00f6sszefog\u00e1sunk gy\u00f6ny\u00f6r\u0171, de a s\u00faly, amit meg akarunk mozd\u00edtani, m\u00e9g n\u00e1lunk is nagyobb; a madarak kecses ereje kev\u00e9s a megk\u00f6v\u00fclt iszap ellen. \u00c9rzem a mancsaim alatt a remeg\u0151 f\u00e9met, \u00e9s tudom, hogy b\u00e1r a szersz\u00e1munk j\u00f3, a karunk m\u00e9g mindig t\u00fal gyenge ahhoz, hogy utat v\u00e1gjunk az \u00e9letnek.<\/p><p>\u201eKevesen vagyunk, Panni, a v\u00edz s\u00falya \u00e9s a f\u00f6ld akarata er\u0151sebb n\u00e1lunk!\u201d \u2013 ki\u00e1ltja Guli, mik\u00f6zben f\u00e1radtan roskad a meder sz\u00e9l\u00e9re. Ekkor Pille, a kis sz\u00e9ki lile l\u00e9p el\u0151 a hom\u00e1lyb\u00f3l, szemeiben szel\u00edd, de elsz\u00e1nt f\u00e9ny csillan. \u201eGuli, a te bar\u00e1taid a sz\u00e9l \u00e9s a v\u00edz urai, de az \u00e9n bar\u00e1taim a f\u00f6ldet ismerik a legjobban!\u201d<\/p>",
-            "title": null
-        },
-        "ecd0081f-adac-4c4e-ad0d-b1ecccccb296": {
-            "theme": "green",
-            "components": [],
-            "outputs": [
-                "cfb8e2f3-294c-467a-8e89-d24ce01b12a1"
-            ],
-            "content": "<p>A rozsd\u00e1s vaskamp\u00f3 \u00fagy fesz\u00fcl a meder iszapj\u00e1ban, mint egy elfeledett \u00f3ri\u00e1s g\u00f6rbe ujja, hi\u00e1ba r\u00e1ngatjuk Szilvi\u00e1val, a f\u00e9m hideg \u00e9s mozdulatlan marad, T\u00fazok tan\u00e1r \u00far pedig komoran n\u00e9zi, ahogy a v\u00edzt\u00fck\u00f6r tehetetlen\u00fcl megtorpan a torlasz el\u0151tt. Pille a partra szalad, \u00e9s v\u00e9kony, rezg\u0151 h\u00edv\u00f3jelet ad ki, ami v\u00e9gigsz\u00e1ntja a n\u00e9ma puszt\u00e1t; pillanatok alatt tucatnyi sz\u00e9ki lile t\u0171nik el\u0151 a homokbuck\u00e1k k\u00f6z\u00fcl. Az apr\u00f3 madarak szorgalmasan kaparj\u00e1k el az iszapot a fadarabok t\u00f6v\u00e9b\u0151l, \u00e9s egy\u00fctt fesz\u00fcl\u00fcnk neki a vasnak, de a gallyak s\u0171r\u0171n fon\u00f3dnak \u00f6ssze, mint egy g\u00f6rcs\u00f6s, makacs k\u00e9z. Hi\u00e1ba a sokas\u00e1g, a meder nem t\u00e1gul, az apr\u00f3 madarak szorgalmas kapar\u00e1sa elv\u00e9sz a feladat s\u00falya alatt. \u201ePanni, a l\u00e1bunk t\u00fal gyenge a g\u00e1thoz, a f\u00f6ld nem ereszti a zs\u00e1km\u00e1ny\u00e1t!\u201d \u2013 suttogja Pille kimer\u00fclten. T\u00fazok tan\u00e1r \u00far ekkor m\u00e9ly, zeng\u0151 hangon megsz\u00f3lal, mik\u00f6zben a t\u00e1voli, sek\u00e9lyebb v\u00edzfel\u00fcletek fel\u00e9 mutat: \u201eN\u00e9ha az apr\u00f3 l\u00e1bak mell\u00e9 hossz\u00fa g\u00e1zl\u00f3madarakra is sz\u00fcks\u00e9g van, akik nemcsak kaparni, de fesz\u00edteni is tudnak. Pille, Guli bar\u00e1tai, a gulip\u00e1nok a sz\u00e9l \u00e9s a v\u00edz urai. Az \u0151 felfel\u00e9 \u00edvelt cs\u0151r\u00fck \u00e9s erej\u00fck lehet az utols\u00f3 rem\u00e9ny\u00fcnk, hogy a vaskamp\u00f3 v\u00e9gre munk\u00e1hoz l\u00e1sson \u00e9s utat v\u00e1gjon az \u00e9letnek.\u201d<\/p>",
-            "title": null
-        },
-        "cc4f9157-3398-4f48-974f-1c6e7b89905c": {
-            "theme": "default",
-            "components": [],
-            "outputs": [],
-            "content": "<p>Szor\u00edtom a vaskamp\u00f3t, a lil\u00e9k apr\u00f3 l\u00e1bai vadul kaparj\u00e1k a sarat a l\u00e1bam k\u00f6r\u00fcl, Guli \u00e9s csapata pedig egyszerre fesz\u00fcl neki a rozsd\u00e1s sz\u00e1rnak. A leveg\u0151 megtelik a sz\u00e1rnyak suhog\u00e1s\u00e1val \u00e9s a megfesz\u00edtett izmok n\u00e9ma erej\u00e9vel, ahogy az \u00f6sszefog\u00e1sunk sz\u00e9tfesz\u00edti a torlaszt. Hirtelen egy m\u00e9ly, cuppan\u00f3 hang has\u00edt bele az \u00e9jszak\u00e1ba: a g\u00e1t megadja mag\u00e1t. A v\u00edz s\u00f6t\u00e9t, morajl\u00f3 \u00e1radatk\u00e9nt t\u00f6r \u00e1t a r\u00e9sen, mag\u00e1val sodorva a gallyakat, \u00e9s ez\u00fcst\u00f6s gy\u0171r\u0171k\u00e9nt \u00f6leli k\u00f6rbe a t\u00e1voli szigeteket, pont abban a pillanatban, amikor a r\u00f3ka mancsa m\u00e1r a partot \u00e9rn\u00e9. A ragadoz\u00f3 megtorpan a hirtelen m\u00e9ly\u00fcl\u0151 v\u00edz el\u0151tt, d\u00fch\u00f6sen villan a szeme a holdf\u00e9nyben, de a f\u00e9szkek m\u00e1r el\u00e9rhetetlenek sz\u00e1m\u00e1ra \u2013 a v\u00edz fala megv\u00e9dte a j\u00f6v\u0151t.<\/p><p>A Nagysz\u00e9ks\u00f3s-t\u00f3 fel\u0151l most nem forr\u00f3 por, hanem friss, nedves illat \u00e9rkezik, ami \u00e1tj\u00e1rja a bund\u00e1mat \u00e9s megnyugtatja a torkomat. Berci el\u00e9gedett b\u0151g\u00e9se messzire elhallatszik a dagonya fel\u0151l, Szilvia pedig az\u00fark\u00e9k \u00edvben rep\u00fcl \u00e1t a csillog\u00f3 v\u00edzt\u00fck\u00f6r felett, hirdetve a gy\u0151zelmet minden lak\u00f3nak. T\u00fazok tan\u00e1r \u00far mell\u00e9m \u00e1ll, sz\u00e1rnyaival mintha az eg\u00e9sz tavat \u00e1t\u00f6leln\u00e9. \u201eMa a puszta sz\u00edve \u00fajra dobbant egyet, fiam\u201d \u2013 suttogja, \u00e9s a tekintet\u00e9ben a v\u00e9gtelen nyugalom t\u00fckr\u00f6z\u0151dik. A f\u00f6ld m\u00e1r nem l\u00e1zasan liheg, hanem b\u00e9k\u00e9sen issza a megv\u00e1lt\u00e1st; k\u00f6z\u00f6sen visszaadtuk a t\u00e1jnak a lelk\u00e9t, \u00e9s a holnap reggel m\u00e1r a mad\u00e1rfi\u00f3k\u00e1k els\u0151, biztons\u00e1gos sz\u00e1rnypr\u00f3b\u00e1lgat\u00e1sair\u00f3l fog sz\u00f3lni.<\/p>",
-            "title": null
-        },
-        "630d71ca-547a-44e5-8ec4-830c3d1648ee": {
-            "theme": "purple",
-            "components": [],
-            "outputs": [
-                "6cac28c6-f940-4487-907a-91e1d71035df"
-            ],
-            "content": "<p>V\u00e9gre l\u00e1tom Bercit, ahogy neh\u00e9zkesen bel\u00e9p az els\u0151 s\u00f6t\u00e9t t\u00f3cs\u00e1ba, amit a zsilipb\u0151l \u00e9rkez\u0151 v\u00edz rajzolt a meder fenek\u00e9re. A s\u00e1r h\u00e1l\u00e1san cuppan a hatalmas pat\u00e1k alatt, \u00e9s l\u00e1tom, ahogy az \u00f3ri\u00e1s v\u00e9gre megnyugszik: a h\u0171v\u00f6s iszap bebor\u00edtja repedezett b\u0151r\u00e9t, el\u0171zve a b\u00f6g\u00f6ly\u00f6ket \u00e9s a l\u00e1zat. Berci neh\u00e9z test\u00e9vel g\u00e1zol a s\u0171r\u0171ben, a n\u00e1das sz\u00e1raz sz\u00e1rai pedig ropogva adj\u00e1k meg magukat a s\u00faly\u00e1nak, helyet szor\u00edtva a ny\u00edlt v\u00edznek \u00e9s a friss hajt\u00e1soknak.<\/p><p>T\u00fazok tan\u00e1r \u00far azonban nem a dagony\u00e1t n\u00e9zi, hanem a t\u00e1volabbi, kop\u00e1r szigeteket, ahol a gulip\u00e1nok \u00e9s a sz\u00e9ki lil\u00e9k f\u00e9szkelnek. \u201eA v\u00edz m\u00e9g t\u00fal lass\u00fa, Panni, \u00e9s a mederben felgy\u0171lt hordal\u00e9k megakasztja az \u00fatj\u00e1t\u201d \u2013 mondja, \u00e9s a hangja olyan m\u00e9ly, mint a k\u00f6zelg\u0151 vihar. \u201eN\u00e9zd ott a n\u00e1das sz\u00e9l\u00e9t! A v\u00f6r\u00f6s bund\u00e1k m\u00e1r v\u00e1rakoznak. Ha a v\u00edz nem \u00f6leli k\u00f6rbe a szigeteket s\u00f6t\u00e9ted\u00e9sig, a r\u00f3k\u00e1k sz\u00e1raz l\u00e1bbal s\u00e9t\u00e1lnak be a f\u00e9szkekhez, \u00e9s Guli\u00e9knak nem marad kit nevelni\u00fck.\u201d<\/p><p>\u00c9rzem, ahogy a torkomban dobog a sz\u00edvem a f\u00e9lelemt\u0151l a kis fi\u00f3k\u00e1k\u00e9rt. A v\u00edz ugyan elindult, de a meder tele van r\u00e9gi gallyakkal \u00e9s \u00f6ssze\u00e1llt s\u00e1rral, ami g\u00e1tat vet az \u00e1rad\u00e1snak a legfontosabb helyeken. Ha nem v\u00e1gunk utat a v\u00edznek a szigetek fel\u00e9, Berci boldogs\u00e1ga csak f\u00e9l gy\u0151zelem lesz, \u00e9s a puszta ma \u00e9jjel \u00fajra elvesz\u00edt valamit, ami p\u00f3tolhatatlan.<\/p>",
-            "title": null
-        }
+    "630fdb8a-48d6-473e-9974-2460f7eb2b41": {
+      "name": "1. történet",
+      "notes": [],
+      "jumpers": [],
+      "branches": [],
+      "elements": [
+        "e3d27f29-240f-42ff-84a5-77e3e0727d38",
+        "fe971f02-67fc-4743-94ec-848b88571d20",
+        "fda49ff1-f479-4992-996e-6d647135fce7",
+        "3a94d1f5-90a1-47d0-ae55-538698518a54",
+        "4f6e511d-5685-48a3-8987-6e1f68a6a176",
+        "58d89f79-b210-44d0-97c0-da7548c44bea",
+        "4eb5d1d8-1300-4455-975d-58734ee1c3ab",
+        "1a172247-7afa-40b9-89d6-8c0e0da50723",
+        "7abcf11a-98fb-4bd5-9aef-1e74986e647a",
+        "fa5c0e5e-b53e-4615-9813-b5e86f571a8f",
+        "886e56eb-a8ea-41e0-a3cc-b617589e586a",
+        "b5536964-f6e0-4dc0-b80c-b3bd575287f2",
+        "02b00992-5b63-4fc3-bd14-d131e67c2298",
+        "ecd0081f-adac-4c4e-ad0d-b1ecccccb296",
+        "cc4f9157-3398-4f48-974f-1c6e7b89905c",
+        "630d71ca-547a-44e5-8ec4-830c3d1648ee"
+      ],
+      "connections": [
+        "8022a626-6585-4482-8711-f02117bf7ea3",
+        "ba84953b-3836-4a8a-bae8-684ad7d5a743",
+        "acda64e4-3d8a-4353-858f-fd27d886a684",
+        "f8600f3b-bb83-4816-9914-0e96b713e7f2",
+        "85f356e9-3358-4735-a546-a6b589a3392a",
+        "3ef3d88b-4257-4401-b372-e2888eab8eec",
+        "3f66392f-a5b1-4cc4-be9a-882964beb036",
+        "b005bb30-c076-42a3-a654-403e725039e1",
+        "e514296f-c259-48bd-a49f-3a176771a391",
+        "a5619d61-653b-475c-ae5c-5a897899e1ca",
+        "f6536b5b-242f-4111-8bdc-d1634bff4e8d",
+        "95428eb7-eb78-4855-be75-89cb58a83503",
+        "d53148f0-0257-4ea8-92ef-44dc9a39efcb",
+        "bbb55b0e-6193-43ac-a2e7-dca390f63234",
+        "e7d9d119-85ae-4344-a253-66350b4ae559",
+        "31084b25-a558-4383-9e95-6177c413d759",
+        "07ecc8bb-83f6-486f-9ee8-e588297c90bb",
+        "cfb8e2f3-294c-467a-8e89-d24ce01b12a1",
+        "1537a160-1c83-4d17-8e70-2249380fe731",
+        "6cac28c6-f940-4487-907a-91e1d71035df",
+        "cfff1bbe-d742-44a4-b26d-da046ca01a5c"
+      ]
     },
-    "jumpers": {},
-    "connections": {
-        "118bf399-7f7f-4f6b-8e91-ac863ba81355": {
-            "type": "Straight",
-            "theme": "default",
-            "sourceid": "08ceed66-0613-4d20-8e50-e9b0d08a1082",
-            "targetid": "4b9b4a07-4244-4631-bee4-cfd19aa3ef94",
-            "sourceType": "elements",
-            "targetFace": "left",
-            "targetType": "elements",
-            "label": "<p>Tov\u00e1bb<\/p>"
-        },
-        "3ef3d88b-4257-4401-b372-e2888eab8eec": {
-            "type": "Straight",
-            "theme": "gold",
-            "sourceid": "fe971f02-67fc-4743-94ec-848b88571d20",
-            "targetid": "4f6e511d-5685-48a3-8987-6e1f68a6a176",
-            "sourceType": "elements",
-            "targetFace": "left",
-            "targetType": "elements",
-            "label": "<p>T\u00fazok tan\u00e1r \u00far seg\u00edts\u00e9g\u00e9vel er\u0151s \u00e1gakat gy\u0171jt\u00fcnk, hogy emel\u0151k\u00e9nt haszn\u00e1lva fesz\u00edts\u00fck ki a kereket.<\/p>"
-        },
-        "3f66392f-a5b1-4cc4-be9a-882964beb036": {
-            "type": "Straight",
-            "theme": "cyan",
-            "sourceid": "4f6e511d-5685-48a3-8987-6e1f68a6a176",
-            "targetid": "fe971f02-67fc-4743-94ec-848b88571d20",
-            "sourceType": "elements",
-            "targetFace": "right",
-            "targetType": "elements",
-            "label": "<p>M\u00e1ssal pr\u00f3b\u00e1lkozunk<\/p>"
-        },
-        "f8600f3b-bb83-4816-9914-0e96b713e7f2": {
-            "type": "Straight",
-            "theme": "orange",
-            "sourceid": "fe971f02-67fc-4743-94ec-848b88571d20",
-            "targetid": "3a94d1f5-90a1-47d0-ae55-538698518a54",
-            "sourceType": "elements",
-            "targetFace": "left",
-            "targetType": "elements",
-            "label": "<p>Megkeress\u00fck Bercit, a bivalyt, h\u00e1tha az \u0151 hatalmas ereje el\u00e9g a rozsd\u00e1s ker\u00e9k elforgat\u00e1s\u00e1hoz.<\/p>"
-        },
-        "5609fc97-99ed-46bf-a65e-546bd5b1923d": {
-            "type": "Straight",
-            "theme": "default",
-            "sourceid": "bf4ac53a-9afb-417e-9672-e9c9f8dd8681",
-            "targetid": "c0cf9637-de11-4dc6-aaa3-e9649d56b434",
-            "sourceType": "elements",
-            "targetFace": "left",
-            "targetType": "elements",
-            "label": "<p>Egy nagy kamr\u00e1t \u00e1sok a legm\u00e9lyebb ponton, hogy ott v\u00e9szeljem \u00e1t a d\u00e9li h\u0151s\u00e9get.<\/p>"
-        },
-        "8022a626-6585-4482-8711-f02117bf7ea3": {
-            "type": "Straight",
-            "theme": "default",
-            "sourceid": "e3d27f29-240f-42ff-84a5-77e3e0727d38",
-            "targetid": "fe971f02-67fc-4743-94ec-848b88571d20",
-            "sourceType": "elements",
-            "targetFace": "left",
-            "targetType": "elements",
-            "label": "<p>Megkeress\u00fck a r\u00e9gi zsilipet, h\u00e1tha elz\u00e1r\u00e1s\u00e1val meg\u00e1ll\u00edthatjuk a marad\u00e9k v\u00edz elsziv\u00e1rg\u00e1s\u00e1t.<\/p>"
-        },
-        "85f356e9-3358-4735-a546-a6b589a3392a": {
-            "type": "Straight",
-            "theme": "cyan",
-            "sourceid": "3a94d1f5-90a1-47d0-ae55-538698518a54",
-            "targetid": "fe971f02-67fc-4743-94ec-848b88571d20",
-            "sourceType": "elements",
-            "targetFace": "right",
-            "targetType": "elements",
-            "label": "<p>M\u00e1ssal pr\u00f3b\u00e1lkozunk<\/p>"
-        },
-        "91363283-a5d3-4362-b4c3-d1c2842663fc": {
-            "type": "Straight",
-            "theme": "default",
-            "sourceid": "6716312d-7f05-4ef9-8954-68362d2012be",
-            "targetid": "bf4ac53a-9afb-417e-9672-e9c9f8dd8681",
-            "sourceType": "elements",
-            "targetFace": "left",
-            "targetType": "elements",
-            "label": "<p>M\u00e9lyebb j\u00e1ratokat \u00e1sok, hogy el\u00e9rjem a talajv\u00edz marad\u00e9k\u00e1t a gy\u00f6kerekn\u00e9l.<\/p>"
-        },
-        "95428eb7-eb78-4855-be75-89cb58a83503": {
-            "type": "Straight",
-            "theme": "pink",
-            "sourceid": "4eb5d1d8-1300-4455-975d-58734ee1c3ab",
-            "targetid": "7abcf11a-98fb-4bd5-9aef-1e74986e647a",
-            "sourceType": "elements",
-            "targetFace": "left",
-            "targetType": "elements",
-            "label": null
-        },
-        "a5619d61-653b-475c-ae5c-5a897899e1ca": {
-            "type": "Straight",
-            "theme": "brown",
-            "sourceid": "58d89f79-b210-44d0-97c0-da7548c44bea",
-            "targetid": "1a172247-7afa-40b9-89d6-8c0e0da50723",
-            "sourceType": "elements",
-            "targetFace": "left",
-            "targetType": "elements",
-            "label": "<p>Haszn\u00e1ljuk \u00fajra az emel\u0151k\u00e9nt szolg\u00e1l\u00f3 er\u0151s \u00e1gakat, amikkel most m\u00e1r k\u00f6nnyebben mozd\u00edthatunk a f\u00e9men.<\/p>"
-        },
-        "acda64e4-3d8a-4353-858f-fd27d886a684": {
-            "type": "Straight",
-            "theme": "cyan",
-            "sourceid": "fda49ff1-f479-4992-996e-6d647135fce7",
-            "targetid": "fe971f02-67fc-4743-94ec-848b88571d20",
-            "sourceType": "elements",
-            "targetFace": "right",
-            "targetType": "elements",
-            "label": "<p>M\u00e1ssal pr\u00f3b\u00e1lkozunk<\/p>"
-        },
-        "b005bb30-c076-42a3-a654-403e725039e1": {
-            "type": "Straight",
-            "theme": "moss",
-            "sourceid": "fe971f02-67fc-4743-94ec-848b88571d20",
-            "targetid": "58d89f79-b210-44d0-97c0-da7548c44bea",
-            "sourceType": "elements",
-            "targetFace": "left",
-            "targetType": "elements",
-            "label": "<p>Elindulunk a k\u00f6zeli tany\u00e1ra, hogy az emberekt\u0151l k\u00e9rj\u00fcnk seg\u00edts\u00e9get vagy egy kis ken\u0151olajat a rozsda ellen.<\/p>"
-        },
-        "ba84953b-3836-4a8a-bae8-684ad7d5a743": {
-            "type": "Straight",
-            "theme": "brown",
-            "sourceid": "fe971f02-67fc-4743-94ec-848b88571d20",
-            "targetid": "fda49ff1-f479-4992-996e-6d647135fce7",
-            "sourceType": "elements",
-            "targetFace": "left",
-            "targetType": "elements",
-            "label": "<p>Szilvia vezet\u00e9s\u00e9vel vizet hordunk a cs\u0151r\u00fcnkben \u00e9s a bund\u00e1nkban, hogy fel\u00e1ztassuk az iszapot.<\/p><p><\/p>"
-        },
-        "e514296f-c259-48bd-a49f-3a176771a391": {
-            "type": "Straight",
-            "theme": "orange",
-            "sourceid": "58d89f79-b210-44d0-97c0-da7548c44bea",
-            "targetid": "4eb5d1d8-1300-4455-975d-58734ee1c3ab",
-            "sourceType": "elements",
-            "targetFace": "left",
-            "targetType": "elements",
-            "label": "<p>Megkeress\u00fck Bercit, a bivalyt, h\u00e1tha az \u0151 hatalmas ereje el\u00e9g a rozsd\u00e1s ker\u00e9k elforgat\u00e1s\u00e1hoz.<\/p>"
-        },
-        "f6536b5b-242f-4111-8bdc-d1634bff4e8d": {
-            "type": "Straight",
-            "theme": "pink",
-            "sourceid": "1a172247-7afa-40b9-89d6-8c0e0da50723",
-            "targetid": "7abcf11a-98fb-4bd5-9aef-1e74986e647a",
-            "sourceType": "elements",
-            "targetFace": "left",
-            "targetType": "elements",
-            "label": null
-        },
-        "d53148f0-0257-4ea8-92ef-44dc9a39efcb": {
-            "targetFace": "left",
-            "type": "Straight",
-            "targetType": "elements",
-            "targetid": "fa5c0e5e-b53e-4615-9813-b5e86f571a8f",
-            "sourceid": "7abcf11a-98fb-4bd5-9aef-1e74986e647a",
-            "theme": "blue",
-            "sourceType": "elements",
-            "label": "<p>\u00c9p\u00edts\u00fcnk \u00e1gakb\u00f3l \u00e9s s\u00e1rb\u00f3l csalikupacokat.<\/p>"
-        },
-        "bbb55b0e-6193-43ac-a2e7-dca390f63234": {
-            "targetFace": "left",
-            "type": "Straight",
-            "targetType": "elements",
-            "targetid": "886e56eb-a8ea-41e0-a3cc-b617589e586a",
-            "sourceid": "fa5c0e5e-b53e-4615-9813-b5e86f571a8f",
-            "theme": "blue",
-            "sourceType": "elements",
-            "label": null
-        },
-        "cfb8e2f3-294c-467a-8e89-d24ce01b12a1": {
-            "targetFace": "left",
-            "type": "Straight",
-            "targetType": "elements",
-            "targetid": "cc4f9157-3398-4f48-974f-1c6e7b89905c",
-            "sourceid": "ecd0081f-adac-4c4e-ad0d-b1ecccccb296",
-            "theme": "default",
-            "sourceType": "elements",
-            "label": "<p>H\u00edvjuk a gulip\u00e1nok seg\u00edts\u00e9g\u00e9t is.<\/p>"
-        },
-        "1537a160-1c83-4d17-8e70-2249380fe731": {
-            "targetFace": "right",
-            "type": "Straight",
-            "targetType": "elements",
-            "targetid": "630d71ca-547a-44e5-8ec4-830c3d1648ee",
-            "sourceid": "886e56eb-a8ea-41e0-a3cc-b617589e586a",
-            "theme": "purple",
-            "sourceType": "elements",
-            "label": "<p>Keress\u00fck meg gyorsan a j\u00f3 megold\u00e1st.<\/p>"
-        },
-        "e7d9d119-85ae-4344-a253-66350b4ae559": {
-            "targetFace": "left",
-            "type": "Straight",
-            "targetType": "elements",
-            "targetid": "02b00992-5b63-4fc3-bd14-d131e67c2298",
-            "sourceid": "b5536964-f6e0-4dc0-b80c-b3bd575287f2",
-            "theme": "green",
-            "sourceType": "elements",
-            "label": "<p>K\u00e9rj\u00fck Guli seg\u00edts\u00e9g\u00e9t.<\/p>"
-        },
-        "31084b25-a558-4383-9e95-6177c413d759": {
-            "targetFace": "left",
-            "type": "Straight",
-            "targetType": "elements",
-            "targetid": "ecd0081f-adac-4c4e-ad0d-b1ecccccb296",
-            "sourceid": "b5536964-f6e0-4dc0-b80c-b3bd575287f2",
-            "theme": "green",
-            "sourceType": "elements",
-            "label": "<p>K\u00e9rj\u00fck Pille seg\u00edts\u00e9g\u00e9t.<\/p>"
-        },
-        "07ecc8bb-83f6-486f-9ee8-e588297c90bb": {
-            "targetFace": "left",
-            "type": "Straight",
-            "targetType": "elements",
-            "targetid": "cc4f9157-3398-4f48-974f-1c6e7b89905c",
-            "sourceid": "02b00992-5b63-4fc3-bd14-d131e67c2298",
-            "theme": "default",
-            "sourceType": "elements",
-            "label": "<p>H\u00edvjuk a sz\u00e9ki lil\u00e9k csapat\u00e1t is.<\/p>"
-        },
-        "6cac28c6-f940-4487-907a-91e1d71035df": {
-            "targetFace": "left",
-            "type": "Straight",
-            "targetType": "elements",
-            "targetid": "b5536964-f6e0-4dc0-b80c-b3bd575287f2",
-            "sourceid": "630d71ca-547a-44e5-8ec4-830c3d1648ee",
-            "theme": "green",
-            "sourceType": "elements",
-            "label": "<p>Tiszt\u00edtsuk meg az utat a madarak f\u00e9szkel\u0151helyei fel\u00e9.<\/p>"
-        },
-        "cfff1bbe-d742-44a4-b26d-da046ca01a5c": {
-            "targetFace": "left",
-            "type": "Straight",
-            "targetType": "elements",
-            "targetid": "b5536964-f6e0-4dc0-b80c-b3bd575287f2",
-            "sourceid": "7abcf11a-98fb-4bd5-9aef-1e74986e647a",
-            "theme": "green",
-            "sourceType": "elements",
-            "label": "<p>Tiszt\u00edtsuk meg az utat a madarak f\u00e9szkel\u0151helyei fel\u00e9.<\/p>"
-        }
+    "a1d6536d-5104-440a-bfc1-c5189026a510": {
+      "name": "Kezdő próbálkozás",
+      "notes": [],
+      "jumpers": [],
+      "branches": [],
+      "elements": [
+        "08ceed66-0613-4d20-8e50-e9b0d08a1082",
+        "4b9b4a07-4244-4631-bee4-cfd19aa3ef94"
+      ],
+      "connections": [
+        "118bf399-7f7f-4f6b-8e91-ac863ba81355"
+      ]
     },
-    "branches": {},
-    "components": {
-        "06cf39c0-44c5-4721-85bb-34c812ac4beb": {
-            "attributes": [],
-            "name": "\u00dcrge Panni"
-        },
-        "0b36838c-9009-43a8-9744-2bfbf455337b": {
-            "attributes": [],
-            "name": "Szalak\u00f3ta Szilvia"
-        },
-        "65005bda-15d0-41c5-867f-68c118829f08": {
-            "root": true,
-            "children": [
-                "06cf39c0-44c5-4721-85bb-34c812ac4beb",
-                "0b36838c-9009-43a8-9744-2bfbf455337b",
-                "6b236d74-f906-4def-badc-2c1e92743add"
-            ],
-            "name": "Root"
-        },
-        "6b236d74-f906-4def-badc-2c1e92743add": {
-            "attributes": [],
-            "name": "T\u00fazok tan\u00e1r \u00far"
-        }
+    "ad76224a-16b1-4af0-bea2-e15474d225dc": {
+      "name": "Sztori teszt1",
+      "notes": [],
+      "jumpers": [],
+      "branches": [],
+      "elements": [
+        "6716312d-7f05-4ef9-8954-68362d2012be",
+        "bf4ac53a-9afb-417e-9672-e9c9f8dd8681",
+        "c0cf9637-de11-4dc6-aaa3-e9649d56b434"
+      ],
+      "connections": [
+        "91363283-a5d3-4362-b4c3-d1c2842663fc",
+        "5609fc97-99ed-46bf-a65e-546bd5b1923d"
+      ]
     },
-    "attributes": {},
-    "assets": {
-        "187bf22a-f930-43e6-96e9-f7d3fd7b1f96": {
-            "name": "Gemini_Generated_Image_dnun7hdnun7hdnun.webp",
-            "type": "image"
-        },
-        "647d0495-341f-42b2-8788-b47dace22bf8": {
-            "root": true,
-            "children": [
-                "187bf22a-f930-43e6-96e9-f7d3fd7b1f96",
-                "941f16e4-6db5-4650-af6f-8ea3129bd3a6"
-            ]
-        },
-        "941f16e4-6db5-4650-af6f-8ea3129bd3a6": {
-            "name": "Gemini_Generated_Image_27zat527zat527za.webp",
-            "type": "image"
+    "d079dad4-e594-45f7-89c3-34f21421b029": {
+      "name": "Tesztek",
+      "children": [
+        "ad76224a-16b1-4af0-bea2-e15474d225dc",
+        "a1d6536d-5104-440a-bfc1-c5189026a510"
+      ]
+    }
+  },
+  "notes": {},
+  "elements": {
+    "08ceed66-0613-4d20-8e50-e9b0d08a1082": {
+      "theme": "default",
+      "assets": {
+        "cover": {
+          "id": "941f16e4-6db5-4650-af6f-8ea3129bd3a6"
         }
+      },
+      "outputs": [
+        "118bf399-7f7f-4f6b-8e91-ac863ba81355"
+      ],
+      "components": [],
+      "content": "<p>Mórahalom határában, ahol a homoki sztyeppék találkoznak a nedves vizenyős rétekkel, különös társaság gyülekezett a Nagyszéksós-tónál. Túzok Tanár úr, a puszta tekintélyes őre, szárnyait megigazítva várta tanítványait.</p>",
+      "title": "<p>Mórahalom határában...</p>"
     },
-    "variables": {
-        "747d0495-341f-42b2-8788-b47dace22bf8": {
-            "root": true,
-            "children": []
+    "1a172247-7afa-40b9-89d6-8c0e0da50723": {
+      "theme": "brown",
+      "outputs": [
+        "f6536b5b-242f-4111-8bdc-d1634bff4e8d"
+      ],
+      "components": [],
+      "content": "<p>A talpaimmal szorosan átkulcsolom a vastag tölgyfa ágat, amit Túzok tanár úrral közösen illesztettünk a fogaskerekek közé. Az olaj, amit a tanyáról hoztunk, feketén csillog a rozsdás mélyedésekben, mintha csak arra várna, hogy végre munkához lásson. Megfeszítem minden apró izmomat, a tanár úr pedig széles szárnyaival és nehéz testével segít nekem; érzem, ahogy a fa rostjai halkan nyöszörögnek a nyomás alatt, de most nem a törés, hanem a győzelem íze van a levegőben.</p><p>Hirtelen egy éles pattanás hasít bele a puszta csendjébe, és a nehéz kerék lassan elfordul a kezünk alatt. A zsilip fémes szája, ami eddig szorosan zárva maradt a szomjazó táj előtt, most megnyílik, és a mélyből feltör az első, gurgulázó vízsugár. A víz illata úgy csap meg minket, mint egy hűvös érintés a déli hőségben; ahogy végre megkezdi útját a Nagyszéksós-tó repedezett medre felé.</p><p>Szalakóta Szilvia ujjongva csap le mellénk a magasból, azúrkék szárnyai megvillannak a felverődő vízcseppek fényében. „Nézzétek, a föld inni kezd!” – rikoltja, és valóban, a porszáraz meder mohón nyeli el az első kortyokat, mély, sötét foltokat rajzolva a talajra. Túzok tanár úr bölcs tekintettel figyeli az áradást; tudja, hogy ez még csak a kezdet, de a tó szíve ma újra dobbant egyet.</p>",
+      "title": "<p>2.2/2</p>"
+    },
+    "3a94d1f5-90a1-47d0-ae55-538698518a54": {
+      "theme": "orange",
+      "outputs": [
+        "85f356e9-3358-4735-a546-a6b589a3392a"
+      ],
+      "components": [],
+      "content": "<p>Bercihez sietek, aki a tó szélén áll, feje mélyre lóg, szeméből mély bágyadtság árad. A bőre úgy feszül a hátán, mint a napon felejtett, kiszáradt sár, a bögölyök pedig sűrű felhőben keringenek az elgyötört teste körül. Elvezetem a zsiliphez, ő pedig nehézkesen mellém vánszorog. Megmutatom neki a rozsdás kereket, a bivaly pedig hatalmas erejét megfeszítve, széles homlokával nekitámaszkodik a hideg vasnak.</p><p>A szerkezet élesen felcsikordul, egyetlen fájdalmas fémes hangot ad, de a kerék meg sem moccan. Berci lábai tehetetlenül megcsúsznak a porladó talajon, nehéz zihálása messzire elhallatszik a néma pusztában. A hatalmas állat végül megáll, remegő inakkal, habzó szájjal néz rám; az ereje, ami máskor hegyeket mozgatna meg, most kevés a hőségtől megkövült szerkezet ellen.</p><p>Túzok tanár úr szomorúan hajtja le a fejét, miközben Berci fájdalmasan bőg egyet, és visszaballag az árnyék nélküli nádas szélére. „A puszta most olyan kemény, mint az acél, Panni” – suttogja a mentorom. „A nyers erő néha csak még jobban befeszíti a rozsdát, ha a táj nem akar engedni.” Egyedül maradtunk a néma zsilipnél, és a nap úgy nehezedik a hátunkra, mint egy izzó vaskupola.</p>",
+      "title": "<p>2.1/1</p>"
+    },
+    "4b9b4a07-4244-4631-bee4-cfd19aa3ef94": {
+      "theme": "default",
+      "assets": {
+        "cover": {
+          "id": "187bf22a-f930-43e6-96e9-f7d3fd7b1f96"
         }
+      },
+      "outputs": [],
+      "components": [],
+      "content": "<p>— Megjöttünk! — sikkantott fel Ürge Panni, ahogy kidugta az orrát a homokból. Mellette egy égszínkék villanással landolt Szalakóta Szilvia.</p>",
+      "title": null
     },
-    "conditions": {},
-    "name": "Csupasziv1",
-    "cover": null
+    "4eb5d1d8-1300-4455-975d-58734ee1c3ab": {
+      "theme": "orange",
+      "outputs": [
+        "95428eb7-eb78-4855-be75-89cb58a83503"
+      ],
+      "components": [],
+      "content": "<p>Berci nehézkesen vánszorog a zsiliphez, patái nyomán porzik a szikes föld. Szemei fáradtak a hőségtől, de amikor meglátja az olajtól feketálló fogaskerekeket, megfeszíti hatalmas nyakizmait. Szilvia bíztatóan csattog a szárnyával a bivaly szarvai között, én pedig a zsilip kávája mellé húzódva figyelem, ahogy az óriás széles homlokával nekitámaszkodik a vasnak. A levegő megremeg a feszültségtől, Berci zihálása pedig megtölti a csatorna némaságát.</p><p>Hirtelen éles, de már nem fájdalmas csikordulás hallatszik. A kerék, ami eddig mozdíthatatlanul dacolt velünk, lassan forogni kezd a bivaly ereje alatt. Az olaj tette a dolgát: a rozsda elengedte a fémet. Egy mély, bugyogó hang tör fel a mélyből, és a zsilip alatt megcsillan az első vékony, ezüstös vízsugár. A víz illata azonnal szétárad a forróságban, friss és édes, mint egy rég elfeledett ígéret.</p><p>Túzok tanár úr elégedetten bólint, miközben Berci megkönnyebbülten fúj egyet az orrán keresztül, apró porfelhőt kavarva. „Látod, Panni, az erő és a gondoskodás együtt nyitja meg a jövőt” – mondja bölcsen, miközben a víz lassan hízni kezd a csatorna alján. A táj lázas lélegzése egy pillanatra megnyugszik, ahogy az első korty nedvesség eléri a repedezett, szomjas földet.</p>",
+      "title": "<p>2.2/1</p>"
+    },
+    "4f6e511d-5685-48a3-8987-6e1f68a6a176": {
+      "theme": "gold",
+      "outputs": [
+        "3f66392f-a5b1-4cc4-be9a-882964beb036"
+      ],
+      "components": [],
+      "content": "<p>Túzok tanár úrral a közeli erdősáv szélére sietünk, ahol a kiszáradt fák szürke ágaikat nyújtják az ég felé, mintha vízért könyörögnének. Kiválasztjuk a legvastagabb, legszívósabb darabokat, és visszavonszoljuk őket a zsiliphez, miközben a talpamat szinte égeti a porsivatag. Beékeljük az ágat a fogaskerekek közé, és minden súlyunkkal ránehezedünk, bízva a fizika törvényeiben. Hallom, ahogy a fa rostjai megfeszülnek, Túzok tanár úr pedig mélyet sóhajt: „Az ész néha hatalmasabb a nyers erőnél, Panni, de a rozsda néha még az észnél is makacsabb.”</p><p>Egy hirtelen, éles reccsenés hasít bele a puszta csendjébe. Az ág kettétörik a kezeink között, mint egy száraz nádszál, és mi tehetetlenül huppanunk a forró porba. A zsilip kereke továbbra is némán, mozdulatlanul vigyorog ránk a rozsdás fogaival; a táj bezárta kapuit előttünk. Szilvia a fejem fölött köröz, árnyéka pillanatra átsuhan a repedezett földön, de a fém nem enged. Úgy tűnik, a mi apró világunk eszközei már nem elegendőek ahhoz, hogy újra életet leheljünk a tóba.</p><p>Nézem a tikkadt horizontot, ahol a délibáb úgy táncol, mintha gúnyolódna rajtunk. Berci messziről felbőg, a hangja tele van fájdalommal, Szilvia pedig kétségbeesetten csapkod a szárnyaival. „Lássuk be, Panni” – mondja halk, komoly hangon Túzok tanár úr, és a távoli tanyaépület felé néz, aminek a bádogteteje vakítóan csillog a napon. „Olyan segítség kell, aminek nem csak ereje, de szerszámai is vannak a rozsda ellen.”</p>",
+      "title": "<p>2.1/3</p>"
+    },
+    "58d89f79-b210-44d0-97c0-da7548c44bea": {
+      "theme": "moss",
+      "outputs": [
+        "e514296f-c259-48bd-a49f-3a176771a391",
+        "a5619d61-653b-475c-ae5c-5a897899e1ca"
+      ],
+      "components": [],
+      "content": "<p>Megállunk a tanya kerítésénél, ahol a homokot nemcsak a szél, hanem az emberi lábnyomok is felkavarják. A szívem úgy ver a bordáim között, mint egy csapdába esett kismadár, mert az emberek világa számunkra mindig rejtélyes és félelmetes. De Szilvia nem habozik, egyenesen a gazda válla mellé száll a kerítésre, én pedig Túzok tanár úr szárnya mögé húzódva figyelem az öreg férfit. Az arca olyan barázdált, mint a kiszáradt tómeder, de amikor ránk néz, a szemeiben nem vadásztüzet, hanem ugyanazt a nehéz szomorúságot látom, amit a miénkben. Túzok tanár úr méltóságteljesen bólint, a gazda pedig, mintha értené a puszta néma segélykiáltását, beballag a fészerbe, és egy sűrű, fekete folyadékkal teli kannával tér vissza.</p><p>Visszaérve a zsiliphez, a nehéz illatú olajat óvatosan a fogaskerekek közé csorgatom. A rozsda mohón issza be a folyadékot, mintha maga a vas is szomjazna a megváltásra. Ahogy a fekete cseppek elérik a szerkezet legmélyebb pontjait, a fém színe megváltozik, és a fojtogató, vörös páncél engedni kezd a szorításából. Érzem a mancsom alatt, ahogy a kerék már nem ellenségesen merev, hanem várakozón feszül; az olaj utat tört a mozdulatlanságban. Most már nem a rozsdával harcolunk, hanem a zsilip súlyával, ami készen áll arra, hogy újra életet engedjen a tájba.</p>",
+      "title": "<p>2.1/4</p>"
+    },
+    "6716312d-7f05-4ef9-8954-68362d2012be": {
+      "theme": "default",
+      "outputs": [
+        "91363283-a5d3-4362-b4c3-d1c2842663fc"
+      ],
+      "components": [],
+      "content": "<p>A talpaim alatt a föld már nem hűvös menedék, hanem egy lázasan lélegző táj. Mélyebbre ások, mint tavaly, de a nedvesség illata egyre távolodik, mintha a világ elfelejtette volna a víz ízét. A fűszálak, amik régen lédús erdőként vettek körül, most sárga szilánkokként karcolják az oldalam. Minden rágás érdes és porszagú.</p><p>Fent a peremen Szalakóta várakozik, tollai között a távoli vizek párájának hűlt helyével. Azt mondja, a csatornák medre már csak repedezett seb a puszta testén, és a tanyák vályúi is konganak az ürességtől. Túzok, a bölcs, csak áll a remegő forróságban, és a távolt nézi. Szerinte a puszta nem halt meg, csak elaludt a szomjúságtól, és várja, hogy valaki újra megtanítsa a földet a víz megtartására.</p>",
+      "title": "<p>1.</p>"
+    },
+    "7abcf11a-98fb-4bd5-9aef-1e74986e647a": {
+      "theme": "pink",
+      "outputs": [
+        "d53148f0-0257-4ea8-92ef-44dc9a39efcb",
+        "cfff1bbe-d742-44a4-b26d-da046ca01a5c"
+      ],
+      "components": [],
+      "content": "<p>Végre látom Bercit, ahogy nehézkesen belép az első sötét tócsába, amit a zsilipből érkező víz rajzolt a meder fenekére. A sár hangosan cuppan a hatalmas paták alatt, és látom, ahogy az óriás bivaly végre megnyugszik: a hűvös iszap beborítja repedezett bőrét, elűzve a bögölyöket és a lázat. Berci nehéz testével gázol a sűrűben, a nádas száraz szárai pedig ropogva adják meg magukat a súlyának, helyet szorítva a víznek és a friss hajtásoknak.</p><p>Túzok tanár úr azonban nem a dagonyát nézi, hanem a távolabbi, kopár szigeteket, ahol a gulipánok és a széki lilék fészkelnek. „A víz még túl lassú, Panni, és a mederben felgyűlt hordalék megakasztja az útját” – mondja, és a hangja olyan mély, mint a közelgő vihar. „Nézd ott a nádas szélét! A vörös bundák már várakoznak. Ha a víz nem öleli körbe a szigeteket sötétedésig, a rókák száraz lábbal sétálnak be a fészkekhez, és Guliéknak nem marad kit nevelniük.”</p><p>Érzem, ahogy a torkomban dobog a szívem a félelemtől a kis fiókákért. A víz ugyan elindult, de a meder tele van régi gallyakkal és összeállt sárral, ami gátat vet az áradásnak a legfontosabb helyeken. Ha nem vágunk utat a víznek a szigetek felé, Berci boldogsága csak fél győzelem lesz, és a puszta ma éjjel újra elveszít valamit, ami pótolhatatlan.</p>",
+      "title": "<p>2.3</p>"
+    },
+    "bf4ac53a-9afb-417e-9672-e9c9f8dd8681": {
+      "theme": "default",
+      "outputs": [
+        "5609fc97-99ed-46bf-a65e-546bd5b1923d"
+      ],
+      "components": [],
+      "content": "<p>Feszülnek az izmaim, ahogy a kiszáradt földet feszítem. A felszín már csak forró por, de lent, a gyökerek között még ott bujkál a hűvös álom. A karmaim alatt a homok csikorog, mintha a puszta tiltakozna a bolygatás ellen. Minden egyes centiméterért meg kell küzdenem, de a szomjúság hajt előre, mélyebbre, ahol a növények még kapaszkodnak az életbe.</p><p>Szalakóta fentről figyeli a porfelhőt, amit kavarok. Azt mondja, a közeli tanyák mellett a kutak már csak furcsa, mély sebek a földön, amikből nem jön fel többé a víz éneke. Túzok a távolban egy magányos bokor árnyékába húzódik. Szerinte hiába ások mélyre, ha a felhők elfelejtik az utat hozzánk, a föld végül egészen kőkeménnyé válik, és elzárja előlünk a kincseit.</p>",
+      "title": "<p>1.1</p>"
+    },
+    "c0cf9637-de11-4dc6-aaa3-e9649d56b434": {
+      "theme": "default",
+      "outputs": [],
+      "components": [],
+      "content": "<p></p><p>Ürge naplója: Mélyre ástam, oda, ahol a világ zaja már csak tompa morajlás. A kamra tágas, a falai hűvösek, de ez a hűvös nem éltet, csak várakozik. A sötétben hallom a saját szívverésemet; minden dobbanás egy-egy kortyot követelne, amit nem tudok megadni neki. A felszín felettem lázasan lüktet, a nap kegyetlen ujjaival a bejáratig nyúl, mintha ki akarna rángatni az árnyékból.</p><p>Kintről Szalakóta hangja szűrődik be, vékonyan és élesen. Azt mondja, a közeli gyepeken a fű már nem hajlong, hanem porrá omlik minden lépésnél. Túzok a járatom közelében pihen meg, érzi a mélység nyugalmát, de figyelmeztet: a föld alatti magány csak odú, nem otthon, ha a gyökerek elszáradnak körülöttünk. A tartalékaim fogynak, és a falak, amik eddig megvédtek, most fojtogatni kezdenek az állott levegővel.</p>",
+      "title": "<p>1.1.1</p>"
+    },
+    "e3d27f29-240f-42ff-84a5-77e3e0727d38": {
+      "theme": "cyan",
+      "assets": {
+        "cover": {
+          "id": "941f16e4-6db5-4650-af6f-8ea3129bd3a6"
+        }
+      },
+      "outputs": [
+        "8022a626-6585-4482-8711-f02117bf7ea3"
+      ],
+      "components": [],
+      "content": "<p>A talpaim alatt repedezik a föld, mintha a táj lázasan lélegezne, és minden erejével próbálná visszatartani az utolsó csepp nedvességet. A Nagyszéksós-tó medre felől nem hűvös pára, hanem forró porszagú szél érkezik, ami összekócolja a szőrömet. A fűszálak, amik tavaly ilyenkor még húsosak és édesek voltak, most sárga szilánkokként szúrják az ínyemet; alig találok bennük annyi nedvességet, hogy elnyomjam a torkomban lüktető szomjúságot.</p><p>Szalakóta Szilvia hirtelen huppan le mellém a kiszáradt vadvirág kórójára, azúrkék tollai fakón verik vissza a könyörtelen fényt. „Panni, nagy a baj, Berci bőre már cserepesre száradt, és a bögölyök elevenen eszik meg, mert nincs sár, amiben megdagonyázhatna!” – hadarja, és a szárnyaival a tó közepe felé mutat, ahol a nádas úgy terjeszkedik, mint egy falánk zöld hadsereg. Túzok tanár úr méltóságteljesen lépdel mellénk, tekintete a messzeségbe vész. „A víz az életerő, fiam” – mondja mély, zengő hangon. „Ha Berci nem tudja visszataposni a nádat, a tó végleg eltűnik, és Guliéknak sem marad többé sekély víz, ahol élelmet szűrhetnének. A sár az ő bölcsőjük, de víz nélkül csak egy kemény, élettelen páncél marad utána.”</p><p>Nézem a távolban álló bivalyokat, ahogy tehetetlenül keresik az árnyékot, és hallom a gulipánok panaszos kiáltását a kopár meder felett. Ha nem teszünk valamit a vízpótlásért vagy a nádas megállításáért, hamarosan csak a por marad utánunk, amit a szél hord szét a pusztában.</p>",
+      "title": "<p>2.</p>"
+    },
+    "fda49ff1-f479-4992-996e-6d647135fce7": {
+      "theme": "brown",
+      "outputs": [
+        "acda64e4-3d8a-4353-858f-fd27d886a684"
+      ],
+      "components": [],
+      "content": "<p>Szilvia szüntelenül cikázik a távoli, zavaros pocsolya és a zsilip között. Apró csőrében csak pár cseppet hoz, amik gyémántként fénylenek a porban, mielőtt elnyelné őket a vörös rozsda. Én a bundámat mártom a langyos, iszapos vízbe, majd a fogaskerekek közé préselem magam, hogy átadjam a nedvességet a megkövült sárnak. A hátamat égeti a nap, a lábam alatt pedig szinte forr a talaj, de csak dörzsölöm a fémet, hátha megenyhül.</p><p>Hiába minden igyekezetünk, a táj lázas szomjúsága erősebb nálunk. Mire Szilvia visszaér a következő adaggal, az előző cseppek már el is illantak a forró vasról, mintha sosem léteztek volna. A sár nem puhul meg, csak még keményebb páncéllá köt a hőségben; a természet most nem adja oda a titkait ilyen könnyen. Túzok tanár úr szomorúan nézi remegő mancsaimat, és halkan megszólal: „Panni, a puszta most többet kér tőlünk, mint amit a szárnyunkon vagy a bundánkban el tudunk hozni. Más utat kell találnunk, mielőtt az utolsó víztükör is az ég áldozatává válik.”</p><p>Megállok, és a ziháló tüdőmben érzem a por karcos ízét. A zsilip továbbra is mozdulatlan marad, a kerék pedig némán mered ránk a hőségben. Az időnk fogy, és a Nagyszéksós-tó medre egyre inkább egy kiszáradt, repedezett sebre emlékeztet, amit csak egy nagyobb erő vagy egy okosabb terv gyógyíthatna be.</p>",
+      "title": "<p>2.1/2</p>"
+    },
+    "fe971f02-67fc-4743-94ec-848b88571d20": {
+      "theme": "cyan",
+      "assets": {
+        "cover": {
+          "id": "187bf22a-f930-43e6-96e9-f7d3fd7b1f96"
+        }
+      },
+      "outputs": [
+        "ba84953b-3836-4a8a-bae8-684ad7d5a743",
+        "f8600f3b-bb83-4816-9914-0e96b713e7f2",
+        "3ef3d88b-4257-4401-b372-e2888eab8eec",
+        "b005bb30-c076-42a3-a654-403e725039e1"
+      ],
+      "components": [],
+      "content": "<p>A talpaim alatt megnyíló mély repedések között cikázom, a tikkasztó hőségben minden mozdulat nehéz, mintha ólomsúlyokat kötnének a lábamra. Szilvia a magasból rikolt, a szárnyaival egy rozsdás, félig földbe süllyedt vasszerkezet felé mutat, ami úgy meredezik ki a csatorna partjából, mint egy régi, elfeledett óriás foga. Ez a zsilip: egykor azért építették, hogy elvezesse innen a vizet, de most ez az egyetlen reményünk, hogy megállítsuk a táj lassú elvérzését.</p><p>Túzok tanár úr méltóságteljesen lépdel a csatorna szélén, tollai rezegnek a forró levegőben, ahogy a zsilip kerekét nézi. „Látod, Panni, az ember néha elfelejti, hogy a víz nem véletlenül tűnik el, hanem mert mi nem vigyázunk rá” – suttogja, és a tekintete a távoli horizontra réved.</p>",
+      "title": "<p>2.1</p>"
+    },
+    "fa5c0e5e-b53e-4615-9813-b5e86f571a8f": {
+      "theme": "lightBlue",
+      "components": [],
+      "outputs": [
+        "bbb55b0e-6193-43ac-a2e7-dca390f63234"
+      ],
+      "content": "<p>Pille és Guli remegve állnak a sziget szélén, ahol a por már belepte a féltve őrzött tojásokat. „Panni, a róka már a szélcsatornában van, érzi az élet szagát!” – suttogja Pille, apró teste úgy rázkódik, mint a száraz fűszál a pusztában. Guli felfelé ívelt, kecses csőrével vadul mutogat a sötétedő nádas felé, ahol egy vörös árnyék oson. „Ha nem ér ide a víz, hajnalra csak üres héjakat találtok a fészkek helyén!” – mondja rekedten, és a hangjában ott lüktet az egész puszta félelme. Túzok tanár úr lép elő a homályból, hangja nyugodt és mély, mint a föld alatti vizek moraja: „Ha nincs falunk vízből, építünk falat a ravaszságból. Panni, Pille, Guli! Építünk tíz hamis fészket. Mire a ragadozó végére ér a sornak, a víz talán már körbeöleli az igazit.”</p><p>Mancsaimmal hordom a száraz ágakat és a tapadós, nehéz sarat a meder szélére, várakat emelünk a szürkületben a pusztulás útjába. Pille ügyesen kavicsokat és elhullatott tollakat szór a kupacok tetejére, hogy megtévessze a ragadozó szemét, Guli pedig a csőrével formázza meg a fészekmélyedéseket. „Nézd, Panni, pont olyanok, mint az enyém!” – suttogja Pille, és egy pillanatra felcsillan a remény a szemében. Szalakóta Szilvia közben a tanyáról hozott bivalyszőrt szórja szét a csaliknál, hogy az idegen szag végképp összezavarja a vadász orrát. „Az időnk kevés, a víz pedig még mindig a hordalék fogságában küzd” – figyelmeztet Szilvia, miközben azúrkék szárnyai beleolvadnak az éjszakába.</p><p>A táj lázas lélegzése mostanra halk suttogássá szelídült a hűvösödő estében, de a föld szomjúsága még mindig fojtogató. A csalikupacok úgy állnak a homályban, mint néma őrszemek, védve a jövőt a vörösbundás árnyéktól. Érzem a torkomban a port és a gyomromban a korgást, mert a nagy munkában elfelejtettünk enni, de a szigetek biztonsága most mindennél többet ér. A távolban a zsilip felől érkező víz halkan mormog, mintha biztatna minket: tartsunk ki, amíg el nem éri a szomjas medret.</p>",
+      "title": null
+    },
+    "886e56eb-a8ea-41e0-a3cc-b617589e586a": {
+      "theme": "lightBlue",
+      "components": [],
+      "outputs": [
+        "1537a160-1c83-4d17-8e70-2249380fe731"
+      ],
+      "content": "<p>A hold sarlója alatt a vörös árnyék megállt az első sárkupacunknál. Csak egyetlen, gúnyos szippantást tett a levegőbe, majd a feje könyörtelenül az igazi fészkek felé fordult; a ravaszsága átlátott a mi kétségbeesett trükkünkön. A bivalyszőr szaga nem tudta elnyomni az élő tojások lüktetését, a víz pedig, hiába küzdött a mederben, még mindig túl messze járt ahhoz, hogy áthághatatlan falat emeljen a szigetek köré.</p><p>„Panni, a róka már az igazi fészket szimatolja!” – suttogta Pille, és éreztem, ahogy az apró madár teste remeg mellettem a sötétben. Guli kétségbeesetten feszült neki a víznek, de a lábai még a sárba ragadtak, a ragadozó pedig már nem tágított. Túzok tanár úr mély hangja zizzent fel a hátam mögött, mint a száraz nádas: „Az időnk elfogyott a trükkökhöz, gyerekek. A víz túl lassú, a róka pedig túl éhes. Ha nem találunk azonnal egy másik utat, a hajnal már csak üres héjakat talál a szigeten.”</p><p>Néztem a lassan kúszó víztükröt és a fenyegető vörös szempárt a homályban. A táj lázasan lélegzett körülöttünk, minden egyes másodperc egy-egy súlyos szívverésnek tűnt a puszta némaságában. Valamit tennünk kell, és gyorsabban, mint ahogy a víz folyik, mert a Nagyszéksós-tó jövője most egyetlen elszánt mozdulaton múlik.</p>",
+      "title": null
+    },
+    "b5536964-f6e0-4dc0-b80c-b3bd575287f2": {
+      "theme": "green",
+      "components": [],
+      "outputs": [
+        "e7d9d119-85ae-4344-a253-66350b4ae559",
+        "31084b25-a558-4383-9e95-6177c413d759"
+      ],
+      "content": "<p>A víz csak gyűlik a lábam alatt, de nem mozdul a szigetek felé. A hordalék, a száraz gallyak és a megkövült iszap sűrű gátat vont az élet útja elé, miközben a puszta lázasan lélegzik körülöttünk a fülledt alkonyatban. Szilvia kétségbeesetten verdes a fejem felett, tekintete a nádas szélét fürkészi, ahol a vörös árnyék már türelmetlenül oson. „Panni, ha a víz nem tör át ezen a falon, a szigetek védtelenek maradnak!” – kiáltja, és a hangja élesen hasít bele a várakozó csendbe. Túzok tanár úr lehajtja méltóságteljes fejét, csőrével a sűrű, fekete iszapot kotorja, de a torlasz meg sem moccan az ereje alatt.</p><p>Hirtelen egy rozsdás villanást veszek észre a csatorna partján, félig betemetve a homokba. Egy régi, görbe vaskampó az, ami úgy mered ki a földből, mint egy elfeledett óriás ujja. Odaszaladok, mancsaimmal kikaparom a fém hideg testét, és Szilviával közösen a gát alá próbáljuk feszíteni. Tanár úr is mellénk áll, minden súlyát a vasra veti, de a kampó mozdulatlan marad a szorításunkban. Hiába találtuk meg a megoldást, a mi apró izmaink ehhez a harchoz kevesek; a vaskampó súlya és a meder ellenállása nagyobb nálunk.</p><p>„Látod, fiam, az ész felismerte a szerszámot, de a testünk elvész a feladat súlya alatt” – mondja Túzok tanár úr, és a hangja olyan komoly, mint a közelgő éjszaka. Nézem a mancsaimat, amik tehetetlenül csúsznak le a rozsdás fémen, és hallom a szomjas föld halk reccsenéseit. A kulcs itt van a kezünkben, mégis elérhetetlen, amíg nem találunk egy erőt, amely képes kimozdítani a tájat a dermedtségéből. A víz mormogva torlódik a hátunk mögött, és minden elvesztegetett pillanat a róka lépteit gyorsítja a védtelen fészkek felé.</p>",
+      "title": null
+    },
+    "02b00992-5b63-4fc3-bd14-d131e67c2298": {
+      "theme": "green",
+      "components": [],
+      "outputs": [
+        "07ecc8bb-83f6-486f-9ee8-e588297c90bb"
+      ],
+      "content": "<p>A rozsdás vasat szorítom, a kampó hideg foga már beleharapott egy sötét, iszapos gallyba, ami keresztbe állt a víz útjában. Guli mellettem feszül, de ketten csak apró porszemek vagyunk a medret elzáró súlyos torlasz ellen; a zsilip felől érkező víz türelmetlenül mormog a hátunk mögött, de a gát nem tágul. Guli ekkor a magasba vágódik, és éles, fuvolázó hívójelet ad ki, ami messzire zeng a lázasan lélegző puszta felett. Percek alatt tucatnyi gulipán csap le mellénk, a szárnyaik suhogása betölti a csendet, és mindannyian a kampó szárába kapaszkodnak, hogy együtt rángassuk ki a víz útjából a nehéz akadályokat.</p><p>Minden erőnket beleadjuk, a vas élesen nyikordul a hordalék szorításában, ahogy próbáljuk kifordítani a meder mélyén fekvő rönköket. Hiába a gulipánok serege és a közös akarat, a kampó csak remeg a sárban, de a gallyak sűrűn fonódnak össze, mint egy görcsös, makacs kéz, amit nem tudunk szétfeszíteni. Az összefogásunk gyönyörű, de a súly, amit meg akarunk mozdítani, még nálunk is nagyobb; a madarak kecses ereje kevés a megkövült iszap ellen. Érzem a mancsaim alatt a remegő fémet, és tudom, hogy bár a szerszámunk jó, a karunk még mindig túl gyenge ahhoz, hogy utat vágjunk az életnek.</p><p>„Kevesen vagyunk, Panni, a víz súlya és a föld akarata erősebb nálunk!” – kiáltja Guli, miközben fáradtan roskad a meder szélére. Ekkor Pille, a kis széki lile lép elő a homályból, szemeiben szelíd, de elszánt fény csillan. „Guli, a te barátaid a szél és a víz urai, de az én barátaim a földet ismerik a legjobban!”</p>",
+      "title": null
+    },
+    "ecd0081f-adac-4c4e-ad0d-b1ecccccb296": {
+      "theme": "green",
+      "components": [],
+      "outputs": [
+        "cfb8e2f3-294c-467a-8e89-d24ce01b12a1"
+      ],
+      "content": "<p>A rozsdás vaskampó úgy feszül a meder iszapjában, mint egy elfeledett óriás görbe ujja, hiába rángatjuk Szilviával, a fém hideg és mozdulatlan marad, Túzok tanár úr pedig komoran nézi, ahogy a víztükör tehetetlenül megtorpan a torlasz előtt. Pille a partra szalad, és vékony, rezgő hívójelet ad ki, ami végigszántja a néma pusztát; pillanatok alatt tucatnyi széki lile tűnik elő a homokbuckák közül. Az apró madarak szorgalmasan kaparják el az iszapot a fadarabok tövéből, és együtt feszülünk neki a vasnak, de a gallyak sűrűn fonódnak össze, mint egy görcsös, makacs kéz. Hiába a sokaság, a meder nem tágul, az apró madarak szorgalmas kaparása elvész a feladat súlya alatt. „Panni, a lábunk túl gyenge a gáthoz, a föld nem ereszti a zsákmányát!” – suttogja Pille kimerülten. Túzok tanár úr ekkor mély, zengő hangon megszólal, miközben a távoli, sekélyebb vízfelületek felé mutat: „Néha az apró lábak mellé hosszú gázlómadarakra is szükség van, akik nemcsak kaparni, de feszíteni is tudnak. Pille, Guli barátai, a gulipánok a szél és a víz urai. Az ő felfelé ívelt csőrük és erejük lehet az utolsó reményünk, hogy a vaskampó végre munkához lásson és utat vágjon az életnek.”</p>",
+      "title": null
+    },
+    "cc4f9157-3398-4f48-974f-1c6e7b89905c": {
+      "theme": "default",
+      "components": [],
+      "outputs": [],
+      "content": "<p>Szorítom a vaskampót, a lilék apró lábai vadul kaparják a sarat a lábam körül, Guli és csapata pedig egyszerre feszül neki a rozsdás szárnak. A levegő megtelik a szárnyak suhogásával és a megfeszített izmok néma erejével, ahogy az összefogásunk szétfeszíti a torlaszt. Hirtelen egy mély, cuppanó hang hasít bele az éjszakába: a gát megadja magát. A víz sötét, morajló áradatként tör át a résen, magával sodorva a gallyakat, és ezüstös gyűrűként öleli körbe a távoli szigeteket, pont abban a pillanatban, amikor a róka mancsa már a partot érné. A ragadozó megtorpan a hirtelen mélyülő víz előtt, dühösen villan a szeme a holdfényben, de a fészkek már elérhetetlenek számára – a víz fala megvédte a jövőt.</p><p>A Nagyszéksós-tó felől most nem forró por, hanem friss, nedves illat érkezik, ami átjárja a bundámat és megnyugtatja a torkomat. Berci elégedett bőgése messzire elhallatszik a dagonya felől, Szilvia pedig azúrkék ívben repül át a csillogó víztükör felett, hirdetve a győzelmet minden lakónak. Túzok tanár úr mellém áll, szárnyaival mintha az egész tavat átölelné. „Ma a puszta szíve újra dobbant egyet, fiam” – suttogja, és a tekintetében a végtelen nyugalom tükröződik. A föld már nem lázasan liheg, hanem békésen issza a megváltást; közösen visszaadtuk a tájnak a lelkét, és a holnap reggel már a madárfiókák első, biztonságos szárnypróbálgatásairól fog szólni.</p>",
+      "title": null
+    },
+    "630d71ca-547a-44e5-8ec4-830c3d1648ee": {
+      "theme": "purple",
+      "components": [],
+      "outputs": [
+        "6cac28c6-f940-4487-907a-91e1d71035df"
+      ],
+      "content": "<p>Végre látom Bercit, ahogy nehézkesen belép az első sötét tócsába, amit a zsilipből érkező víz rajzolt a meder fenekére. A sár hálásan cuppan a hatalmas paták alatt, és látom, ahogy az óriás végre megnyugszik: a hűvös iszap beborítja repedezett bőrét, elűzve a bögölyöket és a lázat. Berci nehéz testével gázol a sűrűben, a nádas száraz szárai pedig ropogva adják meg magukat a súlyának, helyet szorítva a nyílt víznek és a friss hajtásoknak.</p><p>Túzok tanár úr azonban nem a dagonyát nézi, hanem a távolabbi, kopár szigeteket, ahol a gulipánok és a széki lilék fészkelnek. „A víz még túl lassú, Panni, és a mederben felgyűlt hordalék megakasztja az útját” – mondja, és a hangja olyan mély, mint a közelgő vihar. „Nézd ott a nádas szélét! A vörös bundák már várakoznak. Ha a víz nem öleli körbe a szigeteket sötétedésig, a rókák száraz lábbal sétálnak be a fészkekhez, és Guliéknak nem marad kit nevelniük.”</p><p>Érzem, ahogy a torkomban dobog a szívem a félelemtől a kis fiókákért. A víz ugyan elindult, de a meder tele van régi gallyakkal és összeállt sárral, ami gátat vet az áradásnak a legfontosabb helyeken. Ha nem vágunk utat a víznek a szigetek felé, Berci boldogsága csak fél győzelem lesz, és a puszta ma éjjel újra elveszít valamit, ami pótolhatatlan.</p>",
+      "title": null
+    }
+  },
+  "jumpers": {},
+  "connections": {
+    "118bf399-7f7f-4f6b-8e91-ac863ba81355": {
+      "type": "Straight",
+      "theme": "default",
+      "sourceid": "08ceed66-0613-4d20-8e50-e9b0d08a1082",
+      "targetid": "4b9b4a07-4244-4631-bee4-cfd19aa3ef94",
+      "sourceType": "elements",
+      "targetFace": "left",
+      "targetType": "elements",
+      "label": "<p>Tovább</p>"
+    },
+    "3ef3d88b-4257-4401-b372-e2888eab8eec": {
+      "type": "Straight",
+      "theme": "gold",
+      "sourceid": "fe971f02-67fc-4743-94ec-848b88571d20",
+      "targetid": "4f6e511d-5685-48a3-8987-6e1f68a6a176",
+      "sourceType": "elements",
+      "targetFace": "left",
+      "targetType": "elements",
+      "label": "<p>Túzok tanár úr segítségével erős ágakat gyűjtünk, hogy emelőként használva feszítsük ki a kereket.</p>"
+    },
+    "3f66392f-a5b1-4cc4-be9a-882964beb036": {
+      "type": "Straight",
+      "theme": "cyan",
+      "sourceid": "4f6e511d-5685-48a3-8987-6e1f68a6a176",
+      "targetid": "fe971f02-67fc-4743-94ec-848b88571d20",
+      "sourceType": "elements",
+      "targetFace": "right",
+      "targetType": "elements",
+      "label": "<p>Mással próbálkozunk</p>"
+    },
+    "f8600f3b-bb83-4816-9914-0e96b713e7f2": {
+      "type": "Straight",
+      "theme": "orange",
+      "sourceid": "fe971f02-67fc-4743-94ec-848b88571d20",
+      "targetid": "3a94d1f5-90a1-47d0-ae55-538698518a54",
+      "sourceType": "elements",
+      "targetFace": "left",
+      "targetType": "elements",
+      "label": "<p>Megkeressük Bercit, a bivalyt, hátha az ő hatalmas ereje elég a rozsdás kerék elforgatásához.</p>"
+    },
+    "5609fc97-99ed-46bf-a65e-546bd5b1923d": {
+      "type": "Straight",
+      "theme": "default",
+      "sourceid": "bf4ac53a-9afb-417e-9672-e9c9f8dd8681",
+      "targetid": "c0cf9637-de11-4dc6-aaa3-e9649d56b434",
+      "sourceType": "elements",
+      "targetFace": "left",
+      "targetType": "elements",
+      "label": "<p>Egy nagy kamrát ások a legmélyebb ponton, hogy ott vészeljem át a déli hőséget.</p>"
+    },
+    "8022a626-6585-4482-8711-f02117bf7ea3": {
+      "type": "Straight",
+      "theme": "default",
+      "sourceid": "e3d27f29-240f-42ff-84a5-77e3e0727d38",
+      "targetid": "fe971f02-67fc-4743-94ec-848b88571d20",
+      "sourceType": "elements",
+      "targetFace": "left",
+      "targetType": "elements",
+      "label": "<p>Megkeressük a régi zsilipet, hátha elzárásával megállíthatjuk a maradék víz elszivárgását.</p>"
+    },
+    "85f356e9-3358-4735-a546-a6b589a3392a": {
+      "type": "Straight",
+      "theme": "cyan",
+      "sourceid": "3a94d1f5-90a1-47d0-ae55-538698518a54",
+      "targetid": "fe971f02-67fc-4743-94ec-848b88571d20",
+      "sourceType": "elements",
+      "targetFace": "right",
+      "targetType": "elements",
+      "label": "<p>Mással próbálkozunk</p>"
+    },
+    "91363283-a5d3-4362-b4c3-d1c2842663fc": {
+      "type": "Straight",
+      "theme": "default",
+      "sourceid": "6716312d-7f05-4ef9-8954-68362d2012be",
+      "targetid": "bf4ac53a-9afb-417e-9672-e9c9f8dd8681",
+      "sourceType": "elements",
+      "targetFace": "left",
+      "targetType": "elements",
+      "label": "<p>Mélyebb járatokat ások, hogy elérjem a talajvíz maradékát a gyökereknél.</p>"
+    },
+    "95428eb7-eb78-4855-be75-89cb58a83503": {
+      "type": "Straight",
+      "theme": "pink",
+      "sourceid": "4eb5d1d8-1300-4455-975d-58734ee1c3ab",
+      "targetid": "7abcf11a-98fb-4bd5-9aef-1e74986e647a",
+      "sourceType": "elements",
+      "targetFace": "left",
+      "targetType": "elements",
+      "label": null
+    },
+    "a5619d61-653b-475c-ae5c-5a897899e1ca": {
+      "type": "Straight",
+      "theme": "brown",
+      "sourceid": "58d89f79-b210-44d0-97c0-da7548c44bea",
+      "targetid": "1a172247-7afa-40b9-89d6-8c0e0da50723",
+      "sourceType": "elements",
+      "targetFace": "left",
+      "targetType": "elements",
+      "label": "<p>Használjuk újra az emelőként szolgáló erős ágakat, amikkel most már könnyebben mozdíthatunk a fémen.</p>"
+    },
+    "acda64e4-3d8a-4353-858f-fd27d886a684": {
+      "type": "Straight",
+      "theme": "cyan",
+      "sourceid": "fda49ff1-f479-4992-996e-6d647135fce7",
+      "targetid": "fe971f02-67fc-4743-94ec-848b88571d20",
+      "sourceType": "elements",
+      "targetFace": "right",
+      "targetType": "elements",
+      "label": "<p>Mással próbálkozunk</p>"
+    },
+    "b005bb30-c076-42a3-a654-403e725039e1": {
+      "type": "Straight",
+      "theme": "moss",
+      "sourceid": "fe971f02-67fc-4743-94ec-848b88571d20",
+      "targetid": "58d89f79-b210-44d0-97c0-da7548c44bea",
+      "sourceType": "elements",
+      "targetFace": "left",
+      "targetType": "elements",
+      "label": "<p>Elindulunk a közeli tanyára, hogy az emberektől kérjünk segítséget vagy egy kis kenőolajat a rozsda ellen.</p>"
+    },
+    "ba84953b-3836-4a8a-bae8-684ad7d5a743": {
+      "type": "Straight",
+      "theme": "brown",
+      "sourceid": "fe971f02-67fc-4743-94ec-848b88571d20",
+      "targetid": "fda49ff1-f479-4992-996e-6d647135fce7",
+      "sourceType": "elements",
+      "targetFace": "left",
+      "targetType": "elements",
+      "label": "<p>Szilvia vezetésével vizet hordunk a csőrünkben és a bundánkban, hogy feláztassuk az iszapot.</p><p></p>"
+    },
+    "e514296f-c259-48bd-a49f-3a176771a391": {
+      "type": "Straight",
+      "theme": "orange",
+      "sourceid": "58d89f79-b210-44d0-97c0-da7548c44bea",
+      "targetid": "4eb5d1d8-1300-4455-975d-58734ee1c3ab",
+      "sourceType": "elements",
+      "targetFace": "left",
+      "targetType": "elements",
+      "label": "<p>Megkeressük Bercit, a bivalyt, hátha az ő hatalmas ereje elég a rozsdás kerék elforgatásához.</p>"
+    },
+    "f6536b5b-242f-4111-8bdc-d1634bff4e8d": {
+      "type": "Straight",
+      "theme": "pink",
+      "sourceid": "1a172247-7afa-40b9-89d6-8c0e0da50723",
+      "targetid": "7abcf11a-98fb-4bd5-9aef-1e74986e647a",
+      "sourceType": "elements",
+      "targetFace": "left",
+      "targetType": "elements",
+      "label": null
+    },
+    "d53148f0-0257-4ea8-92ef-44dc9a39efcb": {
+      "targetFace": "left",
+      "type": "Straight",
+      "targetType": "elements",
+      "targetid": "fa5c0e5e-b53e-4615-9813-b5e86f571a8f",
+      "sourceid": "7abcf11a-98fb-4bd5-9aef-1e74986e647a",
+      "theme": "blue",
+      "sourceType": "elements",
+      "label": "<p>Építsünk ágakból és sárból csalikupacokat.</p>"
+    },
+    "bbb55b0e-6193-43ac-a2e7-dca390f63234": {
+      "targetFace": "left",
+      "type": "Straight",
+      "targetType": "elements",
+      "targetid": "886e56eb-a8ea-41e0-a3cc-b617589e586a",
+      "sourceid": "fa5c0e5e-b53e-4615-9813-b5e86f571a8f",
+      "theme": "blue",
+      "sourceType": "elements",
+      "label": null
+    },
+    "cfb8e2f3-294c-467a-8e89-d24ce01b12a1": {
+      "targetFace": "left",
+      "type": "Straight",
+      "targetType": "elements",
+      "targetid": "cc4f9157-3398-4f48-974f-1c6e7b89905c",
+      "sourceid": "ecd0081f-adac-4c4e-ad0d-b1ecccccb296",
+      "theme": "default",
+      "sourceType": "elements",
+      "label": "<p>Hívjuk a gulipánok segítségét is.</p>"
+    },
+    "1537a160-1c83-4d17-8e70-2249380fe731": {
+      "targetFace": "right",
+      "type": "Straight",
+      "targetType": "elements",
+      "targetid": "630d71ca-547a-44e5-8ec4-830c3d1648ee",
+      "sourceid": "886e56eb-a8ea-41e0-a3cc-b617589e586a",
+      "theme": "purple",
+      "sourceType": "elements",
+      "label": "<p>Keressük meg gyorsan a jó megoldást.</p>"
+    },
+    "e7d9d119-85ae-4344-a253-66350b4ae559": {
+      "targetFace": "left",
+      "type": "Straight",
+      "targetType": "elements",
+      "targetid": "02b00992-5b63-4fc3-bd14-d131e67c2298",
+      "sourceid": "b5536964-f6e0-4dc0-b80c-b3bd575287f2",
+      "theme": "green",
+      "sourceType": "elements",
+      "label": "<p>Kérjük Guli segítségét.</p>"
+    },
+    "31084b25-a558-4383-9e95-6177c413d759": {
+      "targetFace": "left",
+      "type": "Straight",
+      "targetType": "elements",
+      "targetid": "ecd0081f-adac-4c4e-ad0d-b1ecccccb296",
+      "sourceid": "b5536964-f6e0-4dc0-b80c-b3bd575287f2",
+      "theme": "green",
+      "sourceType": "elements",
+      "label": "<p>Kérjük Pille segítségét.</p>"
+    },
+    "07ecc8bb-83f6-486f-9ee8-e588297c90bb": {
+      "targetFace": "left",
+      "type": "Straight",
+      "targetType": "elements",
+      "targetid": "cc4f9157-3398-4f48-974f-1c6e7b89905c",
+      "sourceid": "02b00992-5b63-4fc3-bd14-d131e67c2298",
+      "theme": "default",
+      "sourceType": "elements",
+      "label": "<p>Hívjuk a széki lilék csapatát is.</p>"
+    },
+    "6cac28c6-f940-4487-907a-91e1d71035df": {
+      "targetFace": "left",
+      "type": "Straight",
+      "targetType": "elements",
+      "targetid": "b5536964-f6e0-4dc0-b80c-b3bd575287f2",
+      "sourceid": "630d71ca-547a-44e5-8ec4-830c3d1648ee",
+      "theme": "green",
+      "sourceType": "elements",
+      "label": "<p>Tisztítsuk meg az utat a madarak fészkelőhelyei felé.</p>"
+    },
+    "cfff1bbe-d742-44a4-b26d-da046ca01a5c": {
+      "targetFace": "left",
+      "type": "Straight",
+      "targetType": "elements",
+      "targetid": "b5536964-f6e0-4dc0-b80c-b3bd575287f2",
+      "sourceid": "7abcf11a-98fb-4bd5-9aef-1e74986e647a",
+      "theme": "green",
+      "sourceType": "elements",
+      "label": "<p>Tisztítsuk meg az utat a madarak fészkelőhelyei felé.</p>"
+    }
+  },
+  "branches": {},
+  "components": {
+    "06cf39c0-44c5-4721-85bb-34c812ac4beb": {
+      "attributes": [],
+      "name": "Ürge Panni"
+    },
+    "0b36838c-9009-43a8-9744-2bfbf455337b": {
+      "attributes": [],
+      "name": "Szalakóta Szilvia"
+    },
+    "65005bda-15d0-41c5-867f-68c118829f08": {
+      "root": true,
+      "children": [
+        "06cf39c0-44c5-4721-85bb-34c812ac4beb",
+        "0b36838c-9009-43a8-9744-2bfbf455337b",
+        "6b236d74-f906-4def-badc-2c1e92743add"
+      ],
+      "name": "Root"
+    },
+    "6b236d74-f906-4def-badc-2c1e92743add": {
+      "attributes": [],
+      "name": "Túzok tanár úr"
+    },
+    "94cb5cda-5d84-4917-bb9e-31313c40f7b0": {
+      "name": "Kolon-tó (Izsák)",
+      "attributes": [
+        "256d5c28-2080-49bb-97b9-196b8298d636"
+      ]
+    },
+    "b639e984-46ed-4184-aec7-a88929b87501": {
+      "name": "Kiskunmajsai Tarté-erdő",
+      "attributes": [
+        "bba1479e-9b84-456b-8c50-c442ec761e64"
+      ]
+    },
+    "70718fab-edd1-4664-95bd-9bc30e75fa0a": {
+      "name": "Kiskunfélegyházi Péteri-tó",
+      "attributes": [
+        "c6b41b2d-707e-4c75-8d73-62919687aea1"
+      ]
+    },
+    "3e33b49c-2717-4802-aa1f-77770d1fee5b": {
+      "name": "Kunhalmok (Gidófalvy-halom)",
+      "attributes": [
+        "10615829-82d4-4252-85ab-e3f0a6996851"
+      ]
+    },
+    "c4143811-7d14-43fb-be04-c79d426c2a53": {
+      "name": "Madarasi Marhajárás",
+      "attributes": [
+        "893ed9a4-6bac-439a-b322-ec4767e6eea5"
+      ]
+    },
+    "6b4e8f75-829a-4ebd-b9f9-8844ffa8ab62": {
+      "name": "Soltvadkerti Büdös-tó",
+      "attributes": [
+        "e42ef85e-242f-4350-8800-a9070668b39f"
+      ]
+    },
+    "5170b64c-f8a8-4044-832f-04601a232871": {
+      "name": "Kiskunhalasi Fejeték-mocsár",
+      "attributes": [
+        "96d2cd9c-c145-4fb4-a969-92c36443b0bc"
+      ]
+    },
+    "06d1be46-e0a4-40c6-8042-a38d348541dc": {
+      "name": "Kelebiai-erdő",
+      "attributes": [
+        "dc30db3a-530b-4b00-8e57-52e4ba0bad57"
+      ]
+    },
+    "114b6d49-ee91-45c4-91f8-b33fbec4ec30": {
+      "name": "Kéleshalmi Homokbuckák",
+      "attributes": [
+        "bd4435bd-1707-41cf-9d80-a03977bbffdc"
+      ]
+    },
+    "99f63141-a614-4eeb-a35f-834cd8bb84ac": {
+      "name": "Hajósi Kaszálók",
+      "attributes": [
+        "ec6261b4-eabf-4543-8586-1e370f13b0f0"
+      ]
+    }
+  },
+  "attributes": {
+    "256d5c28-2080-49bb-97b9-196b8298d636": {
+      "cId": "94cb5cda-5d84-4917-bb9e-31313c40f7b0",
+      "name": "description",
+      "value": {
+        "data": "A Duna-Tisza köze legnagyobb édesvizű mocsara, amely nádasaival és nyílt vízfelületeivel az egykori mocsárvilág hangulatát idézi. A terület központi szerepet játszik a térség vízháztartásának megőrzésében."
+      }
+    },
+    "bba1479e-9b84-456b-8c50-c442ec761e64": {
+      "cId": "b639e984-46ed-4184-aec7-a88929b87501",
+      "name": "description",
+      "value": {
+        "data": "Egy különleges homoki tölgyes és erdei fenyves mozaik, amely a Homokhátság eredeti erdőtársulásainak maradványait őrzi. A hűvös erdei utak tökéletes menedéket nyújtanak a pusztai hőség elől."
+      }
+    },
+    "c6b41b2d-707e-4c75-8d73-62919687aea1": {
+      "cId": "70718fab-edd1-4664-95bd-9bc30e75fa0a",
+      "name": "description",
+      "value": {
+        "data": "Fontos vizes élőhely-rehabilitáció, ahol a látogatók a gátakon kialakított tanösvényeken sétálva ismerhetik meg a szikes tavak megújuló világát és a nádasok nyugalmát."
+      }
+    },
+    "10615829-82d4-4252-85ab-e3f0a6996851": {
+      "cId": "3e33b49c-2717-4802-aa1f-77770d1fee5b",
+      "name": "description",
+      "value": {
+        "data": "Az alföldi táj „piramisai”, melyek történelmi emlékhelyek és fontos menedékek a puszta őshonos növényvilága számára. Kiemelkedő pontok, ahonnan messzire elláthatunk a síkságon."
+      }
+    },
+    "893ed9a4-6bac-439a-b322-ec4767e6eea5": {
+      "cId": "c4143811-7d14-43fb-be04-c79d426c2a53",
+      "name": "description",
+      "value": {
+        "data": "Egy hatalmas, összefüggő pusztai legelő, amely a hagyományos magyar állattartás és a végtelen horizont látványát kínálja az utazóknak."
+      }
+    },
+    "e42ef85e-242f-4350-8800-a9070668b39f": {
+      "cId": "6b4e8f75-829a-4ebd-b9f9-8844ffa8ab62",
+      "name": "description",
+      "value": {
+        "data": "Rejtett, vadregényes tóvidék a homokbuckák között, amely különleges mikroklímájával és sűrű növényzetével a nyugalom szigete a Homokhátság szívében."
+      }
+    },
+    "96d2cd9c-c145-4fb4-a969-92c36443b0bc": {
+      "cId": "5170b64c-f8a8-4044-832f-04601a232871",
+      "name": "description",
+      "value": {
+        "data": "Egy mélyebben fekvő, lápos terület, ahol a nedves rétek és fűzlápok ritka növénytársulásai maradtak fenn az intenzív mezőgazdasági környezetben."
+      }
+    },
+    "dc30db3a-530b-4b00-8e57-52e4ba0bad57": {
+      "cId": "06d1be46-e0a4-40c6-8042-a38d348541dc",
+      "name": "description",
+      "value": {
+        "data": "A szerb határ mentén húzódó összefüggő erdőtömb, amely homoki erdőspuszta-rétekkel tarkítva mutatja be a régió erdőgazdálkodási múltját és természeti értékeit."
+      }
+    },
+    "bd4435bd-1707-41cf-9d80-a03977bbffdc": {
+      "cId": "114b6d49-ee91-45c4-91f8-b33fbec4ec30",
+      "name": "description",
+      "value": {
+        "data": "Az „Alföldi sivatagként” is emlegetett terület, ahol a szél építette meredek homokbuckák és a közöttük megtelepedett borókások látványa egyedülálló geomorfológiai érték."
+      }
+    },
+    "ec6261b4-eabf-4543-8586-1e370f13b0f0": {
+      "cId": "99f63141-a614-4eeb-a35f-834cd8bb84ac",
+      "name": "description",
+      "value": {
+        "data": "Kiterjedt löszgyepek és mély fekvésű kaszálók rendszere, ahol a táj tavaszi virágpompája és a hagyományos gazdálkodás nyomai találkoznak."
+      }
+    }
+  },
+  "assets": {
+    "187bf22a-f930-43e6-96e9-f7d3fd7b1f96": {
+      "name": "Gemini_Generated_Image_dnun7hdnun7hdnun.webp",
+      "type": "image"
+    },
+    "647d0495-341f-42b2-8788-b47dace22bf8": {
+      "root": true,
+      "children": [
+        "187bf22a-f930-43e6-96e9-f7d3fd7b1f96",
+        "941f16e4-6db5-4650-af6f-8ea3129bd3a6"
+      ]
+    },
+    "941f16e4-6db5-4650-af6f-8ea3129bd3a6": {
+      "name": "Gemini_Generated_Image_27zat527zat527za.webp",
+      "type": "image"
+    }
+  },
+  "variables": {
+    "747d0495-341f-42b2-8788-b47dace22bf8": {
+      "root": true,
+      "children": []
+    }
+  },
+  "conditions": {},
+  "name": "Csupasziv1",
+  "cover": null
 }

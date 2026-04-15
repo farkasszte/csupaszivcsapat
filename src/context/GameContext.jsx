@@ -22,6 +22,7 @@ export const GameProvider = ({ children }) => {
     const [showImages, setShowImages] = useState(false);
     const [lastActiveTab, setLastActiveTab] = useState('menu');
     const [lightboxImage, setLightboxImage] = useState(null);
+    const [selectedMapLocation, setSelectedMapLocation] = useState(null);
 
 
 
@@ -216,6 +217,8 @@ export const GameProvider = ({ children }) => {
         showImages,
         setShowImages: toggleImages,
         togglePanel,
+        selectedMapLocation,
+        setSelectedMapLocation,
         typewriterSpeed: store.typewriterSpeed,
         setTypewriterSpeed: store.setTypewriterSpeed,
         transitionsEnabled: store.transitionsEnabled,
