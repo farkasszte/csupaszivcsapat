@@ -140,7 +140,7 @@ export const StoryEngine = ({ hideMedia = false }) => {
     // Global typewriter controller per step
     useEffect(() => {
         if (typewriterSpeed === 0 || contentSegments.length === 0) return;
-        
+
         const currentSeg = contentSegments[currentStep];
         if (!currentSeg) return;
 
@@ -271,29 +271,29 @@ export const StoryEngine = ({ hideMedia = false }) => {
 
     return (
         <div key={displayElementId} className="w-full h-full flex flex-col lg:flex-row items-stretch lg:items-center justify-center relative z-0">
-            
+
             {/* Left Image Section / Top on Mobile */}
             <div className="w-full lg:w-[40%] flex justify-center items-end lg:items-center relative z-0 pt-20 lg:pt-0 -mb-8 lg:mb-0">
                 {activeDiscoveryComponent && (!videoUrl && !activeCoverUrl) && (
-                     // Discovery fallback if no media
-                     <div className="absolute top-4 left-1/2 -translate-x-1/2 z-50 pointer-events-none animate-in fade-in duration-500">
-                         <div className="bg-white/80 backdrop-blur-md border border-[#3e2723]/30 shadow-lg rounded-full px-4 py-2 flex items-center gap-2 mx-auto w-fit">
-                            <RiSearchLine size={14} className="text-[#3e2723]" />
-                            <span className="text-[10px] font-bold tracking-wider text-[#3e2723] uppercase whitespace-nowrap">
-                                Új felfedezés: <span className="text-[#3e2723]">{activeDiscoveryComponent.name}</span>
+                    // Discovery fallback if no media
+                    <div className="absolute top-4 left-1/2 -translate-x-1/2 z-50 pointer-events-none animate-in fade-in duration-500">
+                        <div className="bg-white/80 backdrop-blur-md border border-surface/30 shadow-lg rounded-full px-4 py-2 flex items-center gap-2 mx-auto w-fit">
+                            <RiSearchLine size={14} className="text-surface" />
+                            <span className="text-[10px] font-bold tracking-wider text-surface uppercase whitespace-nowrap">
+                                Új felfedezés: <span className="text-surface">{activeDiscoveryComponent.name}</span>
                             </span>
                         </div>
-                     </div>
+                    </div>
                 )}
-                
+
                 {(videoUrl || activeCoverUrl) && (
                     <div className="relative w-full overflow-visible flex justify-center">
                         {activeDiscoveryComponent && (
                             <div key={activeDiscoveryId} className="absolute -top-10 left-1/2 -translate-x-1/2 z-50 pointer-events-none animate-in slide-in-from-top-4 fade-in duration-500">
-                                <div className="bg-white/80 backdrop-blur-md border border-[#3e2723]/30 shadow-lg rounded-full px-4 py-2 flex items-center gap-2">
-                                    <RiSearchLine size={14} className="text-[#3e2723]" />
-                                    <span className="text-[10px] font-bold tracking-wider text-[#3e2723] uppercase whitespace-nowrap">
-                                        Új felfedezés: <span className="text-[#3e2723]">{activeDiscoveryComponent.name}</span>
+                                <div className="bg-white/80 backdrop-blur-md border border-surface/30 shadow-lg rounded-full px-4 py-2 flex items-center gap-2">
+                                    <RiSearchLine size={14} className="text-surface" />
+                                    <span className="text-[10px] font-bold tracking-wider text-surface uppercase whitespace-nowrap">
+                                        Új felfedezés: <span className="text-surface">{activeDiscoveryComponent.name}</span>
                                     </span>
                                 </div>
                             </div>
@@ -332,9 +332,9 @@ export const StoryEngine = ({ hideMedia = false }) => {
 
             {/* Right Dialogue Section / Bottom on Mobile */}
             <div className="w-full lg:w-[60%] flex flex-col justify-end lg:justify-center p-4 lg:p-8 relative z-10 lg:min-h-full">
-                
+
                 <div className="biophilic-card w-full mx-auto mt-auto lg:mt-auto mb-4 lg:mb-12 max-w-3xl lg:mr-8 rounded-2xl shadow-2xl border border-white/30 bg-white/20 backdrop-blur-md flex flex-col max-h-[50vh] lg:max-h-[60vh] overflow-hidden">
-                    
+
                     {/* Story Text (Middle - Scrollable) */}
                     <div className="flex-1 min-h-0 overflow-y-auto no-scrollbar flex flex-col items-stretch pb-4 p-6 sm:p-8 lg:p-10">
                         {/* Status Messages */}
@@ -347,7 +347,7 @@ export const StoryEngine = ({ hideMedia = false }) => {
                             </div>
                         )}
 
-                        <div className="story-content space-y-4 sm:space-y-6 text-base sm:text-lg lg:text-[19px] text-[#3e2723] leading-[1.7] sm:leading-[1.8] lg:leading-[2] tracking-wide text-justify animate-in fade-in duration-500">
+                        <div className="story-content space-y-4 sm:space-y-6 text-base sm:text-lg lg:text-[19px] text-surface leading-[1.7] sm:leading-[1.8] lg:leading-loose tracking-wide text-justify animate-in fade-in duration-500">
                             {contentSegments.length > 0 && contentSegments[currentStep] && (
                                 <TypewriterSegment
                                     key={`${displayElementId}-${currentStep}`}
@@ -361,8 +361,8 @@ export const StoryEngine = ({ hideMedia = false }) => {
 
                     {/* Pagination Controls */}
                     {contentSegments.length > 0 && currentStep < contentSegments.length - 1 && (
-                        <div className="shrink-0 flex justify-end px-6 pb-6 sm:px-8 sm:pb-8 lg:px-10 lg:pb-10 pt-4 mt-auto bg-gradient-to-t from-white/10 to-transparent border-t border-[#3e2723]/10">
-                            <button 
+                        <div className="shrink-0 flex justify-end px-6 pb-6 sm:px-8 sm:pb-8 lg:px-10 lg:pb-10 pt-4 mt-auto bg-linear-to-t from-white/10 to-transparent border-t border-surface/10">
+                            <button
                                 onClick={() => setCurrentStep(prev => prev + 1)}
                                 className="px-8 py-3 sm:px-10 sm:py-4 bg-[#4F7942] hover:bg-[#3d5e33] text-white text-base sm:text-lg font-bold rounded-xl transition-all shadow-lg hover:shadow-xl hover:-translate-y-1 block"
                             >
@@ -373,7 +373,7 @@ export const StoryEngine = ({ hideMedia = false }) => {
 
                     {/* Choices (Bottom) */}
                     {contentSegments.length > 0 && currentStep === contentSegments.length - 1 && (
-                        <div className="shrink-0 px-6 pb-6 sm:px-8 sm:pb-8 lg:px-10 lg:pb-10 pt-6 animate-in fade-in slide-in-from-bottom-2 duration-500 mt-auto bg-gradient-to-t from-white/10 to-transparent border-t border-[#3e2723]/10">
+                        <div className="shrink-0 px-6 pb-6 sm:px-8 sm:pb-8 lg:px-10 lg:pb-10 pt-6 animate-in fade-in slide-in-from-bottom-2 duration-500 mt-auto bg-linear-to-t from-white/10 to-transparent border-t border-surface/10">
                             <Choices hasImage={false} onHoverChange={setIsChoiceHovered} />
                         </div>
                     )}
