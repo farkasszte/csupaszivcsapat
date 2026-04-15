@@ -270,10 +270,58 @@ export const StoryEngine = ({ hideMedia = false }) => {
     if (!isMounted) return null;
 
     return (
-        <div key={displayElementId} className="w-full h-full flex flex-col lg:flex-row items-stretch lg:items-center justify-center relative z-0">
+        <div key={displayElementId} className="w-full h-full flex flex-col lg:flex-row items-stretch lg:items-start justify-center relative z-0 mt-4 lg:mt-8 gap-4 lg:gap-8">
 
-            {/* Left Image Section / Top on Mobile */}
-            <div className="w-full lg:w-[40%] flex justify-center items-end lg:items-center relative z-0 pt-20 lg:pt-0 -mb-8 lg:mb-0">
+            {/* Left Dialogue Section (Content) / Top on Mobile */}
+            <div className="w-full lg:w-[65%] flex flex-col justify-start p-4 lg:p-0 relative z-10 lg:min-h-full">
+                <div className="biophilic-card w-full mt-0 mb-4 lg:mb-12 max-w-4xl rounded-2xl shadow-2xl border border-white/30 bg-white/20 backdrop-blur-md flex flex-col max-h-[55vh] lg:max-h-[80vh] overflow-hidden">
+                    {/* Story Text (Middle - Scrollable) */}
+                    <div className="flex-1 min-h-0 overflow-y-auto no-scrollbar flex flex-col items-stretch pb-4 p-6 sm:p-8 lg:p-10">
+                        {/* Status Messages */}
+                        {(error || message) && (
+                            <div className="mb-6 shrink-0 animate-in fade-in duration-300">
+                                <div className={`p-3 flex items-center justify-between text-xs rounded-lg border ${error ? 'bg-red-100 border-red-500 text-red-900' : 'bg-emerald-100 border-emerald-500 text-emerald-900'}`}>
+                                    <span>{error || message}</span>
+                                    <button onClick={() => clearMessage?.()} className="ml-2 hover:opacity-70 transition-opacity">✕</button>
+                                </div>
+                            </div>
+                        )}
+
+                        <div className="story-content space-y-4 sm:space-y-6 text-base sm:text-lg lg:text-[19px] text-surface leading-[1.7] sm:leading-[1.8] lg:leading-loose tracking-wide text-left animate-in fade-in duration-500">
+                            {contentSegments.length > 0 && contentSegments[currentStep] && (
+                                <TypewriterSegment
+                                    key={`${displayElementId}-${currentStep}`}
+                                    content={contentSegments[currentStep].content}
+                                    visibleCount={totalVisibleChars}
+                                    isFull={totalVisibleChars >= contentSegments[currentStep].length}
+                                />
+                            )}
+                        </div>
+                    </div>
+
+                    {/* Pagination Controls */}
+                    {contentSegments.length > 0 && currentStep < contentSegments.length - 1 && (
+                        <div className="shrink-0 flex justify-start px-6 pb-6 sm:px-8 sm:pb-8 lg:px-10 lg:pb-10 pt-4 mt-auto bg-linear-to-t from-white/5 to-transparent border-t border-surface/10">
+                            <button
+                                onClick={() => setCurrentStep(prev => prev + 1)}
+                                className="px-8 py-3 sm:px-10 sm:py-4 bg-[#4F7942] hover:bg-[#3d5e33] text-white text-base sm:text-lg font-bold rounded-xl transition-all shadow-lg hover:shadow-xl hover:-translate-y-1 block"
+                            >
+                                Tovább
+                            </button>
+                        </div>
+                    )}
+
+                    {/* Choices (Bottom) */}
+                    {contentSegments.length > 0 && currentStep === contentSegments.length - 1 && (
+                        <div className="shrink-0 px-6 pb-6 sm:px-8 sm:pb-8 lg:px-10 lg:pb-10 pt-6 animate-in fade-in slide-in-from-bottom-2 duration-500 mt-auto bg-linear-to-t from-white/5 to-transparent border-t border-surface/10">
+                            <Choices hasImage={false} onHoverChange={setIsChoiceHovered} />
+                        </div>
+                    )}
+                </div>
+            </div>
+
+            {/* Right Image Section (Visuals) / Bottom on Mobile */}
+            <div className="w-full lg:w-[35%] flex justify-center items-start relative z-0 pt-0 -mb-8 lg:mb-0">
                 {activeDiscoveryComponent && (!videoUrl && !activeCoverUrl) && (
                     // Discovery fallback if no media
                     <div className="absolute top-4 left-1/2 -translate-x-1/2 z-50 pointer-events-none animate-in fade-in duration-500">
@@ -304,81 +352,22 @@ export const StoryEngine = ({ hideMedia = false }) => {
                                 src={videoUrl}
                                 autoPlay loop muted playsInline
                                 onCanPlay={() => setIsVideoLoaded(true)}
-                                className={`w-full max-w-[400px] lg:max-w-none h-auto lg:max-h-[80vh] lg:h-full object-contain rounded-xl transition-opacity duration-300 ${isVideoLoaded ? 'opacity-100' : 'opacity-0'}`}
+                                className={`w-full max-w-[400px] lg:max-w-none h-auto lg:max-h-[75vh] lg:h-full object-contain rounded-2xl transition-opacity duration-300 ${isVideoLoaded ? 'opacity-100' : 'opacity-0'}`}
                                 style={{ filter: getColorFilterStyle(colorFilter) }}
                             />
                         ) : (
-                            <div className={`w-full mx-auto drop-shadow-2xl ${
-                                isIntro ? 'max-w-[400px] lg:max-w-none' : 'max-w-[250px] lg:max-w-[300px] mt-2 lg:mt-0'
-                            }`}>
-                                <div className={`w-full ${isIntro ? '' : 'rounded-2xl overflow-hidden'}`}>
-                                    <img
-                                        key={activeCoverUrl}
-                                        src={activeCoverUrl}
-                                        alt="Scene"
-                                        className={`w-full h-auto ${
-                                            isIntro
-                                                ? 'lg:h-full lg:max-h-[80vh] object-contain'
-                                                : 'object-cover scale-[1.06]'
-                                        }`}
-                                        style={{ filter: getColorFilterStyle(colorFilter) }}
-                                    />
-                                </div>
+                            <div className={`w-full max-w-[300px] lg:max-w-full mx-auto drop-shadow-2xl flex justify-center items-start lg:max-h-[80vh]`}>
+                                <img
+                                    key={activeCoverUrl}
+                                    src={activeCoverUrl}
+                                    alt="Scene"
+                                    className={`max-w-full max-h-[55vh] lg:max-h-[80vh] w-auto h-auto object-contain bg-black/10 rounded-2xl`}
+                                    style={{ filter: getColorFilterStyle(colorFilter) }}
+                                />
                             </div>
                         )}
                     </div>
                 )}
-            </div>
-
-            {/* Right Dialogue Section / Bottom on Mobile */}
-            <div className="w-full lg:w-[60%] flex flex-col justify-end lg:justify-center p-4 lg:p-8 relative z-10 lg:min-h-full">
-
-                <div className="biophilic-card w-full mx-auto mt-auto lg:mt-auto mb-4 lg:mb-12 max-w-3xl lg:mr-8 rounded-2xl shadow-2xl border border-white/30 bg-white/20 backdrop-blur-md flex flex-col max-h-[50vh] lg:max-h-[60vh] overflow-hidden">
-
-                    {/* Story Text (Middle - Scrollable) */}
-                    <div className="flex-1 min-h-0 overflow-y-auto no-scrollbar flex flex-col items-stretch pb-4 p-6 sm:p-8 lg:p-10">
-                        {/* Status Messages */}
-                        {(error || message) && (
-                            <div className="mb-6 shrink-0 animate-in fade-in duration-300">
-                                <div className={`p-3 flex items-center justify-between text-xs rounded-lg border ${error ? 'bg-red-100 border-red-500 text-red-900' : 'bg-emerald-100 border-emerald-500 text-emerald-900'}`}>
-                                    <span>{error || message}</span>
-                                    <button onClick={() => clearMessage?.()} className="ml-2 hover:opacity-70 transition-opacity">✕</button>
-                                </div>
-                            </div>
-                        )}
-
-                        <div className="story-content space-y-4 sm:space-y-6 text-base sm:text-lg lg:text-[19px] text-surface leading-[1.7] sm:leading-[1.8] lg:leading-loose tracking-wide text-justify animate-in fade-in duration-500">
-                            {contentSegments.length > 0 && contentSegments[currentStep] && (
-                                <TypewriterSegment
-                                    key={`${displayElementId}-${currentStep}`}
-                                    content={contentSegments[currentStep].content}
-                                    visibleCount={totalVisibleChars}
-                                    isFull={totalVisibleChars >= contentSegments[currentStep].length}
-                                />
-                            )}
-                        </div>
-                    </div>
-
-                    {/* Pagination Controls */}
-                    {contentSegments.length > 0 && currentStep < contentSegments.length - 1 && (
-                        <div className="shrink-0 flex justify-end px-6 pb-6 sm:px-8 sm:pb-8 lg:px-10 lg:pb-10 pt-4 mt-auto bg-linear-to-t from-white/10 to-transparent border-t border-surface/10">
-                            <button
-                                onClick={() => setCurrentStep(prev => prev + 1)}
-                                className="px-8 py-3 sm:px-10 sm:py-4 bg-[#4F7942] hover:bg-[#3d5e33] text-white text-base sm:text-lg font-bold rounded-xl transition-all shadow-lg hover:shadow-xl hover:-translate-y-1 block"
-                            >
-                                Tovább
-                            </button>
-                        </div>
-                    )}
-
-                    {/* Choices (Bottom) */}
-                    {contentSegments.length > 0 && currentStep === contentSegments.length - 1 && (
-                        <div className="shrink-0 px-6 pb-6 sm:px-8 sm:pb-8 lg:px-10 lg:pb-10 pt-6 animate-in fade-in slide-in-from-bottom-2 duration-500 mt-auto bg-linear-to-t from-white/10 to-transparent border-t border-surface/10">
-                            <Choices hasImage={false} onHoverChange={setIsChoiceHovered} />
-                        </div>
-                    )}
-
-                </div>
             </div>
         </div>
     );

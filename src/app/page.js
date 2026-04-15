@@ -90,80 +90,64 @@ export default function Home() {
             <div className="absolute top-[52px] lg:top-0 bottom-0 left-0 right-0 z-10 flex flex-col items-center justify-center px-4 pt-10 pb-4 lg:px-6 lg:pt-14 lg:pb-6 overflow-hidden">
 
                 {/* Layout: side-by-side when panel open, single column otherwise */}
+                {/* Layout: side-by-side main container, panel as overlay */}
                 <div
-                    className={`w-full max-w-[1400px] mx-auto flex justify-center items-center gap-6 flex-col lg:flex-row h-full relative max-h-[min(80vh,750px)] lg:max-h-[min(90vh,900px)] transition-all duration-500`}
+                    className={`w-full max-w-[1400px] mx-auto flex justify-center items-center h-full relative max-h-[min(80vh,750px)] lg:max-h-[min(90vh,900px)] transition-all duration-500`}
                 >
                     {/* Shared Desktop Header Row — fixed max-width */}
-                    {showPanel && (
-                        <div className="hidden lg:flex absolute -top-12 left-0 w-full items-center justify-between animate-in fade-in slide-in-from-bottom-2 duration-1200 px-2">
-                            {/* Title + Hamburger (left) */}
-                            <div className="flex items-center gap-4 shrink-0">
-                                <h1 className="text-lg font-bold text-white whitespace-nowrap">
-                                    Csupaszív kalandok: A Homokhátság Hősei
-                                </h1>
-                                <button
-                                    onClick={togglePanel}
-                                    className="p-1.5 rounded-lg transition-all text-[#4F7942] bg-white/80 backdrop-blur-md scale-90 hover:scale-100 hover:bg-white/95 shadow-sm border border-[#4F7942]/20"
-                                    title="Panel bezárása"
-                                >
-                                    <RiMenuLine size={18} />
-                                </button>
-                            </div>
-
-                            {/* Tabs (Right) */}
-                            <div className="flex items-center gap-1 bg-white/60 backdrop-blur-xl p-1 rounded-xl border border-white/60 shadow-sm no-scrollbar scrollbar-hide ml-auto">
-                                <button onClick={() => setShowImages(true)} className={tabCls('images')}>
-                                    <RiImageLine size={14} /> <span>Képek</span>
-                                </button>
-                                <div className="w-px h-4 bg-[#4F7942]/20 mx-1 shrink-0" />
-                                <button onClick={() => setShowLog(true)} className={tabCls('log')}>
-                                    <RiBookOpenLine size={14} /> <span>Napló</span>
-                                </button>
-                                <button onClick={() => setShowDashboard(true)} className={tabCls('dashboard')}>
-                                    <RiDashboardLine size={14} /> <span>Pontok</span>
-                                </button>
-                                <button onClick={() => setShowMap(true)} className={tabCls('map')}>
-                                    <RiMapLine size={14} /> <span>Térkép</span>
-                                </button>
-                                <button onClick={() => setShowLibrary(true)} className={tabCls('library')}>
-                                    <RiBookLine size={14} /> <span>Könyvtár</span>
-                                </button>
-                                <div className="w-px h-4 bg-[#4F7942]/20 mx-1 shrink-0" />
-                                <button onClick={() => setShowMenu(true)} className={tabCls('menu')}>
-                                    <RiSettings4Line size={14} /> <span>Beállítások</span>
-                                </button>
-                                <button onClick={() => setShowProfile(true)} className={tabCls('profile')}>
-                                    <RiUserLine size={14} /> <span>Profil</span>
-                                </button>
-                            </div>
+                    <div className="hidden lg:flex absolute -top-12 left-0 w-full items-center justify-between animate-in fade-in duration-1200 px-2 z-50">
+                        {/* Title + Hamburger (left) */}
+                        <div className="flex items-center gap-4 shrink-0">
+                            <h1 className="text-lg font-bold text-white whitespace-nowrap bg-white/20 px-3 py-1 rounded-xl backdrop-blur-md border border-white/20">
+                                Csupaszív kalandok: A Homokhátság Hősei
+                            </h1>
+                            <button
+                                onClick={togglePanel}
+                                className="p-1.5 rounded-lg transition-all text-[#4F7942] bg-white/80 backdrop-blur-md scale-90 hover:scale-100 hover:bg-white/95 shadow-sm border border-[#4F7942]/20"
+                                title="Panel bezárása"
+                            >
+                                <RiMenuLine size={18} />
+                            </button>
                         </div>
-                    )}
+
+                        {/* Tabs (Right) - always show top navigation full width */}
+                        <div className="flex items-center gap-1 bg-white/60 backdrop-blur-xl p-1 rounded-xl border border-white/60 shadow-sm no-scrollbar scrollbar-hide ml-auto transition-opacity duration-300">
+                            <button onClick={() => setShowImages(true)} className={tabCls('images')}>
+                                <RiImageLine size={14} /> <span>Képek</span>
+                            </button>
+                            <div className="w-px h-4 bg-[#4F7942]/20 mx-1 shrink-0" />
+                            <button onClick={() => setShowLog(true)} className={tabCls('log')}>
+                                <RiBookOpenLine size={14} /> <span>Napló</span>
+                            </button>
+                            <button onClick={() => setShowDashboard(true)} className={tabCls('dashboard')}>
+                                <RiDashboardLine size={14} /> <span>Pontok</span>
+                            </button>
+                            <button onClick={() => setShowMap(true)} className={tabCls('map')}>
+                                <RiMapLine size={14} /> <span>Térkép</span>
+                            </button>
+                            <button onClick={() => setShowLibrary(true)} className={tabCls('library')}>
+                                <RiBookLine size={14} /> <span>Könyvtár</span>
+                            </button>
+                            <div className="w-px h-4 bg-[#4F7942]/20 mx-1 shrink-0" />
+                            <button onClick={() => setShowMenu(true)} className={tabCls('menu')}>
+                                <RiSettings4Line size={14} /> <span>Beállítások</span>
+                            </button>
+                            <button onClick={() => setShowProfile(true)} className={tabCls('profile')}>
+                                <RiUserLine size={14} /> <span>Profil</span>
+                            </button>
+                        </div>
+                    </div>
 
                     {/* 2. Game panel — middle on desktop, main on mobile */}
-                    <div className={`relative flex flex-col justify-center items-center ${showPanel ? 'hidden lg:flex h-full flex-1' : 'flex w-full h-full'}`}>
-                        {/* Title & Hamburger — only when panel is CLOSED */}
-                        {!showPanel && (
-                            <div className="hidden lg:flex absolute top-2 left-4 w-auto items-center justify-center gap-4 animate-in fade-in duration-1000 z-50">
-                                <h1 className="text-lg font-bold text-white drop-shadow-md bg-white/20 px-3 py-1 rounded-xl backdrop-blur-md border border-white/20">
-                                    Csupaszív kalandok: A Homokhátság Hősei
-                                </h1>
-                                <button
-                                    onClick={togglePanel}
-                                    className="p-1.5 rounded-lg transition-all text-[#4F7942] hover:bg-white/95 bg-white/80 backdrop-blur-md shadow-sm border border-[#4F7942]/20 scale-90 hover:scale-100"
-                                    title="Menü megnyitása"
-                                >
-                                    <RiMenuLine size={18} />
-                                </button>
-                            </div>
-                        )}
+                    <div className={`relative flex flex-col justify-center items-center w-full h-full`}>
                         <StoryEngine hideMedia={true} />
                     </div>
 
-                    {/* 3. Side panel (Right) */}
+                    {/* 3. Side panel (Right) - Rendered as Overlay */}
                     {showPanel && (
-                        <div className="relative h-full flex flex-col justify-center items-center">
+                        <div className="absolute inset-0 z-50 flex lg:justify-end justify-center pointer-events-none">
                             <div
-                                className="h-full w-full max-w-[420px] sm:w-auto sm:max-w-none sm:aspect-9/16 lg:h-full lg:w-auto lg:max-w-none bg-white/20 backdrop-blur-md rounded-xl border border-white/30 shadow-2xl overflow-hidden flex flex-col"
+                                className="pointer-events-auto h-full w-full max-w-[420px] sm:w-auto sm:max-w-none sm:aspect-9/16 lg:h-full lg:w-[420px] lg:max-w-[420px] bg-white/60 backdrop-blur-2xl lg:rounded-l-2xl border-l border-white/40 shadow-2xl overflow-hidden flex flex-col animate-in fade-in slide-in-from-right-4 duration-500"
                             >
 
 
