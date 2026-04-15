@@ -20,6 +20,7 @@ export const useGameStore = create((set, get) => ({
     loading: false,
     error: null,
     message: null,
+    isStarted: false,
 
     // Settings
     volume: 0.5,
@@ -106,6 +107,28 @@ export const useGameStore = create((set, get) => ({
             };
         });
         get().visitElement(finalId);
+    },
+
+    startStory: (boardId) => {
+        const board = projectSettings.boards[boardId];
+        if (!board || board.elements.length === 0) return;
+
+        const startId = board.elements[0];
+        set({
+            currentElementId: startId,
+            visits: {},
+            variables: { score: 0 },
+            history: [],
+            storyLog: [{ elementId: startId, choiceMade: null }],
+            discoveredComponents: [],
+            recentDiscoveries: [],
+            isStarted: true,
+            error: null,
+            message: null
+        });
+
+        get().visitElement(startId);
+        get().saveGame(true);
     },
 
     executeScript: (script) => {
@@ -244,6 +267,7 @@ export const useGameStore = create((set, get) => ({
                     typewriterSpeed: s.typewriterSpeed ?? 30,
                     transitionsEnabled: s.transitionsEnabled ?? true,
                     colorFilter: s.colorFilter ?? 'none',
+                    isStarted: true,
                 });
             } else {
                 set({ error: 'Nincs mentett játékállás.' });
@@ -285,6 +309,7 @@ export const useGameStore = create((set, get) => ({
                     typewriterSpeed: s.typewriterSpeed ?? 30,
                     transitionsEnabled: s.transitionsEnabled ?? true,
                     colorFilter: s.colorFilter ?? 'none',
+                    isStarted: true,
                 });
             }
         } catch (err) {
@@ -305,11 +330,14 @@ export const useGameStore = create((set, get) => ({
             discoveredComponents: [],
             recentDiscoveries: [],
             error: null,
-            message: null
+            message: null,
+            isStarted: false
         });
 
         get().visitElement(startId);
     },
+
+    setStarted: (val) => set({ isStarted: val }),
 
     // Setting Setters (each triggers a debounced save)
     setVolume: (volume) => { set({ volume }); get().saveGame(); },
