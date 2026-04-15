@@ -128,10 +128,10 @@ export const GameProvider = ({ children }) => {
 
             // Read fresh state after autoLoad (React hook snapshot is stale here)
             const fresh = useGameStore.getState();
-            if (Object.keys(fresh.visits).length === 0) {
+            if (Object.keys(fresh.visits).length === 0 && fresh.isStarted) {
                 fresh.visitElement(projectSettings.startingElement);
                 fresh.initStoryLog();
-            } else if (fresh.storyLog.length === 0) {
+            } else if (fresh.isStarted && fresh.storyLog.length === 0) {
                 fresh.initStoryLog();
             }
         };
@@ -250,7 +250,9 @@ export const GameProvider = ({ children }) => {
         isMuted: store.isMuted,
         toggleMute,
         colorFilter: store.colorFilter,
-        setColorFilter: store.setColorFilter
+        setColorFilter: store.setColorFilter,
+        isStarted: store.isStarted,
+        startStory: store.startStory,
     };
 
 

@@ -9,6 +9,7 @@ import GameMenu from '@/components/GameMenu';
 import GameLibrary from '@/components/GameLibrary';
 import ProfileView from '@/components/ProfileView';
 import { useGame } from '@/context/GameContext';
+import { StorySelection } from '@/components/StorySelection';
 
 
 import { Lightbox } from '@/components/Lightbox';
@@ -40,9 +41,9 @@ export default function Home() {
         showProfile, setShowProfile,
         showImages, setShowImages,
         togglePanel,
-        currentElementId,
         getAssetUrl,
         colorFilter,
+        isStarted,
     } = useGame();
 
     // Helper for color filters inside page component
@@ -83,7 +84,7 @@ export default function Home() {
         }`;
 
     return (
-        <div className="fixed inset-0 overflow-hidden text-[#3e2723]">
+        <div className="fixed inset-0 overflow-hidden text-surface">
             {/* Background layers */}
 
             {/* Content Wrapper - Strictly bound between header and bottom */}
@@ -170,7 +171,7 @@ export default function Home() {
 
 
 
-                                 {/* Tab content */}
+                                {/* Tab content */}
                                 <div className="flex-1 min-h-0 flex flex-col overflow-y-auto no-scrollbar">
                                     {activeTab === 'profile' && <ProfileView />}
                                     {activeTab === 'menu' && <GameMenu />}
@@ -206,6 +207,7 @@ export default function Home() {
             </div >
             <Lightbox />
             <ColorFilters />
+            {!isStarted && <StorySelection />}
         </div >
     );
 }
