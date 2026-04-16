@@ -106,40 +106,40 @@ export default function Home() {
                 >
                     {/* Shared Desktop Header Row — fixed max-width */}
                     <div className="hidden lg:flex absolute -top-12 left-0 w-full items-center justify-between animate-in fade-in slide-in-from-bottom-2 duration-1200 px-2">
-                            {/* Title + Hamburger (left) */}
-                            <div className="flex items-center gap-4 shrink-0">
-                                <h1 className="text-lg font-bold text-white whitespace-nowrap">
-                                    Csupaszív kalandok: A Homokhátság Hősei
-                                </h1>
-                            </div>
-
-                            {/* Tabs (Right) */}
-                            <div className="flex items-center gap-1 bg-white/60 backdrop-blur-xl p-1 rounded-xl border border-white/60 shadow-sm no-scrollbar scrollbar-hide ml-auto">
-                                <button onClick={() => setShowImages(true)} className={tabCls('images')}>
-                                    <RiImageLine size={14} /> <span>Képek</span>
-                                </button>
-                                <div className="w-px h-4 bg-[#4F7942]/20 mx-1 shrink-0" />
-                                <button onClick={() => setShowLog(true)} className={tabCls('log')}>
-                                    <RiBookOpenLine size={14} /> <span>Napló</span>
-                                </button>
-                                <button onClick={() => setShowDashboard(true)} className={tabCls('dashboard')}>
-                                    <RiDashboardLine size={14} /> <span>Pontok</span>
-                                </button>
-                                <button onClick={() => setShowMap(true)} className={tabCls('map')}>
-                                    <RiMapLine size={14} /> <span>Térkép</span>
-                                </button>
-                                <button onClick={() => setShowLibrary(true)} className={tabCls('library')}>
-                                    <RiBookLine size={14} /> <span>Tudástár</span>
-                                </button>
-                                <div className="w-px h-4 bg-[#4F7942]/20 mx-1 shrink-0" />
-                                <button onClick={() => setShowMenu(true)} className={tabCls('menu')}>
-                                    <RiSettings4Line size={14} /> <span>Beállítások</span>
-                                </button>
-                                <button onClick={() => setShowProfile(true)} className={tabCls('profile')}>
-                                    <RiUserLine size={14} /> <span>Profil</span>
-                                </button>
-                            </div>
+                        {/* Title + Hamburger (left) */}
+                        <div className="flex items-center gap-4 shrink-0">
+                            <h1 className="text-lg font-bold text-[#4F7942] whitespace-nowrap bg-white/20 px-3 py-1 rounded-xl backdrop-blur-md border border-white/20">
+                                Csupaszív kalandok: A Homokhátság Hősei
+                            </h1>
                         </div>
+
+                        {/* Tabs (Right) */}
+                        <div className="flex items-center gap-1 bg-white/60 backdrop-blur-xl p-1 rounded-xl border border-white/60 shadow-sm no-scrollbar scrollbar-hide ml-auto">
+                            <button onClick={() => setShowImages(true)} className={tabCls('images')}>
+                                <RiImageLine size={14} /> <span>Képek</span>
+                            </button>
+                            <div className="w-px h-4 bg-[#4F7942]/20 mx-1 shrink-0" />
+                            <button onClick={() => setShowLog(true)} className={tabCls('log')}>
+                                <RiBookOpenLine size={14} /> <span>Napló</span>
+                            </button>
+                            <button onClick={() => setShowDashboard(true)} className={tabCls('dashboard')}>
+                                <RiDashboardLine size={14} /> <span>Pontok</span>
+                            </button>
+                            <button onClick={() => setShowMap(true)} className={tabCls('map')}>
+                                <RiMapLine size={14} /> <span>Térkép</span>
+                            </button>
+                            <button onClick={() => setShowLibrary(true)} className={tabCls('library')}>
+                                <RiBookLine size={14} /> <span>Tudástár</span>
+                            </button>
+                            <div className="w-px h-4 bg-[#4F7942]/20 mx-1 shrink-0" />
+                            <button onClick={() => setShowMenu(true)} className={tabCls('menu')}>
+                                <RiSettings4Line size={14} /> <span>Beállítások</span>
+                            </button>
+                            <button onClick={() => setShowProfile(true)} className={tabCls('profile')}>
+                                <RiUserLine size={14} /> <span>Profil</span>
+                            </button>
+                        </div>
+                    </div>
 
                     {/* 2. Game panel — middle on desktop, main on mobile */}
                     <div className={`relative flex flex-col justify-center items-stretch ${showPanel ? 'hidden lg:flex h-full flex-1' : 'flex w-full h-full'}`}>
