@@ -46,7 +46,7 @@ export default function Header() {
         { key: 'log', icon: <RiBookOpenLine size={20} />, label: 'Napló', action: makeTabAction(setShowLog) },
         { key: 'dashboard', icon: <RiDashboardLine size={20} />, label: 'Jutalmak', action: makeTabAction(setShowDashboard) },
         { key: 'map', icon: <RiMapLine size={20} />, label: 'Térkép', action: makeTabAction(setShowMap) },
-        { key: 'library', icon: <RiBookLine size={20} />, label: 'Könyvtár', action: makeTabAction(setShowLibrary) },
+        { key: 'library', icon: <RiBookLine size={20} />, label: 'Tudástár', action: makeTabAction(setShowLibrary) },
     ];
 
     return (

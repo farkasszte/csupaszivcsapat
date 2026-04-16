@@ -1,6 +1,7 @@
 'use client';
 
 import { StoryEngine } from '@/components/StoryEngine';
+import { useEffect } from 'react';
 import dynamic from 'next/dynamic';
 const StoryLog = dynamic(() => import('@/components/StoryLog'), { ssr: false });
 import PlayerDashboard from '@/components/PlayerDashboard';
@@ -32,6 +33,7 @@ import {
 
 export default function Home() {
     const {
+        currentElementId,
         project,
         showLog, setShowLog,
         showDashboard, setShowDashboard,
@@ -45,6 +47,16 @@ export default function Home() {
         colorFilter,
         isStarted,
     } = useGame();
+
+    const showPanel = showLog || showDashboard || showMap || showMenu || showLibrary || showProfile || showImages;
+    const activeTab = showMenu ? 'menu' : showLog ? 'log' : showDashboard ? 'dashboard' : showMap ? 'map' : showLibrary ? 'library' : showProfile ? 'profile' : showImages ? 'images' : null;
+
+    // Force panel open on desktop if closed
+    useEffect(() => {
+        if (typeof window !== 'undefined' && window.innerWidth >= 1024 && !showPanel) {
+            setShowDashboard(true);
+        }
+    }, [showPanel, setShowDashboard]);
 
     // Helper for color filters inside page component
     const getColorFilterStyle = (filterId) => {
@@ -60,8 +72,6 @@ export default function Home() {
 
 
 
-    const showPanel = showLog || showDashboard || showMap || showMenu || showLibrary || showProfile || showImages;
-    const activeTab = showMenu ? 'menu' : showLog ? 'log' : showDashboard ? 'dashboard' : showMap ? 'map' : showLibrary ? 'library' : showProfile ? 'profile' : showImages ? 'images' : null;
 
 
 
@@ -92,23 +102,15 @@ export default function Home() {
 
                 {/* Layout: side-by-side when panel open, single column otherwise */}
                 <div
-                    className={`w-full max-w-[1400px] mx-auto flex justify-center items-center gap-6 flex-col lg:flex-row h-full relative max-h-[min(80vh,750px)] lg:max-h-[min(90vh,900px)] transition-all duration-500`}
+                    className={`w-full max-w-[1500px] mx-auto flex justify-center items-stretch gap-6 flex-col lg:flex-row h-full relative max-h-[min(80vh,750px)] lg:max-h-[min(90vh,900px)] transition-all duration-500`}
                 >
                     {/* Shared Desktop Header Row — fixed max-width */}
-                    {showPanel && (
-                        <div className="hidden lg:flex absolute -top-12 left-0 w-full items-center justify-between animate-in fade-in slide-in-from-bottom-2 duration-1200 px-2">
+                    <div className="hidden lg:flex absolute -top-12 left-0 w-full items-center justify-between animate-in fade-in slide-in-from-bottom-2 duration-1200 px-2">
                             {/* Title + Hamburger (left) */}
                             <div className="flex items-center gap-4 shrink-0">
                                 <h1 className="text-lg font-bold text-white whitespace-nowrap">
                                     Csupaszív kalandok: A Homokhátság Hősei
                                 </h1>
-                                <button
-                                    onClick={togglePanel}
-                                    className="p-1.5 rounded-lg transition-all text-[#4F7942] bg-white/80 backdrop-blur-md scale-90 hover:scale-100 hover:bg-white/95 shadow-sm border border-[#4F7942]/20"
-                                    title="Panel bezárása"
-                                >
-                                    <RiMenuLine size={18} />
-                                </button>
                             </div>
 
                             {/* Tabs (Right) */}
@@ -127,7 +129,7 @@ export default function Home() {
                                     <RiMapLine size={14} /> <span>Térkép</span>
                                 </button>
                                 <button onClick={() => setShowLibrary(true)} className={tabCls('library')}>
-                                    <RiBookLine size={14} /> <span>Könyvtár</span>
+                                    <RiBookLine size={14} /> <span>Tudástár</span>
                                 </button>
                                 <div className="w-px h-4 bg-[#4F7942]/20 mx-1 shrink-0" />
                                 <button onClick={() => setShowMenu(true)} className={tabCls('menu')}>
@@ -138,31 +140,23 @@ export default function Home() {
                                 </button>
                             </div>
                         </div>
-                    )}
 
                     {/* 2. Game panel — middle on desktop, main on mobile */}
-                    <div className={`relative flex flex-col justify-center items-center ${showPanel ? 'hidden lg:flex h-full flex-1' : 'flex w-full h-full'}`}>
+                    <div className={`relative flex flex-col justify-center items-stretch ${showPanel ? 'hidden lg:flex h-full flex-1' : 'flex w-full h-full'}`}>
                         {/* Title & Hamburger — only when panel is CLOSED */}
                         {!showPanel && (
                             <div className="hidden lg:flex absolute top-2 left-4 w-auto items-center justify-center gap-4 animate-in fade-in duration-1000 z-50">
                                 <h1 className="text-lg font-bold text-white drop-shadow-md bg-white/20 px-3 py-1 rounded-xl backdrop-blur-md border border-white/20">
                                     Csupaszív kalandok: A Homokhátság Hősei
                                 </h1>
-                                <button
-                                    onClick={togglePanel}
-                                    className="p-1.5 rounded-lg transition-all text-[#4F7942] hover:bg-white/95 bg-white/80 backdrop-blur-md shadow-sm border border-[#4F7942]/20 scale-90 hover:scale-100"
-                                    title="Menü megnyitása"
-                                >
-                                    <RiMenuLine size={18} />
-                                </button>
                             </div>
                         )}
                         <StoryEngine hideMedia={true} />
                     </div>
 
                     {/* 3. Side panel (Right) */}
-                    {showPanel && (
-                        <div className="relative h-full flex flex-col justify-center items-center">
+                    {(showPanel || true) && (
+                        <div className={`relative h-full flex flex-col justify-center items-center ${!showPanel ? 'hidden lg:flex' : ''}`}>
                             <div
                                 className="h-full w-full max-w-[420px] sm:w-auto sm:max-w-none sm:aspect-9/16 lg:h-full lg:w-auto lg:max-w-none bg-white/20 backdrop-blur-md rounded-xl border border-white/30 shadow-2xl overflow-hidden flex flex-col"
                             >
@@ -179,24 +173,48 @@ export default function Home() {
                                     {activeTab === 'dashboard' && <PlayerDashboard />}
                                     {activeTab === 'map' && <GameMap />}
                                     {activeTab === 'library' && <GameLibrary />}
-                                    {activeTab === 'images' && (
-                                        <div className="flex-1 min-h-0 flex flex-col justify-center p-4">
-                                            {project?.elements?.[currentElementId]?.assets?.cover ? (
-                                                <div className="relative group overflow-hidden rounded-xl h-full w-fit mx-auto transition-transform duration-700">
-                                                    <img
-                                                        src={getAssetUrl(project.elements[currentElementId].assets.cover.id)}
-                                                        alt="Scene"
-                                                        className="h-full w-auto object-contain transition-transform duration-700 block"
-                                                        style={{ filter: typeof getColorFilterStyle === 'function' ? getColorFilterStyle(colorFilter) : 'none' }}
-                                                    />
-                                                </div>
-                                            ) : (
-                                                <div className="aspect-9/16 bg-zinc-800/40 rounded-lg border border-dashed border-white/10 flex items-center justify-center">
-                                                    <span className="text-[10px] text-white/20 uppercase tracking-widest">Nincs kép</span>
-                                                </div>
-                                            )}
-                                        </div>
-                                    )}
+                                    {activeTab === 'images' && (() => {
+                                        const element = project?.elements?.[currentElementId];
+                                        const coverUrl = element?.assets?.cover ? getAssetUrl(element.assets.cover.id) : null;
+                                        let videoUrl = null;
+
+                                        if (element?.components) {
+                                            element.components.forEach(compId => {
+                                                const comp = project.components?.[compId];
+                                                if (comp?.attributes?.videoUrl) {
+                                                    videoUrl = comp.attributes.videoUrl;
+                                                }
+                                            });
+                                        }
+
+                                        return (
+                                            <div className="flex-1 min-h-0 flex flex-col justify-center p-4">
+                                                {videoUrl ? (
+                                                    <div className="relative group overflow-hidden rounded-xl h-full w-fit mx-auto transition-transform duration-700">
+                                                        <video
+                                                            src={videoUrl}
+                                                            autoPlay loop muted playsInline
+                                                            className="h-full w-auto object-contain transition-transform duration-700 block"
+                                                            style={{ filter: getColorFilterStyle(colorFilter) }}
+                                                        />
+                                                    </div>
+                                                ) : coverUrl ? (
+                                                    <div className="relative group overflow-hidden rounded-xl h-full w-fit mx-auto transition-transform duration-700">
+                                                        <img
+                                                            src={coverUrl}
+                                                            alt="Scene"
+                                                            className="h-full w-auto object-contain transition-transform duration-700 block"
+                                                            style={{ filter: getColorFilterStyle(colorFilter) }}
+                                                        />
+                                                    </div>
+                                                ) : (
+                                                    <div className="aspect-9/16 bg-zinc-800/40 rounded-lg border border-dashed border-white/10 flex items-center justify-center">
+                                                        <span className="text-[10px] text-white/20 uppercase tracking-widest">Nincs kép</span>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        );
+                                    })()}
                                 </div>
 
 

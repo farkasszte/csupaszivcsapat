@@ -270,70 +270,72 @@ export const StoryEngine = ({ hideMedia = false }) => {
     if (!isMounted) return null;
 
     return (
-        <div key={displayElementId} className="w-full h-full flex flex-col lg:flex-row items-stretch lg:items-center justify-center relative z-0">
+        <div key={displayElementId} className="w-full h-full flex flex-col lg:flex-row items-stretch lg:items-stretch justify-center relative z-0">
 
-            {/* Left Image Section / Top on Mobile */}
-            <div className="w-full lg:w-[40%] flex justify-center items-end lg:items-center relative z-0 pt-20 lg:pt-0 -mb-8 lg:mb-0">
-                {activeDiscoveryComponent && (!videoUrl && !activeCoverUrl) && (
-                    // Discovery fallback if no media
-                    <div className="absolute top-4 left-1/2 -translate-x-1/2 z-50 pointer-events-none animate-in fade-in duration-500">
-                        <div className="bg-white/80 backdrop-blur-md border border-surface/30 shadow-lg rounded-full px-4 py-2 flex items-center gap-2 mx-auto w-fit">
-                            <RiSearchLine size={14} className="text-surface" />
-                            <span className="text-[10px] font-bold tracking-wider text-surface uppercase whitespace-nowrap">
-                                Új felfedezés: <span className="text-surface">{activeDiscoveryComponent.name}</span>
-                            </span>
+            {/* Left Image Section / Top on Mobile - only shown if not hidden */}
+            {!hideMedia && (
+                <div className="w-full lg:w-[40%] flex justify-center items-end lg:items-center relative z-0 pt-20 lg:pt-0 -mb-8 lg:mb-0">
+                    {activeDiscoveryComponent && (!videoUrl && !activeCoverUrl) && (
+                        // Discovery fallback if no media
+                        <div className="absolute top-4 left-1/2 -translate-x-1/2 z-50 pointer-events-none animate-in fade-in duration-500">
+                            <div className="bg-white/80 backdrop-blur-md border border-surface/30 shadow-lg rounded-full px-4 py-2 flex items-center gap-2 mx-auto w-fit">
+                                <RiSearchLine size={14} className="text-surface" />
+                                <span className="text-[10px] font-bold tracking-wider text-surface uppercase whitespace-nowrap">
+                                    Új felfedezés: <span className="text-surface">{activeDiscoveryComponent.name}</span>
+                                </span>
+                            </div>
                         </div>
-                    </div>
-                )}
+                    )}
 
-                {(videoUrl || activeCoverUrl) && (
-                    <div className="relative w-full overflow-visible flex justify-center">
-                        {activeDiscoveryComponent && (
-                            <div key={activeDiscoveryId} className="absolute -top-10 left-1/2 -translate-x-1/2 z-50 pointer-events-none animate-in slide-in-from-top-4 fade-in duration-500">
-                                <div className="bg-white/80 backdrop-blur-md border border-surface/30 shadow-lg rounded-full px-4 py-2 flex items-center gap-2">
-                                    <RiSearchLine size={14} className="text-surface" />
-                                    <span className="text-[10px] font-bold tracking-wider text-surface uppercase whitespace-nowrap">
-                                        Új felfedezés: <span className="text-surface">{activeDiscoveryComponent.name}</span>
-                                    </span>
+                    {(videoUrl || activeCoverUrl) && (
+                        <div className="relative w-full overflow-visible flex justify-center">
+                            {activeDiscoveryComponent && (
+                                <div key={activeDiscoveryId} className="absolute -top-10 left-1/2 -translate-x-1/2 z-50 pointer-events-none animate-in slide-in-from-top-4 fade-in duration-500">
+                                    <div className="bg-white/80 backdrop-blur-md border border-surface/30 shadow-lg rounded-full px-4 py-2 flex items-center gap-2">
+                                        <RiSearchLine size={14} className="text-surface" />
+                                        <span className="text-[10px] font-bold tracking-wider text-surface uppercase whitespace-nowrap">
+                                            Új felfedezés: <span className="text-surface">{activeDiscoveryComponent.name}</span>
+                                        </span>
+                                    </div>
                                 </div>
-                            </div>
-                        )}
-                        {videoUrl ? (
-                            <video
-                                key={videoUrl}
-                                src={videoUrl}
-                                autoPlay loop muted playsInline
-                                onCanPlay={() => setIsVideoLoaded(true)}
-                                className={`w-full max-w-[400px] lg:max-w-none h-auto lg:max-h-[80vh] lg:h-full object-contain rounded-xl transition-opacity duration-300 ${isVideoLoaded ? 'opacity-100' : 'opacity-0'}`}
-                                style={{ filter: getColorFilterStyle(colorFilter) }}
-                            />
-                        ) : (
-                            <div className={`w-full mx-auto drop-shadow-2xl ${
-                                isIntro ? 'max-w-[400px] lg:max-w-none' : 'max-w-[250px] lg:max-w-[300px] mt-2 lg:mt-0'
-                            }`}>
-                                <div className={`w-full ${isIntro ? '' : 'rounded-2xl overflow-hidden'}`}>
-                                    <img
-                                        key={activeCoverUrl}
-                                        src={activeCoverUrl}
-                                        alt="Scene"
-                                        className={`w-full h-auto ${
-                                            isIntro
-                                                ? 'lg:h-full lg:max-h-[80vh] object-contain'
-                                                : 'object-cover scale-[1.06]'
-                                        }`}
-                                        style={{ filter: getColorFilterStyle(colorFilter) }}
-                                    />
+                            )}
+                            {videoUrl ? (
+                                <video
+                                    key={videoUrl}
+                                    src={videoUrl}
+                                    autoPlay loop muted playsInline
+                                    onCanPlay={() => setIsVideoLoaded(true)}
+                                    className={`w-full max-w-[400px] lg:max-w-none h-auto lg:max-h-[80vh] lg:h-full object-contain rounded-xl transition-opacity duration-300 ${isVideoLoaded ? 'opacity-100' : 'opacity-0'}`}
+                                    style={{ filter: getColorFilterStyle(colorFilter) }}
+                                />
+                            ) : (
+                                <div className={`w-full mx-auto drop-shadow-2xl ${
+                                    isIntro ? 'max-w-[400px] lg:max-w-none' : 'max-w-[250px] lg:max-w-[300px] mt-2 lg:mt-0'
+                                }`}>
+                                    <div className={`w-full ${isIntro ? '' : 'rounded-2xl overflow-hidden'}`}>
+                                        <img
+                                            key={activeCoverUrl}
+                                            src={activeCoverUrl}
+                                            alt="Scene"
+                                            className={`w-full h-auto ${
+                                                isIntro
+                                                    ? 'lg:h-full lg:max-h-[80vh] object-contain'
+                                                    : 'object-cover scale-[1.06]'
+                                            }`}
+                                            style={{ filter: getColorFilterStyle(colorFilter) }}
+                                        />
+                                    </div>
                                 </div>
-                            </div>
-                        )}
-                    </div>
-                )}
-            </div>
+                            )}
+                        </div>
+                    )}
+                </div>
+            )}
 
             {/* Right Dialogue Section / Bottom on Mobile */}
-            <div className="w-full lg:w-[60%] flex flex-col justify-end lg:justify-center p-4 lg:p-8 relative z-10 lg:min-h-full">
+            <div className={`w-full flex flex-col justify-end lg:justify-start relative z-10 lg:min-h-full ${hideMedia ? 'lg:w-full p-0' : 'lg:w-[60%] p-4 lg:p-8'}`}>
 
-                <div className="biophilic-card w-full mx-auto mt-auto lg:mt-auto mb-4 lg:mb-12 max-w-3xl lg:mr-8 rounded-2xl shadow-2xl border border-white/30 bg-white/20 backdrop-blur-md flex flex-col max-h-[50vh] lg:max-h-[60vh] overflow-hidden">
+                <div className={`biophilic-card w-full mx-auto mt-auto lg:mt-auto mb-4 lg:mb-0 rounded-2xl shadow-2xl border border-white/30 bg-white/20 backdrop-blur-md flex flex-col overflow-hidden ${hideMedia ? 'h-full lg:max-w-5xl' : 'max-h-[50vh] lg:max-h-[60vh] max-w-3xl lg:mr-8'}`}>
 
                     {/* Story Text (Middle - Scrollable) */}
                     <div className="flex-1 min-h-0 overflow-y-auto no-scrollbar flex flex-col items-stretch pb-4 p-6 sm:p-8 lg:p-10">

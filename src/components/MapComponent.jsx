@@ -26,8 +26,17 @@ const customActiveIcon = new L.Icon({
 });
 
 // A standard marker
-const defaultIcon = new L.Icon({
+const greenIcon = new L.Icon({
   iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41]
+});
+
+const greyIcon = new L.Icon({
+  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-grey.png',
   shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
   iconSize: [25, 41],
   iconAnchor: [12, 41],
@@ -68,6 +77,8 @@ export default function MapComponent() {
     }
   };
 
+  const highlightedIds = ['loc-11', 'loc-13', 'loc-16'];
+
   return (
     <div 
         className="w-full h-full rounded-xl overflow-hidden border border-white/20 shadow-xl"
@@ -88,12 +99,20 @@ export default function MapComponent() {
         {locationsData.map((loc) => {
            if (!loc.position) return null;
            const isActive = selectedMapLocation?.id === loc.id;
+           const isHighlighted = highlightedIds.includes(loc.id);
+           
+           let icon = greyIcon;
+           if (isActive) {
+             icon = customActiveIcon;
+           } else if (isHighlighted) {
+             icon = greenIcon;
+           }
            
            return (
              <Marker 
                key={loc.id} 
                position={loc.position}
-               icon={isActive ? customActiveIcon : defaultIcon}
+               icon={icon}
              >
                <Popup>
                  <div className="font-bold text-[#4F7942] uppercase text-xs tracking-widest">{loc.name}</div>

@@ -21,6 +21,7 @@ export const useGameStore = create((set, get) => ({
     error: null,
     message: null,
     isStarted: false,
+    finishedStories: [], // Track indices of finished stories
 
     // Settings
     volume: 0.5,
@@ -49,10 +50,28 @@ export const useGameStore = create((set, get) => ({
                 });
             }
 
+            // Handle story completion points
+            const storyEndpoints = [
+                { id: 'c37401ef-7dba-4848-9b65-28f4373ded2d', points: 10, index: 1 },
+                { id: '5e0dfb24-8471-4a72-b626-83a41a8e4ffd', points: 15, index: 2 },
+                { id: '8f6d180f-ef83-41ac-bcaa-fe5bb5b10a77', points: 25, index: 3 }
+            ];
+
+            const endpoint = storyEndpoints.find(e => e.id === id);
+            const newFinishedStories = [...(state.finishedStories || [])];
+            const newVariables = { ...state.variables };
+
+            if (endpoint && !newFinishedStories.includes(endpoint.index)) {
+                newFinishedStories.push(endpoint.index);
+                newVariables.score = (newVariables.score || 0) + endpoint.points;
+            }
+
             return {
                 visits: newVisits,
                 discoveredComponents: newDiscovered,
-                recentDiscoveries: newRecents
+                recentDiscoveries: newRecents,
+                finishedStories: newFinishedStories,
+                variables: newVariables
             };
         });
     },
@@ -193,14 +212,15 @@ export const useGameStore = create((set, get) => ({
 
                 const {
                     currentElementId, visits, variables, history, storyLog, discoveredComponents,
+                    finishedStories,
                     volume, isMuted, typewriterSpeed, transitionsEnabled, colorFilter
                 } = get();
 
                 const stepsToSave = storyLog.map(({ elementId, choiceMade }) => ({ elementId, choiceMade }));
 
                 const gameState = {
-                    currentElementId, visits, variables, history,
-                    storyLog: stepsToSave, discoveredComponents,
+                    currentElementId, visits, variables, history, storyLog, discoveredComponents,
+                    finishedStories,
                     settings: { volume, isMuted, typewriterSpeed, transitionsEnabled, colorFilter }
                 };
 
@@ -304,6 +324,7 @@ export const useGameStore = create((set, get) => ({
                     history: gameState.history,
                     storyLog: gameState.storyLog || [],
                     discoveredComponents: gameState.discoveredComponents || [],
+                    finishedStories: gameState.finishedStories || [],
                     volume: s.volume ?? 0.5,
                     isMuted: s.isMuted ?? false,
                     typewriterSpeed: s.typewriterSpeed ?? 30,
@@ -329,6 +350,7 @@ export const useGameStore = create((set, get) => ({
             storyLog: [{ elementId: startId, choiceMade: null }],
             discoveredComponents: [],
             recentDiscoveries: [],
+            finishedStories: [],
             error: null,
             message: null,
             isStarted: false

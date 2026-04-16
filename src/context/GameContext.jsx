@@ -193,7 +193,11 @@ export const GameProvider = ({ children }) => {
     const value = {
         project: projectSettings,
         currentElementId: store.currentElementId,
-        state: { visits: store.visits, variables: store.variables },
+        state: { 
+            visits: store.visits, 
+            variables: store.variables,
+            finishedStories: store.finishedStories 
+        },
         loading: store.loading,
         error: store.error,
         message: store.message,

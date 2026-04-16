@@ -3,90 +3,144 @@
     "id": "loc-1",
     "name": "Kolon-tó (Izsák)",
     "description": "A Duna-Tisza köze legnagyobb édesvizű mocsara, amely nádasaival és nyílt vízfelületeivel az egykori mocsárvilág hangulatát idézi. A terület központi szerepet játszik a térség vízháztartásának megőrzésében.",
-    "position": [46.7667, 19.3333]
+    "position": [
+      46.7667,
+      19.3333
+    ]
   },
   {
     "id": "loc-2",
     "name": "Kiskunmajsai Tarté-erdő",
     "description": "Egy különleges homoki tölgyes és erdei fenyves mozaik, amely a Homokhátság eredeti erdőtársulásainak maradványait őrzi. A hűvös erdei utak tökéletes menedéket nyújtanak a pusztai hőség elől.",
-    "position": [46.4833, 19.7333]
+    "position": [
+      46.4833,
+      19.7333
+    ]
   },
   {
     "id": "loc-3",
     "name": "Kiskunfélegyházi Péteri-tó",
     "description": "Fontos vizes élőhely-rehabilitáció, ahol a látogatók a gátakon kialakított tanösvényeken sétálva ismerhetik meg a szikes tavak megújuló világát és a nádasok nyugalmát.",
-    "position": [46.6667, 19.9833]
+    "position": [
+      46.6667,
+      19.9833
+    ]
   },
   {
     "id": "loc-4",
     "name": "Kunhalmok (Gidófalvy-halom)",
     "description": "Az alföldi táj „piramisai”, melyek történelmi emlékhelyek és fontos menedékek a puszta őshonos növényvilága számára. Kiemelkedő pontok, ahonnan messzire elláthatunk a síkságon.",
-    "position": [46.9000, 19.6500]
+    "position": [
+      46.9000,
+      19.6500
+    ]
   },
   {
     "id": "loc-5",
     "name": "Madarasi Marhajárás",
     "description": "Egy hatalmas, összefüggő pusztai legelő, amely a hagyományos magyar állattartás és a végtelen horizont látványát kínálja az utazóknak.",
-    "position": [46.0667, 19.2667]
+    "position": [
+      46.0667,
+      19.2667
+    ]
   },
   {
     "id": "loc-6",
     "name": "Soltvadkerti Büdös-tó",
     "description": "Rejtett, vadregényes tóvidék a homokbuckák között, amely különleges mikroklímájával és sűrű növényzetével a nyugalom szigete a Homokhátság szívében.",
-    "position": [46.5833, 19.3833]
+    "position": [
+      46.5833,
+      19.3833
+    ]
   },
   {
     "id": "loc-7",
     "name": "Kiskunhalasi Fejeték-mocsár",
     "description": "Egy mélyebben fekvő, lápos terület, ahol a nedves rétek és fűzlápok ritka növénytársulásai maradtak fenn az intenzív mezőgazdasági környezetben.",
-    "position": [46.4333, 19.4833]
+    "position": [
+      46.4333,
+      19.4833
+    ]
   },
   {
     "id": "loc-8",
     "name": "Kelebiai-erdő",
     "description": "A szerb határ mentén húzódó összefüggő erdőtömb, amely homoki erdőspuszta-rétekkel tarkítva mutatja be a régió erdőgazdálkodási múltját és természeti értékeit.",
-    "position": [46.2000, 19.6167]
+    "position": [
+      46.2000,
+      19.6167
+    ]
   },
   {
     "id": "loc-9",
     "name": "Kéleshalmi Homokbuckák",
     "description": "Az „Alföldi sivatagként” is emlegetett terület, ahol a szél építette meredek homokbuckák és a közöttük megtelepedett borókások látványa egyedülálló geomorfológiai érték.",
-    "position": [46.3667, 19.2833]
+    "position": [
+      46.3667,
+      19.2833
+    ]
   },
   {
     "id": "loc-10",
     "name": "Hajósi Kaszálók",
     "description": "Kiterjedt löszgyepek és mély fekvésű kaszálók rendszere, ahol a táj tavaszi virágpompája és a hagyományos gazdálkodás nyomai találkoznak.",
-    "position": [46.4000, 19.1167]
+    "position": [
+      46.4000,
+      19.1167
+    ]
   },
   {
     "id": "loc-11",
     "name": "Nagyszéksós-tó (Mórahalom)",
     "description": "Egy jellegzetes, sekély vizű szikes tó, amelynek nyílt vízfelületeit és partmenti növényzetét a hagyományos pusztai legeltetés tartja egyensúlyban. A kiépített kilátókból páratlan panoráma nyílik a végtelen, békés tájra.",
-    "position": [46.2100, 19.8600]
+    "position": [
+      46.2120,
+      19.9520
+    ]
   },
   {
     "id": "loc-12",
     "name": "Ásotthalmi láprét",
     "description": "A gyakran csupán „Csodarétként” emlegetett védett terület az ősi mocsárrétek varázslatos flóráját őrzi. Az érintetlen pusztai táj festői nyugalmat és egyedülálló, színes botanikai élményt kínál az idelátogatóknak.",
-    "position": [46.2000, 19.7800]
+    "position": [
+      46.1960,
+      19.8330
+    ]
   },
   {
     "id": "loc-13",
     "name": "Bugaci Ősborókás",
     "description": "A Kiskunság legikonikusabb tájegysége, ahol a szélfútta homokbuckák és a szívós borókabokrok együttese eleveníti fel az igazi, vadregényes alföldi hangulatot. A szinte sivatagias, mégis élettel teli környezet minden évszakban lenyűgöző látványt nyújt.",
-    "position": [46.6800, 19.6000]
+    "position": [
+      46.6800,
+      19.6000
+    ]
   },
   {
     "id": "loc-14",
     "name": "Csongrádi Körös-torok",
     "description": "Különleges, tengerpartokat idéző folyami zóna, ahol a Tisza és a Körös lassan hömpölygő vize lágyan egybefonódik. A finom homokkal borított partszakasz és az árnyas, dús ártéri erdő harmóniája tökéletes nyugalmat áraszt.",
-    "position": [46.7100, 20.1500]
+    "position": [
+      46.7100,
+      20.1500
+    ]
   },
   {
     "id": "loc-15",
     "name": "Pusztaszeri hét tó",
     "description": "Hatalmas, nyugodt vízfelületekből álló szövevényes tórendszer, amely a puszta pihentető oázisaként terül el. A csillogó víztükör, a ringatózó nádasok és a végtelen égbolt találkozása gyönyörű, békés atmoszférát teremt a természet szerelmeseinek.",
-    "position": [46.5400, 19.9800]
+    "position": [
+      46.5400,
+      19.9800
+    ]
+  },
+  {
+    "id": "loc-16",
+    "name": "Fülöpházi homokbuckák",
+    "description": "A Kiskunság egyik legszebb homokpusztája, ahol a szél formálta homokbuckák és a szívós borókabokrok együttese eleveníti fel az igazi, vadregényes alföldi hangulatot. A szinte sivatagias, mégis élettel teli környezet minden évszakban lenyűgöző látványt nyújt.",
+    "position": [
+      46.8651,
+      19.4116
+    ]
   }
 ]

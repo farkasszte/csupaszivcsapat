@@ -2,12 +2,12 @@
 
 import React from 'react';
 import { useGame } from '../context/GameContext';
-import { 
-    RiSeedlingLine, 
-    RiMapPin2Line, 
-    RiStarLine, 
+import {
+    RiSeedlingLine,
+    RiMapPin2Line,
+    RiStarLine,
     RiPlayLine,
-    RiArrowRightSLine 
+    RiArrowRightSLine
 } from '@remixicon/react';
 
 const STORY_BOARDS = [
@@ -45,10 +45,10 @@ export function StorySelection() {
     const { startStory } = useGame();
 
     return (
-        <div className="fixed inset-0 z-[100] bg-[#4F7942]/10 backdrop-blur-xl flex items-center justify-center p-4 sm:p-6 lg:p-10 animate-in fade-in duration-700">
+        <div className="fixed inset-0 z-100 bg-[#4F7942]/10 backdrop-blur-xl flex items-center justify-center p-4 sm:p-6 lg:p-10 animate-in fade-in duration-700">
             <div className="w-full max-w-4xl bg-white/95 backdrop-blur-md rounded-3xl shadow-2xl border border-white/50 overflow-hidden flex flex-col max-h-[90vh]">
                 {/* Header */}
-                <div className="p-8 lg:p-10 text-center bg-gradient-to-b from-[#4F7942]/5 to-transparent border-b border-[#4F7942]/10">
+                <div className="p-8 lg:p-10 text-center bg-linear-to-b from-[#4F7942]/5 to-transparent border-b border-[#4F7942]/10">
                     <h2 className="text-3xl lg:text-4xl font-black text-[#4F7942] mb-3 tracking-tight">
                         Csupaszív kalandok
                     </h2>
@@ -70,7 +70,7 @@ export function StorySelection() {
                                 >
                                     {/* Abstract background shape */}
                                     <div className={`absolute -right-4 -top-4 w-24 h-24 rounded-full opacity-5 group-hover:opacity-10 transition-opacity ${story.color.split(' ')[0]}`} />
-                                    
+
                                     <div className="flex items-center gap-4 mb-4">
                                         <div className={`p-3 rounded-xl ${story.color} transition-transform duration-300 group-hover:scale-110`}>
                                             <Icon size={24} />
