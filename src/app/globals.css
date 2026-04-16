@@ -14,20 +14,26 @@
   --color-border-accent: oklch(0.45 0.15 60 / 0.3);
 
   /* Semantic Text Tokens */
-  --color-text-primary: var(--color-amber-100);
-  --color-text-secondary: var(--color-zinc-300);
-  --color-text-muted: var(--color-zinc-500);
+  --color-text-primary: var(--color-zinc-950);
+  --color-text-secondary: var(--color-zinc-900);
+  --color-text-muted: var(--color-zinc-700);
 
   /* Fonts */
   --font-sans: var(--font-montserrat), 'Inter', system-ui, sans-serif;
   --font-serif: var(--font-montserrat), 'Georgia', 'Times New Roman', serif;
 
-  /* Custom Glow Shadows */
-  --shadow-glow-primary: 0 0 15px rgba(249, 115, 22, 0.4);
-  --shadow-glow-primary-lg: 0 0 25px rgba(249, 115, 22, 0.6);
+  /* Custom Glow Shadows (Green theme) */
+  --shadow-glow-primary: 0 0 15px rgba(79, 121, 66, 0.4);
+  --shadow-glow-primary-lg: 0 0 25px rgba(79, 121, 66, 0.6);
 }
 
-/* Body background is managed in layout.js */
+/* Body background is managed here to ensure it's not overridden by defaults */
+body {
+  background: linear-gradient(to bottom, #87ceeb, #f5deb3) fixed !important;
+  min-height: 100vh;
+  margin: 0;
+}
+
 
 /* Utility to hide scrollbar but keep functionality */
 @layer utilities {
@@ -52,7 +58,7 @@
   backdrop-filter: blur(20px) !important;
   border-radius: 40px 15px 40px 15px !important;
   padding: 35px;
-  border: 1px solid rgba(225, 193, 110, 0.2) !important;
+  border: 1px solid rgba(79, 121, 66, 0.2) !important;
   color: #fdf5e6 !important;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
 }

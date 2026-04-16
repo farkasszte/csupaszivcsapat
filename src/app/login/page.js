@@ -191,13 +191,13 @@ export default function LoginPage() {
     if (!isMounted) return null
 
     return (
-        <div className="min-h-screen text-white font-sans flex flex-col items-center justify-center p-4 py-8">
+        <div className="min-h-screen text-zinc-950 font-sans flex flex-col items-center justify-center p-4 py-8">
 
             <div className="w-full max-w-4xl space-y-6 sm:space-y-12">
                 {/* Header Section representing the image */}
                 <div className="text-center space-y-3 sm:space-y-4 max-w-2xl mx-auto">
-                    <h1 className="text-2xl sm:text-5xl font-extrabold text-white tracking-tight drop-shadow-md">Csupaszív kalandok: Homokhátság Hősei</h1>
-                    <p className="text-sm sm:text-lg text-white leading-relaxed">
+                    <h1 className="text-2xl sm:text-5xl font-extrabold text-zinc-950 tracking-tight drop-shadow-sm">Csupaszív kalandok: Homokhátság Hősei</h1>
+                    <p className="text-sm sm:text-lg text-zinc-950 font-medium leading-relaxed">
                         A tűző nap égeti a homokháti pusztát. A föld repedezett, és minden élet vízért könyörög. Mentsd meg az állatokat Ürge Panni, Szalakóta Szilvia és Túzok tanár úr segítségével!
                     </p>
                 </div>
@@ -211,16 +211,16 @@ export default function LoginPage() {
                             <>
                                 <button
                                     onClick={() => { setShowForgotPassword(false); setError(null); setMessage(null) }}
-                                    className="flex items-center gap-1 text-xs text-white hover:text-white transition-colors mb-6"
+                                    className="flex items-center gap-1 text-xs text-zinc-950 font-semibold hover:opacity-80 transition-opacity mb-6"
                                 >
                                     ← Vissza a bejelentkezéshez
                                 </button>
-                                <h2 className="text-xl sm:text-2xl font-bold text-center mb-2 text-white">Jelszó visszaállítása</h2>
-                                <p className="text-sm text-white text-center mb-6">Add meg az e-mail címedet és küldünk egy visszaállítási linket.</p>
+                                <h2 className="text-xl sm:text-2xl font-bold text-center mb-2 text-zinc-950">Jelszó visszaállítása</h2>
+                                <p className="text-sm text-zinc-950 text-center mb-6">Add meg az e-mail címedet és küldünk egy visszaállítási linket.</p>
 
                                 <form className="space-y-5" onSubmit={handleForgotPassword}>
                                     <div>
-                                        <label className="block text-sm font-medium text-white mb-2">E-mail cím</label>
+                                        <label className="block text-sm font-bold text-zinc-950 mb-2">E-mail cím</label>
                                         <input
                                             type="email"
                                             value={forgotEmail}
@@ -233,7 +233,7 @@ export default function LoginPage() {
                                     <button
                                         type="submit"
                                         disabled={loading}
-                                        className="w-full py-3.5 bg-gradient-to-r from-emerald-500 to-lime-400 hover:from-emerald-400 hover:to-lime-300 text-zinc-950 font-bold rounded-xl transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-lime-500/25 disabled:opacity-50 disabled:cursor-not-allowed"
+                                        className="w-full py-3.5 bg-[#4F7942] text-white font-bold rounded-xl transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-[#4F7942]/20 disabled:opacity-50 disabled:cursor-not-allowed"
                                     >
                                         {loading ? '...' : 'Link küldése'}
                                     </button>
@@ -242,12 +242,12 @@ export default function LoginPage() {
                         ) : (
                             /* ===== Regular Login View ===== */
                             <>
-                                <h2 className="text-xl sm:text-2xl font-bold text-center mb-5 sm:mb-8 text-white">Bejelentkezés</h2>
+                                <h2 className="text-xl sm:text-2xl font-bold text-center mb-5 sm:mb-8 text-zinc-950">Bejelentkezés</h2>
 
                                 <form className="space-y-6">
                                     <div className="space-y-5">
                                         <div>
-                                            <label className="block text-sm font-medium text-white mb-2">E-mail cím</label>
+                                            <label className="block text-sm font-bold text-zinc-950 mb-2">E-mail cím</label>
                                             <input
                                                 type="email"
                                                 value={email}
@@ -259,11 +259,11 @@ export default function LoginPage() {
 
                                         <div>
                                             <div className="flex items-center justify-between mb-2">
-                                                <label className="block text-sm font-medium text-white">Jelszó</label>
+                                                <label className="block text-sm font-bold text-zinc-950">Jelszó</label>
                                                 <button
                                                     type="button"
                                                     onClick={() => { setShowForgotPassword(true); setError(null); setMessage(null); setForgotEmail(email) }}
-                                                    className="text-xs text-white hover:text-white transition-colors"
+                                                    className="text-xs text-zinc-950 font-semibold hover:opacity-80 transition-opacity"
                                                 >
                                                     Elfelejtett jelszó?
                                                 </button>
@@ -281,29 +281,29 @@ export default function LoginPage() {
                                             <button
                                                 onClick={handleLogin}
                                                 disabled={loading}
-                                                className="w-full sm:flex-1 py-3.5 bg-gradient-to-r from-emerald-500 to-lime-400 hover:from-emerald-400 hover:to-lime-300 text-zinc-950 font-bold rounded-xl transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-lime-500/25 disabled:opacity-50 disabled:cursor-not-allowed"
+                                                className="w-full sm:flex-1 py-3.5 bg-[#4F7942] text-white font-bold rounded-xl transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-[#4F7942]/20 disabled:opacity-50 disabled:cursor-not-allowed"
                                             >
                                                 {loading ? '...' : 'Belépés'}
                                             </button>
                                             <button
                                                 onClick={handleSignUp}
                                                 disabled={loading}
-                                                className="w-full sm:flex-1 py-3.5 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-xl transition-all border border-white/20 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
+                                                className="w-full sm:flex-1 py-3.5 bg-emerald-900/10 hover:bg-emerald-900/20 text-zinc-950 font-bold rounded-xl transition-all border border-[#4F7942]/20 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
                                             >
                                                 Regisztráció
                                             </button>
                                         </div>
 
                                         <div className="relative py-2">
-                                            <div className="absolute inset-0 flex items-center"><span className="w-full border-t border-emerald-900/50"></span></div>
-                                            <div className="relative flex justify-center text-xs uppercase"><span className="bg-emerald-900/50 px-2 text-emerald-100 rounded-sm">VAGY</span></div>
+                                            <div className="absolute inset-0 flex items-center"><span className="w-full border-t border-[#4F7942]/30"></span></div>
+                                            <div className="relative flex justify-center text-xs uppercase"><span className="bg-white/20 px-2 text-zinc-950 font-bold rounded-sm">VAGY</span></div>
                                         </div>
 
                                         <button
                                             onClick={handleGoogleLogin}
                                             disabled={loading}
                                             type="button"
-                                            className="w-full py-3 bg-emerald-900/60 hover:bg-emerald-900/80 text-emerald-50 font-semibold rounded-full transition-colors disabled:opacity-50 flex items-center justify-center gap-3 border border-emerald-400/50 shadow-sm"
+                                            className="w-full py-3.5 bg-[#4F7942] text-white font-bold rounded-xl transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-[#4F7942]/20 disabled:opacity-50 flex items-center justify-center gap-3 border-none"
                                         >
                                             <svg className="w-5 h-5" viewBox="0 0 24 24">
                                                 <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
@@ -322,8 +322,8 @@ export default function LoginPage() {
                     {/* Guest Login */}
                     <div className="bg-white/5 backdrop-blur-2xl border border-white/10 shadow-2xl rounded-[2rem] p-6 sm:p-10 flex flex-col justify-between">
                         <div>
-                            <h2 className="text-xl sm:text-2xl font-bold text-center mb-5 sm:mb-8 text-white">Gyors Játék</h2>
-                            <p className="text-sm text-white mb-5 sm:mb-8 text-center px-2 sm:px-4 leading-relaxed">
+                            <h2 className="text-xl sm:text-2xl font-bold text-center mb-5 sm:mb-8 text-zinc-950">Gyors Játék</h2>
+                            <p className="text-sm text-zinc-950 font-medium mb-5 sm:mb-8 text-center px-2 sm:px-4 leading-relaxed">
                                 Nincs fiókod? Lépj be vendégként és próbáld ki a játékot egy egyedi kóddal.
                             </p>
 
@@ -331,19 +331,19 @@ export default function LoginPage() {
                                 <button
                                     onClick={handleGuestSignUp}
                                     disabled={loading}
-                                    className="w-full py-4 bg-gradient-to-r from-emerald-500 to-lime-400 hover:from-emerald-400 hover:to-lime-300 text-zinc-950 font-extrabold rounded-2xl transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 shadow-lg shadow-lime-500/30 flex flex-col items-center justify-center gap-1 border border-lime-300/50"
+                                    className="w-full py-4 bg-[#4F7942] text-white font-extrabold rounded-2xl transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 shadow-lg shadow-[#4F7942]/20 flex flex-col items-center justify-center gap-1 border border-white/10"
                                 >
                                     <span className="text-xl drop-shadow-sm">Kezdjük el</span>
-                                    <span className="text-xs text-zinc-800 font-semibold tracking-wide uppercase">Új vendég fiókkal</span>
+                                    <span className="text-xs text-white/80 font-semibold tracking-wide uppercase">Új vendég fiókkal</span>
                                 </button>
 
                                 <div className="relative py-2">
-                                    <div className="absolute inset-0 flex items-center"><span className="w-full border-t border-emerald-900/50"></span></div>
-                                    <div className="relative flex justify-center text-xs uppercase"><span className="bg-emerald-900/50 px-2 text-emerald-100 rounded-sm">VAGY</span></div>
+                                    <div className="absolute inset-0 flex items-center"><span className="w-full border-t border-[#4F7942]/30"></span></div>
+                                    <div className="relative flex justify-center text-xs uppercase"><span className="bg-white/20 px-2 text-zinc-950 font-bold rounded-sm">VAGY</span></div>
                                 </div>
 
                                 <div className="space-y-3">
-                                    <label className="block text-sm font-medium text-white text-center">Van már kódod? Folytasd!</label>
+                                    <label className="block text-sm font-bold text-zinc-950 text-center">Van már kódod? Folytasd!</label>
                                     <div className="flex gap-2 sm:gap-3">
                                         <input
                                             type="text"
@@ -356,7 +356,7 @@ export default function LoginPage() {
                                         <button
                                             onClick={handleGuestLogin}
                                             disabled={loading}
-                                            className="px-6 sm:px-8 bg-gradient-to-r from-emerald-500 to-lime-400 hover:from-emerald-400 hover:to-lime-300 text-zinc-950 font-bold rounded-xl transition-all hover:scale-[1.05] active:scale-[0.95] shadow-lg shadow-lime-500/25 text-sm sm:text-base border-none"
+                                            className="px-6 sm:px-8 bg-[#4F7942] text-white font-bold rounded-xl transition-all hover:scale-[1.05] active:scale-[0.95] shadow-lg shadow-[#4F7942]/20 text-sm sm:text-base border-none"
                                         >
                                             OK
                                         </button>
@@ -365,7 +365,7 @@ export default function LoginPage() {
                             </div>
                         </div>
 
-                        <div className="mt-8 text-center text-white text-sm">
+                        <div className="mt-8 text-center text-zinc-950 font-bold text-sm">
                             Csupaszív Csapat &copy; 2026
                         </div>
                     </div>
@@ -373,20 +373,20 @@ export default function LoginPage() {
                     {/* Status Messages */}
                     <div className="md:col-span-2 relative z-20">
                         {error && (
-                            <div className="text-white text-sm bg-red-950/50 p-4 rounded-xl border border-red-900/50 mb-4 text-center shadow-lg backdrop-blur-sm">
+                            <div className="text-red-900 text-sm bg-red-100/80 p-4 rounded-xl border border-red-500/50 mb-4 text-center shadow-lg backdrop-blur-sm font-bold">
                                 {error}
                             </div>
                         )}
 
                         {message && (
-                            <div className="text-white text-sm bg-emerald-950/50 p-6 rounded-xl border border-emerald-900/50 text-center shadow-lg backdrop-blur-sm">
+                            <div className="text-zinc-950 text-sm bg-emerald-100/80 p-6 rounded-xl border border-[#4F7942]/50 text-center shadow-lg backdrop-blur-sm font-bold">
                                 <p className="mb-3">{message}</p>
                                 {generatedCode && (
                                     <div className="mt-4 p-4 bg-black/40 rounded-lg inline-block border border-white/5">
-                                        <div className="text-2xl sm:text-3xl font-mono font-bold tracking-widest sm:tracking-[0.25em] text-white selection:bg-orange-500/30 uppercase">
+                                        <div className="text-2xl sm:text-3xl font-mono font-bold tracking-widest sm:tracking-[0.25em] text-zinc-950 selection:bg-[#4F7942]/30 uppercase">
                                             {generatedCode}
                                         </div>
-                                        <div className="text-xs text-white mt-2 font-sans tracking-normal">Ez a te egyedi azonosítód</div>
+                                        <div className="text-xs text-zinc-950 mt-2 font-sans tracking-normal opacity-80">Ez a te egyedi azonosítód</div>
                                     </div>
                                 )}
                             </div>

@@ -17,7 +17,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
     return (
         <html lang="hu" className={montserrat.variable}>
-            <body className={`${montserrat.className} antialiased min-h-screen bg-fixed text-surface bg-linear-to-b from-[#87ceeb] to-[#f5deb3]`}>
+            <body className={`${montserrat.className} antialiased text-surface`}>
                 <GameProvider>
                     <Header />
                     <main className="pb-16 lg:pb-0">

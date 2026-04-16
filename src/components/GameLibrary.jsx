@@ -137,12 +137,30 @@ export default function GameLibrary() {
 
     const components = [
         ...discoveredComponentsData,
-        ...locationsData.map(loc => ({
-            id: loc.id,
-            name: loc.name,
-            _isStaticLocation: true,
-            description: loc.description
-        }))
+        ...locationsData
+            .filter(loc => [
+                "Fülöpházi homokbuckák",
+                "Bugaci Ősborókás",
+                "Nagyszéksós-tó (Mórahalom)"
+            ].includes(loc.name))
+            .map(loc => {
+                let externalLink = null;
+                if (loc.name === "Nagyszéksós-tó (Mórahalom)") {
+                    externalLink = "https://www.facebook.com/p/Szikes-M%C3%B3rahalom-L%C3%A1togat%C3%B3k%C3%B6zpont-Bivalyrezerv%C3%A1tum-%C3%A9s-G%C3%B3lyamened%C3%A9kh%C3%A1z-61576953656787/";
+                } else if (loc.name === "Fülöpházi homokbuckák") {
+                    externalLink = "https://www.knp.hu/hu/naprozsa-haz-fulophazi-buckavidek";
+                } else if (loc.name === "Bugaci Ősborókás") {
+                    externalLink = "https://www.knp.hu/hu";
+                }
+                
+                return {
+                    id: loc.id,
+                    name: loc.name,
+                    _isStaticLocation: true,
+                    description: loc.description,
+                    externalLink
+                };
+            })
     ];
     const filterStyle = getColorFilterStyle(colorFilter);
 
@@ -205,10 +223,10 @@ export default function GameLibrary() {
                                         if (videoUrl) setActiveVideoUrl(videoUrl);
                                         toggleItem(comp.id);
                                     }}
-                                    className={`group bg-zinc-800/30 hover:bg-zinc-800/50 border border-white/5 hover:border-amber-600/20 rounded-xl overflow-hidden transition-all duration-300 cursor-pointer`}
+                                    className={`group bg-white/40 hover:bg-white/50 backdrop-blur-md border border-[#4F7942]/10 rounded-xl overflow-hidden transition-all duration-300 cursor-pointer shadow-sm`}
                                 >
                                     <div className="flex gap-3 p-2.5">
-                                        <div className="shrink-0 w-14 h-14 rounded-lg overflow-hidden border border-white/10 bg-zinc-950 flex items-center justify-center relative">
+                                        <div className="shrink-0 w-14 h-14 rounded-lg overflow-hidden border border-white/10 bg-[#4F7942] flex items-center justify-center relative">
                                             {coverUrl ? (
                                                 <img
                                                     src={coverUrl}
@@ -238,12 +256,23 @@ export default function GameLibrary() {
                                         </div>
 
                                         <div className="flex-1 min-w-0 flex flex-col justify-center">
-                                            <h4 className="text-xs font-bold text-white group-hover:text-white transition-colors truncate">
-                                                {comp.name}
+                                            <h4 className="text-xs font-bold text-zinc-950 group-hover:text-[#4F7942] transition-colors truncate">
+                                                {comp.externalLink ? (
+                                                    <a 
+                                                        href={comp.externalLink} 
+                                                        target="_blank" 
+                                                        rel="noopener noreferrer"
+                                                        className="hover:text-[#4F7942] flex items-center gap-1.5 underline underline-offset-2 decoration-zinc-950/20 hover:decoration-[#4F7942]"
+                                                        onClick={(e) => e.stopPropagation()}
+                                                    >
+                                                        {comp.name}
+                                                        <RiExternalLinkLine size={10} className="opacity-50" />
+                                                    </a>
+                                                ) : comp.name}
                                             </h4>
                                             {(comp._isStaticLocation ? comp.description : descriptionAttr?.value?.data) && (
                                                 <div
-                                                    className={`text-[10px] text-white mt-0.5 leading-relaxed transition-all duration-300 ${expandedItems[comp.id] ? '' : 'line-clamp-1'}`}
+                                                    className={`text-[10px] text-zinc-800 mt-0.5 leading-relaxed transition-all duration-300 ${expandedItems[comp.id] ? '' : 'line-clamp-1'}`}
                                                     dangerouslySetInnerHTML={{ __html: comp._isStaticLocation ? comp.description : descriptionAttr.value.data }}
                                                 />
                                             )}
@@ -268,19 +297,19 @@ export default function GameLibrary() {
                 {/* Keresőmező */}
                 <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <RiSearchLine size={16} className="text-white" />
+                        <RiSearchLine size={16} className="text-[#4F7942]" />
                     </div>
                     <input
                         type="text"
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         placeholder="Keresés faj, település, kategória alapján"
-                        className="w-full bg-zinc-800/40 border border-zinc-700/50 hover:border-amber-600/30 focus:border-white/40 rounded-xl py-2.5 pl-9 pr-10 text-xs text-white placeholder-zinc-500 focus:outline-none transition-all text-ellipsis"
+                        className="w-full bg-white/40 border border-[#4F7942]/10 focus:border-[#4F7942]/30 rounded-xl py-2.5 pl-9 pr-10 text-xs text-zinc-900 placeholder-zinc-400 focus:outline-none transition-all text-ellipsis shadow-sm"
                     />
                     {searchQuery && (
                         <button
                             onClick={() => setSearchQuery('')}
-                            className="absolute inset-y-0 right-0 pr-3 flex items-center text-white hover:text-white transition-colors"
+                            className="absolute inset-y-0 right-0 pr-3 flex items-center text-[#4F7942] hover:opacity-70 transition-colors"
                         >
                             <RiCloseLine size={16} />
                         </button>
@@ -297,14 +326,14 @@ export default function GameLibrary() {
                                 <div key={category} id={`category-${category.replace(/\s+/g, '-')}`} className="flex flex-col gap-1">
                                     <button
                                         onClick={() => toggleCategory(category)}
-                                        className="flex items-center justify-between w-full px-4 py-3 bg-zinc-800/40 hover:bg-zinc-800/70 border border-zinc-700/20 rounded-xl transition-all group"
+                                        className="flex items-center justify-between w-full px-4 py-3 bg-white/40 hover:bg-white/50 border border-[#4F7942]/10 rounded-xl transition-all group shadow-sm"
                                     >
-                                        <span className="text-xs font-semibold text-white group-hover:text-white transition-colors">
+                                        <span className="text-xs font-bold text-[#4F7942] group-hover:opacity-80 transition-opacity">
                                             {category} ({items.length})
                                         </span>
                                         <RiArrowDownSLine
                                             size={16}
-                                            className={`text-white group-hover:text-white transition-transform ${isExpanded ? 'rotate-180' : ''}`}
+                                            className={`text-[#4F7942] group-hover:opacity-80 transition-transform ${isExpanded ? 'rotate-180' : ''}`}
                                         />
                                     </button>
                                     {isExpanded && (
@@ -315,10 +344,10 @@ export default function GameLibrary() {
                                                     href={link.link}
                                                     target="_blank"
                                                     rel="noopener noreferrer"
-                                                    className="flex items-center gap-3 px-4 py-2 bg-zinc-800/20 hover:bg-zinc-800/50 rounded-lg transition-all group border border-transparent hover:border-zinc-700/50"
+                                                    className="flex items-center gap-3 px-4 py-3 bg-white/40 hover:bg-white/60 rounded-xl backdrop-blur-sm transition-all group border border-[#4F7942]/10 hover:border-[#4F7942]/30 shadow-sm"
                                                 >
                                                     <div className="flex-1 min-w-0">
-                                                        <div className="text-xs font-semibold text-white group-hover:text-white transition-colors leading-tight flex items-center gap-2">
+                                                        <div className="text-xs font-bold text-zinc-950 group-hover:text-[#4F7942] transition-colors leading-tight flex items-center gap-2">
                                                             {link.nev}
                                                             {link.isTelepules && link.vedett && (
                                                                 <span className="px-1.5 py-0.5 rounded-sm bg-blue-900/40 text-blue-400 text-[9px] uppercase tracking-wider border border-blue-800/30">
@@ -337,20 +366,20 @@ export default function GameLibrary() {
                                                             )}
                                                         </div>
                                                         {link.latinNev && (
-                                                            <div className="text-[10px] text-white mt-0.5 italic leading-tight">
+                                                            <div className="text-[10px] text-zinc-600 mt-0.5 italic leading-tight">
                                                                 {link.latinNev}
                                                             </div>
                                                         )}
-                                                        <div className="text-[10px] text-white mt-1.5 flex flex-wrap gap-x-3 gap-y-1">
+                                                        <div className="text-[10px] text-zinc-700 mt-1.5 flex flex-wrap gap-x-3 gap-y-1">
                                                             {!link.isTelepules && !link.isTerulet && !link.isTanosveny && link.statusz && link.statusz !== 'Nem fenyegetett' && (
-                                                                <span className="text-white flex items-center gap-1">
-                                                                    <div className="w-1 h-1 rounded-full bg-red-500/50"></div>
+                                                                <span className="text-red-700 font-medium flex items-center gap-1">
+                                                                    <div className="w-1 h-1 rounded-full bg-red-600"></div>
                                                                     {link.statusz}
                                                                 </span>
                                                             )}
                                                             {link.ertekString && (
-                                                                <span className="text-white flex items-center gap-1">
-                                                                    <div className="w-1 h-1 rounded-full bg-emerald-500/50"></div>
+                                                                <span className="text-[#4F7942] font-medium flex items-center gap-1">
+                                                                    <div className="w-1 h-1 rounded-full bg-[#4F7942]"></div>
                                                                     {link.ertekString}
                                                                 </span>
                                                             )}
@@ -358,7 +387,7 @@ export default function GameLibrary() {
                                                     </div>
                                                     <RiExternalLinkLine
                                                         size={12}
-                                                        className="shrink-0 text-white group-hover:text-white transition-colors"
+                                                        className="shrink-0 text-[#4F7942] group-hover:scale-110 transition-all opacity-60"
                                                     />
                                                 </a>
                                             ))}
