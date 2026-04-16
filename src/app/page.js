@@ -98,7 +98,7 @@ export default function Home() {
             {/* Background layers */}
 
             {/* Content Wrapper - Strictly bound between header and bottom */}
-            <div className="absolute top-[52px] lg:top-0 bottom-0 left-0 right-0 z-10 flex flex-col items-center justify-center px-4 pt-10 pb-4 lg:px-6 lg:pt-14 lg:pb-6 overflow-hidden">
+            <div className="absolute top-0 lg:top-0 bottom-0 left-0 right-0 z-10 flex flex-col items-center justify-center px-4 pt-10 pb-4 lg:px-6 lg:pt-14 lg:pb-6 overflow-hidden">
 
                 {/* Layout: side-by-side when panel open, single column otherwise */}
                 <div
@@ -123,7 +123,7 @@ export default function Home() {
                                 <RiBookOpenLine size={14} /> <span>Napló</span>
                             </button>
                             <button onClick={() => setShowDashboard(true)} className={tabCls('dashboard')}>
-                                <RiDashboardLine size={14} /> <span>Pontok</span>
+                                <RiDashboardLine size={14} /> <span>Jutalmak</span>
                             </button>
                             <button onClick={() => setShowMap(true)} className={tabCls('map')}>
                                 <RiMapLine size={14} /> <span>Térkép</span>
@@ -166,7 +166,7 @@ export default function Home() {
 
 
                                 {/* Tab content */}
-                                <div className="flex-1 min-h-0 flex flex-col overflow-y-auto no-scrollbar">
+                                <div className="flex-1 min-h-0 flex flex-col overflow-y-auto no-scrollbar touch-pan-y overscroll-contain">
                                     {activeTab === 'profile' && <ProfileView />}
                                     {activeTab === 'menu' && <GameMenu />}
                                     {activeTab === 'log' && <StoryLog />}

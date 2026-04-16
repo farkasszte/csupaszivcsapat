@@ -42,7 +42,7 @@ export default function Header() {
     };
 
     const mobileTabs = [
-        { key: 'menu', icon: <RiMenuLine size={20} />, label: 'Menü', action: makeTabAction(setShowMenu) },
+        { key: 'menu', icon: <RiMenuLine size={20} />, label: 'Beállítások', action: makeTabAction(setShowMenu) },
         { key: 'log', icon: <RiBookOpenLine size={20} />, label: 'Napló', action: makeTabAction(setShowLog) },
         { key: 'dashboard', icon: <RiDashboardLine size={20} />, label: 'Jutalmak', action: makeTabAction(setShowDashboard) },
         { key: 'map', icon: <RiMapLine size={20} />, label: 'Térkép', action: makeTabAction(setShowMap) },
@@ -51,12 +51,7 @@ export default function Header() {
 
     return (
         <>
-            {/* ── Mobile top header (title only) ── */}
-            <header className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-zinc-950/80 backdrop-blur-md border-b border-amber-900/30 px-6 py-4 flex justify-center items-center">
-                <h1 className="text-sm font-bold text-white text-center">
-                    Csupaszív kalandok: A Homokhátság Hősei
-                </h1>
-            </header>
+            {/* ── Mobile top header (removed as per request) ── */}
 
             {/* ── Desktop header (top bar) ── */}
             {/* Removed as per header decommissioning process */}

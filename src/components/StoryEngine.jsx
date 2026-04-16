@@ -335,10 +335,10 @@ export const StoryEngine = ({ hideMedia = false }) => {
             {/* Right Dialogue Section / Bottom on Mobile */}
             <div className={`w-full flex flex-col justify-end lg:justify-start relative z-10 lg:min-h-full ${hideMedia ? 'lg:w-full p-0' : 'lg:w-[60%] p-4 lg:p-8'}`}>
 
-                <div className={`biophilic-card w-full mx-auto mt-auto lg:mt-auto mb-4 lg:mb-0 rounded-2xl shadow-2xl border border-white/30 bg-white/20 backdrop-blur-md flex flex-col overflow-hidden ${hideMedia ? 'h-full lg:max-w-5xl' : 'max-h-[50vh] lg:max-h-[60vh] max-w-3xl lg:mr-8'}`}>
+                <div className={`biophilic-card w-full mx-auto mt-auto lg:mt-auto mb-4 lg:mb-0 rounded-2xl shadow-2xl border border-white/30 bg-white/20 backdrop-blur-md flex flex-col overflow-hidden ${hideMedia ? 'h-full lg:max-w-5xl' : 'max-h-[70vh] lg:max-h-[60vh] max-w-3xl lg:mr-8'}`}>
 
                     {/* Story Text (Middle - Scrollable) */}
-                    <div className="flex-1 min-h-0 overflow-y-auto no-scrollbar flex flex-col items-stretch pb-4 p-6 sm:p-8 lg:p-10">
+                    <div className="flex-1 min-h-0 overflow-y-auto no-scrollbar flex flex-col items-stretch pb-4 p-6 sm:p-8 lg:p-10 touch-pan-y overscroll-contain">
                         {/* Status Messages */}
                         {(error || message) && (
                             <div className="mb-6 shrink-0 animate-in fade-in duration-300">
