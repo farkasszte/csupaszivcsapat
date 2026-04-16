@@ -15,14 +15,7 @@ export const StoryEngine = ({ hideMedia = false }) => {
         showLog, showDashboard, showMap, showMenu, showLibrary, showProfile
     } = useGame();
 
-    const showPanel = showLog || showDashboard || showMap || showMenu || showLibrary || showProfile;
-
-
-
-
-
     const [contentSegments, setContentSegments] = useState([]);
-    const [currentStep, setCurrentStep] = useState(0);
     const [totalVisibleChars, setTotalVisibleChars] = useState(0);
     const [isMounted, setIsMounted] = useState(false);
 
@@ -38,20 +31,11 @@ export const StoryEngine = ({ hideMedia = false }) => {
 
     // Process new discoveries purely from the store
     useEffect(() => {
-        // If we're already showing a capsule, don't interrupt it
         if (activeDiscoveryId) return;
-
-        // If there are discoveries waiting and we aren't showing one
         if (recentDiscoveries && recentDiscoveries.length > 0) {
             const nextDiscovery = recentDiscoveries[0].id;
-
-            // 1. Immediately remove it from the global store so we don't process it again
             clearRecentDiscovery(nextDiscovery);
-
-            // 2. Set it as active to trigger the UI capsule
             setActiveDiscoveryId(nextDiscovery);
-
-            // 3. Clear the UI capsule after 3 seconds
             if (discoveryTimerRef.current) clearTimeout(discoveryTimerRef.current);
             discoveryTimerRef.current = setTimeout(() => {
                 setActiveDiscoveryId(null);
@@ -59,20 +43,16 @@ export const StoryEngine = ({ hideMedia = false }) => {
         }
     }, [recentDiscoveries, activeDiscoveryId, clearRecentDiscovery]);
 
-    // Cleanup timer on unmount
     useEffect(() => {
         return () => {
             if (discoveryTimerRef.current) clearTimeout(discoveryTimerRef.current);
         };
     }, []);
 
-    const activeDiscoveryComponent = activeDiscoveryId && project?.components ? project.components[activeDiscoveryId] : null;
-
     useEffect(() => {
         setIsMounted(true);
     }, []);
 
-    // Auto-dismiss status messages
     useEffect(() => {
         if (error || message) {
             const timer = setTimeout(() => {
@@ -82,73 +62,60 @@ export const StoryEngine = ({ hideMedia = false }) => {
         }
     }, [error, message]);
 
-
     const element = project.elements[displayElementId];
     const audioRef = useRef(null);
     const transitionTimeoutRef = useRef(null);
 
-
-    // Handle scene transitions
     useEffect(() => {
         if (currentElementId === displayElementId) return;
-
         if (!transitionsEnabled) {
             setDisplayElementId(currentElementId);
             setIsFading(false);
-            // Reset UI visibility on scene change
             setIsUiHidden(false);
             return;
         }
-
         setDisplayElementId(currentElementId);
         setIsFading(false);
         setIsUiHidden(false);
-
         return () => {
             if (transitionTimeoutRef.current) clearTimeout(transitionTimeoutRef.current);
         };
     }, [currentElementId, transitionsEnabled]);
 
-    // Parse into segments and calculate offsets
     useEffect(() => {
         if (!element) return;
-
         const rawContent = element.content;
         const segments = parseRichText(rawContent);
-
-        // Enhance segments with text length
+        
+        let cumulativeLength = 0;
         const enhancedSegments = segments.map(seg => {
             const div = document.createElement('div');
             div.innerHTML = seg.content;
             const textLen = (div.textContent || "").length;
-            return { ...seg, length: textLen };
+            const segmentWithOffset = { ...seg, length: textLen, startOffset: cumulativeLength };
+            cumulativeLength += textLen;
+            return segmentWithOffset;
         });
-
+        
         setContentSegments(enhancedSegments);
-        setCurrentStep(0);
     }, [displayElementId, element]);
 
-    // Typewriter visibility reset
+    const totalLength = contentSegments.reduce((sum, seg) => sum + seg.length, 0);
+
     useEffect(() => {
         if (typewriterSpeed === 0) {
             setTotalVisibleChars(999999);
         } else {
             setTotalVisibleChars(0);
         }
-    }, [displayElementId, currentStep, typewriterSpeed, element, state.visits[displayElementId]]);
+    }, [displayElementId, typewriterSpeed, element, state.visits[displayElementId]]);
 
-    // Global typewriter controller per step
     useEffect(() => {
-        if (typewriterSpeed === 0 || contentSegments.length === 0) return;
-
-        const currentSeg = contentSegments[currentStep];
-        if (!currentSeg) return;
-
-        if (totalVisibleChars >= currentSeg.length) return;
-
+        if (typewriterSpeed === 0 || contentSegments.length === 0 || totalVisibleChars >= totalLength) return;
+        
         const timer = setInterval(() => {
             setTotalVisibleChars(prev => {
-                if (prev >= currentSeg.length) {
+                if (prev >= totalLength) {
                     clearInterval(timer);
                     return prev;
                 }
@@ -157,43 +124,32 @@ export const StoryEngine = ({ hideMedia = false }) => {
         }, typewriterSpeed);
 
         return () => clearInterval(timer);
-    }, [contentSegments, currentStep, typewriterSpeed, totalVisibleChars === 0]);
+    }, [typewriterSpeed, contentSegments, totalLength, totalVisibleChars]);
 
-
-    // Handle clicks on images in story content
     useEffect(() => {
         const container = document.querySelector('.story-content');
         if (!container) return;
-
         const handleImageClick = (e) => {
             if (e.target.tagName === 'IMG') {
                 openLightbox(e.target.src);
             }
         };
-
         container.addEventListener('click', handleImageClick);
-        // Add style to all images in content
         const imgs = container.querySelectorAll('img');
         const filterStyle = getColorFilterStyle(colorFilter);
         imgs.forEach(img => {
             img.classList.add('cursor-pointer', 'hover:opacity-90', 'transition-opacity');
             img.style.filter = filterStyle;
         });
-
         return () => container.removeEventListener('click', handleImageClick);
     }, [contentSegments, openLightbox, colorFilter]);
 
-
-
-    // Audio Playback
     useEffect(() => {
         if (audioRef.current) {
             audioRef.current.pause();
             audioRef.current = null;
         }
-
         if (!element?.assets?.audio) return;
-
         const audioAssets = element.assets.audio;
         if (audioAssets.length > 0) {
             const assetRef = audioAssets[0];
@@ -202,15 +158,12 @@ export const StoryEngine = ({ hideMedia = false }) => {
                 const audio = new Audio(url);
                 audio.loop = assetRef.mode === 'loop';
                 audio.volume = isMuted ? 0 : volume;
-
                 if (!isMuted) {
                     audio.play().catch(e => console.log("Audio play failed:", e));
                 }
                 audioRef.current = audio;
             }
-
         }
-
         return () => {
             if (audioRef.current) {
                 audioRef.current.pause();
@@ -218,7 +171,6 @@ export const StoryEngine = ({ hideMedia = false }) => {
         };
     }, [displayElementId, element]);
 
-    // Handle Mute and Volume changes
     useEffect(() => {
         if (audioRef.current) {
             audioRef.current.volume = isMuted ? 0 : volume;
@@ -229,9 +181,6 @@ export const StoryEngine = ({ hideMedia = false }) => {
             }
         }
     }, [isMuted, volume]);
-
-
-
 
     const coverUrl = element?.assets?.cover ? getAssetUrl(element.assets.cover.id) : null;
     let videoUrl = null;
@@ -245,110 +194,84 @@ export const StoryEngine = ({ hideMedia = false }) => {
     }
 
     const [isVideoLoaded, setIsVideoLoaded] = useState(false);
-    const prevMediaRef = useRef({ type: null, url: null });
-
-    // Reset loaded state when video source changes
+    
     useEffect(() => {
         if (videoUrl) {
             setIsVideoLoaded(false);
         }
     }, [videoUrl]);
 
-    // Track the last successfully loaded media to use as a fallback background
-    useEffect(() => {
-        if (!videoUrl && coverUrl) {
-            prevMediaRef.current = { type: 'image', url: coverUrl };
-        } else if (videoUrl && isVideoLoaded) {
-            prevMediaRef.current = { type: 'video', url: videoUrl };
-        }
-    }, [videoUrl, coverUrl, isVideoLoaded]);
-
-    // Use the Túzok image exclusively for the first intro node
     const isIntro = displayElementId === "e3d27f29-240f-42ff-84a5-77e3e0727d38";
     const activeCoverUrl = isIntro ? "/assets/Images/tuzok_tanar_ur.png" : coverUrl;
 
     if (!isMounted) return null;
 
     return (
-        <div key={displayElementId} className="w-full h-full flex flex-col lg:flex-row items-stretch lg:items-stretch justify-center relative z-0">
+        <div className={`w-full flex flex-col justify-start lg:justify-center items-center relative z-10 min-h-0 lg:min-h-full p-0`}>
+            {/* Unified Adaptive Frame Section */}
+            <div className={`w-full mx-auto mt-auto lg:mt-auto mb-0 lg:mb-0 rounded-2xl flex flex-col overflow-hidden transition-all duration-500
+                ${!hideMedia ? 'bg-transparent border-none shadow-none lg:biophilic-card lg:max-w-4xl h-full' : 'lg:max-w-6xl h-full lg:biophilic-card'}
+            `}>
 
-            {/* Integrated Media & Dialogue Section */}
-            <div className={`w-full flex flex-col justify-start lg:justify-center items-center relative z-10 min-h-0 lg:min-h-full ${hideMedia ? 'p-0' : 'p-2 lg:p-8'}`}>
-
-                <div className={`w-full mx-auto mt-auto lg:mt-auto mb-0 lg:mb-0 rounded-2xl flex flex-col overflow-hidden transition-all duration-500
-                    ${!hideMedia ? 'bg-transparent border-none shadow-none lg:biophilic-card lg:max-w-4xl lg:max-h-[85vh]' : 'lg:max-w-5xl h-full lg:biophilic-card'}
-                `}>
-
-                    {/* Story Content Area (Scrollable) */}
-                    <div className="flex-1 min-h-0 overflow-y-auto no-scrollbar flex flex-col items-stretch p-4 sm:p-8 lg:p-10 touch-pan-y overscroll-contain">
-                        
-                        {/* Integrated Media (Top of Content) */}
-                        {!hideMedia && (videoUrl || activeCoverUrl) && (
-                            <div className="mb-8 relative w-full flex justify-center animate-in fade-in duration-700">
-                                {videoUrl ? (
-                                    <video
-                                        key={videoUrl}
-                                        src={videoUrl}
-                                        autoPlay loop muted playsInline
-                                        onCanPlay={() => setIsVideoLoaded(true)}
-                                        className={`w-full max-w-[500px] h-auto rounded-2xl shadow-xl transition-opacity duration-300 ${isVideoLoaded ? 'opacity-100' : 'opacity-0'}`}
+                {/* Story Content Area (Scrollable) */}
+                <div className="flex-1 min-h-0 overflow-y-auto no-scrollbar flex flex-col items-stretch pt-0 pb-10 px-4 lg:px-5 touch-pan-y overscroll-contain">
+                    
+                    {/* Integrated Media (Top of Content) - Mobile Only */}
+                    {!hideMedia && (videoUrl || activeCoverUrl) && (
+                        <div className="lg:hidden mb-6 relative w-full flex justify-center animate-in fade-in duration-700">
+                            {videoUrl ? (
+                                <video
+                                    key={videoUrl}
+                                    src={videoUrl}
+                                    autoPlay loop muted playsInline
+                                    onCanPlay={() => setIsVideoLoaded(true)}
+                                    className={`w-full h-auto shadow-none transition-opacity duration-300 ${isVideoLoaded ? 'opacity-100' : 'opacity-0'}`}
+                                    style={{ filter: getColorFilterStyle(colorFilter) }}
+                                />
+                            ) : (
+                                <div className="w-full flex justify-center">
+                                    <img
+                                        key={activeCoverUrl}
+                                        src={activeCoverUrl}
+                                        alt="Scene"
+                                        className="w-full h-auto object-cover shadow-none"
                                         style={{ filter: getColorFilterStyle(colorFilter) }}
                                     />
-                                ) : (
-                                    <div className="w-full max-w-[500px] drop-shadow-xl rounded-2xl overflow-hidden border border-white/20">
-                                        <img
-                                            key={activeCoverUrl}
-                                            src={activeCoverUrl}
-                                            alt="Scene"
-                                            className="w-full h-auto object-cover scale-[1.02]"
-                                            style={{ filter: getColorFilterStyle(colorFilter) }}
-                                        />
-                                    </div>
-                                )}
-                            </div>
-                        )}
-
-                        {/* Status Messages */}
-                        {(error || message) && (
-                            <div className="mb-6 shrink-0 animate-in fade-in duration-300">
-                                <div className={`p-3 flex items-center justify-between text-xs rounded-lg border ${error ? 'bg-red-100 border-red-500 text-red-900' : 'bg-emerald-100 border-emerald-500 text-emerald-900'}`}>
-                                    <span>{error || message}</span>
-                                    <button onClick={() => clearMessage?.()} className="ml-2 hover:opacity-70 transition-opacity">✕</button>
                                 </div>
-                            </div>
-                        )}
-
-                        <div className="story-content space-y-4 sm:space-y-6 text-sm sm:text-lg lg:text-[19px] text-surface leading-[1.6] sm:leading-[1.8] lg:leading-loose tracking-wide animate-in fade-in duration-500">
-                            {contentSegments.length > 0 && contentSegments[currentStep] && (
-                                <TypewriterSegment
-                                    key={`${displayElementId}-${currentStep}`}
-                                    content={contentSegments[currentStep].content}
-                                    visibleCount={totalVisibleChars}
-                                    isFull={totalVisibleChars >= contentSegments[currentStep].length}
-                                />
                             )}
                         </div>
+                    )}
 
-                        {/* Pagination Controls (Inside scrollable area) */}
-                        {contentSegments.length > 0 && currentStep < contentSegments.length - 1 && (
-                            <div className="shrink-0 flex justify-end pt-8 mt-auto">
-                                <button
-                                    onClick={() => setCurrentStep(prev => prev + 1)}
-                                    className="px-8 py-3 sm:px-10 sm:py-4 bg-[#4F7942] hover:bg-[#3d5e33] text-white text-base sm:text-lg font-bold rounded-xl transition-all shadow-lg hover:shadow-xl hover:-translate-y-1 block"
-                                >
-                                    Tovább
-                                </button>
+                    {/* Status Messages */}
+                    {(error || message) && (
+                        <div className="mb-6 shrink-0 animate-in fade-in duration-300">
+                            <div className={`p-3 flex items-center justify-between text-xs rounded-lg border ${error ? 'bg-red-100 border-red-500 text-red-900' : 'bg-emerald-100 border-emerald-500 text-emerald-900'}`}>
+                                <span>{error || message}</span>
+                                <button onClick={() => clearMessage?.()} className="ml-2 hover:opacity-70 transition-opacity">✕</button>
                             </div>
-                        )}
+                        </div>
+                    )}
 
-                        {/* Choices (Inside scrollable area) */}
-                        {contentSegments.length > 0 && currentStep === contentSegments.length - 1 && (
-                            <div className="shrink-0 pt-8 animate-in fade-in slide-in-from-bottom-2 duration-500 mt-auto">
-                                <Choices hasImage={false} onHoverChange={setIsChoiceHovered} />
-                            </div>
-                        )}
+                    <div className="story-content space-y-4 sm:space-y-6 text-sm sm:text-lg lg:text-[19px] text-surface leading-[1.6] sm:leading-[1.8] lg:leading-loose tracking-wide animate-in fade-in duration-500">
+                        {contentSegments.map((seg, idx) => {
+                            const visibleForThisSeg = Math.max(0, Math.min(seg.length, totalVisibleChars - seg.startOffset));
+                            return (
+                                <TypewriterSegment
+                                    key={`${displayElementId}-${idx}`}
+                                    content={seg.content}
+                                    visibleCount={visibleForThisSeg}
+                                    isFull={visibleForThisSeg >= seg.length}
+                                />
+                            );
+                        })}
                     </div>
 
+                    {/* Choices (Inside scrollable area) */}
+                    {(typewriterSpeed === 0 || totalVisibleChars >= totalLength) && contentSegments.length > 0 && (
+                        <div className="shrink-0 pt-8 animate-in fade-in slide-in-from-bottom-2 duration-500 mt-auto">
+                            <Choices hasImage={false} onHoverChange={setIsChoiceHovered} />
+                        </div>
+                    )}
                 </div>
             </div>
         </div>
@@ -364,36 +287,31 @@ export const getColorFilterStyle = (filterId) => {
         case 'grayscale': return 'grayscale(100%)';
         case 'vibrant': return 'saturate(150%)';
         default: return 'none';
-
     }
 };
 
 const TypewriterSegment = React.memo(({ content, visibleCount, isFull }) => {
-    // If fully visible, just render normally to avoid DOM walking
     if (isFull) {
         return <div dangerouslySetInnerHTML={{ __html: content }} />;
     }
 
-    // Stable HTML truncation
     const getVisibleHtml = () => {
         if (visibleCount <= 0) return "";
-
         const div = document.createElement('div');
         div.innerHTML = content;
-
         let count = 0;
         const walk = (node) => {
             if (count >= visibleCount) {
                 node.textContent = "";
                 return;
             }
-            if (node.nodeType === 3) { // Text Node
+            if (node.nodeType === 3) {
                 const remaining = visibleCount - count;
                 if (node.textContent.length > remaining) {
                     node.textContent = node.textContent.slice(0, remaining);
                 }
                 count += node.textContent.length;
-            } else { // Element Node
+            } else {
                 const children = Array.from(node.childNodes);
                 for (let i = 0; i < children.length; i++) {
                     if (count >= visibleCount) {

@@ -188,27 +188,27 @@ export default function Home() {
                                         }
 
                                         return (
-                                            <div className="flex-1 min-h-0 flex flex-col justify-center p-4">
+                                            <div className="flex-1 min-h-0 flex flex-col bg-zinc-900 shadow-inner">
                                                 {videoUrl ? (
-                                                    <div className="relative group overflow-hidden rounded-xl h-full w-fit mx-auto transition-transform duration-700">
+                                                    <div className="relative group w-full h-full transition-transform duration-700">
                                                         <video
                                                             src={videoUrl}
                                                             autoPlay loop muted playsInline
-                                                            className="h-full w-auto object-contain transition-transform duration-700 block"
+                                                            className="w-full h-full object-cover transition-transform duration-700 block"
                                                             style={{ filter: getColorFilterStyle(colorFilter) }}
                                                         />
                                                     </div>
                                                 ) : coverUrl ? (
-                                                    <div className="relative group overflow-hidden rounded-xl h-full w-fit mx-auto transition-transform duration-700">
+                                                    <div className="relative group w-full h-full transition-transform duration-700">
                                                         <img
                                                             src={coverUrl}
                                                             alt="Scene"
-                                                            className="h-full w-auto object-contain transition-transform duration-700 block"
+                                                            className="w-full h-full object-cover transition-transform duration-700 block"
                                                             style={{ filter: getColorFilterStyle(colorFilter) }}
                                                         />
                                                     </div>
                                                 ) : (
-                                                    <div className="aspect-9/16 bg-zinc-800/40 rounded-lg border border-dashed border-white/10 flex items-center justify-center">
+                                                    <div className="w-full h-full bg-zinc-800/40 border border-dashed border-white/10 flex items-center justify-center">
                                                         <span className="text-[10px] text-white/20 uppercase tracking-widest">Nincs kép</span>
                                                     </div>
                                                 )}

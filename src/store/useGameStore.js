@@ -26,7 +26,7 @@ export const useGameStore = create((set, get) => ({
     // Settings
     volume: 0.5,
     isMuted: false,
-    typewriterSpeed: 30,
+    typewriterSpeed: 0,
     transitionsEnabled: true,
     colorFilter: 'none',
 
