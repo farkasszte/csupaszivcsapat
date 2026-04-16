@@ -207,10 +207,10 @@ export const StoryEngine = ({ hideMedia = false }) => {
     if (!isMounted) return null;
 
     return (
-        <div className={`w-full flex flex-col justify-start lg:justify-center items-center relative z-10 min-h-0 lg:min-h-full p-0`}>
+        <div className="w-full flex flex-col justify-start lg:items-start items-center relative z-10 min-h-0 lg:min-h-full p-0">
             {/* Unified Adaptive Frame Section */}
             <div className={`w-full mx-auto mt-auto lg:mt-auto mb-0 lg:mb-0 rounded-2xl flex flex-col overflow-hidden transition-all duration-500
-                ${!hideMedia ? 'bg-transparent border-none shadow-none lg:biophilic-card lg:max-w-4xl h-full' : 'lg:max-w-6xl h-full lg:biophilic-card'}
+                ${!hideMedia ? 'bg-transparent border-none shadow-none lg:biophilic-card lg:max-w-5xl h-full' : 'lg:max-w-6xl h-full lg:biophilic-card'}
             `}>
 
                 {/* Story Content Area (Scrollable) */}
