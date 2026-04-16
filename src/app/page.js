@@ -98,11 +98,11 @@ export default function Home() {
             {/* Background layers */}
 
             {/* Content Wrapper - Strictly bound between header and bottom */}
-            <div className="absolute top-0 lg:top-0 bottom-0 left-0 right-0 z-10 flex flex-col items-center justify-center px-4 pt-10 pb-4 lg:px-6 lg:pt-14 lg:pb-6 overflow-hidden">
+            <div className="absolute top-0 lg:top-0 bottom-0 left-0 right-0 z-10 flex flex-col items-center justify-start lg:justify-center px-1 lg:px-6 pt-4 lg:pt-14 pb-16 lg:pb-6 overflow-y-auto lg:overflow-hidden no-scrollbar touch-pan-y">
 
                 {/* Layout: side-by-side when panel open, single column otherwise */}
                 <div
-                    className={`w-full max-w-[1500px] mx-auto flex justify-center items-stretch gap-6 flex-col lg:flex-row h-full relative max-h-[min(80vh,750px)] lg:max-h-[min(90vh,900px)] transition-all duration-500`}
+                    className={`w-full max-w-[1500px] mx-auto flex justify-center items-stretch gap-6 flex-col lg:flex-row min-h-full lg:h-full relative max-h-none lg:max-h-[min(90vh,900px)] transition-all duration-500`}
                 >
                     {/* Shared Desktop Header Row — fixed max-width */}
                     <div className="hidden lg:flex absolute -top-12 left-0 w-full items-center justify-between animate-in fade-in slide-in-from-bottom-2 duration-1200 px-2">
@@ -151,7 +151,7 @@ export default function Home() {
                                 </h1>
                             </div>
                         )}
-                        <StoryEngine hideMedia={true} />
+                        <StoryEngine />
                     </div>
 
                     {/* 3. Side panel (Right) */}

@@ -32,7 +32,7 @@ export const Lightbox = () => {
                 <img
                     src={lightboxImage}
                     alt="Full size view"
-                    className="max-w-[90vw] max-h-[90vh] md:max-w-[90vw] md:max-h-[90vh] lg:max-w-[85vw] lg:max-h-[85vh] object-contain rounded-lg shadow-2xl border border-white/10 transition-transform duration-500 portrait:rotate-90 portrait:max-w-[90vh] portrait:max-h-[90vw] md:portrait:rotate-0 md:portrait:max-w-[90vw] md:portrait:max-h-[90vh]"
+                    className="max-w-[95vw] max-h-[95vh] md:max-w-[90vw] md:max-h-[90vh] lg:max-w-[85vw] lg:max-h-[85vh] object-contain rounded-lg shadow-2xl border border-white/10 transition-transform duration-500"
                     style={{ filter: getColorFilterStyle(colorFilter) }}
                 />
             </div>

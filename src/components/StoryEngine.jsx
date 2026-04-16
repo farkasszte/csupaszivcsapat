@@ -272,73 +272,42 @@ export const StoryEngine = ({ hideMedia = false }) => {
     return (
         <div key={displayElementId} className="w-full h-full flex flex-col lg:flex-row items-stretch lg:items-stretch justify-center relative z-0">
 
-            {/* Left Image Section / Top on Mobile - only shown if not hidden */}
-            {!hideMedia && (
-                <div className="w-full lg:w-[40%] flex justify-center items-end lg:items-center relative z-0 pt-20 lg:pt-0 -mb-8 lg:mb-0">
-                    {activeDiscoveryComponent && (!videoUrl && !activeCoverUrl) && (
-                        // Discovery fallback if no media
-                        <div className="absolute top-4 left-1/2 -translate-x-1/2 z-50 pointer-events-none animate-in fade-in duration-500">
-                            <div className="bg-white/80 backdrop-blur-md border border-surface/30 shadow-lg rounded-full px-4 py-2 flex items-center gap-2 mx-auto w-fit">
-                                <RiSearchLine size={14} className="text-surface" />
-                                <span className="text-[10px] font-bold tracking-wider text-surface uppercase whitespace-nowrap">
-                                    Új felfedezés: <span className="text-surface">{activeDiscoveryComponent.name}</span>
-                                </span>
-                            </div>
-                        </div>
-                    )}
+            {/* Integrated Media & Dialogue Section */}
+            <div className={`w-full flex flex-col justify-start lg:justify-center items-center relative z-10 min-h-0 lg:min-h-full ${hideMedia ? 'p-0' : 'p-2 lg:p-8'}`}>
 
-                    {(videoUrl || activeCoverUrl) && (
-                        <div className="relative w-full overflow-visible flex justify-center">
-                            {activeDiscoveryComponent && (
-                                <div key={activeDiscoveryId} className="absolute -top-10 left-1/2 -translate-x-1/2 z-50 pointer-events-none animate-in slide-in-from-top-4 fade-in duration-500">
-                                    <div className="bg-white/80 backdrop-blur-md border border-surface/30 shadow-lg rounded-full px-4 py-2 flex items-center gap-2">
-                                        <RiSearchLine size={14} className="text-surface" />
-                                        <span className="text-[10px] font-bold tracking-wider text-surface uppercase whitespace-nowrap">
-                                            Új felfedezés: <span className="text-surface">{activeDiscoveryComponent.name}</span>
-                                        </span>
-                                    </div>
-                                </div>
-                            )}
-                            {videoUrl ? (
-                                <video
-                                    key={videoUrl}
-                                    src={videoUrl}
-                                    autoPlay loop muted playsInline
-                                    onCanPlay={() => setIsVideoLoaded(true)}
-                                    className={`w-full max-w-[400px] lg:max-w-none h-auto lg:max-h-[80vh] lg:h-full object-contain rounded-xl transition-opacity duration-300 ${isVideoLoaded ? 'opacity-100' : 'opacity-0'}`}
-                                    style={{ filter: getColorFilterStyle(colorFilter) }}
-                                />
-                            ) : (
-                                <div className={`w-full mx-auto drop-shadow-2xl ${
-                                    isIntro ? 'max-w-[400px] lg:max-w-none' : 'max-w-[250px] lg:max-w-[300px] mt-2 lg:mt-0'
-                                }`}>
-                                    <div className={`w-full ${isIntro ? '' : 'rounded-2xl overflow-hidden'}`}>
+                <div className={`w-full mx-auto mt-auto lg:mt-auto mb-0 lg:mb-0 rounded-2xl flex flex-col overflow-hidden transition-all duration-500
+                    ${!hideMedia ? 'bg-transparent border-none shadow-none lg:biophilic-card lg:max-w-4xl lg:max-h-[85vh]' : 'lg:max-w-5xl h-full lg:biophilic-card'}
+                `}>
+
+                    {/* Story Content Area (Scrollable) */}
+                    <div className="flex-1 min-h-0 overflow-y-auto no-scrollbar flex flex-col items-stretch p-4 sm:p-8 lg:p-10 touch-pan-y overscroll-contain">
+                        
+                        {/* Integrated Media (Top of Content) */}
+                        {!hideMedia && (videoUrl || activeCoverUrl) && (
+                            <div className="mb-8 relative w-full flex justify-center animate-in fade-in duration-700">
+                                {videoUrl ? (
+                                    <video
+                                        key={videoUrl}
+                                        src={videoUrl}
+                                        autoPlay loop muted playsInline
+                                        onCanPlay={() => setIsVideoLoaded(true)}
+                                        className={`w-full max-w-[500px] h-auto rounded-2xl shadow-xl transition-opacity duration-300 ${isVideoLoaded ? 'opacity-100' : 'opacity-0'}`}
+                                        style={{ filter: getColorFilterStyle(colorFilter) }}
+                                    />
+                                ) : (
+                                    <div className="w-full max-w-[500px] drop-shadow-xl rounded-2xl overflow-hidden border border-white/20">
                                         <img
                                             key={activeCoverUrl}
                                             src={activeCoverUrl}
                                             alt="Scene"
-                                            className={`w-full h-auto ${
-                                                isIntro
-                                                    ? 'lg:h-full lg:max-h-[80vh] object-contain'
-                                                    : 'object-cover scale-[1.06]'
-                                            }`}
+                                            className="w-full h-auto object-cover scale-[1.02]"
                                             style={{ filter: getColorFilterStyle(colorFilter) }}
                                         />
                                     </div>
-                                </div>
-                            )}
-                        </div>
-                    )}
-                </div>
-            )}
+                                )}
+                            </div>
+                        )}
 
-            {/* Right Dialogue Section / Bottom on Mobile */}
-            <div className={`w-full flex flex-col justify-end lg:justify-start relative z-10 lg:min-h-full ${hideMedia ? 'lg:w-full p-0' : 'lg:w-[60%] p-4 lg:p-8'}`}>
-
-                <div className={`biophilic-card w-full mx-auto mt-auto lg:mt-auto mb-4 lg:mb-0 rounded-2xl shadow-2xl border border-white/30 bg-white/20 backdrop-blur-md flex flex-col overflow-hidden ${hideMedia ? 'h-full lg:max-w-5xl' : 'max-h-[70vh] lg:max-h-[60vh] max-w-3xl lg:mr-8'}`}>
-
-                    {/* Story Text (Middle - Scrollable) */}
-                    <div className="flex-1 min-h-0 overflow-y-auto no-scrollbar flex flex-col items-stretch pb-4 p-6 sm:p-8 lg:p-10 touch-pan-y overscroll-contain">
                         {/* Status Messages */}
                         {(error || message) && (
                             <div className="mb-6 shrink-0 animate-in fade-in duration-300">
@@ -349,7 +318,7 @@ export const StoryEngine = ({ hideMedia = false }) => {
                             </div>
                         )}
 
-                        <div className="story-content space-y-4 sm:space-y-6 text-base sm:text-lg lg:text-[19px] text-surface leading-[1.7] sm:leading-[1.8] lg:leading-loose tracking-wide text-justify animate-in fade-in duration-500">
+                        <div className="story-content space-y-4 sm:space-y-6 text-sm sm:text-lg lg:text-[19px] text-surface leading-[1.6] sm:leading-[1.8] lg:leading-loose tracking-wide animate-in fade-in duration-500">
                             {contentSegments.length > 0 && contentSegments[currentStep] && (
                                 <TypewriterSegment
                                     key={`${displayElementId}-${currentStep}`}
@@ -359,26 +328,26 @@ export const StoryEngine = ({ hideMedia = false }) => {
                                 />
                             )}
                         </div>
+
+                        {/* Pagination Controls (Inside scrollable area) */}
+                        {contentSegments.length > 0 && currentStep < contentSegments.length - 1 && (
+                            <div className="shrink-0 flex justify-end pt-8 mt-auto">
+                                <button
+                                    onClick={() => setCurrentStep(prev => prev + 1)}
+                                    className="px-8 py-3 sm:px-10 sm:py-4 bg-[#4F7942] hover:bg-[#3d5e33] text-white text-base sm:text-lg font-bold rounded-xl transition-all shadow-lg hover:shadow-xl hover:-translate-y-1 block"
+                                >
+                                    Tovább
+                                </button>
+                            </div>
+                        )}
+
+                        {/* Choices (Inside scrollable area) */}
+                        {contentSegments.length > 0 && currentStep === contentSegments.length - 1 && (
+                            <div className="shrink-0 pt-8 animate-in fade-in slide-in-from-bottom-2 duration-500 mt-auto">
+                                <Choices hasImage={false} onHoverChange={setIsChoiceHovered} />
+                            </div>
+                        )}
                     </div>
-
-                    {/* Pagination Controls */}
-                    {contentSegments.length > 0 && currentStep < contentSegments.length - 1 && (
-                        <div className="shrink-0 flex justify-end px-6 pb-6 sm:px-8 sm:pb-8 lg:px-10 lg:pb-10 pt-4 mt-auto bg-linear-to-t from-white/10 to-transparent border-t border-surface/10">
-                            <button
-                                onClick={() => setCurrentStep(prev => prev + 1)}
-                                className="px-8 py-3 sm:px-10 sm:py-4 bg-[#4F7942] hover:bg-[#3d5e33] text-white text-base sm:text-lg font-bold rounded-xl transition-all shadow-lg hover:shadow-xl hover:-translate-y-1 block"
-                            >
-                                Tovább
-                            </button>
-                        </div>
-                    )}
-
-                    {/* Choices (Bottom) */}
-                    {contentSegments.length > 0 && currentStep === contentSegments.length - 1 && (
-                        <div className="shrink-0 px-6 pb-6 sm:px-8 sm:pb-8 lg:px-10 lg:pb-10 pt-6 animate-in fade-in slide-in-from-bottom-2 duration-500 mt-auto bg-linear-to-t from-white/10 to-transparent border-t border-surface/10">
-                            <Choices hasImage={false} onHoverChange={setIsChoiceHovered} />
-                        </div>
-                    )}
 
                 </div>
             </div>
