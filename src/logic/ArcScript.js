@@ -54,7 +54,7 @@ export class ArcScript {
         // will be replaced with 'false' or '0' to prevent ReferenceError.
         // This regex looks for start-of-word followed by letters/numbers/underscore, excluding numbers.
         const remainingVars = expr.match(/\b[a-zA-Z_][a-zA-Z0-9_]*\b/g) || [];
-        const ignoredKeywords = ['true', 'false', 'visits', '&&', '||', '!', 'null', 'undefined'];
+        const ignoredKeywords = ['true', 'false', 'visits', '&&', '||', '!', 'null', 'undefined', 'and', 'or', 'not'];
         remainingVars.forEach(v => {
             if (!ignoredKeywords.includes(v)) {
                 expr = expr.replace(new RegExp(`\\b${v}\\b`, 'g'), 'false');
