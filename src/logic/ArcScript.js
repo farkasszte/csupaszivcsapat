@@ -45,11 +45,15 @@ export class ArcScript {
         });
 
         // Replace variables
-        // This is a naive regex, might need to be more robust for complex expressions
         Object.keys(state.variables).forEach(VarName => {
             const regex = new RegExp(`\\b${VarName}\\b`, 'g');
             expr = expr.replace(regex, state.variables[VarName]);
         });
+
+        // Replace logic operators
+        expr = expr.replace(/\band\b/g, '&&');
+        expr = expr.replace(/\bor\b/g, '||');
+        expr = expr.replace(/\bnot\b/g, '!');
 
         try {
             // eslint-disable-next-line no-new-func
