@@ -12,7 +12,10 @@ export const useGameStore = create((set, get) => ({
     // State
     currentElementId: projectSettings.startingElement,
     visits: {},
-    variables: { score: 0 },
+    variables: Object.entries(projectSettings.variables || {}).reduce((acc, [id, v]) => {
+        if (!v.root) acc[v.name] = v.value;
+        return acc;
+    }, {}),
     history: [],
     storyLog: [],
     discoveredComponents: [],
@@ -61,6 +64,13 @@ export const useGameStore = create((set, get) => ({
             const newFinishedStories = [...(state.finishedStories || [])];
             const newVariables = { ...state.variables };
 
+            // EXECUTE SCRIPTS FROM CONTENT
+            if (element?.content) {
+                const tempState = { visits: newVisits, variables: newVariables };
+                arcScript.parseRichText(element.content, tempState, id);
+                // Variables might be updated by parseRichText -> executeScript
+            }
+
             if (endpoint && !newFinishedStories.includes(endpoint.index)) {
                 newFinishedStories.push(endpoint.index);
                 newVariables.score = (newVariables.score || 0) + endpoint.points;
@@ -74,6 +84,21 @@ export const useGameStore = create((set, get) => ({
                 variables: newVariables
             };
         });
+
+        // AUTO-TRANSITION LOGIC
+        setTimeout(() => {
+            const state = get();
+            const element = projectSettings.elements[id];
+            if (element?.outputs && element.outputs.length === 1) {
+                const connId = element.outputs[0];
+                const conn = projectSettings.connections[connId];
+                // If it's a straight connection with no label (or empty p tag), it's automatic
+                const hasLabel = conn?.label && conn.label.replace(/<[^>]*>/g, '').trim().length > 0;
+                if (!hasLabel) {
+                    state.navigateTo(connId); // navigateTo handles resolution
+                }
+            }
+        }, 100);
     },
 
     clearRecentDiscovery: (compId) => {
@@ -82,26 +107,42 @@ export const useGameStore = create((set, get) => ({
         }));
     },
 
+    resolveTarget: (targetId) => {
+        if (!targetId) return null;
+
+        // Check for Jumper
+        const jumper = projectSettings.jumpers[targetId];
+        if (jumper) {
+            return get().resolveTarget(jumper.elementId);
+        }
+
+        // Check for Branch
+        const branch = projectSettings.branches[targetId];
+        if (branch) {
+            const connId = get().resolveBranch(targetId);
+            if (connId) {
+                const conn = projectSettings.connections[connId];
+                if (conn) return get().resolveTarget(conn.targetid);
+            }
+            return null;
+        }
+
+        // Must be an element
+        return targetId;
+    },
+
     navigateTo: (targetId, choiceLabel = null) => {
         if (!targetId) return;
 
-        let finalId = targetId;
-        const jumper = projectSettings.jumpers[targetId];
-        if (jumper) {
-            finalId = jumper.elementId;
+        // targetId can be a connectionId or a direct elementId/branchId/jumperId
+        let actualTarget = targetId;
+        const connection = projectSettings.connections[targetId];
+        if (connection) {
+            actualTarget = connection.targetid;
         }
 
-        const branch = projectSettings.branches[finalId];
-        if (branch) {
-            const connId = get().resolveBranch(finalId);
-            if (connId) {
-                const conn = projectSettings.connections[connId];
-                if (conn) {
-                    get().navigateTo(conn.targetid, choiceLabel);
-                    return;
-                }
-            }
-        }
+        const finalId = get().resolveTarget(actualTarget);
+        if (!finalId) return;
 
         const currentId = get().currentElementId;
 

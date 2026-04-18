@@ -248,6 +248,7 @@ export const GameProvider = ({ children }) => {
         parseRichText,
         parseRichTextReadOnly,
         resolveBranch: store.resolveBranch,
+        resolveTarget: store.resolveTarget,
         lightboxImage,
         openLightbox,
         closeLightbox,

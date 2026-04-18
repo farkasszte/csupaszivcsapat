@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useGame } from '../context/GameContext';
 
 export const Choices = ({ hasImage, onHoverChange }) => {
-    const { project, currentElementId, navigateTo, resolveBranch, renderRichText, resetGame } = useGame();
+    const { project, currentElementId, navigateTo, resolveTarget, renderRichText, resetGame } = useGame();
     const [isMounted, setIsMounted] = useState(false);
 
     useEffect(() => {
@@ -26,19 +26,8 @@ export const Choices = ({ hasImage, onHoverChange }) => {
         let targetId = connection.targetid;
         let label = connection.label;
 
-        // Branch Resolution
-        if (connection.targetType === 'branches') {
-            const connIdFromBranch = resolveBranch(targetId);
-            if (connIdFromBranch) {
-                const resolvedConn = project.connections[connIdFromBranch];
-                if (resolvedConn) {
-                    targetId = resolvedConn.targetid;
-                    label = resolvedConn.label || label;
-                }
-            } else {
-                return null;
-            }
-        }
+        targetId = resolveTarget(targetId);
+        if (!targetId) return null;
 
         return {
             id: connId,

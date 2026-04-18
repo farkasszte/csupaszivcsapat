@@ -80,8 +80,12 @@ export class ArcScript {
                 // Evaluate the value expression
                 let val = valExpr.trim();
                 // Resolve simple variables in value
-                if (!Number.isNaN(Number(val))) {
+                if (!Number.isNaN(Number(val)) && val !== '') {
                     val = Number(val);
+                } else if (val === 'true') {
+                    val = true;
+                } else if (val === 'false') {
+                    val = false;
                 } else if (val.startsWith('"') || val.startsWith("'")) {
                     val = val.slice(1, -1);
                 } else {
