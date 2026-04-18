@@ -50,6 +50,17 @@ export class ArcScript {
             expr = expr.replace(regex, state.variables[VarName]);
         });
 
+        // Add a safety pass: any remaining words that look like variables but aren't defined
+        // will be replaced with 'false' or '0' to prevent ReferenceError.
+        // This regex looks for start-of-word followed by letters/numbers/underscore, excluding numbers.
+        const remainingVars = expr.match(/\b[a-zA-Z_][a-zA-Z0-9_]*\b/g) || [];
+        const ignoredKeywords = ['true', 'false', 'visits', '&&', '||', '!', 'null', 'undefined'];
+        remainingVars.forEach(v => {
+            if (!ignoredKeywords.includes(v)) {
+                expr = expr.replace(new RegExp(`\\b${v}\\b`, 'g'), 'false');
+            }
+        });
+
         // Replace logic operators
         expr = expr.replace(/\band\b/g, '&&');
         expr = expr.replace(/\bor\b/g, '||');

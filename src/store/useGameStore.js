@@ -8,14 +8,18 @@ const supabase = createClient()
 let saveTimer = null;
 
 
+const getInitialVariables = () => {
+    return Object.entries(projectSettings.variables || {}).reduce((acc, [id, v]) => {
+        if (!v.root && v.name) acc[v.name] = v.value !== undefined ? v.value : false;
+        return acc;
+    }, {});
+};
+
 export const useGameStore = create((set, get) => ({
     // State
     currentElementId: projectSettings.startingElement,
     visits: {},
-    variables: Object.entries(projectSettings.variables || {}).reduce((acc, [id, v]) => {
-        if (!v.root) acc[v.name] = v.value;
-        return acc;
-    }, {}),
+    variables: getInitialVariables(),
     history: [],
     storyLog: [],
     discoveredComponents: [],
@@ -386,7 +390,7 @@ export const useGameStore = create((set, get) => ({
         set({
             currentElementId: startId,
             visits: {},
-            variables: { score: 0 },
+            variables: getInitialVariables(),
             history: [],
             storyLog: [{ elementId: startId, choiceMade: null }],
             discoveredComponents: [],
