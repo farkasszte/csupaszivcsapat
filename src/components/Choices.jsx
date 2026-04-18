@@ -32,9 +32,9 @@ export const Choices = ({ hasImage, onHoverChange }) => {
         return {
             id: connId,
             targetId,
-            label: label ? renderRichText(label) : 'Continue',
+            label: label ? renderRichText(label) : 'Tovább',
             // Strip HTML tags from rendered label for the story log
-            rawLabel: label ? renderRichText(label).replace(/<[^>]*>/g, '').trim() : 'Continue',
+            rawLabel: label ? renderRichText(label).replace(/<[^>]*>/g, '').trim() : 'Tovább',
         };
     }).filter(choice => choice !== null);
 
