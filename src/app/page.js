@@ -10,7 +10,7 @@ import GameMenu from '@/components/GameMenu';
 import GameLibrary from '@/components/GameLibrary';
 import ProfileView from '@/components/ProfileView';
 import { useGame } from '@/context/GameContext';
-import { StorySelection } from '@/components/StorySelection';
+
 
 
 import { Lightbox } from '@/components/Lightbox';
@@ -225,7 +225,7 @@ export default function Home() {
             </div >
             <Lightbox />
             <ColorFilters />
-            {!isStarted && <StorySelection />}
+
         </div >
     );
 }

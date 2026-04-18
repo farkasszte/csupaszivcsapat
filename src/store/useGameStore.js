@@ -20,7 +20,7 @@ export const useGameStore = create((set, get) => ({
     loading: false,
     error: null,
     message: null,
-    isStarted: false,
+    isStarted: true,
     finishedStories: [], // Track indices of finished stories
 
     // Settings
@@ -353,7 +353,7 @@ export const useGameStore = create((set, get) => ({
             finishedStories: [],
             error: null,
             message: null,
-            isStarted: false
+            isStarted: true
         });
 
         get().visitElement(startId);

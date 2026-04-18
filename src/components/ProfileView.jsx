@@ -119,7 +119,7 @@ export default function ProfileView() {
                         type="text"
                         value={formData.full_name}
                         onChange={(e) => setFormData({ ...formData, full_name: e.target.value })}
-                        className="w-full px-4 py-3 bg-white/90 backdrop-blur-md shadow-sm rounded-xl focus:ring-2 focus:ring-white/40 focus:border-white/40 transition-all outline-none text-[#3e2723] placeholder-[#3e2723]/50"
+                        className="w-full px-4 py-3 bg-white/90 backdrop-blur-md shadow-sm rounded-xl focus:ring-2 focus:ring-white/40 focus:border-white/40 transition-all outline-none text-surface placeholder-surface/50"
                         placeholder="Minta János"
                     />
                 </div>
@@ -130,12 +130,11 @@ export default function ProfileView() {
                         <select
                             value={formData.gender}
                             onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
-                            className="w-full px-4 py-3 bg-white/90 backdrop-blur-md shadow-sm rounded-xl focus:ring-2 focus:ring-white/40 focus:border-white/40 transition-all outline-none text-[#3e2723] appearance-none"
+                            className="w-full px-4 py-3 bg-white/90 backdrop-blur-md shadow-sm rounded-xl focus:ring-2 focus:ring-white/40 focus:border-white/40 transition-all outline-none text-surface appearance-none"
                         >
-                            <option value="" className="bg-[#ebd7b1] text-[#3e2723]">Válassz...</option>
-                            <option value="male" className="bg-[#ebd7b1] text-[#3e2723]">Férfi</option>
-                            <option value="female" className="bg-[#ebd7b1] text-[#3e2723]">Nő</option>
-                            <option value="other" className="bg-[#ebd7b1] text-[#3e2723]">Egyéb</option>
+                            <option value="" className="bg-[#ebd7b1] text-surface">Válassz...</option>
+                            <option value="male" className="bg-[#ebd7b1] text-surface">Fiú</option>
+                            <option value="female" className="bg-[#ebd7b1] text-surface">Lány</option>
                         </select>
                     </div>
 
@@ -146,7 +145,7 @@ export default function ProfileView() {
                             inputMode="numeric"
                             value={formData.birth_year}
                             onChange={(e) => setFormData({ ...formData, birth_year: e.target.value.replace(/\D/g, '').slice(0, 4) })}
-                            className="w-full px-4 py-3 bg-white/90 backdrop-blur-md shadow-sm rounded-xl focus:ring-2 focus:ring-white/40 focus:border-white/40 transition-all outline-none text-[#3e2723] placeholder-[#3e2723]/50"
+                            className="w-full px-4 py-3 bg-white/90 backdrop-blur-md shadow-sm rounded-xl focus:ring-2 focus:ring-white/40 focus:border-white/40 transition-all outline-none text-surface placeholder-surface/50"
                             placeholder="1990"
                             maxLength={4}
                         />
@@ -156,7 +155,7 @@ export default function ProfileView() {
                 <button
                     type="submit"
                     disabled={saving}
-                    className="w-full py-3 bg-white/90 hover:bg-white/20 text-white font-semibold rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-sm shadow-sm"
+                    className="w-full py-3 bg-white hover:bg-white/80 text-[#4F7942] font-bold rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-md"
                 >
                     {saving ? 'Mentés...' : 'Mentés'}
                 </button>

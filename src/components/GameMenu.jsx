@@ -5,68 +5,19 @@ import {
     RiSave3Line,
     RiDownloadLine,
     RiRestartLine,
-    RiSmartphoneLine,
-    RiCloseLine,
+
+
     RiVolumeUpLine,
     RiVolumeMuteLine,
     RiPaletteLine,
     RiTimerLine,
-    RiSlideshow3Line,
+
 } from '@remixicon/react';
 import { useState } from 'react';
 
-import { createPortal } from 'react-dom';
 
-function MobilePreviewModal({ onClose }) {
-    return createPortal(
-        <div
-            className="fixed inset-0 z-9999 flex items-center justify-center bg-black/80 backdrop-blur-sm"
-            onClick={onClose}
-        >
-            {/* Phone frame — clicks inside don't bubble to backdrop */}
-            <div
-                className="relative flex flex-col items-center"
-                onClick={e => e.stopPropagation()}
-            >
-                {/* Close button */}
-                <button
-                    onClick={onClose}
-                    className="absolute -top-10 right-0 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-zinc-800/90 border border-zinc-600/50 text-white hover:text-white text-xs transition-colors"
-                >
-                    <RiCloseLine size={14} /> Bezárás
-                </button>
 
-                {/* Phone shell */}
-                <div className="bg-zinc-800 rounded-[3rem] border-4 border-zinc-700 shadow-[0_0_80px_rgba(0,0,0,0.8)] overflow-hidden"
-                    style={{ width: 360 + 16, padding: 4 }}>
-                    {/* Notch bar */}
-                    <div className="flex justify-center items-center py-2">
-                        <div className="w-24 h-2 bg-zinc-800 rounded-full" />
-                    </div>
 
-                    {/* Screen */}
-                    <div className="overflow-hidden rounded-2xl" style={{ width: 360, height: 780 }}>
-                        <iframe
-                            src="/"
-                            title="Mobil előnézet"
-                            width={360}
-                            height={780}
-                            style={{ border: 'none', display: 'block' }}
-                        />
-                    </div>
-
-                    {/* Home bar */}
-                    <div className="flex justify-center py-2">
-                        <div className="w-20 h-1 bg-zinc-600 rounded-full" />
-                    </div>
-                </div>
-
-                <p className="mt-3 text-xs text-white">360 × 780 – kattints hátra a bezáráshoz</p>
-            </div>
-        </div>,
-        document.body
-    );
-}
 
 export default function GameMenu() {
     const {
@@ -74,12 +25,11 @@ export default function GameMenu() {
         isMuted, toggleMute,
         colorFilter, setColorFilter,
         typewriterSpeed, setTypewriterSpeed,
-        transitionsEnabled, setTransitionsEnabled,
         volume, setVolume,
     } = useGame();
 
 
-    const [showPreview, setShowPreview] = useState(false);
+
 
     const filters = [
         { id: 'none', name: 'Nincs' },
@@ -165,21 +115,7 @@ export default function GameMenu() {
                         </div>
                     </div>
 
-                    {/* Scene Transitions */}
-                    <div className="px-3 py-2 bg-white/40 rounded-lg">
-                        <div className="flex items-center justify-between">
-                            <div className="flex items-center gap-2">
-                                <RiSlideshow3Line size={16} className="text-[#4F7942]" />
-                                <span className="text-xs font-semibold text-[#4F7942]">Helyszín áttűnés</span>
-                            </div>
-                            <button
-                                onClick={() => setTransitionsEnabled(!transitionsEnabled)}
-                                className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${transitionsEnabled ? 'bg-[#4F7942]' : 'bg-[#4F7942]/20'}`}
-                            >
-                                <div className={`pointer-events-none inline-block h-4 w-4 rounded-full bg-white shadow transform ring-0 transition duration-200 ease-in-out ${transitionsEnabled ? 'translate-x-4' : 'translate-x-0'}`} />
-                            </button>
-                        </div>
-                    </div>
+
 
                     {/* Color Filter Selector */}
                     <div className="px-3 py-2 mt-2 bg-white/40 rounded-lg">
@@ -232,17 +168,7 @@ export default function GameMenu() {
                     </div>
                 </div>
 
-                {/* Mobile preview button */}
-                <button
-                    onClick={() => setShowPreview(true)}
-                    className="flex items-center gap-3 px-4 py-3 bg-white/40 hover:bg-white/50 backdrop-blur-md border border-[#4F7942]/10 shadow-sm rounded-xl transition-all text-left group mt-1"
-                >
-                    <RiSmartphoneLine size={16} className="shrink-0 text-[#4F7942] transition-colors" />
-                    <div className="flex-1">
-                        <div className="text-sm font-semibold text-[#4F7942] transition-colors">Mobil előnézet</div>
-                        <div className="text-xs text-[#4F7942] mt-0.5 opacity-80">Teljes oldal 360 × 780 px-en</div>
-                    </div>
-                </button>
+
 
                 <div className="border-t border-[#4F7942]/10 my-1" />
 
@@ -263,7 +189,7 @@ export default function GameMenu() {
                 </button>
             </div>
 
-            {showPreview && <MobilePreviewModal onClose={() => setShowPreview(false)} />}
+
         </>
     );
 }
