@@ -90,7 +90,7 @@ export default function MapComponent() {
   // Story Mapping
   const storyLocations = {
     'loc-11': { index: 1, boardId: '630fdb8a-48d6-473e-9974-2460f7eb2b41' },
-    'loc-13': { index: 2, boardId: '6a9aecfe-b7aa-46ba-8946-6a61882f883c' },
+    'loc-17': { index: 2, boardId: '6a9aecfe-b7aa-46ba-8946-6a61882f883c' },
     'loc-16': { index: 3, boardId: 'f571e9b2-4ab3-42ee-8f86-5091ca1aa981' }
   };
 
