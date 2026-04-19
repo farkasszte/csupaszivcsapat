@@ -45,6 +45,10 @@ export const Choices = ({ hasImage, onHoverChange }) => {
             displayLabel = storyTranslations[connId].label || finalLabel;
         } else if (language === 'en' && finalLabel === 'Tovább') {
             displayLabel = 'Continue';
+        } else if (language === 'sr' && storyTranslations.sr?.[connId]) {
+            displayLabel = storyTranslations.sr[connId].label || finalLabel;
+        } else if (language === 'sr' && (finalLabel === 'Tovább' || finalLabel === 'Continue')) {
+            displayLabel = 'Dalje';
         }
 
         const rendered = renderRichText(displayLabel);

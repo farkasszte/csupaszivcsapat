@@ -200,18 +200,15 @@ export default function LoginPage() {
 
             {/* Language Selector (Top right) */}
             <div className="absolute top-4 right-4 flex items-center gap-1 bg-white/40 backdrop-blur-md p-1 rounded-lg border border-white/20 z-50">
-                <button 
-                    onClick={() => setLanguage('hu')}
-                    className={`px-2 py-0.5 text-xs font-bold rounded transition-all ${language === 'hu' ? 'bg-[#4F7942] text-white shadow-sm' : 'text-[#4F7942] hover:bg-white/40'}`}
-                >
-                    HU
-                </button>
-                <button 
-                    onClick={() => setLanguage('en')}
-                    className={`px-2 py-0.5 text-xs font-bold rounded transition-all ${language === 'en' ? 'bg-[#4F7942] text-white shadow-sm' : 'text-[#4F7942] hover:bg-white/40'}`}
-                >
-                    EN
-                </button>
+                {['hu', 'en', 'sr'].map((lang) => (
+                    <button
+                        key={lang}
+                        onClick={() => setLanguage(lang)}
+                        className={`px-2 py-0.5 text-xs font-bold rounded transition-all ${language === lang ? 'bg-[#4F7942] text-white shadow-sm' : 'text-[#4F7942] hover:bg-white/40'}`}
+                    >
+                        {lang.toUpperCase()}
+                    </button>
+                ))}
             </div>
 
             <div className="w-full max-w-4xl space-y-6 sm:space-y-12">

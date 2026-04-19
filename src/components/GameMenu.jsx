@@ -86,7 +86,7 @@ export default function GameMenu() {
                             <span className="text-xs font-semibold text-[#4F7942]">{t('language')}</span>
                         </div>
                         <div className="flex gap-2">
-                            {['hu', 'en'].map(lang => (
+                            {['hu', 'en', 'sr'].map(lang => (
                                 <button
                                     key={lang}
                                     onClick={() => setLanguage(lang)}
@@ -94,7 +94,7 @@ export default function GameMenu() {
                                         ? 'bg-[#4F7942] border-[#4F7942] text-white shadow-sm'
                                         : 'bg-white/40 border-[#4F7942]/10 text-[#4F7942] hover:bg-white/50'}`}
                                 >
-                                    {lang === 'hu' ? 'Magyar' : 'English'}
+                                    {lang === 'hu' ? 'Magyar' : lang === 'en' ? 'English' : 'Srpski'}
                                 </button>
                             ))}
                         </div>

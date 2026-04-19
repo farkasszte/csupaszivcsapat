@@ -252,12 +252,12 @@ export default function PlayerDashboard() {
                                                     }}
                                                     className="shrink-0 flex items-center gap-1 text-xs font-bold text-[#4F7942] hover:text-[#3d5d33] transition-colors bg-[#4F7942]/5 px-2 py-1 rounded-md border border-[#4F7942]/10"
                                                 >
-                                                    <span>{language === 'en' ? char.species_en : char.species}</span>
+                                                    <span>{char[`species_${language}`] || char.species}</span>
                                                     <RiExternalLinkLine size={12} />
                                                 </button>
                                             </div>
                                             <p className="text-sm text-zinc-700 mt-1.5 line-clamp-3 leading-relaxed italic">
-                                                "{language === 'en' ? char.description_en : char.description}"
+                                                "{char[`description_${language}`] || char.description}"
                                             </p>
                                         </div>
                                     </div>
@@ -283,7 +283,7 @@ export default function PlayerDashboard() {
                                         {/* Info Panel */}
                                         <div className="flex-1 min-w-0 flex flex-col justify-center">
                                             <div className="flex items-baseline justify-between gap-2 overflow-hidden">
-                                                <h4 className="text-lg font-bold text-zinc-950 truncate">{loc.name}</h4>
+                                                <h4 className="text-lg font-bold text-zinc-950 truncate">{loc[`name_${language}`] || loc.name}</h4>
                                                 {loc.externalLink && (
                                                     <button
                                                         onClick={() => window.open(loc.externalLink, '_blank')}
@@ -294,7 +294,7 @@ export default function PlayerDashboard() {
                                                 )}
                                             </div>
                                             <p className="text-xs text-zinc-700 mt-1.5 leading-relaxed italic">
-                                                "{loc.description}"
+                                                "{loc[`description_${language}`] || loc.description}"
                                             </p>
                                         </div>
                                     </div>

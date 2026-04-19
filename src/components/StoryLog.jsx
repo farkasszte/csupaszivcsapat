@@ -26,7 +26,15 @@ export default function StoryLog() {
                         const element = project.elements[entry.elementId];
                         if (!element) return [];
 
-                        const segments = parseRichTextReadOnly(element.content, entry.elementId);
+                        const segments = (() => {
+                            let content = element.content;
+                            if (language === 'en' && storyTranslations[entry.elementId]) {
+                                content = storyTranslations[entry.elementId].content || content;
+                            } else if (language === 'sr' && storyTranslations.sr?.[entry.elementId]) {
+                                content = storyTranslations.sr[entry.elementId].content || content;
+                            }
+                            return parseRichTextReadOnly(content, entry.elementId);
+                        })();
                         const paragraphs = segments.map(seg => {
                             const text = seg.content.replace(/<[^>]*>/g, '').trim();
                             return new Paragraph({
@@ -85,7 +93,13 @@ export default function StoryLog() {
                 const el = project.elements[entry.elementId];
                 if (!el) return;
 
-                contentStr += `<div style="text-align: justify; line-height: 1.6; margin-bottom: 20px; width: 100%; white-space: pre-wrap;">${el.content}</div>`;
+                let nodeContentForPdf = el.content;
+                if (language === 'en' && storyTranslations[entry.elementId]) {
+                    nodeContentForPdf = storyTranslations[entry.elementId].content || nodeContentForPdf;
+                } else if (language === 'sr' && storyTranslations.sr?.[entry.elementId]) {
+                    nodeContentForPdf = storyTranslations.sr[entry.elementId].content || nodeContentForPdf;
+                }
+                contentStr += `<div style="text-align: justify; line-height: 1.6; margin-bottom: 20px; width: 100%; white-space: pre-wrap;">${nodeContentForPdf}</div>`;
 
                 if (entry.choiceMade) {
                     contentStr += `<div style="font-style: italic; color: #666; margin-bottom: 30px; padding-left: 20px;">&gt; ${entry.choiceMade}</div>`;
@@ -155,6 +169,8 @@ export default function StoryLog() {
                                     let content = element.content;
                                     if (language === 'en' && storyTranslations[entry.elementId]) {
                                         content = storyTranslations[entry.elementId].content || content;
+                                    } else if (language === 'sr' && storyTranslations.sr?.[entry.elementId]) {
+                                        content = storyTranslations.sr[entry.elementId].content || content;
                                     }
                                     const segments = parseRichTextReadOnly(content, entry.elementId);
                                     return segments.map((seg, sIdx) => (

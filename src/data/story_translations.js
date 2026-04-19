@@ -557,5 +557,234 @@ export const storyTranslations = {
     },
     "3b3ba9f9-5559-48e5-bf9e-04e5c16493c1": {
         content: "<p><strong>The fate of the Homokhátság is in your hands too.</strong> Animals cannot speak the human language, but they need your actions. Take care of the waters, respect the tranquility of nature, and remember: every tiny decision you make protects a life in this special, sandy world. Be our ally too!</p><p><strong>Take watch:</strong> Learn everything about the habitats so you can be the next protector of the landscape.</p><p><strong>Call others:</strong> Tell our story to your friends so they too can care for nature.</p><p><strong>Watch the water:</strong> Actively work on water conservation at home too, so there's enough for the wetlands.</p><p><strong>Be present:</strong> Visit the Homokhátság and get to know live those you have just saved.</p>"
+    },
+    sr: {
+        // Közös kapcsolatok / Common connections
+        "f6f8b154-ec37-4077-97bd-bbc2c3a02618": {
+            label: "Spasimo stanovnike Bugca!"
+        },
+        "119f3295-0365-4317-80dc-a3979a8b66e1": {
+            label: "Spasimo životinje sa peščanih dina Filiphaze!"
+        },
+        "3967e25e-d9a8-472d-b268-3ac1796afc67": {
+            label: "Spasimo živi svet slanih jezera!"
+        },
+        "7cfaabad-a23d-45b8-a028-9c1a2a3d3c7a": {
+            label: "Gde ćemo nastaviti?"
+        },
+        "4c11ead8-cfa5-45d4-9abd-bd8fec1f2e2d": {
+            label: "Spasimo i ostale prijatelje!"
+        },
+        "c3f2996d-3e4b-46cd-8851-1f6125312160": {
+            label: "Neka avantura počne!"
+        },
+        "6f4678c4-63ae-46e3-85d8-b13995082813": {
+            label: "Budi i ti heroj, kao veverica Panni!"
+        },
+        "f6536b5b-242f-4111-8bdc-d1634bff4e8d": {
+            label: "Dalje"
+        },
+        "95428eb7-eb78-4855-be75-89cb58a83503": {
+            label: "Dalje"
+        },
+        "7e74d014-6f0c-4935-91e8-84ef6b601093": {
+            label: "Dalje"
+        },
+        "da3e7cd7-6c2e-4519-a109-9bb36bac055f": {
+            label: "Dalje"
+        },
+        "8764738e-f7b2-40f9-9f59-c73ec5444e93": {
+            label: "Dalje"
+        },
+        "787f49f1-f0b9-48bb-be98-d9220c274c80": {
+            label: "Dalje"
+        },
+        "c47a8c5f-d648-48c9-ae35-cbe91ce521cb": {
+            label: "Dalje"
+        },
+        "3a16d9dd-f386-4c5e-8ba4-1ad708202249": {
+            label: "Dalje"
+        },
+        "28ee7dde-f844-47b0-8197-b2bc97c4867b": {
+            label: "Dalje"
+        },
+        "264178b1-177a-40c4-9425-a1dff39bd51a": {
+            label: "Dalje"
+        },
+        "276aff4b-4eb4-4b32-985d-fd2380346646": {
+            label: "Dalje."
+        },
+        "acda64e4-3d8a-4353-858f-fd27d886a684": {
+            label: "Pokušajmo nešto drugo."
+        },
+        "85f356e9-3358-4735-a546-a6b589a3392a": {
+            label: "Pokušajmo nešto drugo."
+        },
+        "3f66392f-a5b1-4cc4-be9a-882964beb036": {
+            label: "Pokušajmo nešto drugo."
+        },
+        "a73efb32-d267-4a96-aaaa-5cf1fbe19d6a": {
+            label: "Pokušajmo nešto drugo."
+        },
+
+        // Board 0: Bevezetés / Introduction
+        "1349a909-64e0-4969-ac96-039cfa3582e0": {
+            content: "Gori sunce. Vrelina prži zemlju peščare. Nigde oblaka na vidiku, a sav život u peščari moli za bar jednu kap vode. Mi, čuvari prirode, moramo brzo delovati!"
+        },
+        "7d25e0bc-65ce-4993-979f-683a483ca89a": {
+            content: "Zdravo! Ja sam Panni, mala veverica iz peščare. Veoma sam srećna što si ovde! Treba nam tvoja pomoć jer je nastala velika suša. Sve životinje su u opasnosti."
+        },
+        "bd919e1b-4171-4603-91b4-53c8f85f4713": {
+            content: "Tu je i Túzok tanár úr (Gospodin Droplja), koji sve zna o prirodi, kao i Szalakóta Szilvia (Modrovrana Szilvia), koja nas obaveštava o svemu iz vazduha. Zajedno smo spasilački tim!"
+        },
+        "7fc3bad6-da18-4d56-b07a-24898de509b7": {
+            content: "Izaberi gde ćemo prvo poslati pomoć! Klikni na lokaciju na mapi gde želiš da počneš avanturu spasavanja!"
+        },
+
+        // 1. történet / Story 1: Soda Lakes (Nagyszéksós-tó)
+        "e3d27f29-240f-42ff-84a5-77e3e0727d38": {
+            content: "Szilvia nam javlja: slano jezero se skoro potpuno isušilo! Jadne barske kornjače su ostale zarobljene u dubokom blatu koje se brzo stvrdnjava na suncu. Ako se osuši, kornjače se neće moći pomeriti."
+        },
+        "9161bc84-9dbb-43ab-89be-389d06b509ef": {
+            content: "Moramo doneti vodu do blata da ga omekšamo! Szilvia vodi ptice, koje nose vodu u kljunovima i perju. Polako, blato ponovo postaje mekano i kornjače počinju da se kreću!"
+        },
+        "1313e639-688a-42cc-bb0f-2b73ecb8772a": {
+            content: "Blato je previše tvrdo, kornjače su i dalje blokirane. Treba nam veća snaga!"
+        },
+        "ac8d9981-b51f-4bb2-ad3b-788bf3a0f35a": {
+            content: "Berci, snažni bivo, silazi u blato. Svojim ogromnim nogama uzburkava blato i kornjače uspevaju da se izvuku kroz pukotine. Sve su spasene!"
+        },
+        "f309f4cf-f3e1-4c17-bfbe-d56ee364f1dc": {
+            content: "Krugovi u blatu nisu bili dovoljni, vreme ističe..."
+        },
+        "d4ccfa4e-6e84-47cd-96a9-4a0082c57f72": {
+            content: "Dok kornjače izlaze, Szilvia primećuje novi problem: nivo vode u jezeru i dalje opada jer su stara vrata na brani ostala otvorena! Moramo ih zatvoriti da sačuvamo preostalu vodu."
+        },
+        "4d5089f2-2ea9-4be6-a675-9e6e4a2cce4a": {
+            content: "Berci, snažni bivo, gura zarđali točak brane, ali metal se ne pomera. Čak je i njegova snaga premala za ovo..."
+        },
+        "f5bc5930-b2f9-4621-9311-8be52e078ec9": {
+            content: "Gospodin Droplja donosi snažne grane od kojih pravimo poluge. Uz zajednički trud, točak se polako okreće i brana se zatvara! Voda više ne otiče."
+        },
+        "dce62df6-586b-4e12-ae2b-7e6141a086ea": {
+            content: "Poluge su nam dale prednost, a Berci sada jednim snažnim pokretom potpuno zatvara branu. Jezero je sigurno!"
+        },
+        "b599f668-cb08-410c-99f5-4700d86926dc": {
+            content: "Točak je previše zarđao, grane pucaju..."
+        },
+        "46797cc2-e6e7-4482-af19-482260654aa3": {
+            content: "Na obližnjem imanju ljubazni ljudi nam daju malo ulja. Podmazujemo točak i sada se okreće lako kao igračka! Slano jezero je spaseno od potpunog isušivanja."
+        },
+        "cbc46059-d892-416b-bc19-51a815a5180f": {
+            content: "Zahvaljujući tvom trudu i mudrim odlukama, slano jezero je ponovo postalo dom za ptice i kornjače. Berci se radosno kupa u vodi, a Szilvia nam šalje poruku iz vazduha: Misija uspešna!"
+        },
+        "ba84953b-3836-4a8a-bae8-684ad7d5a743": {
+            label: "Sa Szilvijom na čelu, nosimo vodu u kljunovima i perju da natopimo blato."
+        },
+        "f8600f3b-bb83-4816-9914-0e96b713e7f2": {
+            label: "Tražimo Bercia, bivola, možda je njegova ogromna snaga dovoljna da okrene zarđali točak."
+        },
+        "e514296f-c259-48bd-a49f-3a176771a391": {
+            label: "Tražimo Bercia, bivola, možda je njegova ogromna snaga dovoljna da okrene zarđali točak."
+        },
+        "3ef3d88b-4257-4401-b372-e2888eab8eec": {
+            label: "Uz pomoć gospodina Droplje, skupljamo jake grane da ih koristimo kao poluge i pokrenemo točak."
+        },
+        "a5619d61-653b-475c-ae5c-5a897899e1ca": {
+            label: "Iskoristimo ponovo snažne grane kao poluge, sa njima ćemo sada lakše pomeriti metal."
+        },
+        "1cc81ae9-c416-42f3-97fa-ed8d7b27b851": {
+            label: "Tražimo staru branu, nadajući se da njenim zatvaranjem možemo zaustaviti oticanje preostale vode."
+        },
+        "61b386fd-68fe-4beb-9613-80fb4bfe3c93": {
+            label: "Idemo do obližnjeg imanja da zamolimo ljude za pomoć ili malo ulja protiv rđe."
+        },
+        "f12db265-09b0-4dde-b98f-06686dc30c90": {
+            label: "Sledećeg jutra..."
+        },
+        "5657572c-3ba1-4ece-863a-30b1a3b3d1a9": {
+            label: "Brzo pronađimo pravo rešenje."
+        },
+        "2067af44-5364-4c6e-a487-b6702731b607": {
+            label: "Spasili ste jezero od isušivanja..."
+        },
+
+        // 2. történet / Story 2: Bugacpuszta
+        "0f0ca934-be57-41ec-8ad1-64d88e0ec9a4": {
+            content: "Szilvia nosi loše vesti: u Bugacpuszti se čopor šakala sakrio u visoku travu i polako opkoljavaju ovce koje mirno pasu. Ako ništa ne preduzmemo, ovce će biti u velikoj nevolji!"
+        },
+        "ee518f88-469b-4394-a906-8167f1396112": {
+            content: "Izabrali smo najbolji trenutak! Pastir upravo pušta pse, koji brzo rasteruju šakale. Ovce su ponovo bezbedne i mogu mirno da nastave ispašu."
+        },
+        "a1772647-8a30-47b1-9bb4-6bd79ce58334": {
+            content: "Šakali su previše uporni, buka ih nije uplašila. Ovce su i dalje u opasnosti!"
+        },
+        "cfb20641-a1e6-42f1-bc8e-d912da6a9081": {
+            content: "Gospodin Droplja donosi snažne grane od kukuruzovine. Svi zajedno počinjemo da pravimo veliku buku udarajući granama o tlo. Šakali, iznenađeni iznenadnom larmom, brzo beže nazad u šumu!"
+        },
+        "f7a57a07-889b-4c07-b673-4f9dc9f5e1e1": {
+            content: "Uspeli smo da privučemo pažnju pastira! On odmah šalje pse ka pašnjaku, koji čas posla rasteruju šakale. Bugacpuszta je ponovo mirna!"
+        },
+        "b7cfc630-d02f-488b-a477-802523bc789b": {
+            content: "Pastirski pas Roni, čim nas je čuo, odmah je razumeo u čemu je problem. Jednim snažnim lavežom i brzim trkom rasterao je šakale. Hvala ti, Roni!"
+        },
+        "ac6a9284-9351-460d-8547-495ccfac5813": {
+            content: "Šakali su pobegli, ali Panni primećuje nešto drugo: staza do jezera je potpuno zarasla u invazivne biljke koje guše sve ostalo. Ako ih ne uklonimo, lokalne biljke će nestati."
+        },
+        "7f41ca70-7667-4228-a551-7f98f6a96e8e": {
+            content: "Šakali su se povukli, ali borba za Bugac se nastavlja! Moramo paziti i na ostale pretnje."
+        },
+        "a15b7599-157d-4763-b40c-24546b0447ce": {
+            label: "Pokušavamo da nateramo ovce ka gušćem žbunju gde se šakali teže kreću."
+        },
+        "c50a9102-f74e-4d22-9001-b24f675288e2": {
+            label: "Sa gospodinom Dropljom tražimo pastira, nadajući se da će nam pomoći."
+        },
+        "0c1ef4b7-99f7-4af6-a32e-a3d5b67ea1aa": {
+            label: "Tražimo od Ronija da odozgo potraži ređe delove žbunja."
+        },
+        "d038fe62-2e97-4323-ba35-0f5809a3d0f4": {
+            label: "Pod vođstvom gospodina Droplje, tražimo pomoć od pastira."
+        },
+        "74f1450e-6000-4499-b0a3-868c2b455e42": {
+            label: "Zamolićemo pastirskog psa za pomoć."
+        },
+        "f626520e-3ea0-4926-8b71-d952eb674152": {
+            label: "Neka Szilvia glasno upozori ljude ispred prozora imanja."
+        },
+        "e80ddf5f-4b38-4590-a8b8-f6df5288b01e": {
+            label: "Gospodin Droplja neka stane na ivicu bunara i mahne vlasniku."
+        },
+
+        // 3. történet / Story 3: Fülöpházi buckák
+        "4eb33630-f56e-443b-8263-5498e0405fd4": {
+            content: "Szilvia nam šalje alarm: ogromna količina peska, koju je pokrenuo snažan vetar, počela je da zasipa gnezda retkih ptica na dinama Filiphaze! Ako ne zaustavimo pesak, gnezda će biti uništena."
+        },
+        "9f13db25-ffcb-4d5f-a354-80e56b7968ec": {
+            content: "Pravimo lažne gomile od blata i granja kako bismo odvratili pažnju predatora dok mi Čuvari prirode čistimo pravo smeće. Plan uspeva!"
+        },
+        "6cac28c6-f940-4487-907a-91e1d71035df": {
+            label: "Očistimo put ka gnezdilištima ptica."
+        },
+        "99860260-aee3-4c2d-a6db-e45bbf5bf184": {
+            label: "Očistimo put ka gnezdilištima ptica."
+        },
+        "31084b25-a558-4383-9e95-6177c413d759": {
+            label: "Zamolićemo Pille za pomoć."
+        },
+        "e7d9d119-85ae-4344-a253-66350b4ae559": {
+            label: "Zamolićemo Gulija za pomoć."
+        },
+        "07ecc8bb-83f6-486f-9ee8-e588297c90bb": {
+            label: "Pozovimo i ekipu morskih zujavaca."
+        },
+        "cfb8e2f3-294c-467a-8e89-d24ce01b12a1": {
+            label: "Pozovimo i sabljarke (gulipán) u pomoć."
+        },
+
+        // Befejezés / Ending
+        "3b3ba9f9-5559-48e5-bf9e-04e5c16493c1": {
+            content: "<p><strong>Sudbina peščare je i u tvojim rukama.</strong> Životinje ne govore ljudski jezik, ali im je potrebna tvoja akcija. Čuvaj vode, poštuj mir prirode i zapamti: svaka tvoja mala odluka štiti život u ovom posebnom, peščanom svetu. Budi i ti naš saveznik!</p><p><strong>Stražari:</strong> Nauči sve o staništima kako bi bio sledeći čuvar predela.</p><p><strong>Pozovi druge:</strong> Ispričaj našu priču prijateljima kako bi i oni brinuli o prirodi.</p><p><strong>Pazi na vodu:</strong> Aktivno radi na očuvanju vode i kod kuće, da je bude dovoljno za vlažna staništa.</p><p><strong>Budi prisutan:</strong> Poseti peščaru i upoznaj uživo one koje si upravo spasio.</p>"
+        }
     }
 };
