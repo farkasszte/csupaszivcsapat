@@ -1,5 +1,6 @@
 import { Montserrat } from 'next/font/google';
 import Header from "@/components/Header";
+import BackgroundMusic from "@/components/BackgroundMusic";
 import { GameProvider } from '@/context/GameContext';
 import "./globals.css";
 
@@ -19,6 +20,7 @@ export default function RootLayout({ children }) {
         <html lang="hu" className={montserrat.variable}>
             <body className={`${montserrat.className} antialiased text-surface`}>
                 <GameProvider>
+                    <BackgroundMusic />
                     <Header />
                     <main className="pb-16 lg:pb-0">
                         {children}

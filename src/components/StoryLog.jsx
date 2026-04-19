@@ -27,6 +27,9 @@ export default function StoryLog() {
                         if (!element) return [];
 
                         const segments = (() => {
+                            if (entry.elementId === '37ba3288-8b3b-4941-9734-98ca9053bb36') {
+                                return parseRichTextReadOnly(t('game_title'), entry.elementId);
+                            }
                             let content = element.content;
                             if (language === 'en' && storyTranslations[entry.elementId]) {
                                 content = storyTranslations[entry.elementId].content || content;
@@ -93,11 +96,16 @@ export default function StoryLog() {
                 const el = project.elements[entry.elementId];
                 if (!el) return;
 
-                let nodeContentForPdf = el.content;
-                if (language === 'en' && storyTranslations[entry.elementId]) {
-                    nodeContentForPdf = storyTranslations[entry.elementId].content || nodeContentForPdf;
-                } else if (language?.startsWith('sr') && storyTranslations[language]?.[entry.elementId]) {
-                    nodeContentForPdf = storyTranslations[language][entry.elementId].content || nodeContentForPdf;
+                let nodeContentForPdf = entry.elementId === '37ba3288-8b3b-4941-9734-98ca9053bb36' 
+                    ? `<strong>${t('game_title')}</strong>` 
+                    : el.content;
+                
+                if (entry.elementId !== '37ba3288-8b3b-4941-9734-98ca9053bb36') {
+                    if (language === 'en' && storyTranslations[entry.elementId]) {
+                        nodeContentForPdf = storyTranslations[entry.elementId].content || nodeContentForPdf;
+                    } else if (language?.startsWith('sr') && storyTranslations[language]?.[entry.elementId]) {
+                        nodeContentForPdf = storyTranslations[language][entry.elementId].content || nodeContentForPdf;
+                    }
                 }
                 contentStr += `<div style="text-align: justify; line-height: 1.6; margin-bottom: 20px; width: 100%; white-space: pre-wrap;">${nodeContentForPdf}</div>`;
 
@@ -166,6 +174,9 @@ export default function StoryLog() {
                                     </button>
                                 )}
                                 {(() => {
+                                    if (entry.elementId === '37ba3288-8b3b-4941-9734-98ca9053bb36') {
+                                        return <div className="story-content-log mb-3 last:mb-0"><strong>{t('game_title')}</strong></div>;
+                                    }
                                     let content = element.content;
                                     if (language === 'en' && storyTranslations[entry.elementId]) {
                                         content = storyTranslations[entry.elementId].content || content;
