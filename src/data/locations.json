@@ -27,15 +27,6 @@
     ]
   },
   {
-    "id": "loc-4",
-    "name": "Kunhalmok (Gidófalvy-halom)",
-    "description": "Az alföldi táj „piramisai”, melyek történelmi emlékhelyek és fontos menedékek a puszta őshonos növényvilága számára. Kiemelkedő pontok, ahonnan messzire elláthatunk a síkságon.",
-    "position": [
-      46.8169305267248,
-      20.166411280747212
-    ]
-  },
-  {
     "id": "loc-5",
     "name": "Madarasi Marhajárás",
     "description": "Egy hatalmas, összefüggő pusztai legelő, amely a hagyományos magyar állattartás és a végtelen horizont látványát kínálja az utazóknak.",
@@ -114,15 +105,6 @@
     "position": [
       46.656558,
       19.603143
-    ]
-  },
-  {
-    "id": "loc-14",
-    "name": "Csongrádi Körös-torok",
-    "description": "Különleges, tengerpartokat idéző folyami zóna, ahol a Tisza és a Körös lassan hömpölygő vize lágyan egybefonódik. A finom homokkal borított partszakasz és az árnyas, dús ártéri erdő harmóniája tökéletes nyugalmat áraszt.",
-    "position": [
-      46.71706413816786,
-      20.188276844759866
     ]
   },
   {
