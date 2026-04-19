@@ -23,6 +23,7 @@ export const GameProvider = ({ children }) => {
     const [lastActiveTab, setLastActiveTab] = useState('menu');
     const [lightboxImage, setLightboxImage] = useState(null);
     const [selectedMapLocation, setSelectedMapLocation] = useState(null);
+    const [librarySearchQuery, setLibrarySearchQuery] = useState('');
 
 
 
@@ -223,6 +224,8 @@ export const GameProvider = ({ children }) => {
         togglePanel,
         selectedMapLocation,
         setSelectedMapLocation,
+        librarySearchQuery,
+        setLibrarySearchQuery,
         typewriterSpeed: store.typewriterSpeed,
         setTypewriterSpeed: store.setTypewriterSpeed,
         transitionsEnabled: store.transitionsEnabled,

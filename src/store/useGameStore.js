@@ -78,6 +78,7 @@ export const useGameStore = create((set, get) => ({
             if (endpoint && !newFinishedStories.includes(endpoint.index)) {
                 newFinishedStories.push(endpoint.index);
                 newVariables.score = (newVariables.score || 0) + endpoint.points;
+                newVariables[`selected_${endpoint.index}`] = true;
             }
 
             return {
@@ -111,13 +112,15 @@ export const useGameStore = create((set, get) => ({
         }));
     },
 
-    resolveTarget: (targetId) => {
-        if (!targetId) return null;
+    resolveTarget: (targetId, currentLabel = null) => {
+        if (!targetId) return { id: null, label: currentLabel };
+
+        let label = currentLabel;
 
         // Check for Jumper
         const jumper = projectSettings.jumpers[targetId];
         if (jumper) {
-            return get().resolveTarget(jumper.elementId);
+            return get().resolveTarget(jumper.elementId, label);
         }
 
         // Check for Branch
@@ -126,13 +129,22 @@ export const useGameStore = create((set, get) => ({
             const connId = get().resolveBranch(targetId);
             if (connId) {
                 const conn = projectSettings.connections[connId];
-                if (conn) return get().resolveTarget(conn.targetid);
+                if (conn) {
+                    // If we don't have a label yet, and this connection has one, use it
+                    if (!label && conn.label) {
+                        const stripped = conn.label.replace(/<[^>]*>/g, '').trim();
+                        if (stripped.length > 0) {
+                            label = conn.label;
+                        }
+                    }
+                    return get().resolveTarget(conn.targetid, label);
+                }
             }
-            return null;
+            return { id: null, label };
         }
 
         // Must be an element
-        return targetId;
+        return { id: targetId, label };
     },
 
     navigateTo: (targetId, choiceLabel = null) => {
@@ -145,7 +157,7 @@ export const useGameStore = create((set, get) => ({
             actualTarget = connection.targetid;
         }
 
-        const finalId = get().resolveTarget(actualTarget);
+        const { id: finalId } = get().resolveTarget(actualTarget);
         if (!finalId) return;
 
         const currentId = get().currentElementId;

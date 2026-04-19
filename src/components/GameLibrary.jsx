@@ -8,12 +8,35 @@ import { getColorFilterStyle } from './StoryEngine';
 import locationsData from '../data/locations.json';
 
 export default function GameLibrary() {
-    const { project, discoveredComponents, colorFilter, getAssetUrl, setShowMap, setSelectedMapLocation } = useGame();
-    const [csvCategories, setCsvCategories] = useState({});
+    const { 
+        project, 
+        discoveredComponents, 
+        colorFilter, 
+        getAssetUrl, 
+        setShowMap, 
+        setSelectedMapLocation, 
+        state, 
+        currentElementId,
+        librarySearchQuery: searchQuery,
+        setLibrarySearchQuery: setSearchQuery
+    } = useGame();
+    const finishedStories = state?.finishedStories || [];
+    
+    // Character count logic (3 intro + 3 per story)
+    const hasStartedKaland = (state?.visits?.['f4476778-0b1f-40cc-a60b-688c895e3c0f'] || 0) > 0;
+    const discoveredChars = (hasStartedKaland ? 3 : 0) + (finishedStories.length * 3);
+    const discoveredLocs = finishedStories.length;
     const [expandedCategories, setExpandedCategories] = useState({});
-    const [searchQuery, setSearchQuery] = useState('');
     const [activeVideoUrl, setActiveVideoUrl] = useState(null);
     const [expandedItems, setExpandedItems] = useState({});
+
+    // Reset scroll when searchQuery changes externally
+    useEffect(() => {
+        if (searchQuery) {
+            const container = document.querySelector('.side-panel-content');
+            if (container) container.scrollTop = 0;
+        }
+    }, [searchQuery]);
 
     const toggleItem = (id) => {
         setExpandedItems(prev => ({
@@ -140,7 +163,7 @@ export default function GameLibrary() {
         ...locationsData
             .filter(loc => [
                 "Fülöpházi homokbuckák",
-                "Bugaci Ősborókás",
+                "Bugaci ősborókás",
                 "Nagyszéksós-tó (Mórahalom)"
             ].includes(loc.name))
             .map(loc => {
@@ -149,10 +172,10 @@ export default function GameLibrary() {
                     externalLink = "https://www.facebook.com/p/Szikes-M%C3%B3rahalom-L%C3%A1togat%C3%B3k%C3%B6zpont-Bivalyrezerv%C3%A1tum-%C3%A9s-G%C3%B3lyamened%C3%A9kh%C3%A1z-61576953656787/";
                 } else if (loc.name === "Fülöpházi homokbuckák") {
                     externalLink = "https://www.knp.hu/hu/naprozsa-haz-fulophazi-buckavidek";
-                } else if (loc.name === "Bugaci Ősborókás") {
-                    externalLink = "https://www.knp.hu/hu";
+                } else if (loc.name === "Bugaci ősborókás") {
+                    externalLink = "https://www.knp.hu/hu/bugac";
                 }
-                
+
                 return {
                     id: loc.id,
                     name: loc.name,
@@ -189,8 +212,10 @@ export default function GameLibrary() {
         <div className="flex flex-col gap-6 p-4">
             {/* 1. DISCOVERED ENTRIES SECTION */}
             <div className="flex flex-col gap-3">
-                <div className="flex items-center gap-1.5 text-[10px] text-[#4F7942] font-bold uppercase tracking-widest px-1">
-                    Helyszínek ({components.length})
+                <div className="flex items-center justify-between text-[10px] text-[#4F7942] font-bold uppercase tracking-widest px-1">
+                    <span>Szereplők ({discoveredChars} / 12)</span>
+                    <span className="opacity-40">•</span>
+                    <span>Helyszínek ({discoveredLocs} / 3)</span>
                 </div>
 
                 {components.length === 0 ? (
@@ -239,7 +264,7 @@ export default function GameLibrary() {
                                             ) : isCharacter ? (
                                                 <RiUser3Line size={18} className="text-white" />
                                             ) : (
-                                                <div 
+                                                <div
                                                     className={`w-full h-full flex items-center justify-center transition-colors ${comp.position ? 'hover:bg-zinc-800 cursor-pointer' : ''}`}
                                                     onClick={(e) => {
                                                         if (comp.position) {
@@ -258,9 +283,9 @@ export default function GameLibrary() {
                                         <div className="flex-1 min-w-0 flex flex-col justify-center">
                                             <h4 className="text-xs font-bold text-zinc-950 group-hover:text-[#4F7942] transition-colors truncate">
                                                 {comp.externalLink ? (
-                                                    <a 
-                                                        href={comp.externalLink} 
-                                                        target="_blank" 
+                                                    <a
+                                                        href={comp.externalLink}
+                                                        target="_blank"
                                                         rel="noopener noreferrer"
                                                         className="hover:text-[#4F7942] flex items-center gap-1.5 underline underline-offset-2 decoration-zinc-950/20 hover:decoration-[#4F7942]"
                                                         onClick={(e) => e.stopPropagation()}

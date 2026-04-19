@@ -4,7 +4,15 @@ import React, { useState, useEffect } from 'react';
 import { useGame } from '../context/GameContext';
 
 export const Choices = ({ hasImage, onHoverChange }) => {
-    const { project, currentElementId, navigateTo, resolveTarget, renderRichText, resetGame } = useGame();
+    const { 
+        project, 
+        currentElementId, 
+        navigateTo, 
+        resolveTarget, 
+        renderRichText, 
+        resetGame,
+        setShowImages 
+    } = useGame();
     const [isMounted, setIsMounted] = useState(false);
 
     useEffect(() => {
@@ -23,31 +31,45 @@ export const Choices = ({ hasImage, onHoverChange }) => {
         let connection = project.connections[connId];
         if (!connection) return null;
 
-        let targetId = connection.targetid;
-        let label = connection.label;
-
-        targetId = resolveTarget(targetId);
+        const { id: targetId, label: resolvedLabel } = resolveTarget(connection.targetid, connection.label);
         if (!targetId) return null;
+
+        const finalLabel = resolvedLabel || 'Tovább';
 
         return {
             id: connId,
             targetId,
-            label: label ? renderRichText(label) : 'Tovább',
+            label: renderRichText(finalLabel),
             // Strip HTML tags from rendered label for the story log
-            rawLabel: label ? renderRichText(label).replace(/<[^>]*>/g, '').trim() : 'Tovább',
+            rawLabel: renderRichText(finalLabel).replace(/<[^>]*>/g, '').trim(),
         };
     }).filter(choice => choice !== null);
 
+    // Deduplicate by label to avoid multiple identical "Tovább" buttons
+    const uniqueChoices = [];
+    const seenLabels = new Set();
+    for (const choice of availableChoices) {
+        if (!seenLabels.has(choice.rawLabel)) {
+            uniqueChoices.push(choice);
+            seenLabels.add(choice.rawLabel);
+        }
+    }
+
     return (
         <div className={`mt-4 ${hasImage ? 'flex flex-wrap gap-2 justify-center' : 'grid gap-4 mt-2'}`}>
-            {availableChoices.length > 0 ? (
-                availableChoices.map((choice, idx) => (
+            {uniqueChoices.length > 0 ? (
+                uniqueChoices.map((choice, idx) => (
                     <button
                         key={`${choice.id}-${idx}`}
-                        onClick={() => navigateTo(choice.targetId, choice.rawLabel)}
+                        onClick={() => {
+                            navigateTo(choice.targetId, choice.rawLabel);
+                            if (typeof window !== 'undefined' && window.innerWidth >= 1024) {
+                                setShowImages(true);
+                            }
+                        }}
                         onMouseEnter={() => onHoverChange?.(true)}
                         onMouseLeave={() => onHoverChange?.(false)}
-                        className={`text-[#3e2723] font-medium text-base italic transition-all transform hover:scale-102 shadow-xl backdrop-blur-md border border-white/20 hover:border-[#4F7942]/50 whitespace-normal max-w-full
+                        className={`text-surface font-medium text-base italic transition-all transform hover:scale-102 shadow-xl backdrop-blur-md border border-white/20 hover:border-[#4F7942]/50 whitespace-normal max-w-full
                             ${hasImage
                                 ? 'px-2 py-2 rounded-full bg-white/40 hover:bg-white/60 text-sm'
                                 : 'w-full text-left px-4 py-4 rounded-lg bg-linear-to-r from-white/40 to-white/20 hover:from-white/60 hover:to-white/40'

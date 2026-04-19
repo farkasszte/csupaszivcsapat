@@ -1,13 +1,21 @@
 'use client';
 
 import { useGame } from '../context/GameContext';
-import { RiUser3Line, RiMapPin2Line, RiFootprintLine, RiLeafLine, RiHeartLine, RiEarthLine } from '@remixicon/react';
+import {
+    RiUser3Line, RiMapPin2Line, RiFootprintLine, RiLeafLine,
+    RiHeartLine, RiEarthLine, RiExternalLinkLine, RiZoomInLine
+} from '@remixicon/react';
 import { getColorFilterStyle } from './StoryEngine';
 import { useState } from 'react';
+import { CHARACTERS } from '../data/characters';
 
 
 export default function PlayerDashboard() {
-    const { state, project, currentElementId, getAssetUrl, isStarted, colorFilter, discoveredComponents } = useGame();
+    const {
+        state, project, currentElementId, getAssetUrl, isStarted,
+        colorFilter, discoveredComponents,
+        openLightbox, setShowLibrary, setShowDashboard, setLibrarySearchQuery
+    } = useGame();
     const score = state.variables?.score ?? 0;
     const finishedStories = state.finishedStories || [];
     const [isVideoLoaded, setIsVideoLoaded] = useState(false);
@@ -23,9 +31,9 @@ export default function PlayerDashboard() {
     // Level Logic
     const LEVELS = [
         { min: 0, title: 'Kezdő Megfigyelő', icon: RiFootprintLine, color: 'text-[#4F7942]' },
-        { min: 10, title: 'Természetbarát', icon: RiLeafLine, color: 'text-white' },
-        { min: 25, title: 'Mentőcsapat-tag', icon: RiHeartLine, color: 'text-white' },
-        { min: 50, title: 'A Vadon Hőse', icon: RiEarthLine, color: 'text-white' },
+        { min: 10, title: 'Természetbarát', icon: RiLeafLine, color: 'text-[#4F7942]' },
+        { min: 25, title: 'Mentőcsapat-tag', icon: RiHeartLine, color: 'text-[#4F7942]' },
+        { min: 50, title: 'A Vadon Hőse', icon: RiEarthLine, color: 'text-[#4F7942]' },
     ];
 
 
@@ -42,10 +50,9 @@ export default function PlayerDashboard() {
     const totalLocs = 3;  // 1 per story
 
     // Discovered counts
-    // For characters, we approximate based on unique discovered components that aren't locations
-    // We'll count unique discovered components and cap at 12
-    const uniqueDiscovered = [...new Set(discoveredComponents)];
-    const discoveredChars = Math.min(uniqueDiscovered.length, 12);
+    // 3 characters after first choice ("Kezdődjön a kaland!") + 3 per story
+    const hasStartedKaland = (state.visits['f4476778-0b1f-40cc-a60b-688c895e3c0f'] || 0) > 0;
+    const discoveredChars = (hasStartedKaland ? 3 : 0) + (finishedStories.length * 3);
     const discoveredLocs = finishedStories.length; // 1 per story finished
 
     return (
@@ -142,31 +149,76 @@ export default function PlayerDashboard() {
                     </div>
                 </div>
 
-                {/* Friends Image - Story Progression Reveal */}
-                <div className="relative overflow-hidden rounded-2xl border border-white/20 shadow-xl bg-zinc-900 group">
-                    {/* Base Layer: Grayscale */}
-                    <img
-                        src="/assets/Images/baratok.webp"
-                        alt="Barátok"
-                        className="w-full h-auto object-cover grayscale transition-opacity duration-1000"
-                    />
+                {/* Friends Section - Dynamic List */}
+                <div className="flex flex-col gap-3">
+                    <div className="flex items-center gap-2 px-1">
+                        <RiHeartLine size={16} className="text-[#4F7942]" />
+                        <h3 className="text-xs font-bold text-[#4F7942] uppercase tracking-widest">
+                            Felfedezett barátok ({discoveredChars} / {totalChars})
+                        </h3>
+                    </div>
 
-                    {/* Reveal Layer: Color */}
-                    <img
-                        src="/assets/Images/baratok.webp"
-                        alt="Barátok Color"
-                        className="absolute inset-0 w-full h-full object-cover transition-all duration-1000 ease-in-out"
-                        style={{
-                            clipPath: `inset(0 0 ${Math.max(0, 100 - (finishedStories.length * 33.33))}% 0)`,
-                            filter: 'drop-shadow(0 0 10px rgba(79, 121, 66, 0.3))'
-                        }}
-                    />
+                    <div className="grid gap-3">
+                        {CHARACTERS.map((char) => {
+                            const isDiscovered = char.storyId === 0 ? hasStartedKaland : finishedStories.includes(char.storyId);
+                            if (!isDiscovered) return null;
 
-                    {/* Optional overlay division lines */}
-                    <div className="absolute inset-0 flex flex-col pointer-events-none opacity-20">
-                        <div className="flex-1 border-b border-white" />
-                        <div className="flex-1 border-b border-white" />
-                        <div className="flex-1" />
+                            return (
+                                <div
+                                    key={char.id}
+                                    className="bg-white/40 backdrop-blur-md border border-[#4F7942]/10 rounded-2xl p-3 flex gap-4 transition-all hover:bg-white/50 shadow-sm animate-in fade-in slide-in-from-bottom-2 duration-500"
+                                >
+                                    {/* ID Photo */}
+                                    <div
+                                        onClick={() => openLightbox(`/assets/Images/${char.image}`)}
+                                        className="relative shrink-0 w-24 aspect-9/16 rounded-xl overflow-hidden border-2 border-white/50 shadow-sm cursor-pointer group"
+                                    >
+                                        <img
+                                            src={`/assets/Images/${char.image}`}
+                                            alt={char.name}
+                                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                            style={{ filter: getColorFilterStyle(colorFilter) }}
+                                        />
+                                        <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                            <RiZoomInLine size={24} className="text-white" />
+                                        </div>
+                                    </div>
+
+                                    {/* Info Panel */}
+                                    <div className="flex-1 min-w-0 flex flex-col justify-center">
+                                        <div className="flex items-baseline justify-between gap-2 overflow-hidden">
+                                            <h4 className="text-xl font-bold text-zinc-950 truncate">{char.name}</h4>
+                                            <button
+                                                onClick={() => {
+                                                    if (char.externalLink) {
+                                                        window.open(char.externalLink, '_blank');
+                                                    } else {
+                                                        setLibrarySearchQuery(char.species);
+                                                        setShowLibrary(true);
+                                                        setShowDashboard(false);
+                                                    }
+                                                }}
+                                                className="shrink-0 flex items-center gap-1 text-xs font-bold text-[#4F7942] hover:text-[#3d5d33] transition-colors bg-[#4F7942]/5 px-2 py-1 rounded-md border border-[#4F7942]/10"
+                                            >
+                                                <span>{char.species}</span>
+                                                <RiExternalLinkLine size={12} />
+                                            </button>
+                                        </div>
+                                        <p className="text-sm text-zinc-700 mt-1.5 line-clamp-3 leading-relaxed italic">
+                                            "{char.description}"
+                                        </p>
+                                    </div>
+                                </div>
+                            );
+                        })}
+
+                        {discoveredChars < totalChars && (
+                            <div className="bg-black/5 border border-dashed border-[#4F7942]/20 rounded-2xl p-4 text-center">
+                                <p className="text-xs text-[#4F7942]/40 font-bold uppercase tracking-widest italic">
+                                    Folytasd a kalandot további barátokért!
+                                </p>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>

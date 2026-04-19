@@ -44,6 +44,15 @@ const greyIcon = new L.Icon({
   shadowSize: [41, 41]
 });
 
+const redIcon = new L.Icon({
+  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41]
+});
+
 
 // Helper component to smoothly fly to the selected location
 function MapController({ selectedLocation }) {
@@ -60,7 +69,8 @@ function MapController({ selectedLocation }) {
 }
 
 export default function MapComponent() {
-  const { colorFilter, selectedMapLocation } = useGame();
+  const { colorFilter, selectedMapLocation, currentElementId, state, project } = useGame();
+  const finishedStories = state?.finishedStories || [];
   
   // Default center roughly on Homokhátság if no selection
   const defaultCenter = [46.4333, 19.4833];
@@ -77,7 +87,18 @@ export default function MapComponent() {
     }
   };
 
-  const highlightedIds = ['loc-11', 'loc-13', 'loc-16'];
+  // Story Mapping
+  const storyLocations = {
+    'loc-11': { index: 1, boardId: '630fdb8a-48d6-473e-9974-2460f7eb2b41' },
+    'loc-13': { index: 2, boardId: '6a9aecfe-b7aa-46ba-8946-6a61882f883c' },
+    'loc-16': { index: 3, boardId: 'f571e9b2-4ab3-42ee-8f86-5091ca1aa981' }
+  };
+
+  // Helper to check if current element is in a board
+  const isElementInBoard = (boardId) => {
+    if (!project || !project.boards[boardId]) return false;
+    return project.boards[boardId].elements.includes(currentElementId);
+  };
 
   return (
     <div 
@@ -98,14 +119,25 @@ export default function MapComponent() {
 
         {locationsData.map((loc) => {
            if (!loc.position) return null;
-           const isActive = selectedMapLocation?.id === loc.id;
-           const isHighlighted = highlightedIds.includes(loc.id);
+           
+           const isSelected = selectedMapLocation?.id === loc.id;
+           const storyInfo = storyLocations[loc.id];
            
            let icon = greyIcon;
-           if (isActive) {
+
+           if (storyInfo) {
+             const isFinished = finishedStories.includes(storyInfo.index);
+             const isActive = isElementInBoard(storyInfo.boardId);
+             
+             if (isFinished) {
+               icon = greenIcon;
+             } else if (isActive) {
+               icon = customActiveIcon; // Orange
+             } else {
+               icon = redIcon;
+             }
+           } else if (isSelected) {
              icon = customActiveIcon;
-           } else if (isHighlighted) {
-             icon = greenIcon;
            }
            
            return (
