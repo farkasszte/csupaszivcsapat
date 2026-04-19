@@ -224,8 +224,8 @@ export const StoryEngine = ({ hideMedia = false }) => {
         }
     }, [videoUrl]);
 
-    const isIntro = displayElementId === "e3d27f29-240f-42ff-84a5-77e3e0727d38";
-    const activeCoverUrl = isIntro ? "/assets/Images/tuzok_tanar_ur.png" : coverUrl;
+    const isIntro = displayElementId === "e3d27f29-240f-42ff-84a5-77e3e0727d38" || displayElementId === "37ba3288-8b3b-4941-9734-98ca9053bb36";
+    const activeCoverUrl = isIntro ? "/assets/Images/Túzok tanár úr.webp" : coverUrl;
 
     if (!isMounted) return null;
 
@@ -260,7 +260,10 @@ export const StoryEngine = ({ hideMedia = false }) => {
                                     <img
                                         key={activeCoverUrl}
                                         src={activeCoverUrl}
-                                        alt="Scene"
+                                        alt=""
+                                        onError={(e) => {
+                                            e.target.style.display = 'none';
+                                        }}
                                         className="w-full h-auto object-cover shadow-none"
                                         style={{ filter: getColorFilterStyle(colorFilter) }}
                                     />
