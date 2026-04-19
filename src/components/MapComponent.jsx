@@ -97,7 +97,7 @@ export default function MapComponent() {
   // Helper to check if current element is in a board
   const isElementInBoard = (boardId) => {
     if (!project || !project.boards[boardId]) return false;
-    return project.boards[boardId].elements.includes(currentElementId);
+    return project.boards[boardId].elements?.includes(currentElementId);
   };
 
   return (

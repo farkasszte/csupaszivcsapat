@@ -57,7 +57,7 @@ export default function BackgroundMusic() {
         } else {
             // Find which board the current element belongs to
             const boardId = Object.keys(project.boards).find(id => 
-                project.boards[id].elements.includes(currentElementId)
+                project.boards[id].elements?.includes(currentElementId)
             );
             
             if (STORY_BOARDS[boardId]) {
