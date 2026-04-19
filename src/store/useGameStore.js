@@ -31,7 +31,7 @@ export const useGameStore = create((set, get) => ({
     finishedStories: [], // Track indices of finished stories
 
     // Settings
-    volume: 0.5,
+    volume: 0.1,
     isMuted: false,
     typewriterSpeed: 0,
     transitionsEnabled: true,
