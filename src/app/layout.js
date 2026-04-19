@@ -13,6 +13,14 @@ const montserrat = Montserrat({
 export const metadata = {
     title: "Csupaszív kalandok: A Homokhátság Hősei",
     description: "Interaktív történetmesélő játék",
+    appleWebApp: {
+        capable: true,
+        statusBarStyle: "default",
+        title: "Csupaszív",
+    },
+    formatDetection: {
+        telephone: false,
+    },
 };
 
 export default function RootLayout({ children }) {

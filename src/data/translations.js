@@ -108,7 +108,11 @@ export const translations = {
         "error_invalid_guest_code": "Kérlek adj meg egy érvényes 8 karakteres kódot!",
         "error_wrong_guest_code": "Helytelen vendégkód!",
         "guest_account_created": "Vendég fiók létrehozva! Bejelentkezés folyamatban...",
-        "your_unique_id": "Ez a te egyedi azonosítód"
+        "your_unique_id": "Ez a te egyedi azonosítód",
+        "finale_guard": "Vállalj őrséget",
+        "finale_call": "Hívd a többieket",
+        "finale_water": "Figyeld a vizet",
+        "finale_present": "Légy jelen"
     },
     "en": {
         "game_title": "Kind-Hearted Adventures: Heroes of the Homokhátság",
@@ -219,7 +223,11 @@ export const translations = {
         "error_invalid_guest_code": "Please enter a valid 8-character code!",
         "error_wrong_guest_code": "Incorrect guest code!",
         "guest_account_created": "Guest account created! Logging in...",
-        "your_unique_id": "This is your unique ID"
+        "your_unique_id": "This is your unique ID",
+        "finale_guard": "Take Guard",
+        "finale_call": "Call Others",
+        "finale_water": "Watch the Water",
+        "finale_present": "Be Present"
     },
     "sr-latn": {
         "game_title": "Avanture velikog srca: Heroji peščare",
@@ -330,7 +338,11 @@ export const translations = {
         "error_invalid_guest_code": "Molimo unesite važeći kod od 8 karaktera!",
         "error_wrong_guest_code": "Pogrešan gostujući kod!",
         "guest_account_created": "Gostujući nalog je kreiran! Prijava u toku...",
-        "your_unique_id": "Ovo je tvoj jedinstveni ID"
+        "your_unique_id": "Ovo je tvoj jedinstveni ID",
+        "finale_guard": "Postani čuvar",
+        "finale_call": "Pozovi druge",
+        "finale_water": "Pazi na vodu",
+        "finale_present": "Budi prisutan"
     },
     "sr-cyrl": {
         "game_title": "Авантуре великог срца: Хероји пешчаре",
@@ -441,6 +453,10 @@ export const translations = {
         "error_invalid_guest_code": "Молимо унесите важећи код од 8 карактера!",
         "error_wrong_guest_code": "Погрешан гостујући код!",
         "guest_account_created": "Гостујући налог је креиран! Пријава у току...",
-        "your_unique_id": "Ово је твој јединствени ИД"
+        "your_unique_id": "Ово је твој јединствени ИД",
+        "finale_guard": "Постани чувар",
+        "finale_call": "Позови друге",
+        "finale_water": "Пази на воду",
+        "finale_present": "Буди присутан"
     }
 };

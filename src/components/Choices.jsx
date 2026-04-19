@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useGame } from '../context/GameContext';
 import { storyTranslations } from '../data/story_translations';
+import { FinaleActions } from './FinaleActions';
 
 export const Choices = ({ hasImage, onHoverChange }) => {
     const { 
@@ -27,6 +28,10 @@ export const Choices = ({ hasImage, onHoverChange }) => {
     if (!isMounted) return null;
 
     if (!element) return null;
+
+    if (currentElementId === '3b3ba9f9-5559-48e5-bf9e-04e5c16493c1') {
+        return <FinaleActions />;
+    }
 
     const outputs = element.outputs || [];
 
