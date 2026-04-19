@@ -381,7 +381,7 @@ export default function LoginPage() {
                         </div>
 
                         <div className="mt-8 text-center text-zinc-950 font-bold text-sm">
-                            Csupaszív Csapat &copy; 2026
+                            <a href="mailto:csupaszivcsapat@google.com" className="hover:underline">Csupaszív Csapat</a> &copy; 2026
                         </div>
                     </div>
 
