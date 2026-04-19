@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useGame } from '../context/GameContext';
+import { storyTranslations } from '../data/story_translations';
 
 export const Choices = ({ hasImage, onHoverChange }) => {
     const { 
@@ -11,7 +12,9 @@ export const Choices = ({ hasImage, onHoverChange }) => {
         resolveTarget, 
         renderRichText, 
         resetGame,
-        setShowImages 
+        setShowImages,
+        language,
+        t
     } = useGame();
     const [isMounted, setIsMounted] = useState(false);
 
@@ -35,13 +38,23 @@ export const Choices = ({ hasImage, onHoverChange }) => {
         if (!targetId) return null;
 
         const finalLabel = resolvedLabel || 'Tovább';
+        let displayLabel = finalLabel;
+
+        // Apply localization override
+        if (language === 'en' && storyTranslations[connId]) {
+            displayLabel = storyTranslations[connId].label || finalLabel;
+        } else if (language === 'en' && finalLabel === 'Tovább') {
+            displayLabel = 'Continue';
+        }
+
+        const rendered = renderRichText(displayLabel);
 
         return {
             id: connId,
             targetId,
-            label: renderRichText(finalLabel),
+            label: rendered,
             // Strip HTML tags from rendered label for the story log
-            rawLabel: renderRichText(finalLabel).replace(/<[^>]*>/g, '').trim(),
+            rawLabel: rendered.replace(/<[^>]*>/g, '').trim(),
         };
     }).filter(choice => choice !== null);
 
@@ -89,7 +102,7 @@ export const Choices = ({ hasImage, onHoverChange }) => {
                             : 'w-full text-center px-6 py-4 rounded-lg bg-linear-to-r from-red-100/80 to-red-200/80 hover:from-red-200/80 hover:to-red-300/80'
                         }`}
                 >
-                    Kaland újrakezdése
+                    {t('reset_game') || 'Kaland újrakezdése'}
                 </button>
             )}
         </div>

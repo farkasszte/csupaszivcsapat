@@ -1,6 +1,7 @@
 'use client';
 
 import dynamic from 'next/dynamic';
+import { useGame } from '../context/GameContext';
 
 // Next.js requires dynamic import with SSR disabled for Leaflet
 const MapComponent = dynamic(() => import('./MapComponent'), {
@@ -14,6 +15,16 @@ const MapComponent = dynamic(() => import('./MapComponent'), {
 });
 
 export default function GameMap() {
+    const { 
+        project, 
+        discoveredLocations, 
+        getAssetUrl, 
+        setSelectedMapLocation, 
+        selectedMapLocation,
+        language,
+        t
+    } = useGame();
+
     return (
         <div className="flex-1 min-h-0 flex justify-center p-4">
             <MapComponent />

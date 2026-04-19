@@ -4,6 +4,7 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 import projectSettings from '../data/project_settings.json';
 import { useGameStore } from '../store/useGameStore';
 import { ArcScript } from '../logic/ArcScript';
+import { translations } from '../data/translations';
 
 const GameContext = createContext();
 
@@ -191,9 +192,16 @@ export const GameProvider = ({ children }) => {
         );
     };
 
+    const t = (key) => {
+        return translations[store.language]?.[key] || translations['hu']?.[key] || key;
+    };
+
     const value = {
         project: projectSettings,
         currentElementId: store.currentElementId,
+        language: store.language,
+        setLanguage: store.setLanguage,
+        t,
         state: { 
             visits: store.visits, 
             variables: store.variables,

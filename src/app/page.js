@@ -45,11 +45,21 @@ export default function Home() {
         togglePanel,
         getAssetUrl,
         colorFilter,
-        isStarted,
+        t, language, setLanguage
     } = useGame();
 
     const showPanel = showLog || showDashboard || showMap || showMenu || showLibrary || showProfile || showImages;
     const activeTab = showMenu ? 'menu' : showLog ? 'log' : showDashboard ? 'dashboard' : showMap ? 'map' : showLibrary ? 'library' : showProfile ? 'profile' : showImages ? 'images' : null;
+
+    const makeTabAction = (setter) => () => {
+        Object.keys({ setShowLog, setShowDashboard, setShowMap, setShowMenu, setShowLibrary, setShowProfile, setShowImages }).forEach(key => {
+            if (key !== setter.name) {
+                const s = { setShowLog, setShowDashboard, setShowMap, setShowMenu, setShowLibrary, setShowProfile, setShowImages }[key];
+                if (typeof s === 'function') s(false);
+            }
+        });
+        setter(true);
+    };
 
     // Force panel open on desktop if closed
     useEffect(() => {
@@ -69,23 +79,6 @@ export default function Home() {
             default: return 'none';
         }
     };
-
-
-
-
-
-
-    const closeAll = () => {
-        setShowLog(false);
-        setShowDashboard(false);
-        setShowMap(false);
-        setShowMenu(false);
-        setShowLibrary(false);
-        setShowProfile(false);
-        setShowImages(false);
-    };
-
-
 
     const tabCls = (key) =>
         `flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold transition-colors ${activeTab === key
@@ -109,34 +102,34 @@ export default function Home() {
                         {/* Title + Hamburger (left) */}
                         <div className="flex items-center gap-4 shrink-0">
                             <h1 className="text-lg font-bold text-[#4F7942] whitespace-nowrap bg-white/20 px-3 py-1 rounded-xl backdrop-blur-md border border-white/20">
-                                Csupaszív kalandok: A Homokhátság Hősei
+                                {t('game_title')}
                             </h1>
                         </div>
 
                         {/* Tabs (Right) */}
                         <div className="flex items-center gap-1 bg-white/60 backdrop-blur-xl p-1 rounded-xl border border-white/60 shadow-sm no-scrollbar scrollbar-hide ml-auto">
                             <button onClick={() => setShowImages(true)} className={tabCls('images')}>
-                                <RiImageLine size={14} /> <span>Képek</span>
+                                <RiImageLine size={14} /> <span>{t('images')}</span>
                             </button>
                             <div className="w-px h-4 bg-[#4F7942]/20 mx-1 shrink-0" />
                             <button onClick={() => setShowLog(true)} className={tabCls('log')}>
-                                <RiBookOpenLine size={14} /> <span>Napló</span>
+                                <RiBookOpenLine size={14} /> <span>{t('log')}</span>
                             </button>
                             <button onClick={() => setShowDashboard(true)} className={tabCls('dashboard')}>
-                                <RiDashboardLine size={14} /> <span>Jutalmak</span>
+                                <RiDashboardLine size={14} /> <span>{t('dashboard')}</span>
                             </button>
                             <button onClick={() => setShowMap(true)} className={tabCls('map')}>
-                                <RiMapLine size={14} /> <span>Térkép</span>
+                                <RiMapLine size={14} /> <span>{t('map')}</span>
                             </button>
                             <button onClick={() => setShowLibrary(true)} className={tabCls('library')}>
-                                <RiBookLine size={14} /> <span>Tudástár</span>
+                                <RiBookLine size={14} /> <span>{t('library')}</span>
                             </button>
                             <div className="w-px h-4 bg-[#4F7942]/20 mx-1 shrink-0" />
                             <button onClick={() => setShowMenu(true)} className={tabCls('menu')}>
-                                <RiSettings4Line size={14} /> <span>Beállítások</span>
+                                <RiSettings4Line size={14} /> <span>{t('settings')}</span>
                             </button>
                             <button onClick={() => setShowProfile(true)} className={tabCls('profile')}>
-                                <RiUserLine size={14} /> <span>Profil</span>
+                                <RiUserLine size={14} /> <span>{t('profile')}</span>
                             </button>
                         </div>
                     </div>
@@ -147,7 +140,7 @@ export default function Home() {
                         {!showPanel && (
                             <div className="hidden lg:flex absolute top-2 left-4 w-auto items-center justify-center gap-4 animate-in fade-in duration-1000 z-50">
                                 <h1 className="text-lg font-bold text-white drop-shadow-md bg-white/20 px-3 py-1 rounded-xl backdrop-blur-md border border-white/20">
-                                    Csupaszív kalandok: A Homokhátság Hősei
+                                    {t('game_title')}
                                 </h1>
                             </div>
                         )}

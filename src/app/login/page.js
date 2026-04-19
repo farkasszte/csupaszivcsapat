@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react'
 import { createClient } from '@/utils/supabase/client'
 import { useRouter } from 'next/navigation'
+import { useGameStore } from '@/store/useGameStore'
+import { translations } from '@/data/translations'
 
 export default function LoginPage() {
     const router = useRouter()
@@ -18,6 +20,9 @@ export default function LoginPage() {
     const [isMounted, setIsMounted] = useState(false)
     const [showForgotPassword, setShowForgotPassword] = useState(false)
     const [forgotEmail, setForgotEmail] = useState('')
+
+    const { language, setLanguage } = useGameStore()
+    const t = (key) => translations[language]?.[key] || translations['hu']?.[key] || key
 
     useEffect(() => {
         setIsMounted(true)
@@ -35,7 +40,7 @@ export default function LoginPage() {
     const handleLogin = async (e) => {
         e.preventDefault()
         if (!email || !password) {
-            setError('Kérlek add meg az email címedet és a jelszavadat!')
+            setError(t('error_email_pass'))
             return
         }
 
@@ -60,7 +65,7 @@ export default function LoginPage() {
     const handleSignUp = async (e) => {
         e.preventDefault()
         if (!email || !password) {
-            setError('Kérlek add meg az email címedet és a jelszavadat a regisztrációhoz!')
+            setError(t('error_email_pass_reg'))
             return
         }
 
@@ -77,7 +82,7 @@ export default function LoginPage() {
         if (error) {
             setError(error.message)
         } else {
-            setMessage('Regisztráció sikeres! Ellenőrizd az e-mailedet a visszaigazoláshoz.')
+            setMessage(t('reg_success'))
         }
         setLoading(false)
     }
@@ -85,7 +90,7 @@ export default function LoginPage() {
     const handleForgotPassword = async (e) => {
         e.preventDefault()
         if (!forgotEmail) {
-            setError('Kérlek add meg az e-mail címedet!')
+            setError(t('error_email'))
             return
         }
 
@@ -100,7 +105,7 @@ export default function LoginPage() {
         if (error) {
             setError(error.message)
         } else {
-            setMessage('Jelszó-visszaállítási linket küldtünk az e-mail címedre. Ellenőrizd a postaládádat!')
+            setMessage(t('reset_link_sent'))
         }
         setLoading(false)
     }
@@ -152,7 +157,7 @@ export default function LoginPage() {
                 setLoading(false)
             } else {
                 setGeneratedCode(code)
-                setMessage('Vendég fiók létrehozva! Bejelentkezés folyamatban...')
+                setMessage(t('guest_account_created'))
                 setTimeout(() => {
                     router.push('/')
                     router.refresh()
@@ -164,7 +169,7 @@ export default function LoginPage() {
     const handleGuestLogin = async (e) => {
         e.preventDefault()
         if (!guestCode || guestCode.length !== 8) {
-            setError('Kérlek adj meg egy érvényes 8 karakteres kódot!')
+            setError(t('error_invalid_guest_code'))
             return
         }
 
@@ -180,7 +185,7 @@ export default function LoginPage() {
         })
 
         if (error) {
-            setError('Helytelen vendégkód!')
+            setError(t('error_wrong_guest_code'))
         } else {
             router.push('/')
             router.refresh()
@@ -191,14 +196,30 @@ export default function LoginPage() {
     if (!isMounted) return null
 
     return (
-        <div className="min-h-screen text-zinc-950 font-sans flex flex-col items-center justify-center p-4 py-8">
+        <div className="min-h-screen text-zinc-950 font-sans flex flex-col items-center justify-center p-4 py-8 relative">
+
+            {/* Language Selector (Top right) */}
+            <div className="absolute top-4 right-4 flex items-center gap-1 bg-white/40 backdrop-blur-md p-1 rounded-lg border border-white/20 z-50">
+                <button 
+                    onClick={() => setLanguage('hu')}
+                    className={`px-2 py-0.5 text-xs font-bold rounded transition-all ${language === 'hu' ? 'bg-[#4F7942] text-white shadow-sm' : 'text-[#4F7942] hover:bg-white/40'}`}
+                >
+                    HU
+                </button>
+                <button 
+                    onClick={() => setLanguage('en')}
+                    className={`px-2 py-0.5 text-xs font-bold rounded transition-all ${language === 'en' ? 'bg-[#4F7942] text-white shadow-sm' : 'text-[#4F7942] hover:bg-white/40'}`}
+                >
+                    EN
+                </button>
+            </div>
 
             <div className="w-full max-w-4xl space-y-6 sm:space-y-12">
                 {/* Header Section representing the image */}
-                <div className="text-center space-y-3 sm:space-y-4 max-w-2xl mx-auto">
-                    <h1 className="text-2xl sm:text-5xl font-extrabold text-zinc-950 tracking-tight drop-shadow-sm">Csupaszív kalandok: Homokhátság Hősei</h1>
+                <div className="text-center space-y-3 sm:space-y-4 max-w-2xl mx-auto mt-8 sm:mt-0">
+                    <h1 className="text-2xl sm:text-5xl font-extrabold text-zinc-950 tracking-tight drop-shadow-sm">{t('game_title')}</h1>
                     <p className="text-sm sm:text-lg text-[#004d40] font-medium leading-relaxed">
-                        A tűző nap égeti a homokháti pusztát. A föld repedezett, és minden élet vízért könyörög. Mentsd meg az állatokat Ürge Panni, Szalakóta Szilvia és Túzok tanár úr segítségével interaktív kalandok során!
+                        {t('login_desc')}
                     </p>
                 </div>
 
@@ -213,20 +234,20 @@ export default function LoginPage() {
                                     onClick={() => { setShowForgotPassword(false); setError(null); setMessage(null) }}
                                     className="flex items-center gap-1 text-xs text-zinc-950 font-semibold hover:opacity-80 transition-opacity mb-6"
                                 >
-                                    ← Vissza a bejelentkezéshez
+                                    {t('back_to_login')}
                                 </button>
-                                <h2 className="text-xl sm:text-2xl font-bold text-center mb-2 text-zinc-950">Jelszó visszaállítása</h2>
-                                <p className="text-sm text-zinc-950 text-center mb-6">Add meg az e-mail címedet és küldünk egy visszaállítási linket.</p>
+                                <h2 className="text-xl sm:text-2xl font-bold text-center mb-2 text-zinc-950">{t('reset_password_title')}</h2>
+                                <p className="text-sm text-zinc-950 text-center mb-6">{t('reset_password_desc')}</p>
 
                                 <form className="space-y-5" onSubmit={handleForgotPassword}>
                                     <div>
-                                        <label className="block text-sm font-bold text-zinc-950 mb-2">E-mail cím</label>
+                                        <label className="block text-sm font-bold text-zinc-950 mb-2">{t('email_label')}</label>
                                         <input
                                             type="email"
                                             value={forgotEmail}
                                             onChange={(e) => setForgotEmail(e.target.value)}
                                             className="w-full px-4 py-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl focus:ring-2 focus:ring-white/40 focus:border-white/40 transition-all outline-none text-surface placeholder-surface/50"
-                                            placeholder="pelda@email.hu"
+                                            placeholder={t('email_placeholder')}
                                             autoFocus
                                         />
                                     </div>
@@ -235,37 +256,37 @@ export default function LoginPage() {
                                         disabled={loading}
                                         className="w-full py-3.5 bg-[#4F7942] text-white font-bold rounded-xl transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-[#4F7942]/20 disabled:opacity-50 disabled:cursor-not-allowed"
                                     >
-                                        {loading ? '...' : 'Link küldése'}
+                                        {loading ? '...' : t('send_link')}
                                     </button>
                                 </form>
                             </>
                         ) : (
                             /* ===== Regular Login View ===== */
                             <>
-                                <h2 className="text-xl sm:text-2xl font-bold text-center mb-5 sm:mb-8 text-zinc-950">Bejelentkezés</h2>
+                                <h2 className="text-xl sm:text-2xl font-bold text-center mb-5 sm:mb-8 text-zinc-950">{t('login_title')}</h2>
 
                                 <form className="space-y-6">
                                     <div className="space-y-5">
                                         <div>
-                                            <label className="block text-sm font-bold text-zinc-950 mb-2">E-mail cím</label>
+                                            <label className="block text-sm font-bold text-zinc-950 mb-2">{t('email_label')}</label>
                                             <input
                                                 type="email"
                                                 value={email}
                                                 onChange={(e) => setEmail(e.target.value)}
                                                 className="w-full px-4 py-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl focus:ring-2 focus:ring-white/40 focus:border-white/40 transition-all outline-none text-surface placeholder-surface/50"
-                                                placeholder="pelda@email.hu"
+                                                placeholder={t('email_placeholder')}
                                             />
                                         </div>
 
                                         <div>
                                             <div className="flex items-center justify-between mb-2">
-                                                <label className="block text-sm font-bold text-zinc-950">Jelszó</label>
+                                                <label className="block text-sm font-bold text-zinc-950">{t('password_label')}</label>
                                                 <button
                                                     type="button"
                                                     onClick={() => { setShowForgotPassword(true); setError(null); setMessage(null); setForgotEmail(email) }}
                                                     className="text-xs text-zinc-950 font-semibold hover:opacity-80 transition-opacity"
                                                 >
-                                                    Elfelejtett jelszó?
+                                                    {t('forgot_password')}
                                                 </button>
                                             </div>
                                             <input
@@ -283,14 +304,14 @@ export default function LoginPage() {
                                                 disabled={loading}
                                                 className="w-full sm:flex-1 py-3.5 bg-[#4F7942] text-white font-bold rounded-xl transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-[#4F7942]/20 disabled:opacity-50 disabled:cursor-not-allowed"
                                             >
-                                                {loading ? '...' : 'Belépés'}
+                                                {loading ? '...' : t('login_button')}
                                             </button>
                                             <button
                                                 onClick={handleSignUp}
                                                 disabled={loading}
                                                 className="w-full sm:flex-1 py-3.5 bg-emerald-900/10 hover:bg-emerald-900/20 text-zinc-950 font-bold rounded-xl transition-all border border-[#4F7942]/20 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
                                             >
-                                                Regisztráció
+                                                {t('register_button')}
                                             </button>
                                         </div>
 
@@ -309,7 +330,7 @@ export default function LoginPage() {
                                                 <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" />
                                                 <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
                                             </svg>
-                                            Google bejelentkezés
+                                            {t('google_login')}
                                         </button>
                                     </div>
                                 </form>
@@ -320,9 +341,9 @@ export default function LoginPage() {
                     {/* Guest Login */}
                     <div className="bg-white/5 backdrop-blur-2xl border border-white/10 shadow-2xl rounded-4xl p-6 sm:p-10 flex flex-col justify-between">
                         <div>
-                            <h2 className="text-xl sm:text-2xl font-bold text-center mb-5 sm:mb-8 text-zinc-950">Gyors játék</h2>
+                            <h2 className="text-xl sm:text-2xl font-bold text-center mb-5 sm:mb-8 text-zinc-950">{t('quick_play')}</h2>
                             <p className="text-sm text-zinc-950 font-medium mb-5 sm:mb-8 text-center px-2 sm:px-4 leading-relaxed">
-                                Nincs fiókod? Lépj be vendégként és próbáld ki a játékot egy egyedi kóddal.
+                                {t('guest_desc')}
                             </p>
 
                             <div className="space-y-5 sm:space-y-8">
@@ -331,8 +352,8 @@ export default function LoginPage() {
                                     disabled={loading}
                                     className="w-full py-4 bg-[#4F7942] text-white font-extrabold rounded-2xl transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 shadow-lg shadow-[#4F7942]/20 flex flex-col items-center justify-center gap-1 border border-white/10"
                                 >
-                                    <span className="text-xl drop-shadow-sm">Kezdjük el</span>
-                                    <span className="text-xs text-white/80 font-semibold tracking-wide uppercase">Új vendég fiókkal</span>
+                                    <span className="text-xl drop-shadow-sm">{t('start_button')}</span>
+                                    <span className="text-xs text-white/80 font-semibold tracking-wide uppercase">{t('new_guest_account')}</span>
                                 </button>
 
                                 <div className="relative py-2">
@@ -340,14 +361,14 @@ export default function LoginPage() {
                                 </div>
 
                                 <div className="space-y-3">
-                                    <label className="block text-sm font-bold text-zinc-950 text-center">Van már kódod? Folytasd!</label>
+                                    <label className="block text-sm font-bold text-zinc-950 text-center">{t('have_code')}</label>
                                     <div className="flex gap-2 sm:gap-3">
                                         <input
                                             type="text"
                                             value={guestCode}
                                             onChange={(e) => setGuestCode(e.target.value.toLowerCase().slice(0, 8))}
                                             className="flex-1 px-3 sm:px-4 py-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl focus:ring-2 focus:ring-white/40 focus:border-white/40 outline-none text-[#4F7942] text-center font-mono tracking-widest sm:tracking-[0.2em] uppercase placeholder-zinc-700 text-sm sm:text-base"
-                                            placeholder="8 KARAKTER"
+                                            placeholder={t('eight_chars')}
                                             maxLength={8}
                                         />
                                         <button
@@ -355,7 +376,7 @@ export default function LoginPage() {
                                             disabled={loading}
                                             className="px-6 sm:px-8 bg-[#4F7942] text-white font-bold rounded-xl transition-all hover:scale-[1.05] active:scale-[0.95] shadow-lg shadow-[#4F7942]/20 text-sm sm:text-base border-none"
                                         >
-                                            OK
+                                            {t('ok_button')}
                                         </button>
                                     </div>
                                 </div>
@@ -383,7 +404,7 @@ export default function LoginPage() {
                                         <div className="text-2xl sm:text-3xl font-mono font-bold tracking-widest sm:tracking-[0.25em] text-zinc-950 selection:bg-[#4F7942]/30 uppercase">
                                             {generatedCode}
                                         </div>
-                                        <div className="text-xs text-zinc-950 mt-2 font-sans tracking-normal opacity-80">Ez a te egyedi azonosítód</div>
+                                        <div className="text-xs text-zinc-950 mt-2 font-sans tracking-normal opacity-80">{t('your_unique_id')}</div>
                                     </div>
                                 )}
                             </div>

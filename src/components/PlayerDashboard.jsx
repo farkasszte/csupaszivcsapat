@@ -14,7 +14,8 @@ export default function PlayerDashboard() {
     const {
         state, project, currentElementId, getAssetUrl, isStarted,
         colorFilter, discoveredComponents,
-        openLightbox, setShowLibrary, setShowDashboard, setLibrarySearchQuery
+        openLightbox, setShowLibrary, setShowDashboard, setLibrarySearchQuery,
+        t, language
     } = useGame();
     const score = state.variables?.score ?? 0;
     const finishedStories = state.finishedStories || [];
@@ -31,10 +32,10 @@ export default function PlayerDashboard() {
 
     // Level Logic
     const LEVELS = [
-        { min: 0, title: 'Kezdő Megfigyelő', icon: RiFootprintLine, color: 'text-[#4F7942]' },
-        { min: 10, title: 'Természetbarát', icon: RiLeafLine, color: 'text-[#4F7942]' },
-        { min: 25, title: 'Mentőcsapat-tag', icon: RiHeartLine, color: 'text-[#4F7942]' },
-        { min: 50, title: 'A Vadon Hőse', icon: RiEarthLine, color: 'text-[#4F7942]' },
+        { min: 0, title: t('level_1') || 'Kezdő Megfigyelő', icon: RiFootprintLine, color: 'text-[#4F7942]' },
+        { min: 10, title: t('level_2') || 'Természetbarát', icon: RiLeafLine, color: 'text-[#4F7942]' },
+        { min: 25, title: t('level_3') || 'Mentőcsapat-tag', icon: RiHeartLine, color: 'text-[#4F7942]' },
+        { min: 50, title: t('level_4') || 'A Vadon Hőse', icon: RiEarthLine, color: 'text-[#4F7942]' },
     ];
 
 
@@ -115,39 +116,39 @@ export default function PlayerDashboard() {
             <div className="flex flex-col gap-6 p-4">
                 {/* Hint at the top */}
                 <div className="px-5 py-4 bg-white/70 backdrop-blur-md border border-white/30 rounded-2xl shadow-sm">
-                    <p className="text-xs font-bold text-[#4F7942] text-center leading-relaxed tracking-wide">
-                        Figyelj az állatok jelzéseire és hozz bölcs döntéseket a megmentésükért!
-                    </p>
-                </div>
-
-                {/* Main Level Card */}
-                <div className="relative overflow-hidden bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-6 shadow-lg">
-                    <div className="absolute top-0 right-0 p-4 opacity-10 pointer-events-none">
-                        <currentLevel.icon size={120} className="text-[#4F7942]" />
+                        <p className="text-xs font-bold text-[#4F7942] text-center leading-relaxed tracking-wide">
+                            {t('hint_text')}
+                        </p>
                     </div>
 
-                    <div className="relative z-10">
-                        <div className="flex items-center gap-3 mb-1">
-                            <div className={`p-2 rounded-lg bg-white shadow-sm ${currentLevel.color}`}>
-                                <currentLevel.icon size={20} />
-                            </div>
-                            <div>
-                                <div className="text-[10px] font-bold text-[#4F7942]/60 uppercase tracking-widest">Rangod</div>
-                                <div className={`text-xl font-serif font-bold ${currentLevel.color}`}>{currentLevel.title}</div>
-                            </div>
+                    {/* Main Level Card */}
+                    <div className="relative overflow-hidden bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-6 shadow-lg">
+                        <div className="absolute top-0 right-0 p-4 opacity-10 pointer-events-none">
+                            <currentLevel.icon size={120} className="text-[#4F7942]" />
                         </div>
 
-                        <div className="mt-6">
-                            <div className="flex justify-between items-end mb-2">
-                                <span className="text-3xl font-extrabold text-[#4F7942] font-serif tracking-tight drop-shadow-sm">
-                                    {score} <span className="text-xs uppercase text-[#4F7942]/70 tracking-widest ml-1 font-sans">pont</span>
-                                </span>
-                                {nextLevel && (
-                                    <span className="text-[10px] text-[#4F7942]/50 font-bold italic drop-shadow-sm">
-                                        Következő: {nextLevel.title} ({nextLevel.min} pont)
-                                    </span>
-                                )}
+                        <div className="relative z-10">
+                            <div className="flex items-center gap-3 mb-1">
+                                <div className={`p-2 rounded-lg bg-white shadow-sm ${currentLevel.color}`}>
+                                    <currentLevel.icon size={20} />
+                                </div>
+                                <div>
+                                    <div className="text-[10px] font-bold text-[#4F7942]/60 uppercase tracking-widest">{t('level')}</div>
+                                    <div className={`text-xl font-serif font-bold ${currentLevel.color}`}>{currentLevel.title}</div>
+                                </div>
                             </div>
+
+                            <div className="mt-6">
+                                <div className="flex justify-between items-end mb-2">
+                                    <span className="text-3xl font-extrabold text-[#4F7942] font-serif tracking-tight drop-shadow-sm">
+                                        {score} <span className="text-xs uppercase text-[#4F7942]/70 tracking-widest ml-1 font-sans">{t('points')}</span>
+                                    </span>
+                                    {nextLevel && (
+                                        <span className="text-[10px] text-[#4F7942]/50 font-bold italic drop-shadow-sm">
+                                            {t('next_level')}: {nextLevel.title} ({nextLevel.min} {t('points')})
+                                        </span>
+                                    )}
+                                </div>
 
                             {/* XP Bar */}
                             <div className="h-2 w-full bg-black/10 rounded-full border border-white/5 overflow-hidden">
@@ -172,7 +173,7 @@ export default function PlayerDashboard() {
                     >
                         <RiUser3Line size={18} className={activeTab === 'characters' ? 'text-[#4F7942]' : 'text-[#4F7942]/60'} />
                         <div className="text-xl font-bold text-[#4F7942] drop-shadow-sm">{discoveredChars} / {totalChars}</div>
-                        <div className={`text-[9px] uppercase font-bold tracking-tighter drop-shadow-sm ${activeTab === 'characters' ? 'text-[#4F7942]' : 'text-[#4F7942]/60'}`}>Szereplők</div>
+                        <div className={`text-[9px] uppercase font-bold tracking-tighter drop-shadow-sm ${activeTab === 'characters' ? 'text-[#4F7942]' : 'text-[#4F7942]/60'}`}>{t('characters')}</div>
                     </button>
                     <button
                         onClick={() => setActiveTab('locations')}
@@ -184,7 +185,7 @@ export default function PlayerDashboard() {
                     >
                         <RiMapPin2Line size={18} className={activeTab === 'locations' ? 'text-[#4F7942]' : 'text-[#4F7942]/60'} />
                         <div className="text-xl font-bold text-[#4F7942] drop-shadow-sm">{discoveredLocs} / {totalLocs}</div>
-                        <div className={`text-[9px] uppercase font-bold tracking-tighter drop-shadow-sm ${activeTab === 'locations' ? 'text-[#4F7942]' : 'text-[#4F7942]/60'}`}>Helyszínek</div>
+                        <div className={`text-[9px] uppercase font-bold tracking-tighter drop-shadow-sm ${activeTab === 'locations' ? 'text-[#4F7942]' : 'text-[#4F7942]/60'}`}>{t('locations')}</div>
                     </button>
                 </div>
 
@@ -195,14 +196,14 @@ export default function PlayerDashboard() {
                             <>
                                 <RiHeartLine size={16} className="text-[#4F7942]" />
                                 <h3 className="text-xs font-bold text-[#4F7942] uppercase tracking-widest">
-                                    Felfedezett barátok ({discoveredChars} / {totalChars})
+                                    {t('discovered_friends')} ({discoveredChars} / {totalChars})
                                 </h3>
                             </>
                         ) : (
                             <>
                                 <RiMapPin2Line size={16} className="text-[#4F7942]" />
                                 <h3 className="text-xs font-bold text-[#4F7942] uppercase tracking-widest">
-                                    Felfedezett helyszínek ({discoveredLocs} / {totalLocs})
+                                    {t('discovered_locations')} ({discoveredLocs} / {totalLocs})
                                 </h3>
                             </>
                         )}
@@ -238,25 +239,25 @@ export default function PlayerDashboard() {
                                         {/* Info Panel */}
                                         <div className="flex-1 min-w-0 flex flex-col justify-center">
                                             <div className="flex items-baseline justify-between gap-2 overflow-hidden">
-                                                <h4 className="text-xl font-bold text-zinc-950 truncate">{char.name}</h4>
+                                                <h4 className="text-xl font-bold text-zinc-950 truncate">{language === 'en' ? char.name_en : char.name}</h4>
                                                 <button
                                                     onClick={() => {
                                                         if (char.externalLink) {
                                                             window.open(char.externalLink, '_blank');
                                                         } else {
-                                                            setLibrarySearchQuery(char.species);
+                                                            setLibrarySearchQuery(language === 'en' ? char.species_en : char.species);
                                                             setShowLibrary(true);
                                                             setShowDashboard(false);
                                                         }
                                                     }}
                                                     className="shrink-0 flex items-center gap-1 text-xs font-bold text-[#4F7942] hover:text-[#3d5d33] transition-colors bg-[#4F7942]/5 px-2 py-1 rounded-md border border-[#4F7942]/10"
                                                 >
-                                                    <span>{char.species}</span>
+                                                    <span>{language === 'en' ? char.species_en : char.species}</span>
                                                     <RiExternalLinkLine size={12} />
                                                 </button>
                                             </div>
                                             <p className="text-sm text-zinc-700 mt-1.5 line-clamp-3 leading-relaxed italic">
-                                                "{char.description}"
+                                                "{language === 'en' ? char.description_en : char.description}"
                                             </p>
                                         </div>
                                     </div>

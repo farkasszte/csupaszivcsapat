@@ -26,20 +26,17 @@ export default function GameMenu() {
         colorFilter, setColorFilter,
         typewriterSpeed, setTypewriterSpeed,
         volume, setVolume,
+        language, setLanguage, t
     } = useGame();
 
-
-
-
     const filters = [
-        { id: 'none', name: 'Nincs' },
-        { id: 'protanopia', name: 'Protanopia' },
-        { id: 'deuteranopia', name: 'Deuteranopia' },
-        { id: 'tritanopia', name: 'Tritanopia' },
-        { id: 'grayscale', name: 'Szürkeárnyalatos' },
-        { id: 'vibrant', name: 'Élénk' },
+        { id: 'none', name: t('none') },
+        { id: 'protanopia', name: t('protanopia') },
+        { id: 'deuteranopia', name: t('deuteranopia') },
+        { id: 'tritanopia', name: t('tritanopia') },
+        { id: 'grayscale', name: t('grayscale') },
+        { id: 'vibrant', name: t('vibrant') },
     ];
-
 
     return (
         <>
@@ -63,8 +60,8 @@ export default function GameMenu() {
                 >
                     <RiSave3Line size={16} className="shrink-0 text-[#4F7942] transition-colors" />
                     <div className="flex-1">
-                        <div className="text-sm font-semibold text-[#4F7942] transition-colors">Mentés</div>
-                        <div className="text-xs text-[#4F7942] mt-0.5 opacity-80">Játékállás mentése a fiókba</div>
+                        <div className="text-sm font-semibold text-[#4F7942] transition-colors">{t('menu_save_title') || 'Mentés'}</div>
+                        <div className="text-xs text-[#4F7942] mt-0.5 opacity-80">{t('menu_save_desc') || 'Játékállás mentése a fiókba'}</div>
                     </div>
                 </button>
 
@@ -75,20 +72,40 @@ export default function GameMenu() {
                 >
                     <RiDownloadLine size={16} className="shrink-0 text-[#4F7942] transition-colors" />
                     <div className="flex-1">
-                        <div className="text-sm font-semibold text-[#4F7942] transition-colors">Visszatöltés</div>
-                        <div className="text-xs text-[#4F7942] mt-0.5 opacity-80">Mentett állás betöltése</div>
+                        <div className="text-sm font-semibold text-[#4F7942] transition-colors">{t('menu_load_title') || 'Visszatöltés'}</div>
+                        <div className="text-xs text-[#4F7942] mt-0.5 opacity-80">{t('menu_load_desc') || 'Mentett állás betöltése'}</div>
                     </div>
                 </button>
 
                 <div className="p-3 bg-white/40 backdrop-blur-md rounded-xl border border-[#4F7942]/10 shadow-sm mt-1">
-                    <h3 className="text-[10px] font-bold uppercase tracking-widest text-[#4F7942] mb-3 ml-1">Beállítások</h3>
+                    <h3 className="text-[10px] font-bold uppercase tracking-widest text-[#4F7942] mb-3 ml-1">{t('settings')}</h3>
+
+                    {/* Language Switch */}
+                    <div className="px-3 py-2 bg-white/40 rounded-lg mb-2">
+                        <div className="flex items-center justify-between mb-2">
+                            <span className="text-xs font-semibold text-[#4F7942]">{t('language')}</span>
+                        </div>
+                        <div className="flex gap-2">
+                            {['hu', 'en'].map(lang => (
+                                <button
+                                    key={lang}
+                                    onClick={() => setLanguage(lang)}
+                                    className={`flex-1 py-1 px-2 text-[10px] rounded border transition-all uppercase font-bold ${language === lang
+                                        ? 'bg-[#4F7942] border-[#4F7942] text-white shadow-sm'
+                                        : 'bg-white/40 border-[#4F7942]/10 text-[#4F7942] hover:bg-white/50'}`}
+                                >
+                                    {lang === 'hu' ? 'Magyar' : 'English'}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
 
                     {/* Sound Toggle */}
                     <div className="flex flex-col gap-2 px-3 py-2 bg-white/40 rounded-lg mb-2">
                         <div className="flex items-center justify-between">
                             <div className="flex items-center gap-2">
                                 {isMuted ? <RiVolumeMuteLine size={16} className="text-[#4F7942]" /> : <RiVolumeUpLine size={16} className="text-[#4F7942]" />}
-                                <span className="text-xs font-semibold text-[#4F7942]">Hangok</span>
+                                <span className="text-xs font-semibold text-[#4F7942]">{t('mute')}</span>
                             </div>
                             <button
                                 onClick={toggleMute}
@@ -115,13 +132,11 @@ export default function GameMenu() {
                         </div>
                     </div>
 
-
-
                     {/* Color Filter Selector */}
                     <div className="px-3 py-2 mt-2 bg-white/40 rounded-lg">
                         <div className="flex items-center gap-2 mb-2">
                             <RiPaletteLine size={16} className="text-[#4F7942]" />
-                            <span className="text-xs font-semibold text-[#4F7942]">Szín szűrő</span>
+                            <span className="text-xs font-semibold text-[#4F7942]">{t('visual_aid')}</span>
                         </div>
                         <div className="grid grid-cols-2 gap-1.5">
                             {filters.map(f => (
@@ -143,10 +158,10 @@ export default function GameMenu() {
                         <div className="flex items-center justify-between mb-2">
                             <div className="flex items-center gap-2">
                                 <RiTimerLine size={16} className="text-[#4F7942]" />
-                                <span className="text-xs font-semibold text-[#4F7942]">Írógép sebesség</span>
+                                <span className="text-xs font-semibold text-[#4F7942]">{t('typewriter_speed')}</span>
                             </div>
                             <span className="text-[10px] font-mono text-[#4F7942] uppercase">
-                                {typewriterSpeed === 0 ? 'KI' : typewriterSpeed <= 20 ? 'Gyors' : typewriterSpeed <= 50 ? 'Közepes' : 'Lassú'}
+                                {typewriterSpeed === 0 ? t('none') : typewriterSpeed <= 20 ? t('fast') : typewriterSpeed <= 50 ? t('medium') || 'Közepes' : t('slow')}
                             </span>
                         </div>
                         <div className="px-1">
@@ -160,21 +175,19 @@ export default function GameMenu() {
                                 className="w-full h-1.5 bg-[#4F7942]/20 rounded-lg appearance-none cursor-pointer accent-[#4F7942] focus:outline-none"
                             />
                             <div className="flex justify-between mt-1 text-[9px] text-[#4F7942] font-medium opacity-70">
-                                <span>KI</span>
-                                <span>Gyors</span>
-                                <span>Lassú</span>
+                                <span>{t('none')}</span>
+                                <span>{t('fast')}</span>
+                                <span>{t('slow')}</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-
-
                 <div className="border-t border-[#4F7942]/10 my-1" />
 
                 <button
                     onClick={() => {
-                        if (confirm('Biztosan újrakezded? A mentetlen haladás elvész.')) {
+                        if (confirm(t('confirm_reset') || 'Biztosan újrakezded? A mentetlen haladás elvész.')) {
                             resetGame();
                         }
                     }}
@@ -183,13 +196,11 @@ export default function GameMenu() {
                 >
                     <RiRestartLine size={16} className="shrink-0 text-[#4F7942] transition-colors" />
                     <div className="flex-1">
-                        <div className="text-sm font-semibold text-[#4F7942] transition-colors">Újrakezdés</div>
-                        <div className="text-xs text-[#4F7942] mt-0.5 opacity-80">Visszatérés az elejére</div>
+                        <div className="text-sm font-semibold text-[#4F7942] transition-colors">{t('reset_game') || 'Újrakezdés'}</div>
+                        <div className="text-xs text-[#4F7942] mt-0.5 opacity-80">{t('reset_game_desc') || 'Visszatérés az elejére'}</div>
                     </div>
                 </button>
             </div>
-
-
         </>
     );
 }

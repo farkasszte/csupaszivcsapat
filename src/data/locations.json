@@ -2,7 +2,9 @@
   {
     "id": "loc-1",
     "name": "Kolon-tó (Izsák)",
+    "name_en": "Kolon Lake (Izsák)",
     "description": "A Duna-Tisza köze legnagyobb édesvizű mocsara, amely nádasaival és nyílt vízfelületeivel az egykori mocsárvilág hangulatát idézi. A terület központi szerepet játszik a térség vízháztartásának megőrzésében.",
+    "description_en": "The largest freshwater marsh in the Danube-Tisza interfluve, recalling the former marshland with its reed beds and open water surfaces. It plays a key role in regional water management.",
     "position": [
       46.783949402696734,
       19.333719485516767
@@ -11,7 +13,9 @@
   {
     "id": "loc-2",
     "name": "Kiskunmajsai Tarté-erdő",
+    "name_en": "Tarté Forest of Kiskunmajsa",
     "description": "Egy különleges homoki tölgyes és erdei fenyves mozaik, amely a Homokhátság eredeti erdőtársulásainak maradványait őrzi. A hűvös erdei utak tökéletes menedéket nyújtanak a pusztai hőség elől.",
+    "description_en": "A unique mosaic of sandy oak and pine woodland, preserving remnants of the original forest communities of the Homokhátság. Cool forest paths offer a perfect escape from the heat.",
     "position": [
       46.53997127024056,
       19.586629191421387
@@ -20,7 +24,9 @@
   {
     "id": "loc-3",
     "name": "Kiskunfélegyházi Péteri-tó",
+    "name_en": "Péteri Lake of Kiskunfélegyháza",
     "description": "Fontos vizes élőhely-rehabilitáció, ahol a látogatók a gátakon kialakított tanösvényeken sétálva ismerhetik meg a szikes tavak megújuló világát és a nádasok nyugalmát.",
+    "description_en": "Significant wetland rehabilitation area where visitors can explore the renewing world of salt lakes and the tranquility of reed patches along guided embankments.",
     "position": [
       46.59104356955687,
       19.903333247235295
@@ -29,7 +35,9 @@
   {
     "id": "loc-5",
     "name": "Madarasi Marhajárás",
+    "name_en": "Madarasi Marhajárás",
     "description": "Egy hatalmas, összefüggő pusztai legelő, amely a hagyományos magyar állattartás és a végtelen horizont látványát kínálja az utazóknak.",
+    "description_en": "A vast, continuous puszta pasture offering views of traditional Hungarian livestock farming and the endless horizon.",
     "position": [
       46.0398397923685,
       19.277692847429357
@@ -38,7 +46,9 @@
   {
     "id": "loc-6",
     "name": "Soltvadkerti Büdös-tó",
+    "name_en": "Büdös Lake of Soltvadkert",
     "description": "Rejtett, vadregényes tóvidék a homokbuckák között, amely különleges mikroklímájával és sűrű növényzetével a nyugalom szigete a Homokhátság szívében.",
+    "description_en": "A hidden, wild lake district among sand dunes, serving as an island of peace in the heart of the Homokhátság with its unique microclimate.",
     "position": [
       46.61309018476845,
       19.388782197459612
@@ -47,7 +57,9 @@
   {
     "id": "loc-7",
     "name": "Kiskunhalasi Fejeték-mocsár",
+    "name_en": "Fejeték Marsh of Kiskunhalas",
     "description": "Egy mélyebben fekvő, lápos terület, ahol a nedves rétek és fűzlápok ritka növénytársulásai maradtak fenn az intenzív mezőgazdasági környezetben.",
+    "description_en": "A lower-lying, boggy area where rare plant communities of wet meadows and willow bogs have survived amidst an intensive agricultural environment.",
     "position": [
       46.449828307632785,
       19.460291474013474
@@ -56,7 +68,9 @@
   {
     "id": "loc-8",
     "name": "Kelebiai-erdő",
+    "name_en": "Forest of Kelebia",
     "description": "A szerb határ mentén húzódó összefüggő erdőtömb, amely homoki erdőspuszta-rétekkel tarkítva mutatja be a régió erdőgazdálkodási múltját és természeti értékeit.",
+    "description_en": "A large continuous forest block along the Serbian border, showcasing the region's forestry history and natural values interspersed with sandy meadow patches.",
     "position": [
       46.19041568675937,
       19.567637129083252
@@ -65,7 +79,9 @@
   {
     "id": "loc-9",
     "name": "Kéleshalmi Homokbuckák",
+    "name_en": "Sand Dunes of Kéleshalom",
     "description": "Az „Alföldi sivatagként” is emlegetett terület, ahol a szél építette meredek homokbuckák és a közöttük megtelepedett borókások látványa egyedülálló geomorfológiai érték.",
+    "description_en": "Known as the 'Alföld Desert', featuring steep sand dunes built by the wind and unique juniper groves, holding significant geomorphological value.",
     "position": [
       46.37492470877404,
       19.33043535063098
@@ -74,7 +90,9 @@
   {
     "id": "loc-10",
     "name": "Hajósi Kaszálók",
+    "name_en": "Meadows of Hajós",
     "description": "Kiterjedt löszgyepek és mély fekvésű kaszálók rendszere, ahol a táj tavaszi virágpompája és a hagyományos gazdálkodás nyomai találkoznak.",
+    "description_en": "An extensive system of loess grasslands and low-lying hay meadows, where spring floral splendor meets traces of traditional farming.",
     "position": [
       46.396541231420315,
       19.157057308311487
@@ -83,7 +101,9 @@
   {
     "id": "loc-11",
     "name": "Nagyszéksós-tó (Mórahalom)",
+    "name_en": "Nagyszéksós Lake (Mórahalom)",
     "description": "Egy jellegzetes, sekély vizű szikes tó, amelynek nyílt vízfelületeit és partmenti növényzetét a hagyományos pusztai legeltetés tartja egyensúlyban. A kiépített kilátókból páratlan panoráma nyílik a végtelen, békés tájra.",
+    "description_en": "A characteristic shallow salt lake where the balance between open water and shoreline vegetation is maintained by traditional grazing. Towers offer a peerless panorama.",
     "position": [
       46.21245292718971,
       19.95113970066746
@@ -92,7 +112,9 @@
   {
     "id": "loc-12",
     "name": "Ásotthalmi láprét",
+    "name_en": "Fen Meadow of Ásotthalom",
     "description": "A gyakran csupán „Csodarétként” emlegetett védett terület az ősi mocsárrétek varázslatos flóráját őrzi. Az érintetlen pusztai táj festői nyugalmat és egyedülálló, színes botanikai élményt kínál az idelátogatóknak.",
+    "description_en": "Often called the 'Miracle Meadow', this protected area preserves the magical flora of ancient boggy meadows. An untouched puszta landscape offering botanical wonders.",
     "position": [
       46.195499945977275,
       19.83687817945604
@@ -101,7 +123,9 @@
   {
     "id": "loc-13",
     "name": "Bugaci ősborókás",
+    "name_en": "Ancient Juniper Grove of Bugac",
     "description": "A Kiskunság legikonikusabb tájegysége, ahol a szélfútta homokbuckák és a szívós borókabokrok együttese eleveníti fel az igazi, vadregényes alföldi hangulatot. A szinte sivatagias, mégis élettel teli környezet minden évszakban lenyűgöző látványt nyújt.",
+    "description_en": "The most iconic landscape of Kiskunság, where wind-blown sand dunes and hardy junipers recreate the true, wild Alföld atmosphere.",
     "position": [
       46.656558,
       19.603143
@@ -110,7 +134,9 @@
   {
     "id": "loc-15",
     "name": "Pusztaszeri hét tó",
+    "name_en": "Seven Lakes of Pusztaszer",
     "description": "Hatalmas, nyugodt vízfelületekből álló szövevényes tórendszer, amely a puszta pihentető oázisaként terül el. A csillogó víztükör, a ringatózó nádasok és a végtelen égbolt találkozása gyönyörű, békés atmoszférát teremt a természet szerelmeseinek.",
+    "description_en": "A complex system of large, calm water surfaces serving as a relaxing oasis in the puszta. The shimmering water and reed beds create a peaceful atmosphere.",
     "position": [
       46.59253096535807,
       20.05917620636514
@@ -119,7 +145,9 @@
   {
     "id": "loc-16",
     "name": "Fülöpházi homokbuckák",
+    "name_en": "Sand Dunes of Fülöpháza",
     "description": "A Kiskunság egyik legszebb homokpusztája, ahol a szél formálta homokbuckák és a szívós borókabokrok együttese eleveníti fel az igazi, vadregényes alföldi hangulatot. A szinte sivatagias, mégis élettel teli környezet minden évszakban lenyűgöző látványt nyújt.",
+    "description_en": "One of the most beautiful sand dunes of Kiskunság, home to migrating sand dunes and unique flora continuously shaped by the wind.",
     "position": [
       46.86850254726338,
       19.426133340871605
@@ -128,7 +156,9 @@
   {
     "id": "loc-17",
     "name": "Bócsa-Bugac buckavilága",
+    "name_en": "Dunes of Bócsa-Bugac",
     "description": "A Kiskunság egyik legvadregényesebb része, ahol szélfútta homokbuckák és szívós borókások idézik meg az Alföld ősi, sivatagi hangulatot árasztó világát.",
+    "description_en": "One of the wildest parts of Kiskunság, where wind-swept sand dunes and hardy junipers evoke the ancient, desert-like atmosphere of the Alföld.",
     "position": [
       46.667073,
       19.4577076

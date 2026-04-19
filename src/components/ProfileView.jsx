@@ -9,6 +9,7 @@ import {
     RiLogoutBoxRLine,
     RiUserShared2Line
 } from '@remixicon/react'
+import { useGame } from '@/context/GameContext'
 
 export default function ProfileView() {
     const supabase = createClient()
@@ -21,6 +22,7 @@ export default function ProfileView() {
     const [error, setError] = useState(null)
     const [message, setMessage] = useState(null)
     const [isMounted, setIsMounted] = useState(false)
+    const { t } = useGame()
 
     const [formData, setFormData] = useState({
         full_name: '',
@@ -67,7 +69,7 @@ export default function ProfileView() {
         if (formData.birth_year) {
             const year = parseInt(formData.birth_year)
             if (isNaN(year) || year < 1925 || year > 2050) {
-                setError('A születési évnek 1925 és 2050 között kell lennie!')
+                setError(t('error_birth_year') || 'A születési évnek 1925 és 2050 között kell lennie!')
                 return
             }
         }
@@ -87,7 +89,7 @@ export default function ProfileView() {
         if (error) {
             setError(error.message)
         } else {
-            setMessage('Profil sikeresen frissítve!')
+            setMessage(t('profile_updated') || 'Profil sikeresen frissítve!')
             setTimeout(() => {
                 router.refresh()
             }, 2000)
@@ -100,7 +102,7 @@ export default function ProfileView() {
     if (loading) {
         return (
             <div className="p-8 flex items-center justify-center">
-                <div className="animate-pulse text-xl text-white">Betöltés...</div>
+                <div className="animate-pulse text-xl text-white">{t('loading') || 'Betöltés...'}</div>
             </div>
         )
     }
@@ -108,8 +110,8 @@ export default function ProfileView() {
     return (
         <div className="p-6 space-y-8 animate-in fade-in duration-500">
             <div>
-                <h1 className="text-2xl font-bold text-white mb-2">Profilom</h1>
-                <p className="text-xs text-white italic">Módosítsd adataidat az élmény személyre szabásához.</p>
+                <h1 className="text-2xl font-bold text-white mb-2">{t('profile_title') || 'Profilom'}</h1>
+                <p className="text-xs text-white italic">{t('profile_desc') || 'Módosítsd adataidat az élmény személyre szabásához.'}</p>
             </div>
 
             <form onSubmit={handleSave} className="space-y-6">
@@ -126,15 +128,15 @@ export default function ProfileView() {
 
                 <div className="grid grid-cols-2 gap-4">
                     <div>
-                        <label className="block text-[10px] uppercase tracking-widest font-bold text-white mb-2">Nem</label>
+                        <label className="block text-[10px] uppercase tracking-widest font-bold text-white mb-2">{t('gender') || 'Nem'}</label>
                         <select
                             value={formData.gender}
                             onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
                             className="w-full px-4 py-3 bg-white/90 backdrop-blur-md shadow-sm rounded-xl focus:ring-2 focus:ring-white/40 focus:border-white/40 transition-all outline-none text-surface appearance-none"
                         >
-                            <option value="" className="bg-[#ebd7b1] text-surface">Válassz...</option>
-                            <option value="male" className="bg-[#ebd7b1] text-surface">Fiú</option>
-                            <option value="female" className="bg-[#ebd7b1] text-surface">Lány</option>
+                            <option value="" className="bg-[#ebd7b1] text-surface">{t('choose') || 'Válassz...'}</option>
+                            <option value="male" className="bg-[#ebd7b1] text-surface">{t('male') || 'Fiú'}</option>
+                            <option value="female" className="bg-[#ebd7b1] text-surface">{t('female') || 'Lány'}</option>
                         </select>
                     </div>
 
@@ -157,7 +159,7 @@ export default function ProfileView() {
                     disabled={saving}
                     className="w-full py-3 bg-white hover:bg-white/80 text-[#4F7942] font-bold rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-md"
                 >
-                    {saving ? 'Mentés...' : 'Mentés'}
+                    {saving ? (t('saving') || 'Mentés...') : (t('save_button') || 'Mentés')}
                 </button>
 
                 {error && (
@@ -181,12 +183,12 @@ export default function ProfileView() {
                 {/* Guest code section */}
                 {user?.email?.endsWith('@vendeg.hu') && (
                     <div className="flex flex-col gap-2 p-4 bg-white/5 border border-white/10 rounded-xl">
-                        <div className="text-[10px] font-bold text-black uppercase tracking-widest">Vendég kódod</div>
+                        <div className="text-[10px] font-bold text-black uppercase tracking-widest">{t('guest_code') || 'Vendég kódod'}</div>
                         <div className="flex items-center justify-between">
                             <span className="text-lg font-mono text-black font-bold">{user.email.split('@')[0]}</span>
                             <button
                                 onClick={handleCopyCode}
-                                title={copied ? 'Másolva!' : 'Kód másolása'}
+                                title={copied ? (t('copied') || 'Másolva!') : (t('copy_code_hint') || 'Kód másolása')}
                                 className={`p-2 rounded-lg transition-all border ${copied
                                     ? 'text-black border-emerald-500/30 bg-emerald-500/10'
                                     : 'text-black border-white/5 bg-white/90 hover:text-black hover:bg-white/20 hover:border-white/30'
@@ -212,7 +214,7 @@ export default function ProfileView() {
                     className="w-full py-3 flex items-center justify-center gap-2 bg-zinc-800/50 hover:bg-red-900/40 border border-zinc-700 hover:border-red-800/50 text-white hover:text-white font-medium rounded-xl transition-all"
                 >
                     <RiLogoutBoxRLine size={18} />
-                    Kilépés a fiókból
+                    {t('logout_button') || 'Kilépés a fiókból'}
                 </button>
             </div>
         </div>

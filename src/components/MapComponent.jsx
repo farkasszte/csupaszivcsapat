@@ -69,7 +69,7 @@ function MapController({ selectedLocation }) {
 }
 
 export default function MapComponent() {
-  const { colorFilter, selectedMapLocation, currentElementId, state, project } = useGame();
+  const { colorFilter, selectedMapLocation, currentElementId, state, project, language } = useGame();
   const finishedStories = state?.finishedStories || [];
   
   // Default center roughly on Homokhátság if no selection
@@ -147,8 +147,12 @@ export default function MapComponent() {
                icon={icon}
              >
                <Popup>
-                 <div className="font-bold text-[#4F7942] uppercase text-xs tracking-widest">{loc.name}</div>
-                 <div className="text-xs mt-1 text-zinc-600">{loc.description}</div>
+                 <div className="font-bold text-[#4F7942] uppercase text-xs tracking-widest">
+                   {language === 'en' ? (loc.name_en || loc.name) : loc.name}
+                 </div>
+                 <div className="text-xs mt-1 text-zinc-600">
+                   {language === 'en' ? (loc.description_en || loc.description) : loc.description}
+                 </div>
                </Popup>
              </Marker>
            );

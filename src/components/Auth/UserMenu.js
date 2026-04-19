@@ -19,8 +19,8 @@ export default function UserMenu({ compact = false }) {
     const supabase = createClient()
     const router = useRouter()
     const pathname = usePathname()
-    const { setShowLog, setShowDashboard, setShowMap, setShowMenu, setShowLibrary, setShowProfile, showProfile, showMenu } = useGame() || {}
-
+    const { setShowLog, setShowDashboard, setShowMap, setShowMenu, setShowLibrary, setShowProfile, showProfile, showMenu, t, language } = useGame() || {}
+    
     useEffect(() => {
         setIsMounted(true)
         const getUser = async () => {
@@ -59,9 +59,9 @@ export default function UserMenu({ compact = false }) {
     if (!user) {
         if (compact) {
             return (
-                <Link href="/login" title="Belépés" className="flex flex-col items-center gap-0.5 text-[10px] font-semibold text-white hover:text-white hover:bg-white/20 px-2 py-1 rounded-lg transition-colors">
+                <Link href="/login" title={t('login_title')} className="flex flex-col items-center gap-0.5 text-[10px] font-semibold text-white hover:text-white hover:bg-white/20 px-2 py-1 rounded-lg transition-colors">
                     <RiUserLine size={20} />
-                    Belépés
+                    {t('login_button')}
                 </Link>
             )
         }
@@ -70,7 +70,7 @@ export default function UserMenu({ compact = false }) {
                 href="/login"
                 className="px-4 py-2 bg-white/20 backdrop-blur-md hover:bg-white/40 text-white font-semibold rounded-lg transition-colors text-sm border border-white/20 shadow-sm"
             >
-                Belépés
+                {t('login_button')}
             </Link>
         )
     }
@@ -91,11 +91,11 @@ export default function UserMenu({ compact = false }) {
         return (
             <button
                 onClick={handleProfileClick}
-                title={onProfile ? 'Vissza a játékba' : 'Profilom'}
+                title={onProfile ? t('back_to_game') || 'Vissza' : t('profile_title')}
                 className={`flex flex-col items-center gap-0.5 text-[10px] font-semibold transition-colors px-2 py-1 rounded-lg hover:bg-white/20 ${onProfile ? 'text-white bg-white/20 border border-white/20 shadow-sm backdrop-blur-md' : 'text-white/80 hover:text-white'}`}
             >
                 <RiUserLine size={20} />
-                Profil
+                {t('profile')}
             </button>
         )
     }
@@ -111,7 +111,7 @@ export default function UserMenu({ compact = false }) {
                         : 'text-white/80 border-transparent hover:text-white hover:bg-white/20'
                         }`}
                 >
-                    Beállítások
+                    {t('settings')}
                 </button>
             </div>
 
@@ -119,10 +119,10 @@ export default function UserMenu({ compact = false }) {
             <div className="flex-1 flex justify-center">
                 {isGuest && (
                     <span className="hidden md:flex items-center gap-1.5 text-xs text-white whitespace-nowrap">
-                        Vendég kód: <span className="text-white font-mono font-bold bg-white/20 backdrop-blur-md px-1.5 py-0.5 border border-white/20 rounded">{guestCode}</span>
+                        {t('guest_code')}: <span className="text-white font-mono font-bold bg-white/20 backdrop-blur-md px-1.5 py-0.5 border border-white/20 rounded">{guestCode}</span>
                         <button
                             onClick={handleCopyCode}
-                            title={copied ? 'Másolva!' : 'Kód másolása'}
+                            title={copied ? t('copied') : t('copy_code_hint')}
                             className={`p-1 rounded transition-all hover:bg-white/30 ${copied ? 'text-emerald-400' : 'text-white hover:text-white'}`}
                         >
                             {copied
@@ -149,7 +149,7 @@ export default function UserMenu({ compact = false }) {
                         : 'text-white/80 border-transparent hover:text-white hover:bg-white/20'
                         }`}
                 >
-                    Profil
+                    {t('profile')}
                 </button>
             </div>
         </div>

@@ -36,9 +36,10 @@ export const useGameStore = create((set, get) => ({
     typewriterSpeed: 0,
     transitionsEnabled: true,
     colorFilter: 'none',
-
+    language: 'hu',
 
     // Actions
+    setLanguage: (language) => { set({ language }); get().saveGame(); },
     visitElement: (id) => {
         set((state) => {
             const newVisits = { ...state.visits };
@@ -270,7 +271,7 @@ export const useGameStore = create((set, get) => ({
                 const {
                     currentElementId, visits, variables, history, storyLog, discoveredComponents,
                     finishedStories,
-                    volume, isMuted, typewriterSpeed, transitionsEnabled, colorFilter
+                    volume, isMuted, typewriterSpeed, transitionsEnabled, colorFilter, language
                 } = get();
 
                 const stepsToSave = storyLog.map(({ elementId, choiceMade }) => ({ elementId, choiceMade }));
@@ -278,7 +279,7 @@ export const useGameStore = create((set, get) => ({
                 const gameState = {
                     currentElementId, visits, variables, history, storyLog, discoveredComponents,
                     finishedStories,
-                    settings: { volume, isMuted, typewriterSpeed, transitionsEnabled, colorFilter }
+                    settings: { volume, isMuted, typewriterSpeed, transitionsEnabled, colorFilter, language }
                 };
 
                 const { error } = await supabase
@@ -344,6 +345,7 @@ export const useGameStore = create((set, get) => ({
                     typewriterSpeed: s.typewriterSpeed ?? 30,
                     transitionsEnabled: s.transitionsEnabled ?? true,
                     colorFilter: s.colorFilter ?? 'none',
+                    language: s.language ?? 'hu',
                     isStarted: true,
                 });
             } else {
@@ -387,6 +389,7 @@ export const useGameStore = create((set, get) => ({
                     typewriterSpeed: s.typewriterSpeed ?? 30,
                     transitionsEnabled: s.transitionsEnabled ?? true,
                     colorFilter: s.colorFilter ?? 'none',
+                    language: s.language ?? 'hu',
                     isStarted: true,
                 });
             }

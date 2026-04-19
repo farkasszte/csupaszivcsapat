@@ -11,6 +11,7 @@ export default function Header() {
     const {
         showLog, showDashboard, showMap, showMenu, showLibrary,
         setShowMenu, setShowLog, setShowDashboard, setShowMap, setShowLibrary,
+        t
     } = useGame() || {};
 
     if (pathname === '/login') return null;
@@ -42,11 +43,11 @@ export default function Header() {
     };
 
     const mobileTabs = [
-        { key: 'menu', icon: <RiMenuLine size={20} />, label: 'Beállítások', action: makeTabAction(setShowMenu) },
-        { key: 'log', icon: <RiBookOpenLine size={20} />, label: 'Napló', action: makeTabAction(setShowLog) },
-        { key: 'dashboard', icon: <RiDashboardLine size={20} />, label: 'Jutalmak', action: makeTabAction(setShowDashboard) },
-        { key: 'map', icon: <RiMapLine size={20} />, label: 'Térkép', action: makeTabAction(setShowMap) },
-        { key: 'library', icon: <RiBookLine size={20} />, label: 'Tudástár', action: makeTabAction(setShowLibrary) },
+        { key: 'menu', icon: <RiMenuLine size={20} />, label: t('settings'), action: makeTabAction(setShowMenu) },
+        { key: 'log', icon: <RiBookOpenLine size={20} />, label: t('log'), action: makeTabAction(setShowLog) },
+        { key: 'dashboard', icon: <RiDashboardLine size={20} />, label: t('dashboard'), action: makeTabAction(setShowDashboard) },
+        { key: 'map', icon: <RiMapLine size={20} />, label: t('map'), action: makeTabAction(setShowMap) },
+        { key: 'library', icon: <RiBookLine size={20} />, label: t('library'), action: makeTabAction(setShowLibrary) },
     ];
 
     return (

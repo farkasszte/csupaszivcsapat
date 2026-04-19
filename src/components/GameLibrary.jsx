@@ -18,7 +18,9 @@ export default function GameLibrary() {
         state, 
         currentElementId,
         librarySearchQuery: searchQuery,
-        setLibrarySearchQuery: setSearchQuery
+        setLibrarySearchQuery: setSearchQuery,
+        language,
+        t
     } = useGame();
     const finishedStories = state?.finishedStories || [];
     
@@ -38,6 +40,33 @@ export default function GameLibrary() {
             if (container) container.scrollTop = 0;
         }
     }, [searchQuery]);
+
+    const translateCategory = (cat) => {
+        switch(cat) {
+            case 'Emlősök':
+            case 'Emlosök':
+            case 'Emlősök ': return t('csv_mammals') || cat;
+            case 'Madarak':
+            case 'Madarak ': return t('csv_birds') || cat;
+            case 'Hüllők':
+            case 'Hüllok':
+            case 'Hüllők ': return t('csv_reptiles') || cat;
+            case 'Kétéltűek':
+            case 'Kétéltuek':
+            case 'Kétéltűek ': return t('csv_amphibians') || cat;
+            case 'Halak':
+            case 'Halak ': return t('csv_fish') || cat;
+            case 'Lepkék':
+            case 'Lepkék ': return t('csv_butterflies') || cat;
+            case 'Növények':
+            case 'Növények ': return t('csv_plants') || cat;
+            case 'Települések':
+            case 'Települések ': return t('csv_settlements') || cat;
+            case 'Természetvédelmi területek': return t('csv_protected_areas') || cat;
+            case 'Tanösvények': return t('csv_nature_trails') || cat;
+            default: return cat;
+        }
+    };
 
     const toggleItem = (id) => {
         setExpandedItems(prev => ({
@@ -217,7 +246,7 @@ export default function GameLibrary() {
                 <div className="flex items-center justify-between px-1">
                     <div className="flex items-center gap-1.5 text-[10px] text-[#4F7942] font-bold uppercase tracking-widest">
                         <RiBookLine size={10} />
-                        Homokhátsági természeti enciklopédia
+                        {t('library_subtitle') || 'Homokhátsági természeti enciklopédia'}
                     </div>
                 </div>
 
@@ -230,7 +259,7 @@ export default function GameLibrary() {
                         type="text"
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
-                        placeholder="Keresés faj, település, kategória alapján"
+                        placeholder={t('search_placeholder') || 'Keresés faj, település, kategória alapján'}
                         className="w-full bg-white/40 border border-[#4F7942]/10 focus:border-[#4F7942]/30 rounded-xl py-2.5 pl-9 pr-10 text-xs text-zinc-900 placeholder-zinc-400 focus:outline-none transition-all text-ellipsis shadow-sm"
                     />
                     {searchQuery && (
@@ -245,7 +274,7 @@ export default function GameLibrary() {
 
                 <div className="grid gap-2">
                     {Object.keys(filteredCategories).length === 0 ? (
-                        <div className="text-xs text-white italic text-center py-4">Nincs találat a keresésre.</div>
+                        <div className="text-xs text-white italic text-center py-4">{t('no_results') || 'Nincs találat a keresésre.'}</div>
                     ) : (
                         Object.entries(filteredCategories).map(([category, items]) => {
                             const isExpanded = searchQuery.trim() !== '' || expandedCategories[category];
@@ -256,7 +285,7 @@ export default function GameLibrary() {
                                         className="flex items-center justify-between w-full px-4 py-3 bg-white/40 hover:bg-white/50 border border-[#4F7942]/10 rounded-xl transition-all group shadow-sm"
                                     >
                                         <span className="text-xs font-bold text-[#4F7942] group-hover:opacity-80 transition-opacity">
-                                            {category} ({items.length})
+                                            {translateCategory(category)} ({items.length})
                                         </span>
                                         <RiArrowDownSLine
                                             size={16}

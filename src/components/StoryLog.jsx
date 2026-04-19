@@ -7,7 +7,8 @@ import { SlPicture } from 'react-icons/sl';
 
 export default function StoryLog() {
     const scrollContainerRef = useRef(null);
-    const { storyLog, project, parseRichTextReadOnly, state, openLightbox, getAssetUrl } = useGame();
+    const { storyLog, project, parseRichTextReadOnly, state, openLightbox, getAssetUrl, language, t } = useGame();
+    const { storyTranslations } = require('../data/story_translations');
 
     useEffect(() => {
         if (scrollContainerRef.current) {
@@ -110,8 +111,8 @@ export default function StoryLog() {
 
     if (!storyLog || storyLog.length === 0) {
         return (
-            <div className="flex items-center justify-center h-32 text-zinc-900 font-medium text-sm">
-                Még nincs bejegyzés.
+            <div className="flex items-center justify-center h-32 text-zinc-900 font-medium text-sm text-center px-4">
+                {t('no_entries') || 'Még nincs bejegyzés.'}
             </div>
         );
     }
@@ -145,18 +146,25 @@ export default function StoryLog() {
                                     <button
                                         onClick={() => openLightbox?.(coverUrl)}
                                         className="float-left mr-3 mb-1 w-10 h-10 rounded-lg bg-white hover:bg-zinc-100 hover:text-[#3d5e33] flex items-center justify-center transition-all shadow-md border border-white/20"
-                                        title="Kép megnyitása teljes képernyőn"
+                                        title={t('open_lightbox_hint') || 'Kép megnyitása teljes képernyőn'}
                                     >
                                         <SlPicture size={20} className="text-[#4F7942]" />
                                     </button>
                                 )}
-                                {segments.map((seg, sIdx) => (
-                                    <div
-                                        key={sIdx}
-                                        dangerouslySetInnerHTML={{ __html: seg.content }}
-                                        className="story-content-log mb-3 last:mb-0"
-                                    />
-                                ))}
+                                {(() => {
+                                    let content = element.content;
+                                    if (language === 'en' && storyTranslations[entry.elementId]) {
+                                        content = storyTranslations[entry.elementId].content || content;
+                                    }
+                                    const segments = parseRichTextReadOnly(content, entry.elementId);
+                                    return segments.map((seg, sIdx) => (
+                                        <div
+                                            key={sIdx}
+                                            dangerouslySetInnerHTML={{ __html: seg.content }}
+                                            className="story-content-log mb-3 last:mb-0"
+                                        />
+                                    ));
+                                })()}
                             </div>
 
                             {/* Choice made */}
@@ -175,7 +183,7 @@ export default function StoryLog() {
 
             {/* Export Buttons Footer */}
             <div className="flex items-center gap-3 px-4 py-2 z-20 mt-auto">
-                <span className="text-xs text-zinc-900/60 mr-auto font-bold px-1">Mese mentése</span>
+                <span className="text-xs text-zinc-900/60 mr-auto font-bold px-1">{t('save_story') || 'Mese mentése'}</span>
                 <button
                     onClick={exportToDocx}
                     className="p-2 rounded-lg text-zinc-900/60 hover:text-blue-600 transition-colors"

@@ -4,6 +4,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useGame } from '../context/GameContext';
 import { Choices } from './Choices';
 import { RiSearchLine, RiBookOpenLine } from '@remixicon/react';
+import { storyTranslations } from '../data/story_translations';
 
 export const StoryEngine = ({ hideMedia = false }) => {
     const {
@@ -12,7 +13,8 @@ export const StoryEngine = ({ hideMedia = false }) => {
         message, clearMessage, openLightbox, isMuted, colorFilter,
         typewriterSpeed, transitionsEnabled, volume,
         recentDiscoveries, clearRecentDiscovery,
-        showLog, showDashboard, showMap, showMenu, showLibrary, showProfile
+        showLog, showDashboard, showMap, showMenu, showLibrary, showProfile,
+        language, t
     } = useGame();
 
     const [contentSegments, setContentSegments] = useState([]);
@@ -99,7 +101,13 @@ export const StoryEngine = ({ hideMedia = false }) => {
 
     useEffect(() => {
         if (!element) return;
-        const rawContent = element.content;
+        let rawContent = element.content;
+
+        // Apply localization override
+        if (language === 'en' && storyTranslations[displayElementId]) {
+            rawContent = storyTranslations[displayElementId].content || rawContent;
+        }
+
         const segments = parseRichText(rawContent);
         
         let cumulativeLength = 0;
@@ -113,7 +121,7 @@ export const StoryEngine = ({ hideMedia = false }) => {
         });
         
         setContentSegments(enhancedSegments);
-    }, [displayElementId, element]);
+    }, [displayElementId, element, language]);
 
     const totalLength = contentSegments.reduce((sum, seg) => sum + seg.length, 0);
 
