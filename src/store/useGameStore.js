@@ -343,6 +343,7 @@ export const useGameStore = create((set, get) => ({
                     history: gameState.history,
                     storyLog: gameState.storyLog || [],
                     discoveredComponents: gameState.discoveredComponents || [],
+                    finishedStories: gameState.finishedStories || [],
                     volume: s.volume ?? 0.5,
                     isMuted: s.isMuted ?? false,
                     typewriterSpeed: s.typewriterSpeed ?? 30,
