@@ -21,6 +21,9 @@ export const metadata = {
     formatDetection: {
         telephone: false,
     },
+    icons: {
+        apple: "/icons/icon-192x192.png",
+    },
 };
 
 export default function RootLayout({ children }) {

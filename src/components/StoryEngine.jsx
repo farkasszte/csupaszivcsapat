@@ -25,18 +25,16 @@ export const StoryEngine = ({ hideMedia = false }) => {
     const [displayElementId, setDisplayElementId] = useState(currentElementId);
     const [isFading, setIsFading] = useState(false);
 
+    const scrollRef = useRef(null);
+
     // Scroll to top on mobile after every choice/transition
     useEffect(() => {
         if (typeof window === 'undefined') return;
-        if (window.innerWidth < 1024) {
-            const containers = [
-                document.querySelector('.touch-pan-y'), // page.js main wrapper
-                document.querySelector('.story-content')?.parentElement // StoryEngine scrollable area
-            ];
-            containers.forEach(c => {
-                if (c) c.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+        if (window.innerWidth < 1024 && scrollRef.current) {
+            // Force snap to top of the story container
+            scrollRef.current.scrollTo({ top: 0, behavior: 'instant' });
+            // Also ensure page wrapper is at top
+            window.scrollTo({ top: 0, behavior: 'instant' });
         }
     }, [currentElementId]);
 
@@ -240,7 +238,10 @@ export const StoryEngine = ({ hideMedia = false }) => {
             `}>
 
                 {/* Story Content Area (Scrollable) */}
-                <div className="flex-1 min-h-0 overflow-y-auto no-scrollbar flex flex-col items-stretch pt-0 pb-10 px-4 lg:px-5 touch-pan-y overscroll-contain">
+                <div 
+                    ref={scrollRef}
+                    className="flex-1 min-h-0 overflow-y-auto no-scrollbar flex flex-col items-stretch pt-0 pb-10 px-4 lg:px-5 touch-pan-y overscroll-contain"
+                >
                     
                     {/* Integrated Media (Top of Content) - Mobile Only */}
                     {!hideMedia && (videoUrl || activeCoverUrl) && (
