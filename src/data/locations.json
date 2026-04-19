@@ -112,8 +112,8 @@
     "name": "Bugaci ősborókás",
     "description": "A Kiskunság legikonikusabb tájegysége, ahol a szélfútta homokbuckák és a szívós borókabokrok együttese eleveníti fel az igazi, vadregényes alföldi hangulatot. A szinte sivatagias, mégis élettel teli környezet minden évszakban lenyűgöző látványt nyújt.",
     "position": [
-      46.6800,
-      19.6000
+      46.656558,
+      19.603143
     ]
   },
   {
@@ -141,6 +141,15 @@
     "position": [
       46.86850254726338,
       19.426133340871605
+    ]
+  },
+  {
+    "id": "loc-17",
+    "name": "Bócsa-Bugac buckavilága",
+    "description": "A Kiskunság egyik legvadregényesebb része, ahol szélfútta homokbuckák és szívós borókások idézik meg az Alföld ősi, sivatagi hangulatot árasztó világát.",
+    "position": [
+      46.667073,
+      19.4577076
     ]
   }
 ]

@@ -19,6 +19,7 @@ export default function PlayerDashboard() {
     const score = state.variables?.score ?? 0;
     const finishedStories = state.finishedStories || [];
     const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+    const [activeTab, setActiveTab] = useState('characters'); // 'characters' or 'locations'
 
     // Scene Media Logic
     const currentElement = project?.elements?.[currentElementId];
@@ -54,6 +55,30 @@ export default function PlayerDashboard() {
     const hasStartedKaland = (state.visits['f4476778-0b1f-40cc-a60b-688c895e3c0f'] || 0) > 0;
     const discoveredChars = (hasStartedKaland ? 3 : 0) + (finishedStories.length * 3);
     const discoveredLocs = finishedStories.length; // 1 per story finished
+
+    const LOCATIONS = [
+        {
+            id: 'loc-11',
+            name: 'Nagyszéksós-tó (Mórahalom)',
+            storyId: 1,
+            description: 'Sekély szikes tó, ahol a hagyományos legeltetés és a nyílt vízfelületek harmóniája őrzi a puszta békéjét. A kilátókból páratlan panoráma tárul elénk.',
+            externalLink: 'https://www.facebook.com/p/Szikes-M%C3%B3rahalom-L%C3%A1togat%C3%B3k%C3%B6zpont-Bivalyrezerv%C3%A1tum-%C3%A9s-G%C3%B3lyamened%C3%A9kh%C3%A1z-61576953656787/'
+        },
+        {
+            id: 'loc-17',
+            name: 'Bócsa-Bugac buckavilága',
+            storyId: 2,
+            description: 'A Kiskunság egyik legvadregényesebb része, ahol szélfútta homokbuckák és szívós borókások idézik meg az Alföld ősi, sivatagi hangulatot árasztó világát.',
+            externalLink: 'https://www.knp.hu/hu/bugac'
+        },
+        {
+            id: 'loc-16',
+            name: 'Fülöpházi homokbuckák',
+            storyId: 3,
+            description: 'Vándorló homokbuckák és egyedülálló növényvilág otthona, ahol a szél szüntelenül formálja a tájat. Igazi pusztai élettel teli, sivatagi panoráma.',
+            externalLink: 'https://www.knp.hu/hu/naprozsa-haz-fulophazi-buckavidek'
+        }
+    ];
 
     return (
         <div className="flex flex-col min-h-full">
@@ -135,87 +160,152 @@ export default function PlayerDashboard() {
                     </div>
                 </div>
 
-                {/* Stats Grid */}
+                {/* Stats Grid - Now interactive tabs */}
                 <div className="grid grid-cols-2 gap-3">
-                    <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-4 flex flex-col items-center justify-center transition-all hover:bg-white/10 shadow-md">
-                        <RiUser3Line size={18} className="text-[#4F7942] mb-2" />
+                    <button
+                        onClick={() => setActiveTab('characters')}
+                        className={`backdrop-blur-lg border rounded-2xl p-4 flex flex-col items-center justify-center transition-all shadow-md active:scale-95 ${
+                            activeTab === 'characters' 
+                            ? 'bg-white/20 border-[#4F7942]/60 ring-2 ring-[#4F7942]/20' 
+                            : 'bg-white/5 border-white/10 hover:bg-white/10'
+                        }`}
+                    >
+                        <RiUser3Line size={18} className={activeTab === 'characters' ? 'text-[#4F7942]' : 'text-[#4F7942]/60'} />
                         <div className="text-xl font-bold text-[#4F7942] drop-shadow-sm">{discoveredChars} / {totalChars}</div>
-                        <div className="text-[9px] text-[#4F7942]/60 uppercase font-bold tracking-tighter drop-shadow-sm">Szereplők</div>
-                    </div>
-                    <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-4 flex flex-col items-center justify-center transition-all hover:bg-white/10 shadow-md">
-                        <RiMapPin2Line size={18} className="text-[#4F7942] mb-2" />
+                        <div className={`text-[9px] uppercase font-bold tracking-tighter drop-shadow-sm ${activeTab === 'characters' ? 'text-[#4F7942]' : 'text-[#4F7942]/60'}`}>Szereplők</div>
+                    </button>
+                    <button
+                        onClick={() => setActiveTab('locations')}
+                        className={`backdrop-blur-lg border rounded-2xl p-4 flex flex-col items-center justify-center transition-all shadow-md active:scale-95 ${
+                            activeTab === 'locations' 
+                            ? 'bg-white/20 border-[#4F7942]/60 ring-2 ring-[#4F7942]/20' 
+                            : 'bg-white/5 border-white/10 hover:bg-white/10'
+                        }`}
+                    >
+                        <RiMapPin2Line size={18} className={activeTab === 'locations' ? 'text-[#4F7942]' : 'text-[#4F7942]/60'} />
                         <div className="text-xl font-bold text-[#4F7942] drop-shadow-sm">{discoveredLocs} / {totalLocs}</div>
-                        <div className="text-[9px] text-[#4F7942]/60 uppercase font-bold tracking-tighter drop-shadow-sm">Helyszínek</div>
-                    </div>
+                        <div className={`text-[9px] uppercase font-bold tracking-tighter drop-shadow-sm ${activeTab === 'locations' ? 'text-[#4F7942]' : 'text-[#4F7942]/60'}`}>Helyszínek</div>
+                    </button>
                 </div>
 
-                {/* Friends Section - Dynamic List */}
+                {/* Dynamic Content Section */}
                 <div className="flex flex-col gap-3">
                     <div className="flex items-center gap-2 px-1">
-                        <RiHeartLine size={16} className="text-[#4F7942]" />
-                        <h3 className="text-xs font-bold text-[#4F7942] uppercase tracking-widest">
-                            Felfedezett barátok ({discoveredChars} / {totalChars})
-                        </h3>
+                        {activeTab === 'characters' ? (
+                            <>
+                                <RiHeartLine size={16} className="text-[#4F7942]" />
+                                <h3 className="text-xs font-bold text-[#4F7942] uppercase tracking-widest">
+                                    Felfedezett barátok ({discoveredChars} / {totalChars})
+                                </h3>
+                            </>
+                        ) : (
+                            <>
+                                <RiMapPin2Line size={16} className="text-[#4F7942]" />
+                                <h3 className="text-xs font-bold text-[#4F7942] uppercase tracking-widest">
+                                    Felfedezett helyszínek ({discoveredLocs} / {totalLocs})
+                                </h3>
+                            </>
+                        )}
                     </div>
 
-                    <div className="grid gap-3">
-                        {CHARACTERS.map((char) => {
-                            const isDiscovered = char.storyId === 0 ? hasStartedKaland : finishedStories.includes(char.storyId);
-                            if (!isDiscovered) return null;
+                    <div className="grid gap-3 animate-in fade-in slide-in-from-bottom-2 duration-500" key={activeTab}>
+                        {activeTab === 'characters' ? (
+                            CHARACTERS.map((char) => {
+                                const isDiscovered = char.storyId === 0 ? hasStartedKaland : finishedStories.includes(char.storyId);
+                                if (!isDiscovered) return null;
 
-                            return (
-                                <div
-                                    key={char.id}
-                                    className="bg-white/40 backdrop-blur-md border border-[#4F7942]/10 rounded-2xl p-3 flex gap-4 transition-all hover:bg-white/50 shadow-sm animate-in fade-in slide-in-from-bottom-2 duration-500"
-                                >
-                                    {/* ID Photo */}
+                                return (
                                     <div
-                                        onClick={() => openLightbox(`/assets/Images/${char.image}`)}
-                                        className="relative shrink-0 w-24 aspect-9/16 rounded-xl overflow-hidden border-2 border-white/50 shadow-sm cursor-pointer group"
+                                        key={char.id}
+                                        className="bg-white/40 backdrop-blur-md border border-[#4F7942]/10 rounded-2xl p-3 flex gap-4 transition-all hover:bg-white/50 shadow-sm"
                                     >
-                                        <img
-                                            src={`/assets/Images/${char.image}`}
-                                            alt={char.name}
-                                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                                            style={{ filter: getColorFilterStyle(colorFilter) }}
-                                        />
-                                        <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                                            <RiZoomInLine size={24} className="text-white" />
+                                        {/* ID Photo */}
+                                        <div
+                                            onClick={() => openLightbox(`/assets/Images/${char.image}`)}
+                                            className="relative shrink-0 w-24 aspect-9/16 rounded-xl overflow-hidden border-2 border-white/50 shadow-sm cursor-pointer group"
+                                        >
+                                            <img
+                                                src={`/assets/Images/${char.image}`}
+                                                alt={char.name}
+                                                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                                style={{ filter: getColorFilterStyle(colorFilter) }}
+                                            />
+                                            <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                                <RiZoomInLine size={24} className="text-white" />
+                                            </div>
+                                        </div>
+
+                                        {/* Info Panel */}
+                                        <div className="flex-1 min-w-0 flex flex-col justify-center">
+                                            <div className="flex items-baseline justify-between gap-2 overflow-hidden">
+                                                <h4 className="text-xl font-bold text-zinc-950 truncate">{char.name}</h4>
+                                                <button
+                                                    onClick={() => {
+                                                        if (char.externalLink) {
+                                                            window.open(char.externalLink, '_blank');
+                                                        } else {
+                                                            setLibrarySearchQuery(char.species);
+                                                            setShowLibrary(true);
+                                                            setShowDashboard(false);
+                                                        }
+                                                    }}
+                                                    className="shrink-0 flex items-center gap-1 text-xs font-bold text-[#4F7942] hover:text-[#3d5d33] transition-colors bg-[#4F7942]/5 px-2 py-1 rounded-md border border-[#4F7942]/10"
+                                                >
+                                                    <span>{char.species}</span>
+                                                    <RiExternalLinkLine size={12} />
+                                                </button>
+                                            </div>
+                                            <p className="text-sm text-zinc-700 mt-1.5 line-clamp-3 leading-relaxed italic">
+                                                "{char.description}"
+                                            </p>
                                         </div>
                                     </div>
+                                );
+                            })
+                        ) : (
+                            LOCATIONS.map((loc) => {
+                                const isDiscovered = finishedStories.includes(loc.storyId);
+                                if (!isDiscovered) return null;
 
-                                    {/* Info Panel */}
-                                    <div className="flex-1 min-w-0 flex flex-col justify-center">
-                                        <div className="flex items-baseline justify-between gap-2 overflow-hidden">
-                                            <h4 className="text-xl font-bold text-zinc-950 truncate">{char.name}</h4>
-                                            <button
-                                                onClick={() => {
-                                                    if (char.externalLink) {
-                                                        window.open(char.externalLink, '_blank');
-                                                    } else {
-                                                        setLibrarySearchQuery(char.species);
-                                                        setShowLibrary(true);
-                                                        setShowDashboard(false);
-                                                    }
-                                                }}
-                                                className="shrink-0 flex items-center gap-1 text-xs font-bold text-[#4F7942] hover:text-[#3d5d33] transition-colors bg-[#4F7942]/5 px-2 py-1 rounded-md border border-[#4F7942]/10"
-                                            >
-                                                <span>{char.species}</span>
-                                                <RiExternalLinkLine size={12} />
-                                            </button>
+                                return (
+                                    <div
+                                        key={loc.id}
+                                        className="bg-white/40 backdrop-blur-md border border-[#4F7942]/10 rounded-2xl p-3 flex gap-4 transition-all hover:bg-white/50 shadow-sm"
+                                    >
+                                        {/* Map Portrait Placeholder */}
+                                        <div
+                                            className="relative shrink-0 w-24 aspect-9/16 rounded-xl overflow-hidden border-2 border-white/50 shadow-sm bg-[#4F7942] flex items-center justify-center group"
+                                        >
+                                            <RiMapPin2Line size={32} className="text-white/80 group-hover:scale-110 transition-transform duration-500" />
                                         </div>
-                                        <p className="text-sm text-zinc-700 mt-1.5 line-clamp-3 leading-relaxed italic">
-                                            "{char.description}"
-                                        </p>
-                                    </div>
-                                </div>
-                            );
-                        })}
 
-                        {discoveredChars < totalChars && (
+                                        {/* Info Panel */}
+                                        <div className="flex-1 min-w-0 flex flex-col justify-center">
+                                            <div className="flex items-baseline justify-between gap-2 overflow-hidden">
+                                                <h4 className="text-lg font-bold text-zinc-950 truncate">{loc.name}</h4>
+                                                {loc.externalLink && (
+                                                    <button
+                                                        onClick={() => window.open(loc.externalLink, '_blank')}
+                                                        className="shrink-0 flex items-center gap-1 text-[10px] font-bold text-[#4F7942] hover:text-[#3d5d33] transition-colors bg-[#4F7942]/5 px-2 py-1 rounded-md border border-[#4F7942]/10"
+                                                    >
+                                                        <RiExternalLinkLine size={12} />
+                                                    </button>
+                                                )}
+                                            </div>
+                                            <p className="text-xs text-zinc-700 mt-1.5 leading-relaxed italic">
+                                                "{loc.description}"
+                                            </p>
+                                        </div>
+                                    </div>
+                                );
+                            })
+                        )}
+
+                        {((activeTab === 'characters' && discoveredChars < totalChars) || 
+                          (activeTab === 'locations' && discoveredLocs < totalLocs)) && (
                             <div className="bg-black/5 border border-dashed border-[#4F7942]/20 rounded-2xl p-4 text-center">
                                 <p className="text-xs text-[#4F7942]/40 font-bold uppercase tracking-widest italic">
-                                    Folytasd a kalandot további barátokért!
+                                    Folytasd a kalandot további {activeTab === 'characters' ? 'barátokért' : 'helyszínekért'}!
                                 </p>
                             </div>
                         )}
