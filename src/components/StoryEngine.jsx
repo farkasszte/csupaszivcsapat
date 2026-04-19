@@ -23,6 +23,21 @@ export const StoryEngine = ({ hideMedia = false }) => {
     const [displayElementId, setDisplayElementId] = useState(currentElementId);
     const [isFading, setIsFading] = useState(false);
 
+    // Scroll to top on mobile after every choice/transition
+    useEffect(() => {
+        if (typeof window === 'undefined') return;
+        if (window.innerWidth < 1024) {
+            const containers = [
+                document.querySelector('.touch-pan-y'), // page.js main wrapper
+                document.querySelector('.story-content')?.parentElement // StoryEngine scrollable area
+            ];
+            containers.forEach(c => {
+                if (c) c.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    }, [currentElementId]);
+
     const [isChoiceHovered, setIsChoiceHovered] = useState(false);
     const [isUiHidden, setIsUiHidden] = useState(false);
 
