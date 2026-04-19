@@ -239,13 +239,13 @@ export default function PlayerDashboard() {
                                         {/* Info Panel */}
                                         <div className="flex-1 min-w-0 flex flex-col justify-center">
                                             <div className="flex items-baseline justify-between gap-2 overflow-hidden">
-                                                <h4 className="text-xl font-bold text-zinc-950 truncate">{language === 'en' ? char.name_en : char.name}</h4>
+                                                <h4 className="text-xl font-bold text-zinc-950 truncate">{char[`name_${language}`] || char.name}</h4>
                                                 <button
                                                     onClick={() => {
                                                         if (char.externalLink) {
                                                             window.open(char.externalLink, '_blank');
                                                         } else {
-                                                            setLibrarySearchQuery(language === 'en' ? char.species_en : char.species);
+                                                            setLibrarySearchQuery(char[`species_${language}`] || char.species);
                                                             setShowLibrary(true);
                                                             setShowDashboard(false);
                                                         }

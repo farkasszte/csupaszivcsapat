@@ -106,8 +106,8 @@ export const StoryEngine = ({ hideMedia = false }) => {
         // Apply localization override
         if (language === 'en' && storyTranslations[displayElementId]) {
             rawContent = storyTranslations[displayElementId].content || rawContent;
-        } else if (language === 'sr' && storyTranslations.sr?.[displayElementId]) {
-            rawContent = storyTranslations.sr[displayElementId].content || rawContent;
+        } else if (language?.startsWith('sr') && storyTranslations[language]?.[displayElementId]) {
+            rawContent = storyTranslations[language][displayElementId].content || rawContent;
         }
 
         const segments = parseRichText(rawContent);

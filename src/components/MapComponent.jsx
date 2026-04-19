@@ -148,10 +148,10 @@ export default function MapComponent() {
              >
                <Popup>
                  <div className="font-bold text-[#4F7942] uppercase text-xs tracking-widest">
-                   {language === 'en' ? (loc.name_en || loc.name) : loc.name}
+                   {loc[`name_${language}`] || loc.name}
                  </div>
                  <div className="text-xs mt-1 text-zinc-600">
-                   {language === 'en' ? (loc.description_en || loc.description) : loc.description}
+                   {loc[`description_${language}`] || loc.description}
                  </div>
                </Popup>
              </Marker>

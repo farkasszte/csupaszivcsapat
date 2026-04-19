@@ -30,8 +30,8 @@ export default function StoryLog() {
                             let content = element.content;
                             if (language === 'en' && storyTranslations[entry.elementId]) {
                                 content = storyTranslations[entry.elementId].content || content;
-                            } else if (language === 'sr' && storyTranslations.sr?.[entry.elementId]) {
-                                content = storyTranslations.sr[entry.elementId].content || content;
+                            } else if (language?.startsWith('sr') && storyTranslations[language]?.[entry.elementId]) {
+                                content = storyTranslations[language][entry.elementId].content || content;
                             }
                             return parseRichTextReadOnly(content, entry.elementId);
                         })();
@@ -96,8 +96,8 @@ export default function StoryLog() {
                 let nodeContentForPdf = el.content;
                 if (language === 'en' && storyTranslations[entry.elementId]) {
                     nodeContentForPdf = storyTranslations[entry.elementId].content || nodeContentForPdf;
-                } else if (language === 'sr' && storyTranslations.sr?.[entry.elementId]) {
-                    nodeContentForPdf = storyTranslations.sr[entry.elementId].content || nodeContentForPdf;
+                } else if (language?.startsWith('sr') && storyTranslations[language]?.[entry.elementId]) {
+                    nodeContentForPdf = storyTranslations[language][entry.elementId].content || nodeContentForPdf;
                 }
                 contentStr += `<div style="text-align: justify; line-height: 1.6; margin-bottom: 20px; width: 100%; white-space: pre-wrap;">${nodeContentForPdf}</div>`;
 
@@ -169,8 +169,8 @@ export default function StoryLog() {
                                     let content = element.content;
                                     if (language === 'en' && storyTranslations[entry.elementId]) {
                                         content = storyTranslations[entry.elementId].content || content;
-                                    } else if (language === 'sr' && storyTranslations.sr?.[entry.elementId]) {
-                                        content = storyTranslations.sr[entry.elementId].content || content;
+                                    } else if (language?.startsWith('sr') && storyTranslations[language]?.[entry.elementId]) {
+                                        content = storyTranslations[language][entry.elementId].content || content;
                                     }
                                     const segments = parseRichTextReadOnly(content, entry.elementId);
                                     return segments.map((seg, sIdx) => (

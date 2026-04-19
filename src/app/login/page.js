@@ -200,13 +200,13 @@ export default function LoginPage() {
 
             {/* Language Selector (Top right) */}
             <div className="absolute top-4 right-4 flex items-center gap-1 bg-white/40 backdrop-blur-md p-1 rounded-lg border border-white/20 z-50">
-                {['hu', 'en', 'sr'].map((lang) => (
+                {['hu', 'en', 'sr-latn', 'sr-cyrl'].map((lang) => (
                     <button
                         key={lang}
                         onClick={() => setLanguage(lang)}
                         className={`px-2 py-0.5 text-xs font-bold rounded transition-all ${language === lang ? 'bg-[#4F7942] text-white shadow-sm' : 'text-[#4F7942] hover:bg-white/40'}`}
                     >
-                        {lang.toUpperCase()}
+                        {lang === 'sr-latn' ? 'SR(LAT)' : lang === 'sr-cyrl' ? 'SR(ЋИР)' : lang.toUpperCase()}
                     </button>
                 ))}
             </div>
@@ -359,19 +359,19 @@ export default function LoginPage() {
 
                                 <div className="space-y-3">
                                     <label className="block text-sm font-bold text-zinc-950 text-center">{t('have_code')}</label>
-                                    <div className="flex gap-2 sm:gap-3">
+                                    <div className="flex gap-1.5 sm:gap-3">
                                         <input
                                             type="text"
                                             value={guestCode}
                                             onChange={(e) => setGuestCode(e.target.value.toLowerCase().slice(0, 8))}
-                                            className="flex-1 px-3 sm:px-4 py-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl focus:ring-2 focus:ring-white/40 focus:border-white/40 outline-none text-[#4F7942] text-center font-mono tracking-widest sm:tracking-[0.2em] uppercase placeholder-zinc-700 text-sm sm:text-base"
+                                            className="flex-1 min-w-0 px-2 sm:px-4 py-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl focus:ring-2 focus:ring-white/40 focus:border-white/40 outline-none text-[#4F7942] text-center font-mono tracking-normal sm:tracking-widest uppercase placeholder-zinc-700 text-xs sm:text-base"
                                             placeholder={t('eight_chars')}
                                             maxLength={8}
                                         />
                                         <button
                                             onClick={handleGuestLogin}
                                             disabled={loading}
-                                            className="px-6 sm:px-8 bg-[#4F7942] text-white font-bold rounded-xl transition-all hover:scale-[1.05] active:scale-[0.95] shadow-lg shadow-[#4F7942]/20 text-sm sm:text-base border-none"
+                                            className="px-3 sm:px-8 bg-[#4F7942] text-white font-bold rounded-xl transition-all hover:scale-[1.05] active:scale-[0.95] shadow-lg shadow-[#4F7942]/20 text-xs sm:text-base border-none whitespace-nowrap shrink-0"
                                         >
                                             {t('ok_button')}
                                         </button>

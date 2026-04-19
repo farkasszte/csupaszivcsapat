@@ -333,6 +333,9 @@ export const useGameStore = create((set, get) => ({
             const gameState = data?.game_state;
             if (gameState) {
                 const s = gameState.settings || {};
+                let loadedLang = s.language ?? 'hu';
+                if (loadedLang === 'sr') loadedLang = 'sr-latn';
+                
                 set({
                     currentElementId: gameState.currentElementId,
                     visits: gameState.visits,
@@ -345,7 +348,7 @@ export const useGameStore = create((set, get) => ({
                     typewriterSpeed: s.typewriterSpeed ?? 30,
                     transitionsEnabled: s.transitionsEnabled ?? true,
                     colorFilter: s.colorFilter ?? 'none',
-                    language: s.language ?? 'hu',
+                    language: loadedLang,
                     isStarted: true,
                 });
             } else {
@@ -376,6 +379,9 @@ export const useGameStore = create((set, get) => ({
             const gameState = data?.game_state;
             if (gameState) {
                 const s = gameState.settings || {};
+                let loadedLang = s.language ?? 'hu';
+                if (loadedLang === 'sr') loadedLang = 'sr-latn';
+
                 set({
                     currentElementId: gameState.currentElementId,
                     visits: gameState.visits,
@@ -389,7 +395,7 @@ export const useGameStore = create((set, get) => ({
                     typewriterSpeed: s.typewriterSpeed ?? 30,
                     transitionsEnabled: s.transitionsEnabled ?? true,
                     colorFilter: s.colorFilter ?? 'none',
-                    language: s.language ?? 'hu',
+                    language: loadedLang,
                     isStarted: true,
                 });
             }

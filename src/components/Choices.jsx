@@ -45,10 +45,12 @@ export const Choices = ({ hasImage, onHoverChange }) => {
             displayLabel = storyTranslations[connId].label || finalLabel;
         } else if (language === 'en' && finalLabel === 'Tovább') {
             displayLabel = 'Continue';
-        } else if (language === 'sr' && storyTranslations.sr?.[connId]) {
-            displayLabel = storyTranslations.sr[connId].label || finalLabel;
-        } else if (language === 'sr' && (finalLabel === 'Tovább' || finalLabel === 'Continue')) {
+        } else if (language && language.startsWith('sr') && storyTranslations[language]?.[connId]) {
+            displayLabel = storyTranslations[language][connId].label || finalLabel;
+        } else if (language === 'sr-latn' && (finalLabel === 'Tovább' || finalLabel === 'Continue')) {
             displayLabel = 'Dalje';
+        } else if (language === 'sr-cyrl' && (finalLabel === 'Tovább' || finalLabel === 'Continue')) {
+            displayLabel = 'Даље';
         }
 
         const rendered = renderRichText(displayLabel);
