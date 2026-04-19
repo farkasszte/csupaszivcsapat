@@ -109,7 +109,7 @@ export const StoryEngine = ({ hideMedia = false }) => {
         }
 
         const segments = parseRichText(rawContent);
-        
+
         let cumulativeLength = 0;
         const enhancedSegments = segments.map(seg => {
             const div = document.createElement('div');
@@ -119,7 +119,7 @@ export const StoryEngine = ({ hideMedia = false }) => {
             cumulativeLength += textLen;
             return segmentWithOffset;
         });
-        
+
         setContentSegments(enhancedSegments);
     }, [displayElementId, element, language]);
 
@@ -135,7 +135,7 @@ export const StoryEngine = ({ hideMedia = false }) => {
 
     useEffect(() => {
         if (typewriterSpeed === 0 || contentSegments.length === 0 || totalVisibleChars >= totalLength) return;
-        
+
         const timer = setInterval(() => {
             setTotalVisibleChars(prev => {
                 if (prev >= totalLength) {
@@ -217,15 +217,14 @@ export const StoryEngine = ({ hideMedia = false }) => {
     }
 
     const [isVideoLoaded, setIsVideoLoaded] = useState(false);
-    
+
     useEffect(() => {
         if (videoUrl) {
             setIsVideoLoaded(false);
         }
     }, [videoUrl]);
 
-    const isIntro = displayElementId === "e3d27f29-240f-42ff-84a5-77e3e0727d38" || displayElementId === "37ba3288-8b3b-4941-9734-98ca9053bb36";
-    const activeCoverUrl = isIntro ? "/assets/Images/Túzok tanár úr.webp" : coverUrl;
+    const activeCoverUrl = coverUrl;
 
     if (!isMounted) return null;
 
@@ -238,11 +237,11 @@ export const StoryEngine = ({ hideMedia = false }) => {
             `}>
 
                 {/* Story Content Area (Scrollable) */}
-                <div 
+                <div
                     ref={scrollRef}
                     className="flex-1 min-h-0 overflow-y-auto no-scrollbar flex flex-col items-stretch pt-0 pb-10 px-4 lg:px-5 touch-pan-y overscroll-contain"
                 >
-                    
+
                     {/* Integrated Media (Top of Content) - Mobile Only */}
                     {!hideMedia && (videoUrl || activeCoverUrl) && (
                         <div className="lg:hidden mb-6 relative w-full flex justify-center animate-in fade-in duration-700">
