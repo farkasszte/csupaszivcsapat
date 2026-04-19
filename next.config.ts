@@ -15,7 +15,13 @@ const withPWA = withPWAInit({
   },
 });
 
+const isDesktop = process.env.IS_DESKTOP === "true";
+
 const nextConfig: NextConfig = {
+  output: isDesktop ? "export" : undefined,
+  images: {
+    unoptimized: isDesktop,
+  },
   turbopack: {
     root: path.resolve(__dirname, "./"),
   },

@@ -1,7 +1,9 @@
-import { NextResponse } from 'next/server'
-import { createClient } from '@/utils/supabase/server'
+export const dynamic = 'force-static'
 
 export async function GET(request) {
+    if (process.env.IS_DESKTOP === 'true') {
+        return new Response('Auth not available in desktop mode', { status: 200 })
+    }
     const { searchParams, origin } = new URL(request.url)
     const code = searchParams.get('code')
     // if "next" is in search params, use it as the redirection URL
