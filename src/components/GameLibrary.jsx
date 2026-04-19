@@ -27,6 +27,7 @@ export default function GameLibrary() {
     const discoveredChars = (hasStartedKaland ? 3 : 0) + (finishedStories.length * 3);
     const discoveredLocs = finishedStories.length;
     const [expandedCategories, setExpandedCategories] = useState({});
+    const [csvCategories, setCsvCategories] = useState({});
     const [activeVideoUrl, setActiveVideoUrl] = useState(null);
     const [expandedItems, setExpandedItems] = useState({});
 
