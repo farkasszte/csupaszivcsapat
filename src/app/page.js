@@ -15,7 +15,6 @@ import { useGame } from '@/context/GameContext';
 
 import { Lightbox } from '@/components/Lightbox';
 import { ColorFilters } from '@/components/ColorFilters';
-import UserMenu from '@/components/Auth/UserMenu';
 
 
 import {

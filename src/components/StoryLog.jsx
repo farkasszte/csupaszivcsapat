@@ -4,11 +4,11 @@ import { useGame } from '../context/GameContext';
 import { useEffect, useRef } from 'react';
 import { RiArrowRightSLine, RiFileWordLine, RiFilePdfLine } from '@remixicon/react';
 import { SlPicture } from 'react-icons/sl';
+import { storyTranslations } from '../data/story_translations';
 
 export default function StoryLog() {
     const scrollContainerRef = useRef(null);
     const { storyLog, project, parseRichTextReadOnly, state, openLightbox, getAssetUrl, language, t } = useGame();
-    const { storyTranslations } = require('../data/story_translations');
 
     useEffect(() => {
         if (scrollContainerRef.current) {

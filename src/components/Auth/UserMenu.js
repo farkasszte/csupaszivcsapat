@@ -19,7 +19,7 @@ export default function UserMenu({ compact = false }) {
     const supabase = createClient()
     const router = useRouter()
     const pathname = usePathname()
-    const { setShowLog, setShowDashboard, setShowMap, setShowMenu, setShowLibrary, setShowProfile, showProfile, showMenu, t, language } = useGame() || {}
+    const { setShowLog, setShowDashboard, setShowMap, setShowMenu, setShowLibrary, setShowProfile, showProfile, showMenu, resetGame, t, language } = useGame() || {}
     
     useEffect(() => {
         setIsMounted(true)
@@ -40,8 +40,9 @@ export default function UserMenu({ compact = false }) {
     }, [supabase])
 
     const handleLogout = async () => {
+        resetGame?.()
         await supabase.auth.signOut()
-        router.refresh()
+        window.location.href = '/'
     }
 
     const handleCopyCode = () => {

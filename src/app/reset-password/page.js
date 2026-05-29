@@ -3,10 +3,14 @@
 import { useState, useEffect } from 'react'
 import { createClient } from '@/utils/supabase/client'
 import { useRouter } from 'next/navigation'
+import { useGameStore } from '@/store/useGameStore'
+import { translations } from '@/data/translations'
 
 export default function ResetPasswordPage() {
     const router = useRouter()
     const supabase = createClient()
+    const { language } = useGameStore()
+    const t = (key) => translations[language]?.[key] || translations['hu']?.[key] || key
 
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
@@ -75,9 +79,9 @@ export default function ResetPasswordPage() {
                 {/* Header */}
                 <div className="text-center space-y-3">
                     <h1 className="text-3xl sm:text-4xl font-extrabold text-white font-serif tracking-tight drop-shadow-md">
-                        Kiszáradt Legelők
+                        {t('game_title') || 'Csupaszív kalandok: A Homokhátság Hősei'}
                     </h1>
-                    <p className="text-sm text-white">Jelszó visszaállítása</p>
+                    <p className="text-sm text-white">{t('reset_password_title') || 'Jelszó visszaállítása'}</p>
                 </div>
 
                 {/* Card */}

@@ -45,7 +45,7 @@ export default function GameMenu() {
                 {(error || message) && (
                     <div
                         className={`text-xs text-center px-3 py-2 rounded-lg border ${error
-                            ? 'bg-red-100 border-red-500 text-[#4F7942]'
+                            ? 'bg-red-100 border-red-500 text-red-900'
                             : 'bg-emerald-100 border-emerald-500 text-emerald-900'
                             }`}
                     >
