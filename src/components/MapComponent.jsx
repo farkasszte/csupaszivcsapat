@@ -112,7 +112,9 @@ export default function MapComponent() {
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          url={typeof window !== 'undefined' && (window.__TAURI_INTERNALS__ !== undefined || window.__TAURI__ !== undefined) && process.env.NODE_ENV === 'production'
+            ? "osm-tile://localhost/{z}/{x}/{y}.png"
+            : "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"}
         />
         
         <MapController selectedLocation={selectedMapLocation} />

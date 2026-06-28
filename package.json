@@ -1,36 +1,20 @@
 {
   "name": "next-player",
-  "main": "electron/main.js",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "desktop:dev": "cross-env IS_DESKTOP=true concurrently \"next dev\" \"wait-on http://localhost:3000 && electron .\"",
-    "desktop:build": "powershell \"if (Test-Path 'src/app/auth') { Rename-Item 'src/app/auth' 'auth_hidden' }\" && cross-env IS_DESKTOP=true next build && npx electron-packager . \"Csupasziv-Kalandok\" --platform=win32 --arch=x64 --out=dist --overwrite --asar --prune --icon=public/icons/icon-512x512.png --ignore=\"^/(src|.next|dist|.git|tsconfig|next\\.config|README|package-lock|.gemini)\" && powershell \"Get-ChildItem -Path 'dist/Csupasziv-Kalandok-win32-x64/locales/*.pak' | Where-Object { $_.Name -notmatch '^(hu|en-US|en-GB|sr)\\.pak$' } | Remove-Item; Remove-Item 'dist/Csupasziv-Kalandok-win32-x64/LICENSES.chromium.html'; Set-Content -Path 'dist/Csupasziv-Kalandok-win32-x64/LICENSE_LINKS.txt' -Value 'Chromium and third-party licenses can be found online.'\" && powershell \"if (Test-Path 'src/app/auth_hidden') { Rename-Item 'src/app/auth_hidden' 'auth' }\""
-  },
-  "build": {
-    "appId": "com.csupasziv.kalandok",
-    "productName": "Csupaszív Kalandok",
-    "directories": {
-      "output": "dist"
-    },
-    "files": [
-      "out/**/*",
-      "electron/**/*",
-      "public/**/*"
-    ],
-    "win": {
-      "target": "portable",
-      "icon": "public/icons/icon-512x512.png"
-    }
+    "desktop:dev": "tauri dev",
+    "desktop:build": "powershell \"if (Test-Path 'src/app/auth') { Move-Item 'src/app/auth' 'src/auth_hidden' }\" && tauri build && powershell \"if (Test-Path 'src/auth_hidden') { Move-Item 'src/auth_hidden' 'src/app/auth' }\""
   },
   "dependencies": {
     "@ducanh2912/next-pwa": "^10.2.9",
     "@remixicon/react": "^4.9.0",
     "@supabase/ssr": "^0.8.0",
     "@supabase/supabase-js": "^2.97.0",
+    "@tauri-apps/api": "^2.11.1",
     "@vercel/speed-insights": "^2.0.0",
     "docx": "^9.6.1",
     "dompurify": "^3.4.0",
@@ -42,22 +26,17 @@
     "react-dom": "19.2.3",
     "react-icons": "^5.6.0",
     "react-leaflet": "^5.0.0",
-    "zustand": "^5.0.11",
-    "electron-serve": "^3.0.1"
+    "zustand": "^5.0.11"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@tauri-apps/cli": "^2.11.3",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "concurrently": "^9.2.1",
     "cross-env": "^10.1.0",
-    "electron": "^41.2.1",
-    "electron-builder": "^26.8.1",
-    "electron-packager": "^17.1.2",
     "tailwindcss": "^4",
-    "typescript": "^5",
-    "wait-on": "^9.0.5"
+    "typescript": "^5"
   },
   "overrides": {
     "postcss": "^8.5.10",

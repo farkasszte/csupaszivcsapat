@@ -41,3 +41,14 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Tauri
+/src-tauri/target/
+/src-tauri/gen/
+
+# IDEs and local configs
+.gemini/
+.vscode/
+.idea/
+*.local
+

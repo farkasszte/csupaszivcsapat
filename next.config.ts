@@ -16,9 +16,10 @@ const withPWA = withPWAInit({
 });
 
 const isDesktop = process.env.IS_DESKTOP === "true";
+const isProd = process.env.NODE_ENV === "production";
 
 const nextConfig: NextConfig = {
-  output: isDesktop ? "export" : undefined,
+  output: (isDesktop && isProd) ? "export" : undefined,
   images: {
     unoptimized: isDesktop,
   },
