@@ -33,7 +33,7 @@ export default function RootLayout({ children }) {
                 <GameProvider>
                     <BackgroundMusic />
                     <Header />
-                    <main className="pb-16 lg:pb-0">
+                    <main>
                         {children}
                     </main>
                 </GameProvider>
