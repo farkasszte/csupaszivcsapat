@@ -58,8 +58,13 @@ export default function StoryLog() {
                 }]
             });
 
-            const { data: { user } } = await (await import('@/utils/supabase/client')).createClient().auth.getUser();
-            const username = user?.email?.split('@')[0] || 'vendeg';
+            let username = 'vendeg';
+            if (typeof window !== 'undefined') {
+                try {
+                    const profile = JSON.parse(localStorage.getItem('csupasziv_user_profile') || '{}');
+                    if (profile.full_name) username = profile.full_name.replace(/\s+/g, '_');
+                } catch (e) {}
+            }
             const filename = `Homokhátság Hősei-${username}-${new Date().toISOString().split('T')[0]}.docx`;
 
             const blob = await Packer.toBlob(doc);
@@ -77,8 +82,13 @@ export default function StoryLog() {
     const exportToPdf = async () => {
         try {
             const html2pdf = (await import('html2pdf.js')).default;
-            const { data: { user } } = await (await import('@/utils/supabase/client')).createClient().auth.getUser();
-            const username = user?.email?.split('@')[0] || 'vendeg';
+            let username = 'vendeg';
+            if (typeof window !== 'undefined') {
+                try {
+                    const profile = JSON.parse(localStorage.getItem('csupasziv_user_profile') || '{}');
+                    if (profile.full_name) username = profile.full_name.replace(/\s+/g, '_');
+                } catch (e) {}
+            }
             const filename = `Homokhátság Hősei-${username}-${new Date().toISOString().split('T')[0]}.pdf`;
 
             // Create a styled off-screen element for PDF rendering

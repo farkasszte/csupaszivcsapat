@@ -1,12 +1,12 @@
 'use client';
 
 import { useGame } from '../context/GameContext';
+import Link from 'next/link';
 import {
     RiSave3Line,
     RiDownloadLine,
     RiRestartLine,
-
-
+    RiHome4Line,
     RiVolumeUpLine,
     RiVolumeMuteLine,
     RiPaletteLine,
@@ -14,10 +14,6 @@ import {
 
 } from '@remixicon/react';
 import { useState } from 'react';
-
-
-
-
 
 export default function GameMenu() {
     const {

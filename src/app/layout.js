@@ -11,7 +11,7 @@ const montserrat = Montserrat({
 });
 
 export const metadata = {
-    title: "Csupaszív kalandok: A Homokhátság Hősei",
+    title: "Csupaszív Kalandok: A Homokhátság Hősei",
     description: "Interaktív történetmesélő játék",
     appleWebApp: {
         capable: true,

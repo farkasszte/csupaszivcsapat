@@ -10,12 +10,10 @@ import GameMenu from '@/components/GameMenu';
 import GameLibrary from '@/components/GameLibrary';
 import ProfileView from '@/components/ProfileView';
 import { useGame } from '@/context/GameContext';
-
-
-
 import { Lightbox } from '@/components/Lightbox';
 import { ColorFilters } from '@/components/ColorFilters';
-
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 import {
     RiBookOpenLine,
@@ -26,14 +24,17 @@ import {
     RiUserLine,
     RiSettings4Line,
     RiImageLine,
+    RiHome4Line,
 } from '@remixicon/react';
 
 
 
 export default function Home() {
+    const router = useRouter();
     const {
         currentElementId,
         project,
+        isStarted,
         showLog, setShowLog,
         showDashboard, setShowDashboard,
         showMap, setShowMap,
@@ -46,6 +47,12 @@ export default function Home() {
         colorFilter,
         t, language, setLanguage
     } = useGame();
+
+    useEffect(() => {
+        if (isStarted === false) {
+            router.push('/login');
+        }
+    }, [isStarted, router]);
 
     const showPanel = showLog || showDashboard || showMap || showMenu || showLibrary || showProfile || showImages;
     const activeTab = showMenu ? 'menu' : showLog ? 'log' : showDashboard ? 'dashboard' : showMap ? 'map' : showLibrary ? 'library' : showProfile ? 'profile' : showImages ? 'images' : null;

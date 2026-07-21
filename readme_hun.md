@@ -1,4 +1,4 @@
-# Csupaszív kalandok: A Homokhátság Hősei
+# Csupaszív Kalandok: A Homokhátság Hősei
 
 Ez a projekt egy modern, webalapú interaktív történetmesélő játék, amely a magyarországi Homokhátság tájegységére építve nyújt oktatási és szórakoztató élményt. A játékosok döntéseiken keresztül alakíthatják a történetet, miközben megismerhetik a régió természeti és kulturális értékeit.
 
@@ -24,7 +24,7 @@ A projekt a legmodernebb webes technológiák felhasználásával készült, fó
 
 ## 📖 Tartalmi bemutatás
 
-A **Csupaszív kalandok: A Homokhátság Hősei** egy narratív alapú kalandjáték, amelynek célja a Kiskunság és a Homokhátság értékeinek játékos formában történő átadása.
+A **Csupaszív Kalandok: A Homokhátság Hősei** egy narratív alapú kalandjáték, amelynek célja a Kiskunság és a Homokhátság értékeinek játékos formában történő átadása.
 
 ### A történet világa
 A játékos egy kalandor bőrébe bújik, aki a Homokhátság különleges tájait járja be. A történet során különböző karakterekkel találkozik, rejtélyeket old meg, és olyan döntéseket hoz, amelyek befolyásolják a küldetés sikerét és a karakter fejlődését.

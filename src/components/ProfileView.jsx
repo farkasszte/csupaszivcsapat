@@ -1,28 +1,28 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { createClient } from '@/utils/supabase/client'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 import {
-    RiFileCopyLine,
+    RiDownloadLine,
+    RiUploadLine,
+    RiDeleteBin6Line,
     RiCheckLine,
-    RiLogoutBoxRLine,
-    RiUserShared2Line
+    RiHome4Line
 } from '@remixicon/react'
 import { useGame } from '@/context/GameContext'
+import { useGameStore } from '@/store/useGameStore'
 
 export default function ProfileView() {
-    const supabase = createClient()
     const router = useRouter()
-
     const [loading, setLoading] = useState(true)
     const [saving, setSaving] = useState(false)
-    const [user, setUser] = useState(null)
     const [copied, setCopied] = useState(false)
     const [error, setError] = useState(null)
     const [message, setMessage] = useState(null)
     const [isMounted, setIsMounted] = useState(false)
     const { resetGame, t } = useGame()
+    const { clearSaveGame, loadGame } = useGameStore()
 
     const [formData, setFormData] = useState({
         full_name: '',
@@ -32,38 +32,22 @@ export default function ProfileView() {
 
     useEffect(() => {
         setIsMounted(true)
-        const getProfile = async () => {
-            const { data: { user } } = await supabase.auth.getUser()
-            if (user) {
-                setUser(user)
+        if (typeof window !== 'undefined') {
+            try {
+                const profile = JSON.parse(localStorage.getItem('csupasziv_user_profile') || '{}')
                 setFormData({
-                    full_name: user.user_metadata?.full_name || '',
-                    gender: user.user_metadata?.gender || '',
-                    birth_year: user.user_metadata?.birth_year || ''
+                    full_name: profile.full_name || '',
+                    gender: profile.gender || '',
+                    birth_year: profile.birth_year || ''
                 })
+            } catch (e) {
+                console.error(e)
             }
-            setLoading(false)
         }
-        getProfile()
-    }, [supabase])
+        setLoading(false)
+    }, [])
 
-    const handleLogout = async () => {
-        resetGame?.()
-        await supabase.auth.signOut()
-        window.location.href = '/'
-    }
-
-    const handleCopyCode = () => {
-        const code = user?.email?.split('@')[0]
-        if (code) {
-            navigator.clipboard.writeText(code).then(() => {
-                setCopied(true)
-                setTimeout(() => setCopied(false), 2000)
-            })
-        }
-    }
-
-    const handleSave = async (e) => {
+    const handleSave = (e) => {
         e.preventDefault()
 
         if (formData.birth_year) {
@@ -78,23 +62,63 @@ export default function ProfileView() {
         setError(null)
         setMessage(null)
 
-        const { error } = await supabase.auth.updateUser({
-            data: {
-                full_name: formData.full_name,
-                gender: formData.gender,
-                birth_year: formData.birth_year
-            }
-        })
-
-        if (error) {
-            setError(error.message)
-        } else {
-            setMessage(t('profile_updated') || 'Profil sikeresen frissítve!')
-            setTimeout(() => {
-                router.refresh()
-            }, 2000)
+        try {
+            localStorage.setItem('csupasziv_user_profile', JSON.stringify(formData))
+            setMessage(t('profile_updated') || 'Profil adatok sikeresen elmentve!')
+        } catch (err) {
+            setError(err.message || 'Sikertelen mentés!')
+        } finally {
+            setSaving(false)
         }
-        setSaving(false)
+    }
+
+    const handleExportSave = () => {
+        try {
+            const raw = localStorage.getItem('csupasziv_game_save')
+            if (!raw) {
+                setError(t('export_no_save') || 'Nincs mentett játékállás a kiexportáláshoz.')
+                return
+            }
+            const blob = new Blob([raw], { type: 'application/json' })
+            const url = URL.createObjectURL(blob)
+            const a = document.createElement('a')
+            a.href = url
+            a.download = `csupasziv_mentes_${new Date().toISOString().slice(0, 10)}.json`
+            a.click()
+            URL.revokeObjectURL(url)
+            setMessage(t('export_success') || 'Mentés sikeresen letöltve!')
+        } catch (err) {
+            setError(t('export_error') || 'Hiba történt a mentés exportálásakor.')
+        }
+    }
+
+    const handleImportSave = (e) => {
+        const file = e.target.files?.[0]
+        if (!file) return
+
+        const reader = new FileReader()
+        reader.onload = async (event) => {
+            try {
+                const content = event.target?.result
+                if (content && typeof content === 'string') {
+                    JSON.parse(content) // Verify valid JSON
+                    localStorage.setItem('csupasziv_game_save', content)
+                    await loadGame()
+                    setMessage(t('import_success') || 'Mentés sikeresen beimportálva!')
+                }
+            } catch (err) {
+                setError(t('import_error') || 'Érvénytelen mentési fájl!')
+            }
+        }
+        reader.readAsText(file)
+    }
+
+    const handleClearSave = () => {
+        if (confirm(t('clear_save_confirm') || 'Biztosan törölni szeretnéd a helyi mentést? Ez nem vonható vissza.')) {
+            clearSaveGame()
+            resetGame?.()
+            setMessage(t('save_cleared') || 'Mentés törölve.')
+        }
     }
 
     if (!isMounted) return null
@@ -110,19 +134,19 @@ export default function ProfileView() {
     return (
         <div className="p-6 space-y-8 animate-in fade-in duration-500">
             <div>
-                <h1 className="text-2xl font-bold text-[#4F7942] mb-2">{t('profile_title') || 'Profilom'}</h1>
-                <p className="text-xs text-zinc-700 font-medium italic">{t('profile_desc') || 'Módosítsd adataidat az élmény személyre szabásához.'}</p>
+                <h1 className="text-2xl font-bold text-[#4F7942] mb-2">{t('profile_title') || 'Játékos Profil'}</h1>
+                <p className="text-xs text-zinc-700 font-medium italic">{t('profile_desc') || 'Adatok és mentések kezelése ezen az eszközön.'}</p>
             </div>
 
             <form onSubmit={handleSave} className="space-y-6">
                 <div>
-                    <label className="block text-[10px] uppercase tracking-widest font-bold text-[#4F7942]/80 mb-2">Teljes név</label>
+                    <label className="block text-[10px] uppercase tracking-widest font-bold text-[#4F7942]/80 mb-2">{t('player_name_nickname') || t('player_name_label') || 'Játékos Neve / Becenév'}</label>
                     <input
                         type="text"
                         value={formData.full_name}
                         onChange={(e) => setFormData({ ...formData, full_name: e.target.value })}
-                        className="w-full px-4 py-3 bg-white/90 backdrop-blur-md shadow-sm rounded-xl focus:ring-2 focus:ring-[#4F7942]/40 focus:border-[#4F7942]/40 transition-all outline-none text-surface placeholder-surface/50"
-                        placeholder="Minta János"
+                        className="w-full px-4 py-3 bg-white/90 backdrop-blur-md shadow-sm rounded-xl focus:ring-2 focus:ring-[#4F7942]/40 focus:border-[#4F7942]/40 transition-all outline-none text-surface placeholder-surface/50 font-semibold"
+                        placeholder={t('player_name_placeholder') || 'Írd be a neved...'}
                     />
                 </div>
 
@@ -132,7 +156,7 @@ export default function ProfileView() {
                         <select
                             value={formData.gender}
                             onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
-                            className="w-full px-4 py-3 bg-white/90 backdrop-blur-md shadow-sm rounded-xl focus:ring-2 focus:ring-[#4F7942]/40 focus:border-[#4F7942]/40 transition-all outline-none text-surface appearance-none"
+                            className="w-full px-4 py-3 bg-white/90 backdrop-blur-md shadow-sm rounded-xl focus:ring-2 focus:ring-[#4F7942]/40 focus:border-[#4F7942]/40 transition-all outline-none text-surface appearance-none font-medium"
                         >
                             <option value="" className="bg-[#ebd7b1] text-surface">{t('choose') || 'Válassz...'}</option>
                             <option value="male" className="bg-[#ebd7b1] text-surface">{t('male') || 'Fiú'}</option>
@@ -147,7 +171,7 @@ export default function ProfileView() {
                             inputMode="numeric"
                             value={formData.birth_year}
                             onChange={(e) => setFormData({ ...formData, birth_year: e.target.value.replace(/\D/g, '').slice(0, 4) })}
-                            className="w-full px-4 py-3 bg-white/90 backdrop-blur-md shadow-sm rounded-xl focus:ring-2 focus:ring-[#4F7942]/40 focus:border-[#4F7942]/40 transition-all outline-none text-surface placeholder-surface/50"
+                            className="w-full px-4 py-3 bg-white/90 backdrop-blur-md shadow-sm rounded-xl focus:ring-2 focus:ring-[#4F7942]/40 focus:border-[#4F7942]/40 transition-all outline-none text-surface placeholder-surface/50 font-medium"
                             placeholder="1990"
                             maxLength={4}
                         />
@@ -157,61 +181,67 @@ export default function ProfileView() {
                 <button
                     type="submit"
                     disabled={saving}
-                    className="w-full py-3 bg-[#4F7942] hover:bg-[#3d5e33] text-white font-bold rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-md cursor-pointer"
+                    className="w-full py-3 bg-[#4F7942] hover:bg-[#3d5e33] text-white font-bold rounded-xl transition-all disabled:opacity-50 shadow-md cursor-pointer"
                 >
-                    {saving ? (t('saving') || 'Mentés...') : (t('save_button') || 'Mentés')}
+                    {saving ? (t('saving') || 'Mentés...') : (t('save_button') || 'Profil Mentése')}
                 </button>
 
                 {error && (
-                    <p className="text-red-900 text-sm text-center bg-red-100/80 p-3 rounded-xl border border-red-500/50">
+                    <p className="text-red-900 text-sm text-center bg-red-100/80 p-3 rounded-xl border border-red-500/50 font-bold">
                         {error}
                     </p>
                 )}
 
                 {message && (
-                    <p className="text-emerald-900 text-sm text-center bg-emerald-100/80 p-3 rounded-xl border border-emerald-500/50">
+                    <p className="text-emerald-900 text-sm text-center bg-emerald-100/80 p-3 rounded-xl border border-emerald-500/50 font-bold">
                         {message}
                     </p>
                 )}
             </form>
 
-            {/* Divider */}
             <div className="border-t border-[#4F7942]/10" />
 
-            {/* Account Actions */}
+            {/* Save file backup & restore section */}
             <div className="space-y-4">
-                {/* Guest code section */}
-                {user?.email?.endsWith('@vendeg.hu') && (
-                    <div className="flex flex-col gap-2 p-4 bg-white/40 border border-[#4F7942]/10 rounded-xl backdrop-blur-md shadow-sm">
-                        <div className="text-[10px] font-bold text-[#4F7942]/70 uppercase tracking-widest">{t('guest_code') || 'Vendég kódod'}</div>
-                        <div className="flex items-center justify-between">
-                            <span className="text-lg font-mono text-zinc-950 font-bold">{user.email.split('@')[0]}</span>
-                            <button
-                                onClick={handleCopyCode}
-                                title={copied ? (t('copied') || 'Másolva!') : (t('copy_code_hint') || 'Kód másolása')}
-                                className={`p-2 rounded-lg transition-all border border-[#4F7942]/10 bg-white/60 text-[#4F7942] hover:text-[#3d5e33] hover:bg-white/90 shadow-sm cursor-pointer ${copied ? 'text-emerald-600 bg-emerald-50' : ''}`}
-                            >
-                                {copied ? <RiCheckLine size={18} /> : <RiFileCopyLine size={18} />}
-                            </button>
-                        </div>
-                    </div>
-                )}
+                <h3 className="text-sm font-bold text-[#4F7942] uppercase tracking-wider">{t('local_save_management') || 'Helyi Mentés Kezelése'}</h3>
 
-                {/* Email display for regular users */}
-                {user && !user.email?.endsWith('@vendeg.hu') && (
-                    <div className="flex items-center gap-2 px-1 text-xs text-zinc-800 font-semibold">
-                        <RiUserShared2Line size={14} className="text-[#4F7942]" />
-                        <span>Bejelentkezve: {user.email}</span>
-                    </div>
-                )}
+                <div className="grid grid-cols-2 gap-3">
+                    <button
+                        onClick={handleExportSave}
+                        className="py-2.5 px-3 flex items-center justify-center gap-2 bg-white/60 hover:bg-white/90 border border-[#4F7942]/20 text-[#4F7942] font-bold rounded-xl text-xs transition-all shadow-sm cursor-pointer"
+                    >
+                        <RiDownloadLine size={16} />
+                        {t('export_save') || 'Mentés letöltése'}
+                    </button>
 
-                {/* Logout Button */}
+                    <label className="py-2.5 px-3 flex items-center justify-center gap-2 bg-white/60 hover:bg-white/90 border border-[#4F7942]/20 text-[#4F7942] font-bold rounded-xl text-xs transition-all shadow-sm cursor-pointer">
+                        <RiUploadLine size={16} />
+                        {t('import_save') || 'Mentés betöltése'}
+                        <input
+                            type="file"
+                            accept=".json"
+                            onChange={handleImportSave}
+                            className="hidden"
+                        />
+                    </label>
+                </div>
+
                 <button
-                    onClick={handleLogout}
-                    className="w-full py-3 flex items-center justify-center gap-2 bg-red-500/10 hover:bg-red-500/20 border border-red-500/20 hover:border-red-500/40 text-red-950 font-bold rounded-xl transition-all shadow-sm cursor-pointer"
+                    onClick={handleClearSave}
+                    className="w-full py-2.5 flex items-center justify-center gap-2 bg-red-500/10 hover:bg-red-500/20 border border-red-500/20 text-red-900 font-bold text-xs rounded-xl transition-all cursor-pointer"
                 >
-                    <RiLogoutBoxRLine size={18} />
-                    {t('logout_button') || 'Kilépés a fiókból'}
+                    <RiDeleteBin6Line size={16} />
+                    {t('clear_local_save') || 'Helyi Mentés Törlése'}
+                </button>
+
+                <div className="border-t border-[#4F7942]/10 my-2" />
+
+                <button
+                    onClick={() => router.push('/login')}
+                    className="w-full py-3 flex items-center justify-center gap-2 bg-[#4F7942] hover:bg-[#3d5e33] text-white font-bold rounded-xl text-xs transition-all shadow-md cursor-pointer"
+                >
+                    <RiHome4Line size={18} />
+                    {t('return_to_home') || 'Visszatérés a kezdőlapra'}
                 </button>
             </div>
         </div>

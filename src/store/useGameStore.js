@@ -1,10 +1,10 @@
 import { create } from 'zustand'
 import projectSettings from '../data/project_settings.json'
 import { ArcScript } from '../logic/ArcScript'
-import { createClient } from '@/utils/supabase/client'
 
 const arcScript = new ArcScript(projectSettings)
-const supabase = createClient()
+const SAVE_KEY = 'csupasziv_game_save';
+const PROFILE_KEY = 'csupasziv_user_profile';
 let saveTimer = null;
 
 
@@ -254,48 +254,31 @@ export const useGameStore = create((set, get) => ({
         }
     },
 
-    // Persistence Actions
+    // Persistence Actions (LocalStorage)
     saveGame: async (immediate = false) => {
-        // Clear any pending save
         if (saveTimer) {
             clearTimeout(saveTimer);
             saveTimer = null;
         }
 
-        const performSave = async () => {
+        const performSave = () => {
             set({ loading: true, error: null, message: null });
             try {
-                const { data: { session } } = await supabase.auth.getSession();
-                if (!session) return;
-
                 const {
                     currentElementId, visits, variables, history, storyLog, discoveredComponents,
                     finishedStories,
                     volume, isMuted, typewriterSpeed, transitionsEnabled, colorFilter, language
                 } = get();
 
-                const stepsToSave = storyLog.map(({ elementId, choiceMade }) => ({ elementId, choiceMade }));
-
                 const gameState = {
                     currentElementId, visits, variables, history, storyLog, discoveredComponents,
                     finishedStories,
-                    settings: { volume, isMuted, typewriterSpeed, transitionsEnabled, colorFilter, language }
+                    settings: { volume, isMuted, typewriterSpeed, transitionsEnabled, colorFilter, language },
+                    savedAt: new Date().toISOString()
                 };
 
-                const { error } = await supabase
-                    .from('game_saves')
-                    .upsert({
-                        user_id: session.user.id,
-                        game_state: gameState,
-                        updated_at: new Date().toISOString()
-                    }, { onConflict: 'user_id' });
-
-                if (error) {
-                    if (error.status === 429) {
-                        set({ error: 'Túl sok mentési kérés. Kérlek várj pár másodpercet.' });
-                    } else {
-                        throw error;
-                    }
+                if (typeof window !== 'undefined') {
+                    localStorage.setItem(SAVE_KEY, JSON.stringify(gameState));
                 }
             } catch (err) {
                 console.error('Save error:', err);
@@ -306,41 +289,33 @@ export const useGameStore = create((set, get) => ({
         };
 
         if (immediate) {
-            await performSave();
+            performSave();
         } else {
-            saveTimer = setTimeout(performSave, 3000);
+            saveTimer = setTimeout(performSave, 1000);
         }
     },
-
-
-
 
     loadGame: async () => {
         set({ loading: true, error: null, message: null });
         try {
-            const { data: { session }, error: sessionError } = await supabase.auth.getSession();
-            if (sessionError) throw sessionError;
-            if (!session) throw new Error('Bejelentkezés szükséges.');
+            if (typeof window === 'undefined') return;
+            const raw = localStorage.getItem(SAVE_KEY);
+            if (!raw) {
+                set({ error: 'Nincs mentett játékállás.' });
+                return;
+            }
 
-            const { data, error } = await supabase
-                .from('game_saves')
-                .select('game_state')
-                .eq('user_id', session.user.id)
-                .single();
-
-            if (error && error.code !== 'PGRST116') throw error; // PGRST116 means no row found
-
-            const gameState = data?.game_state;
+            const gameState = JSON.parse(raw);
             if (gameState) {
                 const s = gameState.settings || {};
                 let loadedLang = s.language ?? 'hu';
                 if (loadedLang === 'sr') loadedLang = 'sr-latn';
-                
+
                 set({
                     currentElementId: gameState.currentElementId,
-                    visits: gameState.visits,
-                    variables: gameState.variables,
-                    history: gameState.history,
+                    visits: gameState.visits || {},
+                    variables: gameState.variables || {},
+                    history: gameState.history || [],
                     storyLog: gameState.storyLog || [],
                     discoveredComponents: gameState.discoveredComponents || [],
                     finishedStories: gameState.finishedStories || [],
@@ -363,21 +338,14 @@ export const useGameStore = create((set, get) => ({
         }
     },
 
-    // Silent auto-load on app startup (no error UI)
+    // Silent auto-load on app startup
     autoLoad: async () => {
         try {
-            const { data: { session } } = await supabase.auth.getSession();
-            if (!session) return;
+            if (typeof window === 'undefined') return;
+            const raw = localStorage.getItem(SAVE_KEY);
+            if (!raw) return;
 
-            const { data, error } = await supabase
-                .from('game_saves')
-                .select('game_state')
-                .eq('user_id', session.user.id)
-                .single();
-
-            if (error && error.code !== 'PGRST116') throw error;
-
-            const gameState = data?.game_state;
+            const gameState = JSON.parse(raw);
             if (gameState) {
                 const s = gameState.settings || {};
                 let loadedLang = s.language ?? 'hu';
@@ -385,9 +353,9 @@ export const useGameStore = create((set, get) => ({
 
                 set({
                     currentElementId: gameState.currentElementId,
-                    visits: gameState.visits,
-                    variables: gameState.variables,
-                    history: gameState.history,
+                    visits: gameState.visits || {},
+                    variables: gameState.variables || {},
+                    history: gameState.history || [],
                     storyLog: gameState.storyLog || [],
                     discoveredComponents: gameState.discoveredComponents || [],
                     finishedStories: gameState.finishedStories || [],
@@ -402,6 +370,17 @@ export const useGameStore = create((set, get) => ({
             }
         } catch (err) {
             console.error('Auto-load error:', err);
+        }
+    },
+
+    hasSavedGame: () => {
+        if (typeof window === 'undefined') return false;
+        return !!localStorage.getItem(SAVE_KEY);
+    },
+
+    clearSaveGame: () => {
+        if (typeof window !== 'undefined') {
+            localStorage.removeItem(SAVE_KEY);
         }
     },
 
