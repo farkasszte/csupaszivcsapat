@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
+import { MapContainer, ImageOverlay, Marker, Popup, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { useGame } from '../context/GameContext';
@@ -59,7 +59,7 @@ function MapController({ selectedLocation }) {
   const map = useMap();
   useEffect(() => {
     if (selectedLocation) {
-      map.flyTo([selectedLocation.lat, selectedLocation.lng], 14, {
+      map.flyTo([selectedLocation.lat, selectedLocation.lng], 11, {
         animate: true,
         duration: 1.5
       });
@@ -100,6 +100,8 @@ export default function MapComponent() {
     return project.boards[boardId].elements?.includes(currentElementId);
   };
 
+  const bounds = [[45.951149686691394, 18.984375], [46.92025531537452, 20.21484375]];
+
   return (
     <div 
         className="w-full h-full rounded-xl overflow-hidden border border-white/20 shadow-xl"
@@ -107,14 +109,17 @@ export default function MapComponent() {
     >
       <MapContainer 
         center={selectedMapLocation ? [selectedMapLocation.lat, selectedMapLocation.lng] : defaultCenter} 
-        zoom={selectedMapLocation ? 14 : defaultZoom} 
+        zoom={selectedMapLocation ? 11 : defaultZoom} 
+        minZoom={9}
+        maxZoom={13}
+        maxBounds={bounds}
+        maxBoundsViscosity={1.0}
+        attributionControl={false}
         style={{ height: '100%', width: '100%', background: '#fff' }}
       >
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-          url={typeof window !== 'undefined' && (window.__TAURI_INTERNALS__ !== undefined || window.__TAURI__ !== undefined) && process.env.NODE_ENV === 'production'
-            ? "osm-tile://localhost/{z}/{x}/{y}.png"
-            : "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"}
+        <ImageOverlay
+          url="/map-tiles/zoom_11_merged.png"
+          bounds={bounds}
         />
         
         <MapController selectedLocation={selectedMapLocation} />
@@ -148,11 +153,11 @@ export default function MapComponent() {
                position={loc.position}
                icon={icon}
              >
-               <Popup>
-                 <div className="font-bold text-[#4F7942] uppercase text-xs tracking-widest">
+               <Popup maxWidth={220} keepInView={true}>
+                 <div className="font-bold text-[#4F7942] uppercase text-xs tracking-widest leading-tight">
                    {loc[`name_${language}`] || loc.name}
                  </div>
-                 <div className="text-xs mt-1 text-zinc-600">
+                 <div className="text-xs mt-1 text-zinc-600 leading-normal">
                    {loc[`description_${language}`] || loc.description}
                  </div>
                </Popup>
