@@ -1,7 +1,9 @@
-import sharp from "sharp";
-
 export function register() {
-  sharp.block({
-    operation: ["VipsForeignLoadNsgif", "VipsForeignLoadTiff", "VipsForeignLoadVips"],
-  });
+  if (process.env.NEXT_RUNTIME === "nodejs") {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const sharp = require("sharp");
+    sharp.block({
+      operation: ["VipsForeignLoadNsgif", "VipsForeignLoadTiff", "VipsForeignLoadVips"],
+    });
+  }
 }
