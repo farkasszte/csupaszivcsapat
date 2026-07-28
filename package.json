@@ -10,7 +10,6 @@
     "desktop:build": "powershell \"if (Test-Path 'src/app/auth') { Move-Item 'src/app/auth' 'src/auth_hidden' }\" && tauri build && powershell \"if (Test-Path 'src/auth_hidden') { Move-Item 'src/auth_hidden' 'src/app/auth' }\""
   },
   "dependencies": {
-    "@ducanh2912/next-pwa": "^10.2.9",
     "@remixicon/react": "^4.9.0",
     "@tauri-apps/api": "^2.11.1",
     "@vercel/speed-insights": "^2.0.0",
@@ -27,12 +26,15 @@
     "zustand": "^5.0.11"
   },
   "devDependencies": {
+    "@serwist/turbopack": "^9.5.12",
     "@tailwindcss/postcss": "^4",
     "@tauri-apps/cli": "^2.11.3",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "cross-env": "^10.1.0",
+    "esbuild": "^0.28.1",
+    "serwist": "^9.5.12",
     "tailwindcss": "^4",
     "typescript": "^5"
   },
