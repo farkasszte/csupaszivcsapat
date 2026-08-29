@@ -79,9 +79,8 @@ export default function StoryLog() {
         }
     };
 
-    const exportToPdf = async () => {
+    const exportToPdf = () => {
         try {
-            const html2pdf = (await import('html2pdf.js')).default;
             let username = 'vendeg';
             if (typeof window !== 'undefined') {
                 try {
@@ -89,19 +88,20 @@ export default function StoryLog() {
                     if (profile.full_name) username = profile.full_name.replace(/\s+/g, '_');
                 } catch (e) {}
             }
-            const filename = `Homokhátság Hősei-${username}-${new Date().toISOString().split('T')[0]}.pdf`;
+            const filename = `Homokhátság Hősei-${username}-${new Date().toISOString().split('T')[0]}`;
 
-            // Create a styled off-screen element for PDF rendering
-            const element = document.createElement('div');
-            element.style.padding = '20px 40px';
-            element.style.color = '#000000';
-            element.style.backgroundColor = '#ffffff';
-            element.style.fontFamily = 'Arial, sans-serif';
-            element.style.fontSize = '12px';
-            element.style.width = '750px';
-            element.style.boxSizing = 'border-box';
+            let contentStr = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>${filename}</title><style>
+                @page { margin: 20mm 15mm; size: A4 portrait; }
+                body { font-family: Arial, "Helvetica Neue", Helvetica, sans-serif; font-size: 11pt; line-height: 1.6; color: #1a1a1a; margin: 0; padding: 10px; }
+                h1 { text-align: center; color: #92400e; margin-bottom: 30px; font-size: 20pt; }
+                .story-entry { text-align: justify; margin-bottom: 16px; width: 100%; white-space: pre-wrap; }
+                .choice-made { font-style: italic; color: #555555; margin-bottom: 24px; padding-left: 16px; }
+                @media print {
+                    body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+                }
+            </style></head><body>`;
 
-            let contentStr = `<h1 style="text-align: center; margin-bottom: 40px; color: #92400e;">Homokhátság Hősei</h1>`;
+            contentStr += `<h1>Homokhátság Hősei</h1>`;
             storyLog.forEach((entry) => {
                 const el = project.elements[entry.elementId];
                 if (!el) return;
@@ -117,26 +117,40 @@ export default function StoryLog() {
                         nodeContentForPdf = storyTranslations[language][entry.elementId].content || nodeContentForPdf;
                     }
                 }
-                contentStr += `<div style="text-align: justify; line-height: 1.6; margin-bottom: 20px; width: 100%; white-space: pre-wrap;">${nodeContentForPdf}</div>`;
+                contentStr += `<div class="story-entry">${nodeContentForPdf}</div>`;
 
                 if (entry.choiceMade) {
-                    contentStr += `<div style="font-style: italic; color: #666; margin-bottom: 30px; padding-left: 20px;">&gt; ${entry.choiceMade}</div>`;
+                    contentStr += `<div class="choice-made">&gt; ${entry.choiceMade}</div>`;
                 }
             });
 
-            element.innerHTML = contentStr;
+            contentStr += `</body></html>`;
 
-            const opt = {
-                margin: 15,
-                filename: filename,
-                image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2, useCORS: true, letterRendering: true, width: 750 },
-                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-            };
+            const iframe = document.createElement('iframe');
+            iframe.style.position = 'fixed';
+            iframe.style.right = '0';
+            iframe.style.bottom = '0';
+            iframe.style.width = '0';
+            iframe.style.height = '0';
+            iframe.style.border = '0';
+            document.body.appendChild(iframe);
 
-            await html2pdf().set(opt).from(element).save();
+            const doc = iframe.contentWindow.document;
+            doc.open();
+            doc.write(contentStr);
+            doc.close();
+
+            iframe.contentWindow.focus();
+            setTimeout(() => {
+                iframe.contentWindow.print();
+                setTimeout(() => {
+                    if (iframe.parentNode) {
+                        document.body.removeChild(iframe);
+                    }
+                }, 1000);
+            }, 300);
         } catch (err) {
-            console.error('Export PDF error:', err);
+            console.error('Export PDF/Print error:', err);
         }
     };
 
