@@ -15,7 +15,6 @@ export default function LoginPage() {
     const [isMounted, setIsMounted] = useState(false)
     const [hasSave, setHasSave] = useState(false)
     const [saveDate, setSaveDate] = useState(null)
-    const [playerName, setPlayerName] = useState('')
     const [showConfirmNew, setShowConfirmNew] = useState(false)
 
     const { language, setLanguage, loadGame, resetGame } = useGameStore()
@@ -34,26 +33,13 @@ export default function LoginPage() {
                         setSaveDate(d.toLocaleDateString() + ' ' + d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }))
                     }
                 }
-                const profile = JSON.parse(localStorage.getItem('csupasziv_user_profile') || '{}')
-                if (profile.full_name) {
-                    setPlayerName(profile.full_name)
-                }
             } catch (e) {
                 console.error(e)
             }
         }
     }, [])
 
-    const saveNameIfProvided = () => {
-        if (typeof window !== 'undefined' && playerName.trim()) {
-            const profile = JSON.parse(localStorage.getItem('csupasziv_user_profile') || '{}')
-            profile.full_name = playerName.trim()
-            localStorage.setItem('csupasziv_user_profile', JSON.stringify(profile))
-        }
-    }
-
     const handleContinue = async () => {
-        saveNameIfProvided()
         await loadGame()
         router.push('/')
     }
@@ -63,7 +49,6 @@ export default function LoginPage() {
             setShowConfirmNew(true)
             return
         }
-        saveNameIfProvided()
         resetGame()
         router.push('/')
     }
@@ -133,23 +118,8 @@ export default function LoginPage() {
 
                 {/* Main Card */}
                 <div className="bg-white/5 backdrop-blur-2xl border border-white/10 shadow-2xl rounded-4xl p-6 sm:p-10 space-y-6">
-                    {/* Player Name Input */}
-                    <div className="space-y-2">
-                        <label className="flex items-center gap-2 text-xs font-bold text-zinc-900 uppercase tracking-wider">
-                            <RiUser3Line size={16} className="text-[#4F7942]" />
-                            {t('player_name_label') || 'JÁTÉKOS NEVE (OPCIONÁLIS)'}
-                        </label>
-                        <input
-                            type="text"
-                            value={playerName}
-                            onChange={(e) => setPlayerName(e.target.value)}
-                            placeholder={t('player_name_placeholder') || 'Írd be a neved...'}
-                            className="w-full px-4 py-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl outline-none text-zinc-950 placeholder-zinc-700 font-medium transition-all focus:ring-2 focus:ring-[#4F7942]/40"
-                        />
-                    </div>
-
                     {/* Action Buttons */}
-                    <div className="space-y-4 pt-2">
+                    <div className="space-y-4">
                         {hasSave && (
                             <button
                                 onClick={handleContinue}
@@ -166,46 +136,44 @@ export default function LoginPage() {
                             </button>
                         )}
 
-                        <button
-                            onClick={handleStartNew}
-                            className={`w-full py-4 px-6 font-extrabold rounded-2xl transition-all hover:scale-[1.02] active:scale-[0.98] flex items-center justify-between group cursor-pointer border ${hasSave
-                                ? 'bg-white/10 hover:bg-white/20 text-zinc-950 border-white/20 shadow-md'
-                                : 'bg-[#4F7942] hover:bg-[#3f6134] text-white border-white/10 shadow-lg shadow-[#4F7942]/20'
-                                }`}
-                        >
-                            <div className="flex items-center gap-3">
-                                <RiRestartLine size={28} className="text-[#4F7942] group-hover:rotate-180 transition-transform duration-500" />
-                                <span className="text-lg font-bold">{hasSave ? (t('start_new_game') || 'Új játék kezdése') : (t('start_game_button') || 'Játék indítása')}</span>
-                            </div>
-                            <span className="text-xs font-bold uppercase tracking-wider bg-white/20 px-3 py-1.5 rounded-lg border border-white/20">{t('start_button_tag') || 'INDÍTÁS →'}</span>
-                        </button>
-
-                        {/* Confirmation Dialog */}
-                        {showConfirmNew && (
-                            <div className="p-4 bg-red-100/90 border border-red-500/50 rounded-2xl space-y-3 text-center">
-                                <p className="text-xs text-red-950 font-bold">
-                                    {t('confirm_overwrite_warning') || '⚠️ Új játék indításakor a meglévő elmentett játékállásod felülíródik! Biztosan folytatod?'}
-                                </p>
-                                <div className="flex gap-3">
+                        {showConfirmNew ? (
+                            <div className="w-full py-3.5 px-4 rounded-2xl bg-red-100/90 border border-red-500/40 shadow-md flex flex-col gap-2.5 animate-in fade-in zoom-in-95 duration-200">
+                                <div className="text-xs font-bold text-red-950 text-center leading-snug">
+                                    {t('confirm_overwrite_warning') || '⚠️ A meglévő mentett játékállás felülíródik! Biztosan folytatod?'}
+                                </div>
+                                <div className="flex gap-2">
                                     <button
                                         onClick={() => {
                                             setShowConfirmNew(false)
-                                            saveNameIfProvided()
                                             resetGame()
                                             router.push('/')
                                         }}
-                                        className="flex-1 py-2.5 bg-red-600 hover:bg-red-700 text-white font-bold text-xs rounded-xl cursor-pointer"
+                                        className="flex-1 py-2 px-3 bg-red-600 hover:bg-red-700 text-white font-bold text-xs rounded-xl transition-all shadow-sm cursor-pointer"
                                     >
                                         {t('confirm_yes') || 'Igen, új játék'}
                                     </button>
                                     <button
                                         onClick={() => setShowConfirmNew(false)}
-                                        className="flex-1 py-2.5 bg-white/40 hover:bg-white/60 text-zinc-950 font-bold text-xs rounded-xl cursor-pointer border border-white/20"
+                                        className="flex-1 py-2 px-3 bg-white/80 hover:bg-white text-zinc-950 font-bold text-xs rounded-xl transition-all border border-zinc-300 shadow-sm cursor-pointer"
                                     >
                                         {t('confirm_cancel') || 'Mégse'}
                                     </button>
                                 </div>
                             </div>
+                        ) : (
+                            <button
+                                onClick={handleStartNew}
+                                className={`w-full py-4 px-6 font-extrabold rounded-2xl transition-all hover:scale-[1.02] active:scale-[0.98] flex items-center justify-between group cursor-pointer border ${hasSave
+                                    ? 'bg-white/10 hover:bg-white/20 text-zinc-950 border-white/20 shadow-md'
+                                    : 'bg-[#4F7942] hover:bg-[#3f6134] text-white border-white/10 shadow-lg shadow-[#4F7942]/20'
+                                    }`}
+                            >
+                                <div className="flex items-center gap-3">
+                                    <RiRestartLine size={28} className="text-[#4F7942] group-hover:rotate-180 transition-transform duration-500" />
+                                    <span className="text-lg font-bold">{hasSave ? (t('start_new_game') || 'Új játék kezdése') : (t('start_game_button') || 'Játék indítása')}</span>
+                                </div>
+                                <span className="text-xs font-bold uppercase tracking-wider bg-white/20 px-3 py-1.5 rounded-lg border border-white/20">{t('start_button_tag') || 'INDÍTÁS →'}</span>
+                            </button>
                         )}
                     </div>
                 </div>

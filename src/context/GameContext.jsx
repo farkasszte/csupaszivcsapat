@@ -26,8 +26,13 @@ export const GameProvider = ({ children }) => {
     const [selectedMapLocation, setSelectedMapLocation] = useState(null);
     const [librarySearchQuery, setLibrarySearchQuery] = useState('');
 
-
-
+    useEffect(() => {
+        const disableContextMenu = (e) => {
+            e.preventDefault();
+        };
+        window.addEventListener('contextmenu', disableContextMenu);
+        return () => window.removeEventListener('contextmenu', disableContextMenu);
+    }, []);
 
     const toggleLog = (val) => {
         const next = val !== undefined ? val : !showLog;

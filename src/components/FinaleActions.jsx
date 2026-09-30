@@ -67,8 +67,8 @@ export const FinaleActions = () => {
                                 {action.label}
                             </span>
                             {action.external && (
-                                <span className="text-[10px] uppercase tracking-widest opacity-60 flex items-center gap-1 mt-1">
-                                    Külső oldal <RiExternalLinkLine className="w-2.5 h-2.5" />
+                                <span className="text-xs uppercase tracking-widest opacity-60 flex items-center gap-1 mt-1">
+                                    Külső oldal <RiExternalLinkLine className="w-3 h-3" />
                                 </span>
                             )}
                         </div>

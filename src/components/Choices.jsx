@@ -93,10 +93,10 @@ export const Choices = ({ hasImage, onHoverChange }) => {
                         }}
                         onMouseEnter={() => onHoverChange?.(true)}
                         onMouseLeave={() => onHoverChange?.(false)}
-                        className={`text-surface font-medium text-base italic transition-all transform hover:scale-102 shadow-xl backdrop-blur-md border border-white/20 hover:border-[#4F7942]/50 whitespace-normal max-w-full
+                        className={`text-surface font-medium text-base italic transition-all transform hover:scale-102 shadow-xl backdrop-blur-md border border-white/20 hover:border-[#4F7942]/60 whitespace-normal max-w-full
                             ${hasImage
-                                ? 'px-2 py-2 rounded-full bg-white/40 hover:bg-white/60 text-sm'
-                                : 'w-full text-left px-4 py-4 rounded-lg bg-linear-to-r from-white/40 to-white/20 hover:from-white/60 hover:to-white/40'
+                                ? 'px-3 py-2 rounded-full bg-white/40 hover:bg-[#d8c5b0]/90 hover:brightness-95 text-sm'
+                                : 'w-full text-left px-4 py-4 rounded-lg bg-linear-to-r from-white/40 to-white/20 hover:from-[#d8c5b0]/90 hover:to-[#c8b49e]/80 hover:brightness-95'
                             }`}
                     >
                         {choice.label}

@@ -21,7 +21,7 @@ import {
     RiMapLine,
     RiMenuLine,
     RiBookLine,
-    RiUserLine,
+    RiQrCodeLine,
     RiSettings4Line,
     RiImageLine,
     RiHome4Line,
@@ -87,9 +87,9 @@ export default function Home() {
     };
 
     const tabCls = (key) =>
-        `flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold transition-colors ${activeTab === key
-            ? 'bg-white/60 text-[#4F7942] shadow-sm'
-            : 'text-[#4F7942]/80 hover:text-[#4F7942] hover:bg-white/40'
+        `flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold transition-all ${activeTab === key
+            ? 'bg-white/80 hover:bg-[#d8c5b0] hover:brightness-95 text-[#4F7942] shadow-sm border border-[#4F7942]/30'
+            : 'text-[#4F7942]/80 hover:text-[#4F7942] hover:bg-white/50'
         }`;
 
     return (
@@ -135,7 +135,7 @@ export default function Home() {
                                 <RiSettings4Line size={14} /> <span>{t('settings')}</span>
                             </button>
                             <button onClick={() => setShowProfile(true)} className={tabCls('profile')}>
-                                <RiUserLine size={14} /> <span>{t('profile')}</span>
+                                <RiQrCodeLine size={14} /> <span>{t('mobile_qr') || 'Mobil'}</span>
                             </button>
                         </div>
                     </div>
@@ -208,7 +208,7 @@ export default function Home() {
                                                     </div>
                                                 ) : (
                                                     <div className="w-full h-full bg-zinc-800/40 border border-dashed border-white/10 flex items-center justify-center">
-                                                        <span className="text-[10px] text-white/20 uppercase tracking-widest">Nincs kép</span>
+                                                        <span className="text-xs text-white/30 uppercase tracking-widest">Nincs kép</span>
                                                     </div>
                                                 )}
                                             </div>

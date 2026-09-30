@@ -48,8 +48,9 @@ export const translations = {
         "search_placeholder": "Keresés...",
         "no_results": "Nincs találat",
         "loading": "Betöltés...",
-        "profile_title": "Profilom",
-        "profile_desc": "Módosítsd adataidat az élmény személyre szabásához.",
+        "profile_title": "Profil és Mentések",
+        "profile_desc": "Játékállás és mentések kezelése ezen az eszközön.",
+        "open_on_mobile": "Megnyitás telefonon",
         "gender": "Nem",
         "choose": "Válassz...",
         "male": "Fiú",
@@ -121,7 +122,7 @@ export const translations = {
         "start_new_game": "Új játék kezdése",
         "start_game_button": "Játék indítása",
         "start_button_tag": "Indítás →",
-        "confirm_overwrite_warning": "⚠️ Új játék indításakor a meglévő elmentett játékállásod felülíródik! Biztosan folytatod?",
+        "confirm_overwrite_warning": "⚠️ A meglévő elmentett játékállásod felülíródik! Biztosan folytatod?",
         "confirm_yes": "Igen, új játék",
         "confirm_cancel": "Mégse",
         "local_save_management": "Helyi mentés kezelése",
@@ -135,7 +136,12 @@ export const translations = {
         "import_success": "Mentés sikeresen beimportálva!",
         "import_error": "Érvénytelen mentési fájl!",
         "clear_save_confirm": "Biztosan törölni szeretnéd a helyi mentést? Ez nem vonható vissza.",
-        "save_cleared": "Mentés törölve."
+        "save_cleared": "Mentés törölve.",
+        "mobile_qr": "Mobil",
+        "mobile_qr_desc": "Olvasd be a QR-kódot a telefonoddal a kaland megnyitásához!",
+        "export_save_desc": "Játékállás mentése fájlba",
+        "import_save_desc": "Mentési fájl betöltése",
+        "return_to_home_desc": "Visszatérés a kezdőlapra"
     },
     "en": {
         "game_title": "Kind-Hearted Adventures: Heroes of the Homokhátság",
@@ -186,8 +192,9 @@ export const translations = {
         "search_placeholder": "Search...",
         "no_results": "No results found",
         "loading": "Loading...",
-        "profile_title": "My Profile",
-        "profile_desc": "Modify your data to personalize the experience.",
+        "profile_title": "Profile & Saves",
+        "profile_desc": "Manage your game progress and play on mobile.",
+        "open_on_mobile": "Open on mobile",
         "gender": "Gender",
         "choose": "Choose...",
         "male": "Male",
@@ -273,7 +280,12 @@ export const translations = {
         "import_success": "Save imported successfully!",
         "import_error": "Invalid save file!",
         "clear_save_confirm": "Are you sure you want to delete the local save? This cannot be undone.",
-        "save_cleared": "Save deleted."
+        "save_cleared": "Save deleted.",
+        "mobile_qr": "Mobile",
+        "mobile_qr_desc": "Scan the QR code with your phone to open the adventure!",
+        "export_save_desc": "Save game progress to file",
+        "import_save_desc": "Load save file from device",
+        "return_to_home_desc": "Return to main home page"
     },
     "sr-latn": {
         "game_title": "Avanture velikog srca: Heroji peščare",
@@ -324,8 +336,9 @@ export const translations = {
         "search_placeholder": "Pretraga...",
         "no_results": "Nema rezultata",
         "loading": "Učitavanje...",
-        "profile_title": "Moj profil",
-        "profile_desc": "Izmeni svoje podatke da personalizuješ iskustvo.",
+        "profile_title": "Profil i snimanja",
+        "profile_desc": "Upravljajte napretkom igre i igrajte na telefonu.",
+        "open_on_mobile": "Otvori na telefonu",
         "gender": "Pol",
         "choose": "Izaberi...",
         "male": "Dečak",
@@ -411,7 +424,12 @@ export const translations = {
         "import_success": "Sačuvana igra je uspešno uvežena!",
         "import_error": "Nevažeći fajl za čuvanje!",
         "clear_save_confirm": "Da li ste sigurni da želite da obrišete lokalno sačuvano? Ovo se ne može poništiti.",
-        "save_cleared": "Sačuvano obrisano."
+        "save_cleared": "Sačuvano obrisano.",
+        "mobile_qr": "Mobilni",
+        "mobile_qr_desc": "Skenirajte QR kod telefonom da otvorite avanturu!",
+        "export_save_desc": "Sačuvaj igru u fajl",
+        "import_save_desc": "Učitaj fajl sa uređaja",
+        "return_to_home_desc": "Povratak na početnu stranu"
     },
     "sr-cyrl": {
         "game_title": "Авантуре великог срца: Хероји пешчаре",
@@ -462,8 +480,9 @@ export const translations = {
         "search_placeholder": "Претрага...",
         "no_results": "Нема резултата",
         "loading": "Учитавање...",
-        "profile_title": "Мој профил",
-        "profile_desc": "Измени своје податке да персонализујеш искуство.",
+        "profile_title": "Профил и чувања",
+        "profile_desc": "Управљајте напретком игре и играјте на телефону.",
+        "open_on_mobile": "Отвори на телефону",
         "gender": "Пол",
         "choose": "Изабери...",
         "male": "Дечак",
@@ -549,6 +568,11 @@ export const translations = {
         "import_success": "Сачувана игра је успешно увежена!",
         "import_error": "Неважећи фајл за чување!",
         "clear_save_confirm": "Да ли сте сигурни да желите да обришете локално сачувано? Ово се не може поништити.",
-        "save_cleared": "Сачувано обрисано."
+        "save_cleared": "Сачувано обрисано.",
+        "mobile_qr": "Мобилни",
+        "mobile_qr_desc": "Скенирајте QR код телефоном да отворите авантуру!",
+        "export_save_desc": "Сачувај игру у фајл",
+        "import_save_desc": "Учитај фајл са уређаја",
+        "return_to_home_desc": "Повратак на почетну страну"
     }
 };

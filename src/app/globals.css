@@ -34,6 +34,39 @@ body {
   margin: 0;
 }
 
+/* Custom enlarged theme cursor */
+html, body {
+  cursor: url("/cursors/cursor-default.svg") 3 2, auto;
+}
+
+button,
+a,
+select,
+summary,
+[role="button"],
+label,
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+input[type="range"],
+.cursor-pointer,
+.cursor-pointer * {
+  cursor: url("/cursors/cursor-pointer.svg") 8 2, pointer !important;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="password"],
+textarea {
+  cursor: text;
+}
+
+button:disabled,
+[disabled] {
+  cursor: not-allowed !important;
+}
+
 
 /* Utility to hide scrollbar but keep functionality */
 @layer utilities {

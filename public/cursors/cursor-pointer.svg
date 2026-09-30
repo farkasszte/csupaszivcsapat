@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+  <defs>
+    <filter id="pointer-shadow" x="0" y="0" width="32" height="32" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="1" dy="1.5" stdDeviation="1" flood-color="#1c120c" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+  <g filter="url(#pointer-shadow)">
+    <!-- Dark brown outline: single index finger pointing up, other 3 fingers folded down -->
+    <path d="M8 2 C6.8 2 5.8 3 5.8 4.5 V15.5 L4.2 13.8 C3.2 12.8 1.6 12.8 0.6 13.8 C-0.4 14.8 -0.4 16.4 0.6 17.4 L5.2 23 C7.2 25.5 10.2 27 13.5 27 H16.5 C20 27 22.5 24.5 22.5 21 V16.5 C22.5 15.2 21.5 14.2 20.2 14.2 C19.9 14.2 19.6 14.3 19.3 14.5 C19 13.4 18 12.6 16.8 12.6 C16.5 12.6 16.2 12.7 15.9 12.8 C15.5 11.8 14.5 11 13.3 11 C12.2 11 11.2 11.8 10.8 12.8 V4.5 C10.8 3 9.8 2 8 2 Z" fill="#2d1a10" stroke="#2d1a10" stroke-width="2.2" stroke-linejoin="round"/>
+    <!-- Crisp warm white body -->
+    <path d="M8 2 C6.8 2 5.8 3 5.8 4.5 V15.5 L4.2 13.8 C3.2 12.8 1.6 12.8 0.6 13.8 C-0.4 14.8 -0.4 16.4 0.6 17.4 L5.2 23 C7.2 25.5 10.2 27 13.5 27 H16.5 C20 27 22.5 24.5 22.5 21 V16.5 C22.5 15.2 21.5 14.2 20.2 14.2 C19.9 14.2 19.6 14.3 19.3 14.5 C19 13.4 18 12.6 16.8 12.6 C16.5 12.6 16.2 12.7 15.9 12.8 C15.5 11.8 14.5 11 13.3 11 C12.2 11 11.2 11.8 10.8 12.8 V4.5 C10.8 3 9.8 2 8 2 Z" fill="#fffdf8"/>
+    <!-- Fold separation lines between folded fingers -->
+    <path d="M10.8 15 H14 M14 16.5 H17.5 M17.5 18 H21" stroke="#2d1a10" stroke-width="1.2" stroke-linecap="round"/>
+  </g>
+</svg>

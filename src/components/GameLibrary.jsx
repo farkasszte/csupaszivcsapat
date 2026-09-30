@@ -244,8 +244,8 @@ export default function GameLibrary() {
             {/* 2. EXTERNAL LINKS SECTION */}
             <div className="flex flex-col gap-3">
                 <div className="flex items-center justify-between px-1">
-                    <div className="flex items-center gap-1.5 text-[10px] text-[#4F7942] font-bold uppercase tracking-widest">
-                        <RiBookLine size={10} />
+                    <div className="flex items-center gap-1.5 text-xs text-[#4F7942] font-bold uppercase tracking-widest">
+                        <RiBookLine size={12} />
                         {t('library_subtitle') || 'Homokhátsági természeti enciklopédia'}
                     </div>
                 </div>
@@ -300,33 +300,33 @@ export default function GameLibrary() {
                                                     href={link.link}
                                                     target="_blank"
                                                     rel="noopener noreferrer"
-                                                    className="flex items-center gap-3 px-4 py-3 bg-white/40 hover:bg-white/60 rounded-xl backdrop-blur-sm transition-all group border border-[#4F7942]/10 hover:border-[#4F7942]/30 shadow-sm"
+                                                    className="flex items-center gap-3 px-4 py-3 bg-white/40 hover:bg-[#d8c5b0]/80 hover:brightness-95 rounded-xl backdrop-blur-sm transition-all group border border-[#4F7942]/10 hover:border-[#4F7942]/40 shadow-sm"
                                                 >
                                                     <div className="flex-1 min-w-0">
                                                         <div className="text-xs font-bold text-zinc-950 group-hover:text-[#4F7942] transition-colors leading-tight flex items-center gap-2">
                                                             {link.nev}
                                                             {link.isTelepules && link.vedett && (
-                                                                <span className="px-1.5 py-0.5 rounded-sm bg-blue-900/40 text-blue-400 text-[9px] uppercase tracking-wider border border-blue-800/30">
+                                                                <span className="px-1.5 py-0.5 rounded-sm bg-blue-900/40 text-blue-400 text-xs uppercase tracking-wider border border-blue-800/30">
                                                                     {link.vedett}
                                                                 </span>
                                                             )}
                                                             {link.isTerulet && link.vedett && (
-                                                                <span className="px-1.5 py-0.5 rounded-sm bg-teal-900/40 text-teal-400 text-[9px] uppercase tracking-wider border border-teal-800/30">
+                                                                <span className="px-1.5 py-0.5 rounded-sm bg-teal-900/40 text-teal-400 text-xs uppercase tracking-wider border border-teal-800/30">
                                                                     {link.vedett}
                                                                 </span>
                                                             )}
                                                             {!link.isTelepules && !link.isTerulet && !link.isTanosveny && (link.vedett === 'Védett' || link.vedett === 'Fokozottan védett' || link.vedett === 'Igen') && (
-                                                                <span className="px-1.5 py-0.5 rounded-sm bg-emerald-900/40 text-white text-[9px] uppercase tracking-wider border border-emerald-800/30">
+                                                                <span className="px-1.5 py-0.5 rounded-sm bg-emerald-900/40 text-white text-xs uppercase tracking-wider border border-emerald-800/30">
                                                                     {link.vedett === 'Igen' ? 'Védett' : link.vedett}
                                                                 </span>
                                                             )}
                                                         </div>
                                                         {link.latinNev && (
-                                                            <div className="text-[10px] text-zinc-600 mt-0.5 italic leading-tight">
+                                                            <div className="text-xs text-zinc-600 mt-0.5 italic leading-tight">
                                                                 {link.latinNev}
                                                             </div>
                                                         )}
-                                                        <div className="text-[10px] text-zinc-700 mt-1.5 flex flex-wrap gap-x-3 gap-y-1">
+                                                        <div className="text-xs text-zinc-700 mt-1.5 flex flex-wrap gap-x-3 gap-y-1">
                                                             {!link.isTelepules && !link.isTerulet && !link.isTanosveny && link.statusz && link.statusz !== 'Nem fenyegetett' && (
                                                                 <span className="text-red-700 font-medium flex items-center gap-1">
                                                                     <div className="w-1 h-1 rounded-full bg-red-600"></div>

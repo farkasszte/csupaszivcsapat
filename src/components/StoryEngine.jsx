@@ -281,7 +281,7 @@ export const StoryEngine = ({ hideMedia = false }) => {
                         </div>
                     )}
 
-                    <div className="story-content space-y-4 sm:space-y-6 text-sm sm:text-lg lg:text-[19px] text-surface leading-[1.6] sm:leading-[1.8] lg:leading-loose tracking-wide animate-in fade-in duration-500">
+                    <div className="story-content space-y-4 sm:space-y-6 text-sm sm:text-lg lg:text-lg text-surface leading-[1.6] sm:leading-[1.8] lg:leading-loose tracking-wide animate-in fade-in duration-500">
                         {contentSegments.map((seg, idx) => {
                             const visibleForThisSeg = Math.max(0, Math.min(seg.length, totalVisibleChars - seg.startOffset));
                             return (

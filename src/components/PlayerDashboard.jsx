@@ -133,7 +133,7 @@ export default function PlayerDashboard() {
                                     <currentLevel.icon size={20} />
                                 </div>
                                 <div>
-                                    <div className="text-[10px] font-bold text-[#4F7942]/60 uppercase tracking-widest">{t('level')}</div>
+                                    <div className="text-xs font-bold text-[#4F7942]/70 uppercase tracking-widest">{t('level')}</div>
                                     <div className={`text-xl font-serif font-bold ${currentLevel.color}`}>{currentLevel.title}</div>
                                 </div>
                             </div>
@@ -144,7 +144,7 @@ export default function PlayerDashboard() {
                                         {score} <span className="text-xs uppercase text-[#4F7942]/70 tracking-widest ml-1 font-sans">{t('points')}</span>
                                     </span>
                                     {nextLevel && (
-                                        <span className="text-[10px] text-[#4F7942]/50 font-bold italic drop-shadow-sm">
+                                        <span className="text-xs text-[#4F7942]/60 font-bold italic drop-shadow-sm">
                                             {t('next_level')}: {nextLevel.title} ({nextLevel.min} {t('points')})
                                         </span>
                                     )}
@@ -167,25 +167,25 @@ export default function PlayerDashboard() {
                         onClick={() => setActiveTab('characters')}
                         className={`backdrop-blur-lg border rounded-2xl p-4 flex flex-col items-center justify-center transition-all shadow-md active:scale-95 ${
                             activeTab === 'characters' 
-                            ? 'bg-white/20 border-[#4F7942]/60 ring-2 ring-[#4F7942]/20' 
+                            ? 'bg-white/25 hover:bg-white/35 hover:brightness-90 border-[#4F7942]/60 ring-2 ring-[#4F7942]/20' 
                             : 'bg-white/5 border-white/10 hover:bg-white/10'
                         }`}
                     >
                         <RiUser3Line size={18} className={activeTab === 'characters' ? 'text-[#4F7942]' : 'text-[#4F7942]/60'} />
                         <div className="text-xl font-bold text-[#4F7942] drop-shadow-sm">{discoveredChars} / {totalChars}</div>
-                        <div className={`text-[9px] uppercase font-bold tracking-tighter drop-shadow-sm ${activeTab === 'characters' ? 'text-[#4F7942]' : 'text-[#4F7942]/60'}`}>{t('characters')}</div>
+                        <div className={`text-xs uppercase font-bold tracking-tighter drop-shadow-sm ${activeTab === 'characters' ? 'text-[#4F7942]' : 'text-[#4F7942]/60'}`}>{t('characters')}</div>
                     </button>
                     <button
                         onClick={() => setActiveTab('locations')}
                         className={`backdrop-blur-lg border rounded-2xl p-4 flex flex-col items-center justify-center transition-all shadow-md active:scale-95 ${
                             activeTab === 'locations' 
-                            ? 'bg-white/20 border-[#4F7942]/60 ring-2 ring-[#4F7942]/20' 
+                            ? 'bg-white/25 hover:bg-white/35 hover:brightness-90 border-[#4F7942]/60 ring-2 ring-[#4F7942]/20' 
                             : 'bg-white/5 border-white/10 hover:bg-white/10'
                         }`}
                     >
                         <RiMapPin2Line size={18} className={activeTab === 'locations' ? 'text-[#4F7942]' : 'text-[#4F7942]/60'} />
                         <div className="text-xl font-bold text-[#4F7942] drop-shadow-sm">{discoveredLocs} / {totalLocs}</div>
-                        <div className={`text-[9px] uppercase font-bold tracking-tighter drop-shadow-sm ${activeTab === 'locations' ? 'text-[#4F7942]' : 'text-[#4F7942]/60'}`}>{t('locations')}</div>
+                        <div className={`text-xs uppercase font-bold tracking-tighter drop-shadow-sm ${activeTab === 'locations' ? 'text-[#4F7942]' : 'text-[#4F7942]/60'}`}>{t('locations')}</div>
                     </button>
                 </div>
 
@@ -287,7 +287,7 @@ export default function PlayerDashboard() {
                                                 {loc.externalLink && (
                                                     <button
                                                         onClick={() => window.open(loc.externalLink, '_blank')}
-                                                        className="shrink-0 flex items-center gap-1 text-[10px] font-bold text-[#4F7942] hover:text-[#3d5d33] transition-colors bg-[#4F7942]/5 px-2 py-1 rounded-md border border-[#4F7942]/10"
+                                                        className="shrink-0 flex items-center gap-1 text-xs font-bold text-[#4F7942] hover:text-[#3d5d33] transition-colors bg-[#4F7942]/5 px-2 py-1 rounded-md border border-[#4F7942]/10"
                                                     >
                                                         <RiExternalLinkLine size={12} />
                                                     </button>

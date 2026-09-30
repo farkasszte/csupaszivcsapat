@@ -58,14 +58,7 @@ export default function StoryLog() {
                 }]
             });
 
-            let username = 'vendeg';
-            if (typeof window !== 'undefined') {
-                try {
-                    const profile = JSON.parse(localStorage.getItem('csupasziv_user_profile') || '{}');
-                    if (profile.full_name) username = profile.full_name.replace(/\s+/g, '_');
-                } catch (e) {}
-            }
-            const filename = `Homokhátság Hősei-${username}-${new Date().toISOString().split('T')[0]}.docx`;
+            const filename = `Homokhátság Hősei-${new Date().toISOString().split('T')[0]}.docx`;
 
             const blob = await Packer.toBlob(doc);
             const url = URL.createObjectURL(blob);
@@ -81,14 +74,7 @@ export default function StoryLog() {
 
     const exportToPdf = () => {
         try {
-            let username = 'vendeg';
-            if (typeof window !== 'undefined') {
-                try {
-                    const profile = JSON.parse(localStorage.getItem('csupasziv_user_profile') || '{}');
-                    if (profile.full_name) username = profile.full_name.replace(/\s+/g, '_');
-                } catch (e) {}
-            }
-            const filename = `Homokhátság Hősei-${username}-${new Date().toISOString().split('T')[0]}`;
+            const filename = `Homokhátság Hősei-${new Date().toISOString().split('T')[0]}`;
 
             let contentStr = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>${filename}</title><style>
                 @page { margin: 20mm 15mm; size: A4 portrait; }
