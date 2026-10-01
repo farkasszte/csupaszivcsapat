@@ -29,4 +29,49 @@ test.describe('Alapvető megjelenés és fülek (Smoke)', () => {
     await settingsTab.click();
     await expect(page.getByText(/Nyelv|Hangok/i).first()).toBeVisible();
   });
+
+  test('Felolvasás kapcsoló és Bemutató mód működése', async ({ page, isMobile }) => {
+    await page.goto('/');
+
+    const readAloudSelector = isMobile ? page.getByTestId('mobile-read-aloud') : page.getByTestId('header-read-aloud');
+
+    // 1. By default, TTS button is not present
+    await expect(readAloudSelector).toHaveCount(0);
+
+    // 2. Open Settings tab
+    const settingsTab = page.getByRole('button', { name: /Beállítások/i }).first();
+    await settingsTab.click();
+
+    // 3. Verify Presentation Mode does not contain the word "Kioszk"
+    await expect(page.getByText('Bemutató mód')).toBeVisible();
+    await expect(page.getByText(/kioszk/i)).toHaveCount(0);
+
+    // 4. Verify Read Aloud toggle exists
+    const ttsToggle = page.getByTestId('toggle-read-aloud');
+    const presentationToggle = page.getByTestId('toggle-presentation-mode');
+    await expect(ttsToggle).toBeVisible();
+
+    // 5. Turn on TTS manually
+    await ttsToggle.click();
+    await settingsTab.click(); // close panel
+    await expect(readAloudSelector).toBeVisible();
+
+    // 6. Turn off TTS manually
+    await settingsTab.click();
+    await ttsToggle.click();
+    await settingsTab.click();
+    await expect(readAloudSelector).toHaveCount(0);
+
+    // 7. Enabling presentation mode automatically turns on TTS
+    await settingsTab.click();
+    await presentationToggle.click();
+    await settingsTab.click();
+    await expect(readAloudSelector).toBeVisible();
+
+    // 8. Can still manually turn off TTS while presentation mode is active
+    await settingsTab.click();
+    await ttsToggle.click();
+    await settingsTab.click();
+    await expect(readAloudSelector).toHaveCount(0);
+  });
 });

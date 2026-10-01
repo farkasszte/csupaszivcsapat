@@ -15,6 +15,7 @@ import {
     RiGlobalLine,
     RiFontFamily,
     RiTvLine,
+    RiSpeakLine,
 } from '@remixicon/react';
 
 export default function GameMenu() {
@@ -27,6 +28,7 @@ export default function GameMenu() {
         isMuted, toggleMute,
         colorFilter, setColorFilter,
         presentationMode, setPresentationMode,
+        ttsEnabled, setTtsEnabled,
         typewriterSpeed, setTypewriterSpeed,
         volume, setVolume,
         language, setLanguage,
@@ -290,6 +292,8 @@ export default function GameMenu() {
                             </div>
                             <button
                                 onClick={() => setPresentationMode(!presentationMode)}
+                                data-testid="toggle-presentation-mode"
+                                aria-label={t('presentation_mode') || 'Bemutató mód'}
                                 className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${presentationMode ? 'bg-[#4F7942]' : 'bg-[#4F7942]/20'}`}
                             >
                                 <span className={`pointer-events-none inline-block h-4 w-4 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${presentationMode ? 'translate-x-4' : 'translate-x-0'}`} />
@@ -297,6 +301,27 @@ export default function GameMenu() {
                         </div>
                         <p className="text-xs text-[#4F7942]/80 leading-tight mt-0.5">
                             {t('presentation_mode_desc') || 'A külső linkek felugró ablakban nyílnak meg a bemutató elhagyása nélkül.'}
+                        </p>
+                    </div>
+
+                    {/* Read Aloud Toggle */}
+                    <div className="flex flex-col gap-1 px-3 py-2.5 mt-2 bg-white/40 rounded-lg">
+                        <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-2">
+                                <RiSpeakLine size={16} className="text-[#4F7942]" />
+                                <span className="text-xs font-semibold text-[#4F7942]">{t('read_aloud_toggle') || 'Felolvasás'}</span>
+                            </div>
+                            <button
+                                onClick={() => setTtsEnabled(!ttsEnabled)}
+                                data-testid="toggle-read-aloud"
+                                className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${ttsEnabled ? 'bg-[#4F7942]' : 'bg-[#4F7942]/20'}`}
+                                aria-label={t('read_aloud_toggle') || 'Felolvasás'}
+                            >
+                                <span className={`pointer-events-none inline-block h-4 w-4 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${ttsEnabled ? 'translate-x-4' : 'translate-x-0'}`} />
+                            </button>
+                        </div>
+                        <p className="text-xs text-[#4F7942]/80 leading-tight mt-0.5">
+                            {t('read_aloud_toggle_desc') || 'A történet szövegének felolvasása gomb megjelenítése.'}
                         </p>
                     </div>
                 </div>

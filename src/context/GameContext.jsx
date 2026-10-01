@@ -51,6 +51,74 @@ export const GameProvider = ({ children }) => {
         setExternalModalUrl(null);
     };
 
+    // Text-to-Speech (TTS) centralized handling
+    const [isSpeaking, setIsSpeaking] = useState(false);
+
+    const stopSpeech = () => {
+        if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+            window.speechSynthesis.cancel();
+            setIsSpeaking(false);
+        }
+    };
+
+    const getCurrentStoryText = () => {
+        const el = projectSettings.elements[store.currentElementId];
+        if (!el?.content) return '';
+        let raw = el.content;
+        if (store.language === 'en' && storyTranslations?.[store.currentElementId]) {
+            raw = storyTranslations[store.currentElementId].content || raw;
+        } else if (store.language?.startsWith('sr') && storyTranslations?.[store.language]?.[store.currentElementId]) {
+            raw = storyTranslations[store.language][store.currentElementId].content || raw;
+        }
+        if (typeof document !== 'undefined') {
+            const tmp = document.createElement('div');
+            tmp.innerHTML = raw;
+            return (tmp.textContent || tmp.innerText || '').replace(/\s+/g, ' ').trim();
+        }
+        return raw.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim();
+    };
+
+    const toggleSpeech = () => {
+        if (typeof window === 'undefined' || !('speechSynthesis' in window)) {
+            alert(t('tts_unsupported') || 'A böngésződ nem támogatja a szövegfelolvasást.');
+            return;
+        }
+
+        if (isSpeaking) {
+            stopSpeech();
+            return;
+        }
+
+        const plainText = getCurrentStoryText();
+        if (!plainText) return;
+
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(plainText);
+        const langCode = store.language === 'en' ? 'en-US' : store.language?.startsWith('sr') ? 'sr-RS' : 'hu-HU';
+        utterance.lang = langCode;
+        utterance.rate = 0.95;
+
+        const voices = window.speechSynthesis.getVoices();
+        const voice = voices.find(v => v.lang.startsWith(langCode.slice(0, 2)));
+        if (voice) utterance.voice = voice;
+
+        utterance.onstart = () => setIsSpeaking(true);
+        utterance.onend = () => setIsSpeaking(false);
+        utterance.onerror = () => setIsSpeaking(false);
+
+        window.speechSynthesis.speak(utterance);
+    };
+
+    useEffect(() => {
+        stopSpeech();
+    }, [store.currentElementId, store.language]);
+
+    useEffect(() => {
+        return () => {
+            stopSpeech();
+        };
+    }, []);
+
     useEffect(() => {
         const disableContextMenu = (e) => {
             e.preventDefault();
@@ -312,6 +380,11 @@ export const GameProvider = ({ children }) => {
         setColorFilter: store.setColorFilter,
         presentationMode: store.presentationMode,
         setPresentationMode: store.setPresentationMode,
+        ttsEnabled: store.ttsEnabled,
+        setTtsEnabled: store.setTtsEnabled,
+        isSpeaking,
+        toggleSpeech,
+        stopSpeech,
         externalModalUrl,
         openExternalUrl,
         closeExternalUrl,

@@ -25,6 +25,8 @@ import {
     RiSettings4Line,
     RiImageLine,
     RiHome4Line,
+    RiVolumeUpLine,
+    RiStopCircleLine,
 } from '@remixicon/react';
 
 
@@ -45,7 +47,8 @@ export default function Home() {
         togglePanel,
         getAssetUrl,
         colorFilter,
-        t, language, setLanguage
+        t, language, setLanguage,
+        ttsEnabled, isSpeaking, toggleSpeech
     } = useGame();
 
     useEffect(() => {
@@ -112,8 +115,36 @@ export default function Home() {
                             </h1>
                         </div>
 
+                        {/* Read Aloud (TTS) Button — between title and menu */}
+                        {ttsEnabled && (
+                            <div className="flex-1 flex items-center justify-center px-2">
+                                <button
+                                    onClick={toggleSpeech}
+                                    data-testid="header-read-aloud"
+                                    className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all shadow-xs cursor-pointer select-none backdrop-blur-md border ${
+                                        isSpeaking
+                                            ? 'bg-amber-400 text-amber-950 animate-pulse border-amber-500 shadow-md ring-2 ring-amber-400/30'
+                                            : 'bg-white/60 hover:bg-white/90 text-[#4F7942] border-white/40 hover:border-[#4F7942]/40'
+                                    }`}
+                                    title={isSpeaking ? (t('stop_reading') || 'Leállítás') : (t('read_aloud') || 'Felolvasás')}
+                                >
+                                    {isSpeaking ? (
+                                        <>
+                                            <RiStopCircleLine size={16} className="text-red-700 animate-spin" />
+                                            <span>{t('stop_reading') || 'Leállítás'}</span>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <RiVolumeUpLine size={16} />
+                                            <span>{t('read_aloud') || 'Felolvasás'}</span>
+                                        </>
+                                    )}
+                                </button>
+                            </div>
+                        )}
+
                         {/* Tabs (Right) */}
-                        <div className="flex items-center gap-1 bg-white/60 backdrop-blur-xl p-1 rounded-xl border border-white/60 shadow-sm no-scrollbar scrollbar-hide ml-auto">
+                        <div className="flex items-center gap-1 bg-white/60 backdrop-blur-xl p-1 rounded-xl border border-white/60 shadow-sm no-scrollbar scrollbar-hide shrink-0 ml-auto">
                             <button onClick={() => setShowImages(true)} className={tabCls('images')}>
                                 <RiImageLine size={14} /> <span>{t('images')}</span>
                             </button>
@@ -224,6 +255,33 @@ export default function Home() {
             </div >
             <Lightbox />
             <ColorFilters />
+
+            {/* Mobile floating Read Aloud button when enabled */}
+            {ttsEnabled && (
+                <div className="lg:hidden fixed top-3 right-3 z-40 animate-in fade-in duration-300">
+                    <button
+                        onClick={toggleSpeech}
+                        data-testid="mobile-read-aloud"
+                        className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition-all shadow-md cursor-pointer select-none backdrop-blur-md border ${
+                            isSpeaking
+                                ? 'bg-amber-400 text-amber-950 animate-pulse border-amber-500 ring-2 ring-amber-400/30'
+                                : 'bg-white/80 hover:bg-white text-[#4F7942] border-white/60'
+                        }`}
+                    >
+                        {isSpeaking ? (
+                            <>
+                                <RiStopCircleLine size={16} className="text-red-700 animate-spin" />
+                                <span>{t('stop_reading') || 'Leállítás'}</span>
+                            </>
+                        ) : (
+                            <>
+                                <RiVolumeUpLine size={16} />
+                                <span>{t('read_aloud') || 'Felolvasás'}</span>
+                            </>
+                        )}
+                    </button>
+                </div>
+            )}
 
         </div >
     );

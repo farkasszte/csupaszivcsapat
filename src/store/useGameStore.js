@@ -39,11 +39,19 @@ export const useGameStore = create((set, get) => ({
     language: 'hu',
     fontFamily: 'montserrat',
     presentationMode: false,
+    ttsEnabled: false,
 
     // Actions
     setLanguage: (language) => { set({ language }); get().saveGame(); },
     setFontFamily: (fontFamily) => { set({ fontFamily }); get().saveGame(); },
-    setPresentationMode: (presentationMode) => { set({ presentationMode }); get().saveGame(); },
+    setPresentationMode: (presentationMode) => {
+        set(state => ({
+            presentationMode,
+            ttsEnabled: presentationMode ? true : state.ttsEnabled
+        }));
+        get().saveGame();
+    },
+    setTtsEnabled: (ttsEnabled) => { set({ ttsEnabled }); get().saveGame(); },
     visitElement: (id) => {
         set((state) => {
             const newVisits = { ...state.visits };
@@ -271,13 +279,13 @@ export const useGameStore = create((set, get) => ({
                 const {
                     currentElementId, visits, variables, history, storyLog, discoveredComponents,
                     finishedStories,
-                    volume, isMuted, typewriterSpeed, transitionsEnabled, colorFilter, language, fontFamily, presentationMode
+                    volume, isMuted, typewriterSpeed, transitionsEnabled, colorFilter, language, fontFamily, presentationMode, ttsEnabled
                 } = get();
 
                 const gameState = {
                     currentElementId, visits, variables, history, storyLog, discoveredComponents,
                     finishedStories,
-                    settings: { volume, isMuted, typewriterSpeed, transitionsEnabled, colorFilter, language, fontFamily, presentationMode },
+                    settings: { volume, isMuted, typewriterSpeed, transitionsEnabled, colorFilter, language, fontFamily, presentationMode, ttsEnabled },
                     savedAt: new Date().toISOString()
                 };
 
@@ -331,6 +339,7 @@ export const useGameStore = create((set, get) => ({
                     language: loadedLang,
                     fontFamily: s.fontFamily ?? 'montserrat',
                     presentationMode: s.presentationMode ?? false,
+                    ttsEnabled: s.ttsEnabled ?? false,
                     isStarted: true,
                 });
             } else {
@@ -373,6 +382,7 @@ export const useGameStore = create((set, get) => ({
                     language: loadedLang,
                     fontFamily: s.fontFamily ?? 'montserrat',
                     presentationMode: s.presentationMode ?? false,
+                    ttsEnabled: s.ttsEnabled ?? false,
                     isStarted: true,
                 });
             }
