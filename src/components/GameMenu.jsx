@@ -208,8 +208,11 @@ export default function GameMenu() {
                                 <span className="text-xs font-semibold text-[#4F7942]">{t('mute')}</span>
                             </div>
                             <button
+                                role="switch"
+                                aria-checked={!isMuted}
+                                aria-label={t('mute')}
                                 onClick={toggleMute}
-                                className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${isMuted ? 'bg-[#4F7942]/20' : 'bg-[#4F7942]'}`}
+                                className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-[#4F7942] focus-visible:ring-offset-2 ${isMuted ? 'bg-[#4F7942]/20' : 'bg-[#4F7942]'}`}
                             >
                                 <span className={`pointer-events-none inline-block h-4 w-4 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${isMuted ? 'translate-x-0' : 'translate-x-4'}`} />
                             </button>
@@ -223,8 +226,9 @@ export default function GameMenu() {
                                 max="1"
                                 step="0.01"
                                 value={volume}
+                                aria-label={`${t('mute')} ${Math.round(volume * 100)}%`}
                                 onChange={(e) => setVolume(parseFloat(e.target.value))}
-                                className="flex-1 accent-[#4F7942] h-1 bg-[#4F7942]/20 rounded-lg appearance-none cursor-pointer"
+                                className="flex-1 accent-[#4F7942] h-1 bg-[#4F7942]/20 rounded-lg appearance-none cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#4F7942]"
                             />
                             <span className="text-xs font-mono text-[#4F7942] w-10 text-right">
                                 {Math.round(volume * 100)}%
@@ -239,9 +243,11 @@ export default function GameMenu() {
                             <span className="text-xs font-semibold text-[#4F7942]">{t('read_aloud_toggle') || 'Felolvasás'}</span>
                         </div>
                         <button
+                            role="switch"
+                            aria-checked={ttsEnabled}
                             onClick={() => setTtsEnabled(!ttsEnabled)}
                             data-testid="toggle-read-aloud"
-                            className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${ttsEnabled ? 'bg-[#4F7942]' : 'bg-[#4F7942]/20'}`}
+                            className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-[#4F7942] focus-visible:ring-offset-2 ${ttsEnabled ? 'bg-[#4F7942]' : 'bg-[#4F7942]/20'}`}
                             aria-label={t('read_aloud_toggle') || 'Felolvasás'}
                         >
                             <span className={`pointer-events-none inline-block h-4 w-4 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${ttsEnabled ? 'translate-x-4' : 'translate-x-0'}`} />
@@ -323,8 +329,9 @@ export default function GameMenu() {
                                 max="100"
                                 step="10"
                                 value={typewriterSpeed}
+                                aria-label={t('typewriter_speed')}
                                 onChange={(e) => setTypewriterSpeed(parseInt(e.target.value))}
-                                className="w-full h-1.5 bg-[#4F7942]/20 rounded-lg appearance-none cursor-pointer accent-[#4F7942] focus:outline-none"
+                                className="w-full h-1.5 bg-[#4F7942]/20 rounded-lg appearance-none cursor-pointer accent-[#4F7942] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#4F7942]"
                             />
                             <div className="flex justify-between mt-1 text-xs text-[#4F7942] font-medium opacity-70">
                                 <span>{t('none')}</span>
@@ -341,10 +348,12 @@ export default function GameMenu() {
                             <span className="text-xs font-semibold text-[#4F7942]">{t('presentation_mode') || 'Teljes képernyő mód'}</span>
                         </div>
                         <button
+                            role="switch"
+                            aria-checked={presentationMode}
                             onClick={handleToggleFullscreen}
                             data-testid="toggle-presentation-mode"
                             aria-label={t('presentation_mode') || 'Teljes képernyő mód'}
-                            className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${presentationMode ? 'bg-[#4F7942]' : 'bg-[#4F7942]/20'}`}
+                            className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-[#4F7942] focus-visible:ring-offset-2 ${presentationMode ? 'bg-[#4F7942]' : 'bg-[#4F7942]/20'}`}
                         >
                             <span className={`pointer-events-none inline-block h-4 w-4 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${presentationMode ? 'translate-x-4' : 'translate-x-0'}`} />
                         </button>

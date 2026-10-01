@@ -46,6 +46,7 @@ export default function Home() {
         showImages, setShowImages,
         togglePanel,
         getAssetUrl,
+        getImageAlt,
         colorFilter,
         t, language, setLanguage,
         ttsEnabled, isSpeaking, toggleSpeech
@@ -121,6 +122,7 @@ export default function Home() {
                                 <button
                                     onClick={toggleSpeech}
                                     data-testid="header-read-aloud"
+                                    aria-label={isSpeaking ? (t('stop_reading') || 'Leállítás') : (t('read_aloud') || 'Felolvasás')}
                                     className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all shadow-xs cursor-pointer select-none backdrop-blur-md border ${
                                         isSpeaking
                                             ? 'bg-amber-400 text-amber-950 animate-pulse border-amber-500 shadow-md ring-2 ring-amber-400/30'
@@ -144,28 +146,28 @@ export default function Home() {
                         )}
 
                         {/* Tabs (Right) */}
-                        <div className="flex items-center gap-1 bg-white/60 backdrop-blur-xl p-1 rounded-xl border border-white/60 shadow-sm no-scrollbar scrollbar-hide shrink-0 ml-auto">
-                            <button onClick={() => setShowImages(true)} className={tabCls('images')}>
+                        <div role="tablist" aria-label={t('settings')} className="flex items-center gap-1 bg-white/60 backdrop-blur-xl p-1 rounded-xl border border-white/60 shadow-sm no-scrollbar scrollbar-hide shrink-0 ml-auto">
+                            <button role="tab" aria-selected={activeTab === 'images'} onClick={() => setShowImages(true)} className={tabCls('images')}>
                                 <RiImageLine size={14} /> <span>{t('images')}</span>
                             </button>
                             <div className="w-px h-4 bg-[#4F7942]/20 mx-1 shrink-0" />
-                            <button onClick={() => setShowLog(true)} className={tabCls('log')}>
+                            <button role="tab" aria-selected={activeTab === 'log'} onClick={() => setShowLog(true)} className={tabCls('log')}>
                                 <RiBookOpenLine size={14} /> <span>{t('log')}</span>
                             </button>
-                            <button onClick={() => setShowDashboard(true)} className={tabCls('dashboard')}>
+                            <button role="tab" aria-selected={activeTab === 'dashboard'} onClick={() => setShowDashboard(true)} className={tabCls('dashboard')}>
                                 <RiDashboardLine size={14} /> <span>{t('dashboard')}</span>
                             </button>
-                            <button onClick={() => setShowMap(true)} className={tabCls('map')}>
+                            <button role="tab" aria-selected={activeTab === 'map'} onClick={() => setShowMap(true)} className={tabCls('map')}>
                                 <RiMapLine size={14} /> <span>{t('map')}</span>
                             </button>
-                            <button onClick={() => setShowLibrary(true)} className={tabCls('library')}>
+                            <button role="tab" aria-selected={activeTab === 'library'} onClick={() => setShowLibrary(true)} className={tabCls('library')}>
                                 <RiBookLine size={14} /> <span>{t('library')}</span>
                             </button>
                             <div className="w-px h-4 bg-[#4F7942]/20 mx-1 shrink-0" />
-                            <button onClick={() => setShowMenu(true)} className={tabCls('menu')}>
+                            <button role="tab" aria-selected={activeTab === 'menu'} onClick={() => setShowMenu(true)} className={tabCls('menu')}>
                                 <RiSettings4Line size={14} /> <span>{t('settings')}</span>
                             </button>
-                            <button onClick={() => setShowProfile(true)} className={tabCls('profile')}>
+                            <button role="tab" aria-selected={activeTab === 'profile'} onClick={() => setShowProfile(true)} className={tabCls('profile')}>
                                 <RiQrCodeLine size={14} /> <span>{t('mobile_qr') || 'Mobil'}</span>
                             </button>
                         </div>
@@ -232,7 +234,7 @@ export default function Home() {
                                                     <div className="relative group w-full h-full transition-transform duration-700">
                                                         <img
                                                             src={coverUrl}
-                                                            alt="Scene"
+                                                            alt={getImageAlt?.(coverUrl) || 'Scene'}
                                                             className="w-full h-full object-cover transition-transform duration-700 block"
                                                             style={{ filter: getColorFilterStyle(colorFilter) }}
                                                         />

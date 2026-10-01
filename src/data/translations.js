@@ -111,7 +111,9 @@ export const translations = {
         "mobile_qr_desc": "Olvasd be a QR-kódot a telefonoddal a kaland megnyitásához!",
         "export_save_desc": "Mentés fájlba",
         "import_save_desc": "Mentési fájl betöltése",
-        "return_to_home_desc": "Főmenü megnyitása"
+        "return_to_home_desc": "Főmenü megnyitása",
+        "skip_to_content": "Ugrás a tartalomhoz",
+        "lightbox_title": "Kép nagyítása"
     },
     "en": {
         "game_title": "Kind-Hearted Adventures: Heroes of the Homokhátság",
@@ -225,7 +227,9 @@ export const translations = {
         "certificate_btn": "Honorary Certificate",
         "view_btn": "View",
         "certificate_download_btn": "Download Certificate",
-        "certificate_name_label": "Your name on the certificate:"
+        "certificate_name_label": "Your name on the certificate:",
+        "skip_to_content": "Skip to content",
+        "lightbox_title": "Image enlargement"
     },
     "sr-latn": {
         "game_title": "Avanture velikog srca: Heroji peščare",
@@ -339,7 +343,9 @@ export const translations = {
         "certificate_btn": "Počasna diploma",
         "view_btn": "Pregled",
         "certificate_download_btn": "Preuzmi diplomu",
-        "certificate_name_label": "Tvoje ime na diplomi:"
+        "certificate_name_label": "Tvoje ime na diplomi:",
+        "skip_to_content": "Pređi na sadržaj",
+        "lightbox_title": "Uvećanje slike"
     },
     "sr-cyrl": {
         "game_title": "Авантуре великог срца: Хероји пешчаре",
@@ -453,6 +459,8 @@ export const translations = {
         "certificate_btn": "Почасна диплома",
         "view_btn": "Преглед",
         "certificate_download_btn": "Преузми диплому",
-        "certificate_name_label": "Твоје име на дипломи:"
+        "certificate_name_label": "Твоје име на дипломи:",
+        "skip_to_content": "Пређи на садржај",
+        "lightbox_title": "Увећање слике"
     }
 };

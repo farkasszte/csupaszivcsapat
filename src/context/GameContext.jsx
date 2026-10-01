@@ -5,6 +5,7 @@ import projectSettings from '../data/project_settings.json';
 import { useGameStore } from '../store/useGameStore';
 import { ArcScript } from '../logic/ArcScript';
 import { translations } from '../data/translations';
+import imageDescriptions from '../data/image_descriptions.json';
 import ExternalLinkModal from '../components/ExternalLinkModal';
 
 const GameContext = createContext();
@@ -37,6 +38,19 @@ export const GameProvider = ({ children }) => {
                 .catch(err => console.error('Failed to load story translations:', err));
         }
     }, [store.language, storyTranslations]);
+
+    // Synchronize HTML root lang attribute with store.language for accessibility & screen readers
+    useEffect(() => {
+        if (typeof document !== 'undefined') {
+            const langMap = {
+                'hu': 'hu',
+                'en': 'en',
+                'sr-latn': 'sr-Latn',
+                'sr-cyrl': 'sr-Cyrl',
+            };
+            document.documentElement.lang = langMap[store.language] || store.language || 'hu';
+        }
+    }, [store.language]);
 
     const openExternalUrl = (url, forceModal = false) => {
         if (!url) return;
@@ -272,6 +286,27 @@ export const GameProvider = ({ children }) => {
         return `/assets/${folder}/${asset.name}`;
     };
 
+    const getImageAlt = (imageNameOrUrl) => {
+        if (!imageNameOrUrl) return '';
+        try {
+            const clean = decodeURIComponent(imageNameOrUrl);
+            const filename = clean.split('/').pop().split('?')[0];
+            const desc = imageDescriptions[filename];
+            if (!desc) return '';
+            const lang = store.language || 'hu';
+            return desc[lang] || desc['hu'] || desc['en'] || '';
+        } catch {
+            return '';
+        }
+    };
+
+    const getAssetAlt = (assetId) => {
+        if (!assetId) return '';
+        const asset = projectSettings.assets?.[assetId];
+        if (!asset?.name) return '';
+        return getImageAlt(asset.name);
+    };
+
     const renderRichText = (html) => {
         return arcScript.renderRichText(html, { visits: store.visits, variables: store.variables }, store.currentElementId);
     };
@@ -365,6 +400,8 @@ export const GameProvider = ({ children }) => {
         resetGame: store.resetGame,
         clearMessage: store.clearMessage,
         getAssetUrl,
+        getImageAlt,
+        getAssetAlt,
 
         renderRichText,
         parseRichText,

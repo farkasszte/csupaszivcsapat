@@ -8,7 +8,7 @@ import { RiSearchLine, RiBookOpenLine } from '@remixicon/react';
 export const StoryEngine = ({ hideMedia = false }) => {
     const {
         project, currentElementId, state,
-        getAssetUrl, parseRichText, error,
+        getAssetUrl, getImageAlt, parseRichText, error,
         message, clearMessage, openLightbox, isMuted, colorFilter,
         typewriterSpeed, transitionsEnabled, volume,
         recentDiscoveries, clearRecentDiscovery,
@@ -162,9 +162,13 @@ export const StoryEngine = ({ hideMedia = false }) => {
         imgs.forEach(img => {
             img.classList.add('cursor-pointer', 'hover:opacity-90', 'transition-opacity');
             img.style.filter = filterStyle;
+            const altDesc = getImageAlt?.(img.src);
+            if (altDesc) {
+                img.alt = altDesc;
+            }
         });
         return () => container.removeEventListener('click', handleImageClick);
-    }, [contentSegments, openLightbox, colorFilter]);
+    }, [contentSegments, openLightbox, colorFilter, getImageAlt, language]);
 
     useEffect(() => {
         if (audioRef.current) {
@@ -257,7 +261,7 @@ export const StoryEngine = ({ hideMedia = false }) => {
                                     <img
                                         key={activeCoverUrl}
                                         src={activeCoverUrl}
-                                        alt=""
+                                        alt={getImageAlt?.(activeCoverUrl) || ''}
                                         onError={(e) => {
                                             e.target.style.display = 'none';
                                         }}
@@ -281,7 +285,13 @@ export const StoryEngine = ({ hideMedia = false }) => {
 
 
 
-                    <div className="story-content space-y-4 sm:space-y-6 text-sm sm:text-lg lg:text-lg text-surface leading-[1.6] sm:leading-[1.8] lg:leading-loose tracking-wide animate-in fade-in duration-500">
+                    <div
+                        id="story-content"
+                        tabIndex="-1"
+                        aria-live="polite"
+                        aria-atomic="true"
+                        className="story-content outline-none space-y-4 sm:space-y-6 text-sm sm:text-lg lg:text-lg text-surface leading-[1.6] sm:leading-[1.8] lg:leading-loose tracking-wide animate-in fade-in duration-500"
+                    >
                         {contentSegments.map((seg, idx) => {
                             const visibleForThisSeg = Math.max(0, Math.min(seg.length, totalVisibleChars - seg.startOffset));
                             return (

@@ -13,7 +13,7 @@ import CertificateModal from './CertificateModal';
 
 export default function PlayerDashboard() {
     const {
-        state, project, currentElementId, getAssetUrl, isStarted,
+        state, project, currentElementId, getAssetUrl, getImageAlt, isStarted,
         colorFilter, discoveredComponents,
         openLightbox, setShowLibrary, setShowDashboard, setLibrarySearchQuery, openExternalUrl,
         t, language
@@ -102,7 +102,7 @@ export default function PlayerDashboard() {
                             <img
                                 key={activeCoverUrl}
                                 src={activeCoverUrl}
-                                alt="Scene"
+                                alt={getImageAlt?.(activeCoverUrl) || 'Scene'}
                                 className="w-full h-full object-cover"
                                 style={{ filter: getColorFilterStyle(colorFilter) }}
                             />
@@ -247,7 +247,7 @@ export default function PlayerDashboard() {
                                         >
                                             <img
                                                 src={`/assets/Images/${char.image}`}
-                                                alt={char.name}
+                                                alt={getImageAlt?.(char.image) || char.name}
                                                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                                                 style={{ filter: getColorFilterStyle(colorFilter) }}
                                             />

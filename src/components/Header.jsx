@@ -52,6 +52,14 @@ export default function Header() {
 
     return (
         <>
+            {/* ── Skip to Main Content Link (WCAG 2.4.1) ── */}
+            <a
+                href="#story-content"
+                className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[9999] focus:px-4 focus:py-2 focus:bg-[#4F7942] focus:text-white focus:font-bold focus:rounded-lg focus:shadow-xl focus:ring-2 focus:ring-amber-300"
+            >
+                {t?.('skip_to_content') || 'Ugrás a tartalomhoz'}
+            </a>
+
             {/* ── Mobile top header (removed as per request) ── */}
 
             {/* ── Desktop header (top bar) ── */}

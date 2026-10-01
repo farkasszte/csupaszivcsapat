@@ -9,11 +9,13 @@ import {
     RiTvLine,
     RiRefreshLine
 } from '@remixicon/react';
+import { useFocusTrap } from '../hooks/useFocusTrap';
 
 export default function ExternalLinkModal() {
     const { externalModalUrl, closeExternalUrl, t } = useGame();
     const [showQr, setShowQr] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
+    const modalRef = useFocusTrap(Boolean(externalModalUrl), closeExternalUrl);
 
     useEffect(() => {
         setIsLoading(true);
@@ -44,7 +46,13 @@ export default function ExternalLinkModal() {
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/75 backdrop-blur-md animate-in fade-in duration-200">
             {/* Modal Container */}
-            <div className="relative w-full max-w-5xl h-[88vh] bg-[#F5F2EB] rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-[#4F7942]/30 modal-gpu-accelerated">
+            <div
+                ref={modalRef}
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="external-modal-domain"
+                className="relative w-full max-w-5xl h-[88vh] bg-[#F5F2EB] rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-[#4F7942]/30 modal-gpu-accelerated"
+            >
                 {/* Header */}
                 <div className="flex items-center justify-between px-4 py-3 bg-[#4F7942] text-white shrink-0 shadow-md">
                     <div className="flex items-center gap-2.5 min-w-0 pr-2">
@@ -55,7 +63,7 @@ export default function ExternalLinkModal() {
                             <span className="text-xs font-semibold uppercase tracking-wider text-white/80 leading-none">
                                 {t('presentation_mode') || 'Bemutató mód'} &bull; {t('external_modal_title') || 'Külső oldal'}
                             </span>
-                            <span className="text-sm font-bold truncate text-white mt-0.5" title={externalModalUrl}>
+                            <span id="external-modal-domain" className="text-sm font-bold truncate text-white mt-0.5" title={externalModalUrl}>
                                 {domain}
                             </span>
                         </div>

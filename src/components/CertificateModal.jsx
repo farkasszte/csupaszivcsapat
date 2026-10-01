@@ -6,12 +6,14 @@ import {
     RiDownloadLine,
     RiUser3Line
 } from '@remixicon/react';
+import { useFocusTrap } from '../hooks/useFocusTrap';
 
 export default function CertificateModal({ isOpen, onClose }) {
     const { state, t } = useGame();
     const score = state?.variables?.score ?? 0;
     const [playerName, setPlayerName] = useState('Panni Barátja');
     const [isGenerating, setIsGenerating] = useState(false);
+    const modalRef = useFocusTrap(isOpen, onClose);
 
     // Calculate level title
     const rankTitle = score >= 50
@@ -224,7 +226,13 @@ export default function CertificateModal({ isOpen, onClose }) {
     };
 
     return (
-        <div className="absolute inset-0 z-50 bg-[#FAF7F0] flex flex-col overflow-hidden animate-in fade-in duration-200">
+        <div
+            ref={modalRef}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="certificate-modal-title"
+            className="absolute inset-0 z-50 bg-[#FAF7F0] flex flex-col overflow-hidden animate-in fade-in duration-200"
+        >
             {/* Content Body */}
             <div className="flex-1 overflow-y-auto p-4 sm:p-5 flex flex-col items-center text-center gap-3">
                 {/* Visual Icon & Titles */}
@@ -234,7 +242,7 @@ export default function CertificateModal({ isOpen, onClose }) {
                         alt="Csupaszív Logó"
                         className="w-16 h-16 sm:w-20 sm:h-20 object-contain drop-shadow-md"
                     />
-                    <h2 className="text-xl sm:text-2xl font-black text-[#263d20]">
+                    <h2 id="certificate-modal-title" className="text-xl sm:text-2xl font-black text-[#263d20]">
                         DÍSZOKLEVÉL
                     </h2>
                     <p className="text-sm text-zinc-700 max-w-sm leading-relaxed">
@@ -254,11 +262,12 @@ export default function CertificateModal({ isOpen, onClose }) {
 
                 {/* Name Input Card - Restored */}
                 <div className="w-full bg-white p-3.5 sm:p-4 rounded-xl border border-[#4F7942]/20 shadow-xs flex flex-col gap-2 text-left">
-                    <label className="text-xs font-bold text-[#4F7942] uppercase tracking-wider flex items-center gap-1.5">
+                    <label htmlFor="certificate-player-name" className="text-xs font-bold text-[#4F7942] uppercase tracking-wider flex items-center gap-1.5">
                         <RiUser3Line size={16} />
                         {t('certificate_name_label') || 'A Te neved az oklevélen:'}
                     </label>
                     <input
+                        id="certificate-player-name"
                         type="text"
                         value={playerName}
                         onChange={(e) => setPlayerName(e.target.value)}
