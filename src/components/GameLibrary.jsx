@@ -7,6 +7,8 @@ import { RiBookLine, RiExternalLinkLine, RiUser3Line, RiMapPin2Line, RiQuestionM
 import { getColorFilterStyle } from './StoryEngine';
 import locationsData from '../data/locations.json';
 
+let cachedCsvCategories = null;
+
 export default function GameLibrary() {
     const { 
         project, 
@@ -20,6 +22,7 @@ export default function GameLibrary() {
         librarySearchQuery: searchQuery,
         setLibrarySearchQuery: setSearchQuery,
         language,
+        openExternalUrl,
         t
     } = useGame();
     const finishedStories = state?.finishedStories || [];
@@ -29,7 +32,7 @@ export default function GameLibrary() {
     const discoveredChars = (hasStartedKaland ? 3 : 0) + (finishedStories.length * 3);
     const discoveredLocs = finishedStories.length;
     const [expandedCategories, setExpandedCategories] = useState({});
-    const [csvCategories, setCsvCategories] = useState({});
+    const [csvCategories, setCsvCategories] = useState(cachedCsvCategories || {});
     const [activeVideoUrl, setActiveVideoUrl] = useState(null);
     const [expandedItems, setExpandedItems] = useState({});
 
@@ -76,6 +79,11 @@ export default function GameLibrary() {
     };
 
     useEffect(() => {
+        if (cachedCsvCategories) {
+            setCsvCategories(cachedCsvCategories);
+            return;
+        }
+
         Promise.all([
             fetch('/gerinces_allatok.csv').then(res => res.text()),
             fetch('/telepulesek.csv').then(res => res.text()),
@@ -161,6 +169,7 @@ export default function GameLibrary() {
                     return acc;
                 }, {});
 
+                cachedCsvCategories = grouped;
                 setCsvCategories(grouped);
             })
             .catch(err => console.error("Error fetching recommended readings:", err));
@@ -300,7 +309,11 @@ export default function GameLibrary() {
                                                     href={link.link}
                                                     target="_blank"
                                                     rel="noopener noreferrer"
-                                                    className="flex items-center gap-3 px-4 py-3 bg-white/40 hover:bg-[#d8c5b0]/80 hover:brightness-95 rounded-xl backdrop-blur-sm transition-all group border border-[#4F7942]/10 hover:border-[#4F7942]/40 shadow-sm"
+                                                    onClick={(e) => {
+                                                        e.preventDefault();
+                                                        openExternalUrl(link.link);
+                                                    }}
+                                                    className="flex items-center gap-3 px-4 py-3 bg-white/40 hover:bg-[#d8c5b0]/80 hover:brightness-95 rounded-xl backdrop-blur-sm transition-all group border border-[#4F7942]/10 hover:border-[#4F7942]/40 shadow-sm cursor-pointer"
                                                 >
                                                     <div className="flex-1 min-w-0">
                                                         <div className="text-xs font-bold text-zinc-950 group-hover:text-[#4F7942] transition-colors leading-tight flex items-center gap-2">

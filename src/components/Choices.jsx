@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 import { useGame } from '../context/GameContext';
-import { storyTranslations } from '../data/story_translations';
 import { FinaleActions } from './FinaleActions';
 
 export const Choices = ({ hasImage, onHoverChange }) => {
@@ -14,6 +13,7 @@ export const Choices = ({ hasImage, onHoverChange }) => {
         renderRichText, 
         resetGame,
         setShowImages,
+        storyTranslations,
         language,
         t
     } = useGame();
@@ -46,11 +46,11 @@ export const Choices = ({ hasImage, onHoverChange }) => {
         let displayLabel = finalLabel;
 
         // Apply localization override
-        if (language === 'en' && storyTranslations[connId]) {
+        if (language === 'en' && storyTranslations?.[connId]) {
             displayLabel = storyTranslations[connId].label || finalLabel;
         } else if (language === 'en' && finalLabel === 'Tovább') {
             displayLabel = 'Continue';
-        } else if (language && language.startsWith('sr') && storyTranslations[language]?.[connId]) {
+        } else if (language && language.startsWith('sr') && storyTranslations?.[language]?.[connId]) {
             displayLabel = storyTranslations[language][connId].label || finalLabel;
         } else if (language === 'sr-latn' && (finalLabel === 'Tovább' || finalLabel === 'Continue')) {
             displayLabel = 'Dalje';

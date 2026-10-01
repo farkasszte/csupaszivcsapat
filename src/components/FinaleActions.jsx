@@ -16,6 +16,7 @@ export const FinaleActions = () => {
         setShowLibrary, 
         setShowLog, 
         resetGame, 
+        openExternalUrl,
         t 
     } = useGame();
 
@@ -38,14 +39,14 @@ export const FinaleActions = () => {
             label: t('finale_water'),
             icon: RiDropLine,
             color: 'bg-sky-500/10 text-sky-800 border-sky-500/20 hover:bg-sky-500/20 hover:border-sky-500/40',
-            onClick: () => window.open('https://perlatorprogram.hu/', '_blank'),
+            onClick: () => openExternalUrl('https://perlatorprogram.hu/'),
             external: true
         },
         {
             label: t('finale_present'),
             icon: RiMastodonLine,
             color: 'bg-amber-500/10 text-amber-800 border-amber-500/20 hover:bg-amber-500/20 hover:border-amber-500/40',
-            onClick: () => window.open('https://www.knp.hu/hu/', '_blank'),
+            onClick: () => openExternalUrl('https://www.knp.hu/hu/'),
             external: true
         }
     ];

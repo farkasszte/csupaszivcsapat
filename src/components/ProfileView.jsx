@@ -6,7 +6,7 @@ import { useGame } from '@/context/GameContext'
 
 export default function ProfileView() {
     const [isMounted, setIsMounted] = useState(false)
-    const { t } = useGame() || {}
+    const { t, openExternalUrl } = useGame() || {}
 
     useEffect(() => {
         setIsMounted(true)
@@ -39,7 +39,11 @@ export default function ProfileView() {
                     href="https://csupaszivcsapat.vercel.app"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-3 inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#4F7942] hover:text-[#3d5e33] hover:underline transition-colors bg-[#4F7942]/5 hover:bg-[#4F7942]/10 px-3 py-1.5 rounded-lg border border-[#4F7942]/15"
+                    onClick={(e) => {
+                        e.preventDefault();
+                        openExternalUrl?.('https://csupaszivcsapat.vercel.app');
+                    }}
+                    className="mt-3 inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#4F7942] hover:text-[#3d5e33] hover:underline transition-colors bg-[#4F7942]/5 hover:bg-[#4F7942]/10 px-3 py-1.5 rounded-lg border border-[#4F7942]/15 cursor-pointer"
                 >
                     <span>csupaszivcsapat.vercel.app</span>
                     <RiExternalLinkLine size={14} />
@@ -66,7 +70,11 @@ export default function ProfileView() {
                     href="https://kincseslada.web.app"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-3 inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#4F7942] hover:text-[#3d5e33] hover:underline transition-colors bg-[#4F7942]/5 hover:bg-[#4F7942]/10 px-3 py-1.5 rounded-lg border border-[#4F7942]/15"
+                    onClick={(e) => {
+                        e.preventDefault();
+                        openExternalUrl?.('https://kincseslada.web.app');
+                    }}
+                    className="mt-3 inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#4F7942] hover:text-[#3d5e33] hover:underline transition-colors bg-[#4F7942]/5 hover:bg-[#4F7942]/10 px-3 py-1.5 rounded-lg border border-[#4F7942]/15 cursor-pointer"
                 >
                     <span>kincseslada.web.app</span>
                     <RiExternalLinkLine size={14} />

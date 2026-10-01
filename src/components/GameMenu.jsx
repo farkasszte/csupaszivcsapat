@@ -14,6 +14,7 @@ import {
     RiTimerLine,
     RiGlobalLine,
     RiFontFamily,
+    RiTvLine,
 } from '@remixicon/react';
 
 export default function GameMenu() {
@@ -25,6 +26,7 @@ export default function GameMenu() {
         loadGame, resetGame, loading, error, message,
         isMuted, toggleMute,
         colorFilter, setColorFilter,
+        presentationMode, setPresentationMode,
         typewriterSpeed, setTypewriterSpeed,
         volume, setVolume,
         language, setLanguage,
@@ -278,6 +280,24 @@ export default function GameMenu() {
                                 <span>{t('slow')}</span>
                             </div>
                         </div>
+                    </div>
+                    {/* Presentation Mode Toggle */}
+                    <div className="flex flex-col gap-1 px-3 py-2.5 mt-2 bg-white/40 rounded-lg">
+                        <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-2">
+                                <RiTvLine size={16} className="text-[#4F7942]" />
+                                <span className="text-xs font-semibold text-[#4F7942]">{t('presentation_mode') || 'Bemutató mód'}</span>
+                            </div>
+                            <button
+                                onClick={() => setPresentationMode(!presentationMode)}
+                                className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${presentationMode ? 'bg-[#4F7942]' : 'bg-[#4F7942]/20'}`}
+                            >
+                                <span className={`pointer-events-none inline-block h-4 w-4 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${presentationMode ? 'translate-x-4' : 'translate-x-0'}`} />
+                            </button>
+                        </div>
+                        <p className="text-[11px] text-[#4F7942]/80 leading-tight mt-0.5">
+                            {t('presentation_mode_desc') || 'A külső linkek felugró ablakban nyílnak meg a bemutató elhagyása nélkül.'}
+                        </p>
                     </div>
                 </div>
 

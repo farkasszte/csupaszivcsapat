@@ -4,11 +4,10 @@ import { useGame } from '../context/GameContext';
 import { useEffect, useRef } from 'react';
 import { RiArrowRightSLine, RiFileWordLine, RiFilePdfLine } from '@remixicon/react';
 import { SlPicture } from 'react-icons/sl';
-import { storyTranslations } from '../data/story_translations';
 
 export default function StoryLog() {
     const scrollContainerRef = useRef(null);
-    const { storyLog, project, parseRichTextReadOnly, state, openLightbox, getAssetUrl, language, t } = useGame();
+    const { storyLog, project, parseRichTextReadOnly, state, openLightbox, getAssetUrl, storyTranslations, language, t } = useGame();
 
     useEffect(() => {
         if (scrollContainerRef.current) {
@@ -31,9 +30,9 @@ export default function StoryLog() {
                                 return parseRichTextReadOnly(t('game_title'), entry.elementId);
                             }
                             let content = element.content;
-                            if (language === 'en' && storyTranslations[entry.elementId]) {
+                            if (language === 'en' && storyTranslations?.[entry.elementId]) {
                                 content = storyTranslations[entry.elementId].content || content;
-                            } else if (language?.startsWith('sr') && storyTranslations[language]?.[entry.elementId]) {
+                            } else if (language?.startsWith('sr') && storyTranslations?.[language]?.[entry.elementId]) {
                                 content = storyTranslations[language][entry.elementId].content || content;
                             }
                             return parseRichTextReadOnly(content, entry.elementId);
@@ -97,9 +96,9 @@ export default function StoryLog() {
                     : el.content;
                 
                 if (entry.elementId !== '37ba3288-8b3b-4941-9734-98ca9053bb36') {
-                    if (language === 'en' && storyTranslations[entry.elementId]) {
+                    if (language === 'en' && storyTranslations?.[entry.elementId]) {
                         nodeContentForPdf = storyTranslations[entry.elementId].content || nodeContentForPdf;
-                    } else if (language?.startsWith('sr') && storyTranslations[language]?.[entry.elementId]) {
+                    } else if (language?.startsWith('sr') && storyTranslations?.[language]?.[entry.elementId]) {
                         nodeContentForPdf = storyTranslations[language][entry.elementId].content || nodeContentForPdf;
                     }
                 }
@@ -188,9 +187,9 @@ export default function StoryLog() {
                                         return <div className="story-content-log mb-3 last:mb-0"><strong>{t('game_title')}</strong></div>;
                                     }
                                     let content = element.content;
-                                    if (language === 'en' && storyTranslations[entry.elementId]) {
+                                    if (language === 'en' && storyTranslations?.[entry.elementId]) {
                                         content = storyTranslations[entry.elementId].content || content;
-                                    } else if (language?.startsWith('sr') && storyTranslations[language]?.[entry.elementId]) {
+                                    } else if (language?.startsWith('sr') && storyTranslations?.[language]?.[entry.elementId]) {
                                         content = storyTranslations[language][entry.elementId].content || content;
                                     }
                                     const segments = parseRichTextReadOnly(content, entry.elementId);

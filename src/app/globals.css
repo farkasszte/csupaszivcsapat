@@ -121,3 +121,28 @@ body::before {
   pointer-events: none;
   z-index: -1;
 }
+
+/* GPU Hardware Acceleration & Compositing Optimizations */
+.gpu-layer,
+.backdrop-blur-sm,
+.backdrop-blur-md,
+.backdrop-blur-lg,
+.backdrop-blur-xl {
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Optimize modal, drawer and floating panels for 60fps animations */
+.modal-gpu-accelerated {
+  contain: paint layout;
+  will-change: transform, opacity;
+  transform: translateZ(0);
+}
+
+/* Smooth hardware accelerated transitions */
+.smooth-gpu-transition {
+  will-change: transform, opacity;
+  transform: translate3d(0, 0, 0);
+}

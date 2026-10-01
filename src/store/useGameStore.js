@@ -38,10 +38,12 @@ export const useGameStore = create((set, get) => ({
     colorFilter: 'none',
     language: 'hu',
     fontFamily: 'montserrat',
+    presentationMode: false,
 
     // Actions
     setLanguage: (language) => { set({ language }); get().saveGame(); },
     setFontFamily: (fontFamily) => { set({ fontFamily }); get().saveGame(); },
+    setPresentationMode: (presentationMode) => { set({ presentationMode }); get().saveGame(); },
     visitElement: (id) => {
         set((state) => {
             const newVisits = { ...state.visits };
@@ -269,13 +271,13 @@ export const useGameStore = create((set, get) => ({
                 const {
                     currentElementId, visits, variables, history, storyLog, discoveredComponents,
                     finishedStories,
-                    volume, isMuted, typewriterSpeed, transitionsEnabled, colorFilter, language, fontFamily
+                    volume, isMuted, typewriterSpeed, transitionsEnabled, colorFilter, language, fontFamily, presentationMode
                 } = get();
 
                 const gameState = {
                     currentElementId, visits, variables, history, storyLog, discoveredComponents,
                     finishedStories,
-                    settings: { volume, isMuted, typewriterSpeed, transitionsEnabled, colorFilter, language, fontFamily },
+                    settings: { volume, isMuted, typewriterSpeed, transitionsEnabled, colorFilter, language, fontFamily, presentationMode },
                     savedAt: new Date().toISOString()
                 };
 
@@ -328,6 +330,7 @@ export const useGameStore = create((set, get) => ({
                     colorFilter: s.colorFilter ?? 'none',
                     language: loadedLang,
                     fontFamily: s.fontFamily ?? 'montserrat',
+                    presentationMode: s.presentationMode ?? false,
                     isStarted: true,
                 });
             } else {
@@ -369,6 +372,7 @@ export const useGameStore = create((set, get) => ({
                     colorFilter: s.colorFilter ?? 'none',
                     language: loadedLang,
                     fontFamily: s.fontFamily ?? 'montserrat',
+                    presentationMode: s.presentationMode ?? false,
                     isStarted: true,
                 });
             }

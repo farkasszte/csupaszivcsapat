@@ -4,7 +4,6 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useGame } from '../context/GameContext';
 import { Choices } from './Choices';
 import { RiSearchLine, RiBookOpenLine } from '@remixicon/react';
-import { storyTranslations } from '../data/story_translations';
 
 export const StoryEngine = ({ hideMedia = false }) => {
     const {
@@ -14,6 +13,7 @@ export const StoryEngine = ({ hideMedia = false }) => {
         typewriterSpeed, transitionsEnabled, volume,
         recentDiscoveries, clearRecentDiscovery,
         showLog, showDashboard, showMap, showMenu, showLibrary, showProfile,
+        storyTranslations,
         language, t
     } = useGame();
 
@@ -102,9 +102,9 @@ export const StoryEngine = ({ hideMedia = false }) => {
         let rawContent = element.content;
 
         // Apply localization override
-        if (language === 'en' && storyTranslations[displayElementId]) {
+        if (language === 'en' && storyTranslations?.[displayElementId]) {
             rawContent = storyTranslations[displayElementId].content || rawContent;
-        } else if (language?.startsWith('sr') && storyTranslations[language]?.[displayElementId]) {
+        } else if (language?.startsWith('sr') && storyTranslations?.[language]?.[displayElementId]) {
             rawContent = storyTranslations[language][displayElementId].content || rawContent;
         }
 

@@ -1,10 +1,11 @@
 'use client';
 
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState, useMemo } from 'react';
 import projectSettings from '../data/project_settings.json';
 import { useGameStore } from '../store/useGameStore';
 import { ArcScript } from '../logic/ArcScript';
 import { translations } from '../data/translations';
+import ExternalLinkModal from '../components/ExternalLinkModal';
 
 const GameContext = createContext();
 
@@ -25,6 +26,30 @@ export const GameProvider = ({ children }) => {
     const [lightboxImage, setLightboxImage] = useState(null);
     const [selectedMapLocation, setSelectedMapLocation] = useState(null);
     const [librarySearchQuery, setLibrarySearchQuery] = useState('');
+    const [externalModalUrl, setExternalModalUrl] = useState(null);
+    const [storyTranslations, setStoryTranslations] = useState(null);
+
+    // Lazy load heavy storyTranslations (~256 KB) only when non-Hungarian language is selected
+    useEffect(() => {
+        if (store.language && store.language !== 'hu' && !storyTranslations) {
+            import('../data/story_translations')
+                .then(m => setStoryTranslations(m.storyTranslations))
+                .catch(err => console.error('Failed to load story translations:', err));
+        }
+    }, [store.language, storyTranslations]);
+
+    const openExternalUrl = (url, forceModal = false) => {
+        if (!url) return;
+        if (store.presentationMode || forceModal) {
+            setExternalModalUrl(url);
+        } else {
+            window.open(url, '_blank', 'noopener,noreferrer');
+        }
+    };
+
+    const closeExternalUrl = () => {
+        setExternalModalUrl(null);
+    };
 
     useEffect(() => {
         const disableContextMenu = (e) => {
@@ -285,6 +310,12 @@ export const GameProvider = ({ children }) => {
         toggleMute,
         colorFilter: store.colorFilter,
         setColorFilter: store.setColorFilter,
+        presentationMode: store.presentationMode,
+        setPresentationMode: store.setPresentationMode,
+        externalModalUrl,
+        openExternalUrl,
+        closeExternalUrl,
+        storyTranslations,
         isStarted: store.isStarted,
         startStory: store.startStory,
     };
@@ -295,6 +326,7 @@ export const GameProvider = ({ children }) => {
     return (
         <GameContext.Provider value={value}>
             {children}
+            <ExternalLinkModal />
         </GameContext.Provider>
     );
 };

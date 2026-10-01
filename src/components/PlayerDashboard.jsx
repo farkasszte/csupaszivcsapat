@@ -14,7 +14,7 @@ export default function PlayerDashboard() {
     const {
         state, project, currentElementId, getAssetUrl, isStarted,
         colorFilter, discoveredComponents,
-        openLightbox, setShowLibrary, setShowDashboard, setLibrarySearchQuery,
+        openLightbox, setShowLibrary, setShowDashboard, setLibrarySearchQuery, openExternalUrl,
         t, language
     } = useGame();
     const score = state.variables?.score ?? 0;
@@ -245,7 +245,7 @@ export default function PlayerDashboard() {
                                                 <button
                                                     onClick={() => {
                                                         if (char.externalLink) {
-                                                            window.open(char.externalLink, '_blank');
+                                                            openExternalUrl(char.externalLink);
                                                         } else {
                                                             setLibrarySearchQuery(char[`species_${language}`] || char.species);
                                                             setShowLibrary(true);
@@ -290,7 +290,7 @@ export default function PlayerDashboard() {
                                                 </h4>
                                                 {loc.externalLink && (
                                                     <button
-                                                        onClick={() => window.open(loc.externalLink, '_blank')}
+                                                        onClick={() => openExternalUrl(loc.externalLink)}
                                                         className="inline-flex items-center gap-1 text-[11px] sm:text-xs font-bold text-[#4F7942] hover:text-[#3d5d33] transition-colors bg-[#4F7942]/5 hover:bg-[#4F7942]/10 px-2 py-0.5 rounded-md border border-[#4F7942]/10 shrink-0 cursor-pointer"
                                                     >
                                                         <RiExternalLinkLine size={12} />

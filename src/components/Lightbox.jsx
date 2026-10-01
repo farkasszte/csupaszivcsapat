@@ -27,7 +27,7 @@ export const Lightbox = () => {
 
 
             <div
-                className="relative w-full h-full flex items-center justify-center p-4 animate-in zoom-in-95 duration-300"
+                className="relative w-full h-full flex items-center justify-center p-4 animate-in zoom-in-95 duration-300 modal-gpu-accelerated"
             >
                 <img
                     src={lightboxImage}
