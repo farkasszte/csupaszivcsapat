@@ -169,10 +169,10 @@ export default function PlayerDashboard() {
                     className="w-full flex items-center justify-between p-3.5 rounded-2xl bg-white/40 hover:bg-white/60 border border-[#4F7942]/20 hover:border-[#4F7942]/40 shadow-xs hover:shadow-md transition-all group cursor-pointer"
                 >
                     <div className="flex items-center gap-2.5">
-                        <div className="p-2 rounded-xl bg-[#4F7942]/10 text-[#4F7942] group-hover:bg-[#4F7942] group-hover:text-white shadow-xs transition-all">
+                        <div className="p-2 rounded-xl bg-white text-[#4F7942] shadow-xs border border-[#4F7942]/10">
                             <RiAwardLine size={18} />
                         </div>
-                        <span className="text-xs sm:text-sm font-bold text-[#4F7942] transition-colors">
+                        <span className="text-xs sm:text-sm font-bold text-[#4F7942]">
                             {t('certificate_btn') || 'Díszes Oklevél'}
                         </span>
                     </div>
