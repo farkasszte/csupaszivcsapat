@@ -246,39 +246,39 @@ export default function CertificateModal({ isOpen, onClose }) {
                 </div>
 
                 {/* Content Body */}
-                <div className="p-6 flex flex-col items-center text-center gap-5 overflow-y-auto max-h-[85vh]">
-                    {/* Visual Icon */}
+                <div className="p-6 sm:p-7 flex flex-col items-center text-center gap-5 overflow-y-auto max-h-[85vh]">
+                    {/* Visual Icon & Titles */}
                     <div className="flex flex-col items-center gap-2">
                         <img
                             src="/icons/icon-heart.png"
                             alt="Csupaszív Logó"
-                            className="w-24 h-24 sm:w-28 sm:h-28 object-contain drop-shadow-lg hover:scale-105 transition-transform duration-200"
+                            className="w-24 h-24 sm:w-28 sm:h-28 object-contain drop-shadow-md hover:scale-105 transition-transform duration-200"
                         />
-                        <div className="text-xs font-bold tracking-widest text-[#4F7942] uppercase">
+                        <div className="text-xs sm:text-sm font-bold tracking-widest text-[#4F7942] uppercase mt-1">
                             Csupaszív Kalandok - A Homokhátság Hősei
                         </div>
-                        <h2 className="text-xl sm:text-2xl font-black text-[#263d20]">
+                        <h2 className="text-2xl sm:text-3xl font-black text-[#263d20]">
                             DÍSZOKLEVÉL
                         </h2>
-                        <p className="text-xs sm:text-sm text-zinc-600 max-w-sm leading-relaxed">
+                        <p className="text-xs sm:text-sm text-zinc-700 max-w-sm leading-relaxed">
                             Gratulálunk! Sikeresen óvtad a Homokhátság természeti értékeit. Írd be a neved, és töltsd le a hivatalos, nagy felbontású díszoklevelet képként!
                         </p>
                     </div>
 
-                    {/* Rank Card */}
-                    <div className="w-full bg-white border-2 border-[#D4AF37] p-3.5 rounded-xl shadow-xs flex flex-col items-center">
-                        <span className="text-[11px] font-bold text-amber-700 uppercase tracking-wider">
-                            Kiérdemelt rangod
+                    {/* Rank Section - Seamless, no inner border box */}
+                    <div className="flex flex-col items-center gap-1">
+                        <span className="text-xs font-bold text-amber-700 uppercase tracking-wider">
+                            Kiérdemelt rangod:
                         </span>
-                        <span className="text-base sm:text-lg font-black text-[#4F7942] mt-0.5">
+                        <span className="text-lg sm:text-xl font-black text-[#4F7942]">
                             {rankTitle}
                         </span>
                     </div>
 
-                    {/* Name Input */}
-                    <div className="w-full bg-white p-4 rounded-xl border border-[#4F7942]/20 shadow-xs flex flex-col gap-2 text-left">
+                    {/* Name Input - Direct clean input, no inner card frame */}
+                    <div className="w-full flex flex-col gap-2 text-left">
                         <label className="text-xs font-bold text-[#4F7942] uppercase tracking-wider flex items-center gap-1.5">
-                            <RiUser3Line size={14} />
+                            <RiUser3Line size={16} />
                             {t('certificate_name_label') || 'A Te neved az oklevélen:'}
                         </label>
                         <input
@@ -287,7 +287,7 @@ export default function CertificateModal({ isOpen, onClose }) {
                             onChange={(e) => setPlayerName(e.target.value)}
                             maxLength={35}
                             placeholder="Írd be a teljes neved..."
-                            className="w-full px-3 py-2 text-sm sm:text-base font-bold text-zinc-900 border border-zinc-300 rounded-lg focus:outline-none focus:border-[#4F7942] bg-[#FAF7F0]/40"
+                            className="w-full px-4 py-3 text-sm sm:text-base font-bold text-zinc-900 border-2 border-zinc-300 rounded-xl focus:outline-none focus:border-[#4F7942] bg-white transition-colors"
                         />
                     </div>
 
@@ -295,7 +295,7 @@ export default function CertificateModal({ isOpen, onClose }) {
                     <div className="w-full flex flex-col sm:flex-row items-center justify-end gap-3 pt-2">
                         <button
                             onClick={onClose}
-                            className="w-full sm:w-auto px-5 py-2.5 rounded-xl border border-zinc-300 text-zinc-700 text-xs font-bold hover:bg-zinc-100 transition-colors cursor-pointer"
+                            className="w-full sm:w-auto px-5 py-2.5 rounded-xl border border-zinc-300 text-zinc-700 text-xs sm:text-sm font-bold hover:bg-zinc-100 transition-colors cursor-pointer"
                         >
                             {t('close') || 'Bezárás'}
                         </button>
