@@ -3,9 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useGame } from '../context/GameContext';
 import {
-    RiCloseLine,
     RiDownloadLine,
-    RiAwardLine,
     RiUser3Line
 } from '@remixicon/react';
 
@@ -227,15 +225,6 @@ export default function CertificateModal({ isOpen, onClose }) {
 
     return (
         <div className="absolute inset-0 z-50 bg-[#FAF7F0] flex flex-col overflow-hidden animate-in fade-in duration-200">
-            {/* Floating Close Button */}
-            <button
-                onClick={onClose}
-                className="absolute top-3 right-3 z-10 p-1.5 rounded-full bg-black/5 hover:bg-black/10 text-zinc-600 hover:text-zinc-900 transition-colors cursor-pointer"
-                aria-label={t('close') || 'Bezárás'}
-            >
-                <RiCloseLine size={20} />
-            </button>
-
             {/* Content Body */}
             <div className="flex-1 overflow-y-auto p-4 sm:p-5 flex flex-col items-center text-center gap-3">
                 {/* Visual Icon & Titles */}
