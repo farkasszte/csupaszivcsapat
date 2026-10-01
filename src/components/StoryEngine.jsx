@@ -1,9 +1,9 @@
 'use client';
 
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { useGame } from '../context/GameContext';
 import { Choices } from './Choices';
-import { RiSearchLine, RiBookOpenLine } from '@remixicon/react';
+import { RiSearchLine, RiBookOpenLine, RiVolumeUpLine, RiStopCircleLine } from '@remixicon/react';
 
 export const StoryEngine = ({ hideMedia = false }) => {
     const {
@@ -20,6 +20,61 @@ export const StoryEngine = ({ hideMedia = false }) => {
     const [contentSegments, setContentSegments] = useState([]);
     const [totalVisibleChars, setTotalVisibleChars] = useState(0);
     const [isMounted, setIsMounted] = useState(false);
+    const [isSpeaking, setIsSpeaking] = useState(false);
+
+    const stopSpeech = useCallback(() => {
+        if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+            window.speechSynthesis.cancel();
+            setIsSpeaking(false);
+        }
+    }, []);
+
+    // Stop speaking when moving to another element or unmounting
+    useEffect(() => {
+        stopSpeech();
+    }, [currentElementId, stopSpeech]);
+
+    useEffect(() => {
+        return () => {
+            stopSpeech();
+        };
+    }, [stopSpeech]);
+
+    const handleToggleSpeech = () => {
+        if (typeof window === 'undefined' || !('speechSynthesis' in window)) {
+            alert(t('tts_unsupported') || 'A böngésződ nem támogatja a szövegfelolvasást.');
+            return;
+        }
+
+        if (isSpeaking) {
+            stopSpeech();
+            return;
+        }
+
+        const plainText = contentSegments.map(s => {
+            const div = document.createElement('div');
+            div.innerHTML = s.content;
+            return div.textContent || div.innerText || '';
+        }).join(' ').replace(/\s+/g, ' ').trim();
+
+        if (!plainText) return;
+
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(plainText);
+        const langCode = language === 'en' ? 'en-US' : language?.startsWith('sr') ? 'sr-RS' : 'hu-HU';
+        utterance.lang = langCode;
+        utterance.rate = 0.95;
+
+        const voices = window.speechSynthesis.getVoices();
+        const voice = voices.find(v => v.lang.startsWith(langCode.slice(0, 2)));
+        if (voice) utterance.voice = voice;
+
+        utterance.onstart = () => setIsSpeaking(true);
+        utterance.onend = () => setIsSpeaking(false);
+        utterance.onerror = () => setIsSpeaking(false);
+
+        window.speechSynthesis.speak(utterance);
+    };
 
     // Transition states
     const [displayElementId, setDisplayElementId] = useState(currentElementId);
@@ -280,6 +335,31 @@ export const StoryEngine = ({ hideMedia = false }) => {
                             </div>
                         </div>
                     )}
+
+                    {/* Read Aloud (TTS) Button */}
+                    <div className="flex justify-end mb-2">
+                        <button
+                            onClick={handleToggleSpeech}
+                            className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition-all shadow-xs cursor-pointer select-none ${
+                                isSpeaking
+                                    ? 'bg-amber-400 text-amber-950 animate-pulse border border-amber-500 shadow-md'
+                                    : 'bg-white/60 hover:bg-white/90 text-[#4F7942] border border-[#4F7942]/20 hover:border-[#4F7942]/40'
+                            }`}
+                            title={isSpeaking ? (t('stop_reading') || 'Leállítás') : (t('read_aloud') || 'Felolvasás')}
+                        >
+                            {isSpeaking ? (
+                                <>
+                                    <RiStopCircleLine size={16} className="text-red-700 animate-spin" />
+                                    <span>{t('stop_reading') || 'Leállítás'}</span>
+                                </>
+                            ) : (
+                                <>
+                                    <RiVolumeUpLine size={16} />
+                                    <span>{t('read_aloud') || 'Felolvasás'}</span>
+                                </>
+                            )}
+                        </button>
+                    </div>
 
                     <div className="story-content space-y-4 sm:space-y-6 text-sm sm:text-lg lg:text-lg text-surface leading-[1.6] sm:leading-[1.8] lg:leading-loose tracking-wide animate-in fade-in duration-500">
                         {contentSegments.map((seg, idx) => {

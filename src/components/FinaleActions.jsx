@@ -1,17 +1,20 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useGame } from '../context/GameContext';
+import CertificateModal from './CertificateModal';
 import { 
     RiShieldLine, 
     RiUserSharedLine, 
     RiDropLine, 
     RiMastodonLine, // Using a generic marker icon instead of RiFlagLine for variety
     RiRestartLine,
-    RiExternalLinkLine
+    RiExternalLinkLine,
+    RiAwardLine
 } from '@remixicon/react';
 
 export const FinaleActions = () => {
+    const [showCert, setShowCert] = useState(false);
     const { 
         setShowLibrary, 
         setShowLog, 
@@ -53,6 +56,29 @@ export const FinaleActions = () => {
 
     return (
         <div className="w-full space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-500">
+            {/* Certificate Banner */}
+            <button
+                onClick={() => setShowCert(true)}
+                className="w-full flex items-center justify-between p-4 rounded-2xl border-2 border-[#D4AF37] bg-gradient-to-r from-amber-100 via-amber-50 to-emerald-50 text-amber-950 font-bold shadow-md hover:shadow-xl transition-all transform hover:-translate-y-1 cursor-pointer"
+            >
+                <div className="flex items-center gap-3">
+                    <div className="p-3 rounded-xl bg-amber-400 text-amber-950 shadow-inner">
+                        <RiAwardLine className="w-7 h-7" />
+                    </div>
+                    <div className="flex flex-col text-left">
+                        <span className="text-base sm:text-lg font-black text-[#263d20] leading-tight">
+                            {t('certificate_btn') || 'Díszes Oklevél átvétele'}
+                        </span>
+                        <span className="text-xs text-amber-800 font-medium mt-0.5">
+                            {t('certificate_desc') || 'Töltsd le névre szóló elismerésed képként!'}
+                        </span>
+                    </div>
+                </div>
+                <span className="text-xs uppercase tracking-wider font-extrabold bg-[#4F7942] text-white px-3.5 py-2 rounded-xl shadow-xs shrink-0">
+                    Átvétel
+                </span>
+            </button>
+
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {actions.map((action, idx) => (
                     <button
@@ -86,6 +112,8 @@ export const FinaleActions = () => {
                     {t('reset_game') || 'Újrakezdés'}
                 </button>
             </div>
+
+            <CertificateModal isOpen={showCert} onClose={() => setShowCert(false)} />
         </div>
     );
 };

@@ -3,11 +3,12 @@
 import { useGame } from '../context/GameContext';
 import {
     RiUser3Line, RiMapPin2Line, RiFootprintLine, RiLeafLine,
-    RiHeartLine, RiEarthLine, RiExternalLinkLine, RiZoomInLine
+    RiHeartLine, RiEarthLine, RiExternalLinkLine, RiZoomInLine, RiAwardLine
 } from '@remixicon/react';
 import { getColorFilterStyle } from './StoryEngine';
 import { useState } from 'react';
 import { CHARACTERS } from '../data/characters';
+import CertificateModal from './CertificateModal';
 
 
 export default function PlayerDashboard() {
@@ -21,6 +22,7 @@ export default function PlayerDashboard() {
     const finishedStories = state.finishedStories || [];
     const [isVideoLoaded, setIsVideoLoaded] = useState(false);
     const [activeTab, setActiveTab] = useState('characters'); // 'characters' or 'locations'
+    const [showCert, setShowCert] = useState(false);
 
     // Scene Media Logic
     const currentElement = project?.elements?.[currentElementId];
@@ -160,6 +162,29 @@ export default function PlayerDashboard() {
                         </div>
                     </div>
                 </div>
+
+                {/* Certificate Action Button */}
+                <button
+                    onClick={() => setShowCert(true)}
+                    className="w-full flex items-center justify-between p-3.5 rounded-2xl bg-white/40 hover:bg-white/60 border border-[#D4AF37]/50 shadow-xs hover:shadow-md transition-all group cursor-pointer"
+                >
+                    <div className="flex items-center gap-2.5">
+                        <div className="p-2 rounded-xl bg-amber-400 text-amber-950 shadow-xs">
+                            <RiAwardLine size={18} />
+                        </div>
+                        <div className="flex flex-col text-left">
+                            <span className="text-xs sm:text-sm font-bold text-zinc-900 group-hover:text-[#4F7942] transition-colors">
+                                {t('certificate_btn') || 'Díszes Oklevél'}
+                            </span>
+                            <span className="text-[11px] text-zinc-600">
+                                {t('certificate_desc') || 'Töltsd le névre szóló elismerésed képként!'}
+                            </span>
+                        </div>
+                    </div>
+                    <span className="text-[11px] font-bold text-[#4F7942] bg-[#4F7942]/10 px-2.5 py-1 rounded-lg shrink-0">
+                        Megtekintés
+                    </span>
+                </button>
 
                 {/* Stats Grid - Now interactive tabs */}
                 <div className="grid grid-cols-2 gap-3">
@@ -317,6 +342,8 @@ export default function PlayerDashboard() {
                     </div>
                 </div>
             </div>
+
+            <CertificateModal isOpen={showCert} onClose={() => setShowCert(false)} />
         </div>
     );
 }
