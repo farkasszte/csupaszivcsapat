@@ -1,5 +1,17 @@
 @import "tailwindcss";
 
+:root {
+  --font-app: 'Montserrat', sans-serif;
+}
+
+[data-font="lexend"] {
+  --font-app: 'Lexend', sans-serif;
+}
+
+[data-font="montserrat"] {
+  --font-app: 'Montserrat', sans-serif;
+}
+
 @theme {
   /* Core Colors */
   --color-primary: #d2b48c;
@@ -19,8 +31,8 @@
   --color-text-muted: var(--color-zinc-700);
 
   /* Fonts */
-  --font-sans: var(--font-montserrat), 'Inter', system-ui, sans-serif;
-  --font-serif: var(--font-montserrat), 'Georgia', 'Times New Roman', serif;
+  --font-sans: var(--font-app), 'Inter', system-ui, sans-serif;
+  --font-serif: var(--font-app), 'Georgia', 'Times New Roman', serif;
 
   /* Custom Glow Shadows (Green theme) */
   --shadow-glow-primary: 0 0 15px rgba(79, 121, 66, 0.4);
@@ -29,6 +41,7 @@
 
 /* Body background is managed here to ensure it's not overridden by defaults */
 body {
+  font-family: var(--font-app), 'Inter', system-ui, sans-serif;
   background: linear-gradient(to bottom, #87ceeb, #f5deb3) fixed !important;
   min-height: 100vh;
   margin: 0;
@@ -81,9 +94,9 @@ button:disabled,
   }
 }
 
-/* Force Montserrat on all descendant elements in the dialogue panel */
+/* Apply dynamic font on all descendant elements in the dialogue panel */
 .story-content, .story-content *, .story-content-log, .story-content-log * {
-  font-family: var(--font-montserrat), sans-serif !important;
+  font-family: var(--font-app), sans-serif !important;
 }
 
 .biophilic-card {

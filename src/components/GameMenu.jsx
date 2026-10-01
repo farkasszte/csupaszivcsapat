@@ -13,6 +13,7 @@ import {
     RiPaletteLine,
     RiTimerLine,
     RiGlobalLine,
+    RiFontFamily,
 } from '@remixicon/react';
 
 export default function GameMenu() {
@@ -26,7 +27,9 @@ export default function GameMenu() {
         colorFilter, setColorFilter,
         typewriterSpeed, setTypewriterSpeed,
         volume, setVolume,
-        language, setLanguage, t
+        language, setLanguage,
+        fontFamily, setFontFamily, effectiveFont, isCyrillic,
+        t
     } = useGame();
 
     const handleExportSave = () => {
@@ -210,6 +213,42 @@ export default function GameMenu() {
                                 </button>
                             ))}
                         </div>
+                    </div>
+
+                    {/* Font Selector (Accessibility) */}
+                    <div className="px-3 py-2 mt-2 bg-white/40 rounded-lg">
+                        <div className="flex items-center gap-2 mb-2">
+                            <RiFontFamily size={16} className="text-[#4F7942]" />
+                            <span className="text-xs font-semibold text-[#4F7942]">{t('font_style') || 'Betűtípus'}</span>
+                        </div>
+                        <div className="grid grid-cols-2 gap-1.5">
+                            <button
+                                onClick={() => setFontFamily('montserrat')}
+                                className={`px-2 py-1.5 text-xs rounded border transition-all text-center truncate ${effectiveFont === 'montserrat'
+                                    ? 'bg-[#4F7942] hover:bg-[#3d5e33] border-[#4F7942] text-white shadow-sm font-bold'
+                                    : 'bg-white/40 border-[#4F7942]/10 text-[#4F7942] hover:bg-white/60 hover:brightness-95'}`}
+                                title={t('font_standard_tooltip') || 'Montserrat'}
+                            >
+                                {t('font_standard')}
+                            </button>
+                            <button
+                                onClick={() => !isCyrillic && setFontFamily('lexend')}
+                                disabled={isCyrillic}
+                                title={isCyrillic ? t('font_cyrillic_unavailable') : (t('font_dyslexic_tooltip') || 'Lexend')}
+                                className={`px-2 py-1.5 text-xs rounded border transition-all text-center truncate ${isCyrillic
+                                    ? 'opacity-40 cursor-not-allowed bg-zinc-200/50 border-zinc-300 text-zinc-500'
+                                    : effectiveFont === 'lexend'
+                                        ? 'bg-[#4F7942] hover:bg-[#3d5e33] border-[#4F7942] text-white shadow-sm font-bold'
+                                        : 'bg-white/40 border-[#4F7942]/10 text-[#4F7942] hover:bg-white/60 hover:brightness-95'}`}
+                            >
+                                {t('font_dyslexic')}
+                            </button>
+                        </div>
+                        {isCyrillic && (
+                            <p className="text-[11px] text-zinc-600 mt-1.5 italic leading-tight">
+                                {t('font_cyrillic_unavailable')}
+                            </p>
+                        )}
                     </div>
 
                     {/* Typewriter Speed */}

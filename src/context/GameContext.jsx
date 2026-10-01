@@ -201,11 +201,24 @@ export const GameProvider = ({ children }) => {
         return translations[store.language]?.[key] || translations['hu']?.[key] || key;
     };
 
+    const isCyrillic = store.language === 'sr-cyrl';
+    const effectiveFont = isCyrillic ? 'montserrat' : (store.fontFamily || 'montserrat');
+
+    useEffect(() => {
+        if (typeof document !== 'undefined') {
+            document.documentElement.setAttribute('data-font', effectiveFont);
+        }
+    }, [effectiveFont]);
+
     const value = {
         project: projectSettings,
         currentElementId: store.currentElementId,
         language: store.language,
         setLanguage: store.setLanguage,
+        fontFamily: store.fontFamily || 'montserrat',
+        setFontFamily: store.setFontFamily,
+        effectiveFont,
+        isCyrillic,
         t,
         state: { 
             visits: store.visits, 

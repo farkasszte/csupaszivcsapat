@@ -37,9 +37,11 @@ export const useGameStore = create((set, get) => ({
     transitionsEnabled: true,
     colorFilter: 'none',
     language: 'hu',
+    fontFamily: 'montserrat',
 
     // Actions
     setLanguage: (language) => { set({ language }); get().saveGame(); },
+    setFontFamily: (fontFamily) => { set({ fontFamily }); get().saveGame(); },
     visitElement: (id) => {
         set((state) => {
             const newVisits = { ...state.visits };
@@ -267,13 +269,13 @@ export const useGameStore = create((set, get) => ({
                 const {
                     currentElementId, visits, variables, history, storyLog, discoveredComponents,
                     finishedStories,
-                    volume, isMuted, typewriterSpeed, transitionsEnabled, colorFilter, language
+                    volume, isMuted, typewriterSpeed, transitionsEnabled, colorFilter, language, fontFamily
                 } = get();
 
                 const gameState = {
                     currentElementId, visits, variables, history, storyLog, discoveredComponents,
                     finishedStories,
-                    settings: { volume, isMuted, typewriterSpeed, transitionsEnabled, colorFilter, language },
+                    settings: { volume, isMuted, typewriterSpeed, transitionsEnabled, colorFilter, language, fontFamily },
                     savedAt: new Date().toISOString()
                 };
 
@@ -325,6 +327,7 @@ export const useGameStore = create((set, get) => ({
                     transitionsEnabled: s.transitionsEnabled ?? true,
                     colorFilter: s.colorFilter ?? 'none',
                     language: loadedLang,
+                    fontFamily: s.fontFamily ?? 'montserrat',
                     isStarted: true,
                 });
             } else {
@@ -365,6 +368,7 @@ export const useGameStore = create((set, get) => ({
                     transitionsEnabled: s.transitionsEnabled ?? true,
                     colorFilter: s.colorFilter ?? 'none',
                     language: loadedLang,
+                    fontFamily: s.fontFamily ?? 'montserrat',
                     isStarted: true,
                 });
             }
