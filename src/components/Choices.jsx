@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useGame } from '../context/GameContext';
 import { FinaleActions } from './FinaleActions';
 
-export const Choices = ({ hasImage, onHoverChange }) => {
+export const Choices = ({ hasImage }) => {
     const { 
         project, 
         currentElementId, 
@@ -91,8 +91,6 @@ export const Choices = ({ hasImage, onHoverChange }) => {
                                 setShowImages(true);
                             }
                         }}
-                        onMouseEnter={() => onHoverChange?.(true)}
-                        onMouseLeave={() => onHoverChange?.(false)}
                         className={`text-surface font-medium text-base italic transition-all transform hover:scale-102 shadow-xl backdrop-blur-md border border-white/20 hover:border-[#4F7942]/60 whitespace-normal max-w-full
                             ${hasImage
                                 ? 'px-3 py-2 rounded-full bg-white/40 hover:bg-[#d8c5b0]/90 hover:brightness-95 text-sm'
@@ -105,8 +103,6 @@ export const Choices = ({ hasImage, onHoverChange }) => {
             ) : (
                 <button
                     onClick={() => resetGame?.()}
-                    onMouseEnter={() => onHoverChange?.(true)}
-                    onMouseLeave={() => onHoverChange?.(false)}
                     className={`text-red-900 font-semibold text-xs transition-all transform hover:scale-95 active:scale-90 shadow-xl backdrop-blur-md border border-red-500/30 whitespace-normal pointer-events-auto max-w-full
                         ${hasImage
                             ? 'px-6 py-2 rounded-full bg-red-100/80 hover:bg-red-200/90 text-sm'

@@ -30,7 +30,7 @@ test.describe('Alapvető megjelenés és fülek (Smoke)', () => {
     await expect(page.getByText(/Nyelv|Hangok/i).first()).toBeVisible();
   });
 
-  test('Felolvasás kapcsoló és Bemutató mód működése', async ({ page, isMobile }) => {
+  test('Felolvasás kapcsoló és Teljes képernyő mód működése', async ({ page, isMobile }) => {
     await page.goto('/');
 
     const readAloudSelector = isMobile ? page.getByTestId('mobile-read-aloud') : page.getByTestId('header-read-aloud');
@@ -43,7 +43,7 @@ test.describe('Alapvető megjelenés és fülek (Smoke)', () => {
     await settingsTab.click();
 
     // 3. Verify Presentation Mode does not contain the word "Kioszk"
-    await expect(page.getByText('Bemutató mód')).toBeVisible();
+    await expect(page.getByText('Teljes képernyő mód')).toBeVisible();
     await expect(page.getByText(/kioszk/i)).toHaveCount(0);
 
     // 4. Verify Read Aloud toggle exists

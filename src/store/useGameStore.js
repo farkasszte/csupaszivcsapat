@@ -17,7 +17,7 @@ const getInitialVariables = () => {
 
 export const useGameStore = create((set, get) => ({
     // State
-    currentElementId: projectSettings.startingElement,
+    currentElementId: 'f4476778-0b1f-40cc-a60b-688c895e3c0f', // 0.1: Story start
     visits: {},
     variables: getInitialVariables(),
     history: [],
@@ -405,7 +405,7 @@ export const useGameStore = create((set, get) => ({
 
 
     resetGame: () => {
-        const startId = projectSettings.startingElement;
+        const startId = 'f4476778-0b1f-40cc-a60b-688c895e3c0f'; // 0.1: Beginning of the story (skipping 0.0 tutorial)
         set({
             currentElementId: startId,
             visits: {},

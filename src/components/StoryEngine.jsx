@@ -38,7 +38,6 @@ export const StoryEngine = ({ hideMedia = false }) => {
         }
     }, [currentElementId]);
 
-    const [isChoiceHovered, setIsChoiceHovered] = useState(false);
     const [isUiHidden, setIsUiHidden] = useState(false);
 
     const [activeDiscoveryId, setActiveDiscoveryId] = useState(null);
@@ -233,7 +232,6 @@ export const StoryEngine = ({ hideMedia = false }) => {
             {/* Unified Adaptive Frame Section */}
             <div className={`w-full mx-auto mt-auto lg:mt-auto mb-0 lg:mb-0 rounded-2xl flex flex-col overflow-hidden transition-all duration-500
                 ${!hideMedia ? 'bg-transparent border-none shadow-none lg:biophilic-card lg:max-w-5xl h-full' : 'lg:max-w-6xl h-full lg:biophilic-card'}
-                ${isChoiceHovered ? 'ring-2 ring-[#4F7942]/40 border-[#4F7942]/60 shadow-glow-primary-lg' : ''}
             `}>
 
                 {/* Story Content Area (Scrollable) */}
@@ -300,7 +298,7 @@ export const StoryEngine = ({ hideMedia = false }) => {
                     {/* Choices (Inside scrollable area) */}
                     {(typewriterSpeed === 0 || totalVisibleChars >= totalLength) && contentSegments.length > 0 && (
                         <div className="shrink-0 pt-8 animate-in fade-in slide-in-from-bottom-2 duration-500 mt-auto">
-                            <Choices hasImage={false} onHoverChange={setIsChoiceHovered} />
+                            <Choices hasImage={false} />
                         </div>
                     )}
                 </div>

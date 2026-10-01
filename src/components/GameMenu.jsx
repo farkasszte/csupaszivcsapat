@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useGame } from '../context/GameContext';
 import {
@@ -14,7 +14,7 @@ import {
     RiTimerLine,
     RiGlobalLine,
     RiFontFamily,
-    RiTvLine,
+    RiFullscreenLine,
     RiSpeakLine,
 } from '@remixicon/react';
 
@@ -81,6 +81,40 @@ export default function GameMenu() {
         reader.readAsText(file);
     };
 
+    useEffect(() => {
+        const onFullscreenChange = () => {
+            if (!document.fullscreenElement && presentationMode) {
+                setPresentationMode(false);
+            }
+        };
+        document.addEventListener('fullscreenchange', onFullscreenChange);
+        return () => document.removeEventListener('fullscreenchange', onFullscreenChange);
+    }, [presentationMode, setPresentationMode]);
+
+    const handleToggleFullscreen = () => {
+        const nextVal = !presentationMode;
+        setPresentationMode(nextVal);
+        if (nextVal) {
+            if (typeof document !== 'undefined' && !document.fullscreenElement) {
+                document.documentElement.requestFullscreen?.().catch(() => {});
+            }
+            if (typeof window !== 'undefined' && window.__TAURI_INTERNALS__) {
+                import('@tauri-apps/api/window').then(({ getCurrentWindow }) => {
+                    getCurrentWindow().setFullscreen(true).catch(() => {});
+                }).catch(() => {});
+            }
+        } else {
+            if (typeof document !== 'undefined' && document.fullscreenElement) {
+                document.exitFullscreen?.().catch(() => {});
+            }
+            if (typeof window !== 'undefined' && window.__TAURI_INTERNALS__) {
+                import('@tauri-apps/api/window').then(({ getCurrentWindow }) => {
+                    getCurrentWindow().setFullscreen(false).catch(() => {});
+                }).catch(() => {});
+            }
+        }
+    };
+
     const filters = [
         { id: 'none', name: t('none') },
         { id: 'protanopia', name: t('protanopia') },
@@ -115,31 +149,31 @@ export default function GameMenu() {
                     </div>
                 )}
 
-                <button
-                    onClick={handleExportSave}
-                    disabled={loading}
-                    className="flex items-center gap-3 px-4 py-3 bg-white/40 hover:bg-white/50 backdrop-blur-md border border-[#4F7942]/10 shadow-sm rounded-xl transition-all text-left group disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
-                >
-                    <RiDownloadLine size={16} className="shrink-0 text-[#4F7942] transition-colors" />
-                    <div className="flex-1">
-                        <div className="text-sm font-semibold text-[#4F7942] transition-colors">{t('export_save') || 'Mentés letöltése'}</div>
-                        <div className="text-xs text-[#4F7942] mt-0.5 opacity-80">{t('export_save_desc') || 'Játékállás mentése fájlba'}</div>
-                    </div>
-                </button>
+                <div className="grid grid-cols-2 gap-2">
+                    <button
+                        onClick={handleExportSave}
+                        disabled={loading}
+                        className="flex items-center gap-2.5 px-3 py-2.5 bg-white/40 hover:bg-white/50 backdrop-blur-md border border-[#4F7942]/10 shadow-xs rounded-xl transition-all text-left group disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                    >
+                        <RiDownloadLine size={16} className="shrink-0 text-[#4F7942] transition-colors" />
+                        <span className="text-xs font-semibold text-[#4F7942] leading-tight transition-colors">
+                            {t('export_save_desc') || 'Mentés fájlba'}
+                        </span>
+                    </button>
 
-                <label className="flex items-center gap-3 px-4 py-3 bg-white/40 hover:bg-white/50 backdrop-blur-md border border-[#4F7942]/10 shadow-sm rounded-xl transition-all text-left group cursor-pointer">
-                    <RiUploadLine size={16} className="shrink-0 text-[#4F7942] transition-colors" />
-                    <div className="flex-1">
-                        <div className="text-sm font-semibold text-[#4F7942] transition-colors">{t('import_save') || 'Mentés betöltése'}</div>
-                        <div className="text-xs text-[#4F7942] mt-0.5 opacity-80">{t('import_save_desc') || 'Mentési fájl betöltése'}</div>
-                    </div>
-                    <input
-                        type="file"
-                        accept=".json"
-                        onChange={handleImportSave}
-                        className="hidden"
-                    />
-                </label>
+                    <label className="flex items-center gap-2.5 px-3 py-2.5 bg-white/40 hover:bg-white/50 backdrop-blur-md border border-[#4F7942]/10 shadow-xs rounded-xl transition-all text-left group cursor-pointer">
+                        <RiUploadLine size={16} className="shrink-0 text-[#4F7942] transition-colors" />
+                        <span className="text-xs font-semibold text-[#4F7942] leading-tight transition-colors">
+                            {t('import_save_desc') || 'Mentési fájl betöltése'}
+                        </span>
+                        <input
+                            type="file"
+                            accept=".json"
+                            onChange={handleImportSave}
+                            className="hidden"
+                        />
+                    </label>
+                </div>
 
                 <div className="p-3 bg-white/40 backdrop-blur-md rounded-xl border border-[#4F7942]/10 shadow-sm mt-1">
                     <h3 className="text-xs font-bold uppercase tracking-widest text-[#4F7942] mb-3 ml-1">{t('settings')}</h3>
@@ -167,7 +201,7 @@ export default function GameMenu() {
                     </div>
 
                     {/* Sound Toggle */}
-                    <div className="flex flex-col gap-2 px-3 py-2 bg-white/40 rounded-lg mb-2">
+                    <div className="flex flex-col gap-2 px-3 py-2 bg-white/40 rounded-lg">
                         <div className="flex items-center justify-between">
                             <div className="flex items-center gap-2">
                                 {isMuted ? <RiVolumeMuteLine size={16} className="text-[#4F7942]" /> : <RiVolumeUpLine size={16} className="text-[#4F7942]" />}
@@ -196,6 +230,22 @@ export default function GameMenu() {
                                 {Math.round(volume * 100)}%
                             </span>
                         </div>
+                    </div>
+
+                    {/* Read Aloud Toggle (Under sound settings, without description) */}
+                    <div className="flex items-center justify-between px-3 py-2.5 mt-2 bg-white/40 rounded-lg">
+                        <div className="flex items-center gap-2">
+                            <RiSpeakLine size={16} className="text-[#4F7942]" />
+                            <span className="text-xs font-semibold text-[#4F7942]">{t('read_aloud_toggle') || 'Felolvasás'}</span>
+                        </div>
+                        <button
+                            onClick={() => setTtsEnabled(!ttsEnabled)}
+                            data-testid="toggle-read-aloud"
+                            className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${ttsEnabled ? 'bg-[#4F7942]' : 'bg-[#4F7942]/20'}`}
+                            aria-label={t('read_aloud_toggle') || 'Felolvasás'}
+                        >
+                            <span className={`pointer-events-none inline-block h-4 w-4 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${ttsEnabled ? 'translate-x-4' : 'translate-x-0'}`} />
+                        </button>
                     </div>
 
                     {/* Color Filter Selector */}
@@ -283,77 +333,52 @@ export default function GameMenu() {
                             </div>
                         </div>
                     </div>
-                    {/* Presentation Mode Toggle */}
-                    <div className="flex flex-col gap-1 px-3 py-2.5 mt-2 bg-white/40 rounded-lg">
-                        <div className="flex items-center justify-between">
-                            <div className="flex items-center gap-2">
-                                <RiTvLine size={16} className="text-[#4F7942]" />
-                                <span className="text-xs font-semibold text-[#4F7942]">{t('presentation_mode') || 'Bemutató mód'}</span>
-                            </div>
-                            <button
-                                onClick={() => setPresentationMode(!presentationMode)}
-                                data-testid="toggle-presentation-mode"
-                                aria-label={t('presentation_mode') || 'Bemutató mód'}
-                                className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${presentationMode ? 'bg-[#4F7942]' : 'bg-[#4F7942]/20'}`}
-                            >
-                                <span className={`pointer-events-none inline-block h-4 w-4 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${presentationMode ? 'translate-x-4' : 'translate-x-0'}`} />
-                            </button>
-                        </div>
-                        <p className="text-xs text-[#4F7942]/80 leading-tight mt-0.5">
-                            {t('presentation_mode_desc') || 'A külső linkek felugró ablakban nyílnak meg a bemutató elhagyása nélkül.'}
-                        </p>
-                    </div>
 
-                    {/* Read Aloud Toggle */}
-                    <div className="flex flex-col gap-1 px-3 py-2.5 mt-2 bg-white/40 rounded-lg">
-                        <div className="flex items-center justify-between">
-                            <div className="flex items-center gap-2">
-                                <RiSpeakLine size={16} className="text-[#4F7942]" />
-                                <span className="text-xs font-semibold text-[#4F7942]">{t('read_aloud_toggle') || 'Felolvasás'}</span>
-                            </div>
-                            <button
-                                onClick={() => setTtsEnabled(!ttsEnabled)}
-                                data-testid="toggle-read-aloud"
-                                className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${ttsEnabled ? 'bg-[#4F7942]' : 'bg-[#4F7942]/20'}`}
-                                aria-label={t('read_aloud_toggle') || 'Felolvasás'}
-                            >
-                                <span className={`pointer-events-none inline-block h-4 w-4 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${ttsEnabled ? 'translate-x-4' : 'translate-x-0'}`} />
-                            </button>
+                    {/* Fullscreen Mode Toggle (Without description) */}
+                    <div className="flex items-center justify-between px-3 py-2.5 mt-2 bg-white/40 rounded-lg">
+                        <div className="flex items-center gap-2">
+                            <RiFullscreenLine size={16} className="text-[#4F7942]" />
+                            <span className="text-xs font-semibold text-[#4F7942]">{t('presentation_mode') || 'Teljes képernyő mód'}</span>
                         </div>
-                        <p className="text-xs text-[#4F7942]/80 leading-tight mt-0.5">
-                            {t('read_aloud_toggle_desc') || 'A történet szövegének felolvasása gomb megjelenítése.'}
-                        </p>
+                        <button
+                            onClick={handleToggleFullscreen}
+                            data-testid="toggle-presentation-mode"
+                            aria-label={t('presentation_mode') || 'Teljes képernyő mód'}
+                            className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${presentationMode ? 'bg-[#4F7942]' : 'bg-[#4F7942]/20'}`}
+                        >
+                            <span className={`pointer-events-none inline-block h-4 w-4 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${presentationMode ? 'translate-x-4' : 'translate-x-0'}`} />
+                        </button>
                     </div>
                 </div>
 
                 <div className="border-t border-[#4F7942]/10 my-1" />
 
-                <button
-                    onClick={() => {
-                        if (confirm(t('confirm_reset') || 'Biztosan újrakezded? A mentetlen haladás elvész.')) {
-                            resetGame();
-                        }
-                    }}
-                    disabled={loading}
-                    className="flex items-center gap-3 px-4 py-3 bg-white/40 hover:bg-white/50 border border-[#4F7942]/10 hover:border-[#4F7942]/30 rounded-xl transition-all text-left group disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
-                >
-                    <RiRestartLine size={16} className="shrink-0 text-[#4F7942] transition-colors" />
-                    <div className="flex-1">
-                        <div className="text-sm font-semibold text-[#4F7942] transition-colors">{t('reset_game') || 'Újrakezdés'}</div>
-                        <div className="text-xs text-[#4F7942] mt-0.5 opacity-80">{t('reset_game_desc') || 'Visszatérés az elejére'}</div>
-                    </div>
-                </button>
+                <div className="grid grid-cols-2 gap-2">
+                    <button
+                        onClick={() => {
+                            if (confirm(t('confirm_reset') || 'Biztosan újrakezded? A mentetlen haladás elvész.')) {
+                                resetGame();
+                            }
+                        }}
+                        disabled={loading}
+                        className="flex items-center gap-2.5 px-3 py-2.5 bg-white/40 hover:bg-white/50 border border-[#4F7942]/10 hover:border-[#4F7942]/30 shadow-xs rounded-xl transition-all text-left group disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                    >
+                        <RiRestartLine size={16} className="shrink-0 text-[#4F7942] transition-colors" />
+                        <span className="text-xs font-semibold text-[#4F7942] leading-tight transition-colors">
+                            {t('reset_game_desc') || 'Visszatérés az elejére'}
+                        </span>
+                    </button>
 
-                <button
-                    onClick={() => router.push('/login')}
-                    className="flex items-center gap-3 px-4 py-3 bg-white/40 hover:bg-white/50 border border-[#4F7942]/10 hover:border-[#4F7942]/30 rounded-xl transition-all text-left group cursor-pointer"
-                >
-                    <RiHome4Line size={16} className="shrink-0 text-[#4F7942] transition-colors" />
-                    <div className="flex-1">
-                        <div className="text-sm font-semibold text-[#4F7942] transition-colors">{t('return_to_home') || 'Visszatérés a kezdőlapra'}</div>
-                        <div className="text-xs text-[#4F7942] mt-0.5 opacity-80">{t('return_to_home_desc') || 'Főmenü megnyitása'}</div>
-                    </div>
-                </button>
+                    <button
+                        onClick={() => router.push('/login')}
+                        className="flex items-center gap-2.5 px-3 py-2.5 bg-white/40 hover:bg-white/50 border border-[#4F7942]/10 hover:border-[#4F7942]/30 shadow-xs rounded-xl transition-all text-left group cursor-pointer"
+                    >
+                        <RiHome4Line size={16} className="shrink-0 text-[#4F7942] transition-colors" />
+                        <span className="text-xs font-semibold text-[#4F7942] leading-tight transition-colors">
+                            {t('return_to_home_desc') || 'Főmenü megnyitása'}
+                        </span>
+                    </button>
+                </div>
             </div>
         </>
     );
