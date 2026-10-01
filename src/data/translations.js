@@ -38,7 +38,7 @@ export const translations = {
         "certificate_title": "A Homokhátság Ifjú Őrzője",
         "certificate_subtitle": "Díszoklevél a természeti értékek megmentéséért",
         "certificate_desc": "Töltsd le névre szóló elismerésed képként!",
-        "certificate_download_btn": "Oklevél letöltése képként (PNG)",
+        "certificate_download_btn": "Oklevél letöltése",
         "certificate_name_label": "A Te neved az oklevélen:",
         "certificate_preview": "Oklevél előnézet",
         "reset_game": "Újrakezdés",

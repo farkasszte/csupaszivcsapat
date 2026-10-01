@@ -294,7 +294,7 @@ export default function CertificateModal({ isOpen, onClose }) {
                     >
                         <RiDownloadLine size={18} />
                         <span>
-                            {isGenerating ? 'Generálás...' : (t('certificate_download_btn') || 'Oklevél letöltése (PNG)')}
+                            {isGenerating ? 'Generálás...' : (t('certificate_download_btn') || 'Oklevél letöltése')}
                         </span>
                     </button>
                 </div>
