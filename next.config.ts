@@ -9,6 +9,7 @@ const nextConfig: NextConfig = {
   output: (isDesktop && isProd) ? "export" : undefined,
   images: {
     unoptimized: isDesktop,
+    formats: ["image/avif", "image/webp"],
   },
   turbopack: {
     root: path.resolve(__dirname, "./"),
