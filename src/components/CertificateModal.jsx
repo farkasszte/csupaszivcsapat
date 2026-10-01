@@ -226,28 +226,57 @@ export default function CertificateModal({ isOpen, onClose }) {
     };
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/80 backdrop-blur-md animate-in fade-in duration-200">
-            <div className="relative w-full max-w-2xl bg-[#FAF7F0] rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-[#4F7942]/30 modal-gpu-accelerated">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-md animate-in fade-in duration-200">
+            <div className="relative w-full max-w-lg bg-[#FAF7F0] rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-[#4F7942]/30 modal-gpu-accelerated">
                 {/* Header */}
                 <div className="flex items-center justify-between px-5 py-3.5 bg-[#4F7942] text-white shrink-0">
                     <div className="flex items-center gap-2">
                         <RiAwardLine className="w-5 h-5 text-amber-300" />
                         <h3 className="font-bold text-sm sm:text-base">
-                            {t('certificate_title') || 'A Homokhátság Ifjú Őrzője'}
+                            {t('certificate_title') || 'Díszoklevél Kiállítása'}
                         </h3>
                     </div>
                     <button
                         onClick={onClose}
                         className="p-1 rounded-lg hover:bg-white/20 transition-colors cursor-pointer text-white"
+                        aria-label="Bezárás"
                     >
                         <RiCloseLine size={20} />
                     </button>
                 </div>
 
                 {/* Content Body */}
-                <div className="p-5 sm:p-6 flex flex-col gap-5 overflow-y-auto max-h-[82vh]">
+                <div className="p-6 flex flex-col items-center text-center gap-5 overflow-y-auto max-h-[85vh]">
+                    {/* Visual Icon */}
+                    <div className="flex flex-col items-center gap-2">
+                        <img
+                            src="/icons/icon-heart.png"
+                            alt="Csupaszív Logó"
+                            className="w-24 h-24 sm:w-28 sm:h-28 object-contain drop-shadow-lg hover:scale-105 transition-transform duration-200"
+                        />
+                        <div className="text-xs font-bold tracking-widest text-[#4F7942] uppercase">
+                            Csupaszív Kalandok - A Homokhátság Hősei
+                        </div>
+                        <h2 className="text-xl sm:text-2xl font-black text-[#263d20]">
+                            DÍSZOKLEVÉL
+                        </h2>
+                        <p className="text-xs sm:text-sm text-zinc-600 max-w-sm leading-relaxed">
+                            Gratulálunk! Sikeresen óvtad a Homokhátság természeti értékeit. Írd be a neved, és töltsd le a hivatalos, nagy felbontású díszoklevelet képként!
+                        </p>
+                    </div>
+
+                    {/* Rank Card */}
+                    <div className="w-full bg-white border-2 border-[#D4AF37] p-3.5 rounded-xl shadow-xs flex flex-col items-center">
+                        <span className="text-[11px] font-bold text-amber-700 uppercase tracking-wider">
+                            Kiérdemelt rangod
+                        </span>
+                        <span className="text-base sm:text-lg font-black text-[#4F7942] mt-0.5">
+                            {rankTitle}
+                        </span>
+                    </div>
+
                     {/* Name Input */}
-                    <div className="bg-white p-4 rounded-xl border border-[#4F7942]/20 shadow-xs flex flex-col gap-2">
+                    <div className="w-full bg-white p-4 rounded-xl border border-[#4F7942]/20 shadow-xs flex flex-col gap-2 text-left">
                         <label className="text-xs font-bold text-[#4F7942] uppercase tracking-wider flex items-center gap-1.5">
                             <RiUser3Line size={14} />
                             {t('certificate_name_label') || 'A Te neved az oklevélen:'}
@@ -262,56 +291,8 @@ export default function CertificateModal({ isOpen, onClose }) {
                         />
                     </div>
 
-                    {/* Certificate Preview Card */}
-                    <div className="relative bg-[#FFFDF8] border-4 border-[#4F7942] rounded-xl p-5 sm:p-7 text-center shadow-md overflow-hidden">
-                        <div className="absolute inset-1.5 border border-[#D4AF37] rounded-lg pointer-events-none" />
-
-                        {/* Top Subtitle */}
-                        <div className="text-[11px] sm:text-xs font-bold tracking-widest text-[#4F7942] uppercase mb-1">
-                            Csupaszív Kalandok - A Homokhátság Hősei
-                        </div>
-                        <h2 className="text-xl sm:text-2xl font-black text-[#263d20] tracking-wide mb-1">
-                            DÍSZOKLEVÉL
-                        </h2>
-                        <div className="text-xs text-amber-700 font-medium italic mb-3">
-                            A Homokhátság Természeti Értékeinek Megóvásáért
-                        </div>
-
-                        <div className="text-xs text-zinc-600 mb-1.5">Ezennel tanúsítjuk, hogy</div>
-                        <div className="text-xl sm:text-2xl font-bold text-[#1e3816] border-b-2 border-[#4F7942]/30 pb-1 mx-auto max-w-xs mb-2.5">
-                            {playerName.trim() || 'A Homokhátság Hőse'}
-                        </div>
-
-                        {/* Text under player name */}
-                        <div className="text-xs sm:text-sm text-zinc-700 leading-relaxed max-w-md mx-auto mb-3">
-                            kiemelkedő bátorsággal és elkötelezettséggel óvta a Homokhátság védett természeti kincseit.
-                        </div>
-
-                        {/* Centered Rank Box */}
-                        <div className="flex justify-center my-3">
-                            <div className="inline-block bg-white border-2 border-[#D4AF37] px-6 py-2.5 rounded-xl shadow-xs text-center">
-                                <span className="text-xs sm:text-sm font-bold text-[#4F7942]">
-                                    Kiérdemelt rang: {rankTitle}
-                                </span>
-                            </div>
-                        </div>
-
-                        {/* Centered Heart Logo under the Rank Box (No circular stamp) */}
-                        <div className="flex items-center justify-center my-2">
-                            <img
-                                src="/icons/icon-heart.png"
-                                alt="Csupaszív Logó"
-                                className="w-20 h-20 sm:w-24 sm:h-24 object-contain drop-shadow-md hover:scale-105 transition-transform duration-200"
-                            />
-                        </div>
-
-                        <div className="text-[11px] text-zinc-500 mt-2">
-                            Kelt: {formattedDate}
-                        </div>
-                    </div>
-
                     {/* Action Buttons */}
-                    <div className="flex flex-col sm:flex-row items-center justify-end gap-3 pt-2">
+                    <div className="w-full flex flex-col sm:flex-row items-center justify-end gap-3 pt-2">
                         <button
                             onClick={onClose}
                             className="w-full sm:w-auto px-5 py-2.5 rounded-xl border border-zinc-300 text-zinc-700 text-xs font-bold hover:bg-zinc-100 transition-colors cursor-pointer"
