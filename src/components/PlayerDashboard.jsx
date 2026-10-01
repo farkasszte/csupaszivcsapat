@@ -176,12 +176,12 @@ export default function PlayerDashboard() {
                             <span className="text-xs sm:text-sm font-bold text-zinc-900 group-hover:text-[#4F7942] transition-colors">
                                 {t('certificate_btn') || 'Díszes Oklevél'}
                             </span>
-                            <span className="text-[11px] text-zinc-600">
+                            <span className="text-xs text-zinc-600">
                                 {t('certificate_desc') || 'Töltsd le névre szóló elismerésed képként!'}
                             </span>
                         </div>
                     </div>
-                    <span className="text-[11px] font-bold text-[#4F7942] bg-[#4F7942]/10 px-2.5 py-1 rounded-lg shrink-0">
+                    <span className="text-xs font-bold text-[#4F7942] bg-[#4F7942]/10 px-2.5 py-1 rounded-lg shrink-0">
                         Megtekintés
                     </span>
                 </button>
@@ -277,7 +277,7 @@ export default function PlayerDashboard() {
                                                             setShowDashboard(false);
                                                         }
                                                     }}
-                                                    className="inline-flex items-center gap-1 text-[11px] sm:text-xs font-bold text-[#4F7942] hover:text-[#3d5d33] transition-colors bg-[#4F7942]/5 hover:bg-[#4F7942]/10 px-2 py-0.5 rounded-md border border-[#4F7942]/10 shrink-0 cursor-pointer"
+                                                    className="inline-flex items-center gap-1 text-xs font-bold text-[#4F7942] hover:text-[#3d5d33] transition-colors bg-[#4F7942]/5 hover:bg-[#4F7942]/10 px-2 py-0.5 rounded-md border border-[#4F7942]/10 shrink-0 cursor-pointer"
                                                 >
                                                     <span className="truncate max-w-[130px] sm:max-w-none">{char[`species_${language}`] || char.species}</span>
                                                     <RiExternalLinkLine size={12} className="shrink-0" />
@@ -316,7 +316,7 @@ export default function PlayerDashboard() {
                                                 {loc.externalLink && (
                                                     <button
                                                         onClick={() => openExternalUrl(loc.externalLink)}
-                                                        className="inline-flex items-center gap-1 text-[11px] sm:text-xs font-bold text-[#4F7942] hover:text-[#3d5d33] transition-colors bg-[#4F7942]/5 hover:bg-[#4F7942]/10 px-2 py-0.5 rounded-md border border-[#4F7942]/10 shrink-0 cursor-pointer"
+                                                        className="inline-flex items-center gap-1 text-xs font-bold text-[#4F7942] hover:text-[#3d5d33] transition-colors bg-[#4F7942]/5 hover:bg-[#4F7942]/10 px-2 py-0.5 rounded-md border border-[#4F7942]/10 shrink-0 cursor-pointer"
                                                     >
                                                         <RiExternalLinkLine size={12} />
                                                     </button>
