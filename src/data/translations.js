@@ -36,6 +36,7 @@ export const translations = {
         "stop_reading": "Leállítás",
         "tts_unsupported": "A böngésződ nem támogatja a szövegfelolvasást.",
         "certificate_btn": "Díszes Oklevél",
+        "view_btn": "Megtekintés",
         "certificate_download_btn": "Oklevél letöltése",
         "certificate_name_label": "A Te neved az oklevélen:",
         "reset_game": "Újrakezdés",
@@ -222,6 +223,7 @@ export const translations = {
         "stop_reading": "Stop Reading",
         "tts_unsupported": "Your browser does not support text-to-speech.",
         "certificate_btn": "Honorary Certificate",
+        "view_btn": "View",
         "certificate_download_btn": "Download Certificate",
         "certificate_name_label": "Your name on the certificate:"
     },
@@ -335,6 +337,7 @@ export const translations = {
         "stop_reading": "Zaustavi čitanje",
         "tts_unsupported": "Vaš pregledač ne podržava čitanje naglas.",
         "certificate_btn": "Počasna diploma",
+        "view_btn": "Pregled",
         "certificate_download_btn": "Preuzmi diplomu",
         "certificate_name_label": "Tvoje ime na diplomi:"
     },
@@ -448,6 +451,7 @@ export const translations = {
         "stop_reading": "Заустави читање",
         "tts_unsupported": "Ваш прегледач не подржава читање наглас.",
         "certificate_btn": "Почасна диплома",
+        "view_btn": "Преглед",
         "certificate_download_btn": "Преузми диплому",
         "certificate_name_label": "Твоје име на дипломи:"
     }

@@ -166,18 +166,18 @@ export default function PlayerDashboard() {
                 {/* Certificate Action Button */}
                 <button
                     onClick={() => setShowCert(true)}
-                    className="w-full flex items-center justify-between p-3.5 rounded-2xl bg-white/40 hover:bg-white/60 border border-[#D4AF37]/50 shadow-xs hover:shadow-md transition-all group cursor-pointer"
+                    className="w-full flex items-center justify-between p-3.5 rounded-2xl bg-white/40 hover:bg-white/60 border border-[#4F7942]/20 hover:border-[#4F7942]/40 shadow-xs hover:shadow-md transition-all group cursor-pointer"
                 >
                     <div className="flex items-center gap-2.5">
-                        <div className="p-2 rounded-xl bg-amber-400 text-amber-950 shadow-xs">
+                        <div className="p-2 rounded-xl bg-[#4F7942]/10 text-[#4F7942] group-hover:bg-[#4F7942] group-hover:text-white shadow-xs transition-all">
                             <RiAwardLine size={18} />
                         </div>
-                        <span className="text-xs sm:text-sm font-bold text-zinc-900 group-hover:text-[#4F7942] transition-colors">
+                        <span className="text-xs sm:text-sm font-bold text-[#4F7942] transition-colors">
                             {t('certificate_btn') || 'Díszes Oklevél'}
                         </span>
                     </div>
-                    <span className="text-xs font-bold text-[#4F7942] bg-[#4F7942]/10 px-2.5 py-1 rounded-lg shrink-0">
-                        Megtekintés
+                    <span className="text-xs font-bold text-[#4F7942] bg-[#4F7942]/10 group-hover:bg-[#4F7942] group-hover:text-white px-2.5 py-1 rounded-lg shrink-0 transition-colors">
+                        {t('view_btn') || 'Megtekintés'}
                     </span>
                 </button>
 
