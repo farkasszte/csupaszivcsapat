@@ -12,6 +12,7 @@ import {
     RiVolumeMuteLine,
     RiPaletteLine,
     RiTimerLine,
+    RiGlobalLine,
 } from '@remixicon/react';
 
 export default function GameMenu() {
@@ -82,12 +83,19 @@ export default function GameMenu() {
         { id: 'vibrant', name: t('vibrant') },
     ];
 
+    const languages = [
+        { id: 'hu', name: 'Magyar' },
+        { id: 'en', name: 'English' },
+        { id: 'sr-latn', name: 'Srpski (Lat)' },
+        { id: 'sr-cyrl', name: 'Српски (Ћир)' },
+    ];
+
     const displayError = localError || error;
     const displayMessage = localMessage || message;
 
     return (
         <>
-            <div className="flex flex-col gap-3 p-4 max-h-full overflow-y-auto no-scrollbar">
+            <div className="flex flex-col gap-3 p-4 max-h-full overflow-y-auto overflow-x-hidden no-scrollbar w-full">
                 {/* Status message */}
                 {(displayError || displayMessage) && (
                     <div
@@ -131,19 +139,21 @@ export default function GameMenu() {
 
                     {/* Language Switch */}
                     <div className="px-3 py-2 bg-white/40 rounded-lg mb-2">
-                        <div className="flex items-center justify-between mb-2">
+                        <div className="flex items-center gap-2 mb-2">
+                            <RiGlobalLine size={16} className="text-[#4F7942]" />
                             <span className="text-xs font-semibold text-[#4F7942]">{t('language')}</span>
                         </div>
-                        <div className="flex gap-2">
-                            {['hu', 'en', 'sr-latn', 'sr-cyrl'].map(lang => (
+                        <div className="grid grid-cols-2 gap-1.5">
+                            {languages.map(lang => (
                                 <button
-                                    key={lang}
-                                    onClick={() => setLanguage(lang)}
-                                    className={`flex-1 py-1 px-2 text-xs rounded border transition-all uppercase font-bold ${language === lang
-                                        ? 'bg-[#4F7942] hover:bg-[#3d5e33] border-[#4F7942] text-white shadow-sm'
+                                    key={lang.id}
+                                    onClick={() => setLanguage(lang.id)}
+                                    className={`px-2 py-1.5 text-xs rounded border transition-all text-center truncate ${language === lang.id
+                                        ? 'bg-[#4F7942] hover:bg-[#3d5e33] border-[#4F7942] text-white shadow-sm font-bold'
                                         : 'bg-white/40 border-[#4F7942]/10 text-[#4F7942] hover:bg-white/60 hover:brightness-95'}`}
+                                    title={lang.name}
                                 >
-                                    {lang === 'hu' ? 'Magyar' : lang === 'en' ? 'EN' : lang === 'sr-latn' ? 'SR(Lat)' : 'SR(Ћир)'}
+                                    {lang.name}
                                 </button>
                             ))}
                         </div>

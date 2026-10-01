@@ -218,12 +218,12 @@ export default function PlayerDashboard() {
                                 return (
                                     <div
                                         key={char.id}
-                                        className="bg-white/40 backdrop-blur-md border border-[#4F7942]/10 rounded-2xl p-3 flex gap-4 transition-all hover:bg-white/50 shadow-sm"
+                                        className="bg-white/40 backdrop-blur-md border border-[#4F7942]/10 rounded-2xl p-3 flex gap-3 sm:gap-4 items-start transition-all hover:bg-white/50 shadow-sm"
                                     >
                                         {/* ID Photo */}
                                         <div
                                             onClick={() => openLightbox(`/assets/Images/${char.image}`)}
-                                            className="relative shrink-0 w-24 aspect-9/16 rounded-xl overflow-hidden border-2 border-white/50 shadow-sm cursor-pointer group"
+                                            className="relative shrink-0 w-20 sm:w-24 aspect-9/16 rounded-xl overflow-hidden border-2 border-white/50 shadow-sm cursor-pointer group"
                                         >
                                             <img
                                                 src={`/assets/Images/${char.image}`}
@@ -232,14 +232,16 @@ export default function PlayerDashboard() {
                                                 style={{ filter: getColorFilterStyle(colorFilter) }}
                                             />
                                             <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                                                <RiZoomInLine size={24} className="text-white" />
+                                                <RiZoomInLine size={22} className="text-white" />
                                             </div>
                                         </div>
 
                                         {/* Info Panel */}
-                                        <div className="flex-1 min-w-0 flex flex-col justify-center">
-                                            <div className="flex items-baseline justify-between gap-2 overflow-hidden">
-                                                <h4 className="text-xl font-bold text-zinc-950 truncate">{char[`name_${language}`] || char.name}</h4>
+                                        <div className="flex-1 min-w-0 flex flex-col justify-center py-0.5">
+                                            <div className="flex flex-wrap items-center justify-between gap-1.5 mb-1.5">
+                                                <h4 className="text-base sm:text-lg font-bold text-zinc-950 leading-tight">
+                                                    {char[`name_${language}`] || char.name}
+                                                </h4>
                                                 <button
                                                     onClick={() => {
                                                         if (char.externalLink) {
@@ -250,13 +252,13 @@ export default function PlayerDashboard() {
                                                             setShowDashboard(false);
                                                         }
                                                     }}
-                                                    className="shrink-0 flex items-center gap-1 text-xs font-bold text-[#4F7942] hover:text-[#3d5d33] transition-colors bg-[#4F7942]/5 px-2 py-1 rounded-md border border-[#4F7942]/10"
+                                                    className="inline-flex items-center gap-1 text-[11px] sm:text-xs font-bold text-[#4F7942] hover:text-[#3d5d33] transition-colors bg-[#4F7942]/5 hover:bg-[#4F7942]/10 px-2 py-0.5 rounded-md border border-[#4F7942]/10 shrink-0 cursor-pointer"
                                                 >
-                                                    <span>{char[`species_${language}`] || char.species}</span>
-                                                    <RiExternalLinkLine size={12} />
+                                                    <span className="truncate max-w-[130px] sm:max-w-none">{char[`species_${language}`] || char.species}</span>
+                                                    <RiExternalLinkLine size={12} className="shrink-0" />
                                                 </button>
                                             </div>
-                                            <p className="text-sm text-zinc-700 mt-1.5 line-clamp-3 leading-relaxed italic">
+                                            <p className="text-xs sm:text-sm text-zinc-700 leading-relaxed italic">
                                                 "{char[`description_${language}`] || char.description}"
                                             </p>
                                         </div>
@@ -271,29 +273,31 @@ export default function PlayerDashboard() {
                                 return (
                                     <div
                                         key={loc.id}
-                                        className="bg-white/40 backdrop-blur-md border border-[#4F7942]/10 rounded-2xl p-3 flex gap-4 transition-all hover:bg-white/50 shadow-sm"
+                                        className="bg-white/40 backdrop-blur-md border border-[#4F7942]/10 rounded-2xl p-3 flex gap-3 sm:gap-4 items-start transition-all hover:bg-white/50 shadow-sm"
                                     >
                                         {/* Map Portrait Placeholder */}
                                         <div
-                                            className="relative shrink-0 w-24 aspect-9/16 rounded-xl overflow-hidden border-2 border-white/50 shadow-sm bg-[#4F7942] flex items-center justify-center group"
+                                            className="relative shrink-0 w-20 sm:w-24 aspect-9/16 rounded-xl overflow-hidden border-2 border-white/50 shadow-sm bg-[#4F7942] flex items-center justify-center group"
                                         >
-                                            <RiMapPin2Line size={32} className="text-white/80 group-hover:scale-110 transition-transform duration-500" />
+                                            <RiMapPin2Line size={28} className="text-white/80 group-hover:scale-110 transition-transform duration-500" />
                                         </div>
 
                                         {/* Info Panel */}
-                                        <div className="flex-1 min-w-0 flex flex-col justify-center">
-                                            <div className="flex items-baseline justify-between gap-2 overflow-hidden">
-                                                <h4 className="text-lg font-bold text-zinc-950 truncate">{loc[`name_${language}`] || loc.name}</h4>
+                                        <div className="flex-1 min-w-0 flex flex-col justify-center py-0.5">
+                                            <div className="flex flex-wrap items-center justify-between gap-1.5 mb-1.5">
+                                                <h4 className="text-base sm:text-lg font-bold text-zinc-950 leading-tight">
+                                                    {loc[`name_${language}`] || loc.name}
+                                                </h4>
                                                 {loc.externalLink && (
                                                     <button
                                                         onClick={() => window.open(loc.externalLink, '_blank')}
-                                                        className="shrink-0 flex items-center gap-1 text-xs font-bold text-[#4F7942] hover:text-[#3d5d33] transition-colors bg-[#4F7942]/5 px-2 py-1 rounded-md border border-[#4F7942]/10"
+                                                        className="inline-flex items-center gap-1 text-[11px] sm:text-xs font-bold text-[#4F7942] hover:text-[#3d5d33] transition-colors bg-[#4F7942]/5 hover:bg-[#4F7942]/10 px-2 py-0.5 rounded-md border border-[#4F7942]/10 shrink-0 cursor-pointer"
                                                     >
                                                         <RiExternalLinkLine size={12} />
                                                     </button>
                                                 )}
                                             </div>
-                                            <p className="text-xs text-zinc-700 mt-1.5 leading-relaxed italic">
+                                            <p className="text-xs sm:text-sm text-zinc-700 leading-relaxed italic">
                                                 "{loc[`description_${language}`] || loc.description}"
                                             </p>
                                         </div>

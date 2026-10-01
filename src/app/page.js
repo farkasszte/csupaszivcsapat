@@ -157,7 +157,7 @@ export default function Home() {
                     {(showPanel || true) && (
                         <div className={`relative h-full flex flex-col justify-center items-center ${!showPanel ? 'hidden lg:flex' : ''}`}>
                             <div
-                                className="h-full w-full max-w-[420px] sm:w-auto sm:max-w-none sm:aspect-9/16 lg:h-full lg:w-auto lg:max-w-none bg-white/20 backdrop-blur-md rounded-xl border border-white/30 shadow-2xl overflow-hidden flex flex-col"
+                                className="h-full w-full max-w-[420px] sm:w-auto sm:max-w-none sm:aspect-9/16 sm:min-w-[340px] lg:w-[420px] lg:min-w-[380px] lg:max-w-[440px] lg:aspect-auto bg-white/20 backdrop-blur-md rounded-xl border border-white/30 shadow-2xl overflow-hidden flex flex-col"
                             >
 
 
