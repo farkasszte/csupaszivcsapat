@@ -1,0 +1,29 @@
+# Dependencies & Build artifacts
+node_modules/**
+.next/**
+out/**
+dist/**
+tmp/**
+target/**
+gen/**
+.git/**
+.skills/**
+
+# Static assets & Public directory
+public/**
+src-tauri/icons/**
+
+# Data files (not source code)
+*.json
+*.csv
+*.svg
+*.xml
+
+# Documentation
+*.md
+
+# Lock files & build caches
+package-lock.json
+bun.lock
+Cargo.lock
+tsconfig.tsbuildinfo

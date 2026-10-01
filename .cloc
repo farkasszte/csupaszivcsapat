@@ -1,0 +1,3 @@
+--vcs=git
+--exclude-ext=json,csv,svg,xml,md
+--exclude-dir=public,tmp,.skills,target,gen,node_modules,.next,dist,out
