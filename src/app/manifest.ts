@@ -4,7 +4,7 @@ export const dynamic = 'force-static';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Csupaszív Kalandok',
+    name: 'Csupaszív Kalandok - A Homokhátság Hősei',
     short_name: 'Csupaszív',
     description: 'Interaktív természetvédelmi kalandjáték a Homokhátságon',
     start_url: '/',
@@ -20,6 +20,11 @@ export default function manifest(): MetadataRoute.Manifest {
       {
         src: '/icons/icon-512x512.png',
         sizes: '512x512',
+        type: 'image/png',
+      },
+      {
+        src: '/icons/apple-touch-icon.png',
+        sizes: '180x180',
         type: 'image/png',
       },
     ],

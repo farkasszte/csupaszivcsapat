@@ -5,8 +5,8 @@ import { SerwistProvider } from "@serwist/turbopack/react";
 import "./globals.css";
 
 export const metadata = {
-    title: "Csupaszív Kalandok: A Homokhátság Hősei",
-    description: "Interaktív történetmesélő játék",
+    title: "Csupaszív Kalandok - A Homokhátság Hősei",
+    description: "Interaktív természetvédelmi kalandjáték a Homokhátságon",
     appleWebApp: {
         capable: true,
         statusBarStyle: "default",
@@ -16,7 +16,14 @@ export const metadata = {
         telephone: false,
     },
     icons: {
-        apple: "/icons/icon-192x192.png",
+        icon: [
+            { url: "/favicon.ico", sizes: "any" },
+            { url: "/icons/icon-192x192.png", sizes: "192x192", type: "image/png" },
+            { url: "/icons/icon-512x512.png", sizes: "512x512", type: "image/png" },
+        ],
+        apple: [
+            { url: "/icons/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+        ],
     },
 };
 

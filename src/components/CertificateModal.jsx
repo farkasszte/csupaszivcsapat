@@ -10,7 +10,7 @@ import {
 } from '@remixicon/react';
 
 // Raw SVG string for HTML5 Canvas rasterization
-const SEAL_SVG_STRING = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+const SEAL_SVG_STRING = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 240 240" width="240" height="240">
   <defs>
     <linearGradient id="c_sealGold" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#FDE68A"/>
@@ -23,7 +23,7 @@ const SEAL_SVG_STRING = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24
       <stop offset="100%" stop-color="#D97706"/>
     </linearGradient>
     <radialGradient id="c_sealGreen" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#3B7A32"/>
+      <stop offset="0%" stop-color="#2D6A28"/>
       <stop offset="65%" stop-color="#1B4D1B"/>
       <stop offset="100%" stop-color="#0E2E0E"/>
     </radialGradient>
@@ -35,19 +35,15 @@ const SEAL_SVG_STRING = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24
   <circle cx="120" cy="120" r="103" fill="none" stroke="url(#c_sealGoldHighlight)" stroke-width="2" />
   <circle cx="120" cy="120" r="97" fill="url(#c_sealGreen)" stroke="#D97706" stroke-width="2" />
   <circle cx="120" cy="120" r="91" fill="none" stroke="#FDE68A" stroke-width="1.5" stroke-dasharray="3 4" opacity="0.8" />
-  <circle cx="120" cy="120" r="63" fill="none" stroke="#FDE68A" stroke-width="1.5" stroke-dasharray="3 4" opacity="0.8" />
+  <circle cx="120" cy="120" r="61" fill="none" stroke="#FDE68A" stroke-width="1.5" stroke-dasharray="3 4" opacity="0.8" />
   <text font-family="'Montserrat', 'Arial Black', sans-serif" font-weight="900" font-size="14.5" fill="#FEF08A" letter-spacing="2.8">
-    <textPath href="#c_upperSealPath" startOffset="50%" text-anchor="middle">CSUPASZÍV PECSÉT</textPath>
+    <textPath xlink:href="#c_upperSealPath" href="#c_upperSealPath" startOffset="50%" text-anchor="middle">CSUPASZÍV PECSÉT</textPath>
   </text>
-  <text font-family="'Montserrat', 'Arial', sans-serif" font-weight="800" font-size="12.5" fill="#FDE68A" letter-spacing="3.5">
-    <textPath href="#c_lowerSealPath" startOffset="50%" text-anchor="middle">★ 2026 ★</textPath>
+  <text font-family="'Montserrat', 'Arial', sans-serif" font-weight="800" font-size="11" fill="#FDE68A" letter-spacing="2.2">
+    <textPath xlink:href="#c_lowerSealPath" href="#c_lowerSealPath" startOffset="50%" text-anchor="middle">★ HOMOKHÁTSÁG HŐSEI ★</textPath>
   </text>
-  <circle cx="120" cy="120" r="49" fill="url(#c_sealGold)" stroke="#FFFBEB" stroke-width="2" />
-  <circle cx="120" cy="120" r="44" fill="url(#c_sealGreen)" stroke="#B45309" stroke-width="1.2" />
-  <path d="M 120,111 C 120,102 108,97 99,105 C 91,113 95,124 120,140 C 145,124 149,113 141,105 C 132,97 120,102 120,111 Z"
-    fill="url(#c_sealGold)" stroke="#FFFBEB" stroke-width="1.5" />
-  <polygon points="120,110 122.2,114.8 127.5,115.5 123.6,119.2 124.6,124.5 120,121.9 115.4,124.5 116.4,119.2 112.5,115.5 117.8,114.8"
-    fill="#FFFBEB" />
+  <circle cx="120" cy="120" r="50" fill="url(#c_sealGold)" stroke="#FFFBEB" stroke-width="2" />
+  <circle cx="120" cy="120" r="46" fill="#FFFDF8" stroke="#B45309" stroke-width="1.5" />
 </svg>`;
 
 // Interactive SVG Seal for Preview Card
@@ -58,6 +54,7 @@ function CsupaszivSealSvg({ className = 'w-24 h-24' }) {
             className={className}
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
+            xmlnsXlink="http://www.w3.org/1999/xlink"
         >
             <defs>
                 <linearGradient id="previewSealGold" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -71,7 +68,7 @@ function CsupaszivSealSvg({ className = 'w-24 h-24' }) {
                     <stop offset="100%" stopColor="#D97706" />
                 </linearGradient>
                 <radialGradient id="previewSealGreen" cx="50%" cy="50%" r="50%">
-                    <stop offset="0%" stopColor="#3B7A32" />
+                    <stop offset="0%" stopColor="#2D6A28" />
                     <stop offset="65%" stopColor="#1B4D1B" />
                     <stop offset="100%" stopColor="#0E2E0E" />
                 </radialGradient>
@@ -98,36 +95,34 @@ function CsupaszivSealSvg({ className = 'w-24 h-24' }) {
 
             {/* Dotted decorative tracks */}
             <circle cx="120" cy="120" r="91" fill="none" stroke="#FDE68A" strokeWidth="1.5" strokeDasharray="3 4" opacity="0.8" />
-            <circle cx="120" cy="120" r="63" fill="none" stroke="#FDE68A" strokeWidth="1.5" strokeDasharray="3 4" opacity="0.8" />
+            <circle cx="120" cy="120" r="61" fill="none" stroke="#FDE68A" strokeWidth="1.5" strokeDasharray="3 4" opacity="0.8" />
 
             {/* Upper text: CSUPASZÍV PECSÉT */}
             <text fontFamily="'Montserrat', 'Arial Black', sans-serif" fontWeight="900" fontSize="14" fill="#FEF08A" letterSpacing="2.8">
-                <textPath href="#previewUpperPath" startOffset="50%" textAnchor="middle">
+                <textPath href="#previewUpperPath" xlinkHref="#previewUpperPath" startOffset="50%" textAnchor="middle">
                     CSUPASZÍV PECSÉT
                 </textPath>
             </text>
 
-            {/* Lower text: ★ 2026 ★ */}
-            <text fontFamily="'Montserrat', 'Arial', sans-serif" fontWeight="800" fontSize="12" fill="#FDE68A" letterSpacing="3.5">
-                <textPath href="#previewLowerPath" startOffset="50%" textAnchor="middle">
-                    ★ 2026 ★
+            {/* Lower text: ★ HOMOKHÁTSÁG HŐSEI ★ */}
+            <text fontFamily="'Montserrat', 'Arial', sans-serif" fontWeight="800" fontSize="11" fill="#FDE68A" letterSpacing="2.2">
+                <textPath href="#previewLowerPath" xlinkHref="#previewLowerPath" startOffset="50%" textAnchor="middle">
+                    ★ HOMOKHÁTSÁG HŐSEI ★
                 </textPath>
             </text>
 
-            {/* Inner Center Disc */}
-            <circle cx="120" cy="120" r="49" fill="url(#previewSealGold)" stroke="#FFFBEB" strokeWidth="2" filter="url(#previewSealShadow)" />
-            <circle cx="120" cy="120" r="44" fill="url(#previewSealGreen)" stroke="#B45309" strokeWidth="1.2" />
+            {/* Inner Center Medallion Disc */}
+            <circle cx="120" cy="120" r="50" fill="url(#previewSealGold)" stroke="#FFFBEB" strokeWidth="2" filter="url(#previewSealShadow)" />
+            <circle cx="120" cy="120" r="46" fill="#FFFDF8" stroke="#B45309" strokeWidth="1.5" />
 
-            {/* Center Emblem: Stylized Heart & Star */}
-            <path
-                d="M 120,111 C 120,102 108,97 99,105 C 91,113 95,124 120,140 C 145,124 149,113 141,105 C 132,97 120,102 120,111 Z"
-                fill="url(#previewSealGold)"
-                stroke="#FFFBEB"
-                strokeWidth="1.5"
-            />
-            <polygon
-                points="120,110 122.2,114.8 127.5,115.5 123.6,119.2 124.6,124.5 120,121.9 115.4,124.5 116.4,119.2 112.5,115.5 117.8,114.8"
-                fill="#FFFBEB"
+            {/* Authentic Heart of Homokhátság Emblem */}
+            <image
+                href="/icons/icon-heart.png"
+                x="76"
+                y="76"
+                width="88"
+                height="88"
+                preserveAspectRatio="xMidYMid meet"
             />
         </svg>
     );
@@ -219,7 +214,7 @@ export default function CertificateModal({ isOpen, onClose }) {
 
             ctx.font = 'bold 30px "Montserrat", sans-serif';
             ctx.fillStyle = '#4F7942';
-            ctx.fillText('CSUPASZÍV: A HOMOKHÁTSÁG HŐSEI', canvas.width / 2, 135);
+            ctx.fillText('CSUPASZÍV KALANDOK - A HOMOKHÁTSÁG HŐSEI', canvas.width / 2, 135);
 
             ctx.font = '900 68px "Montserrat", sans-serif';
             ctx.fillStyle = '#263d20';
@@ -282,23 +277,42 @@ export default function CertificateModal({ isOpen, onClose }) {
             ctx.fillStyle = '#4F7942';
             ctx.fillText(`Kiérdemelt rang: ${rankTitle}`, canvas.width / 2, boxY + 49);
 
-            // 6. Centered SVG Seal under the Rank Box
+            // 6. Centered Seal under the Rank Box
             const sealSize = 160;
             const sealX = (canvas.width - sealSize) / 2;
             const sealY = 720;
 
-            // Draw SVG Seal onto Canvas
+            // Draw SVG Seal and Heart Emblem onto Canvas
             try {
                 const sealImg = new Image();
+                const heartImg = new Image();
                 sealImg.crossOrigin = 'anonymous';
+                heartImg.crossOrigin = 'anonymous';
+
                 const svgDataUri = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(SEAL_SVG_STRING);
-                await new Promise((resolve, reject) => {
-                    sealImg.onload = resolve;
-                    sealImg.onerror = reject;
-                    sealImg.src = svgDataUri;
-                });
+
+                await Promise.all([
+                    new Promise((resolve, reject) => {
+                        sealImg.onload = resolve;
+                        sealImg.onerror = reject;
+                        sealImg.src = svgDataUri;
+                    }),
+                    new Promise((resolve, reject) => {
+                        heartImg.onload = resolve;
+                        heartImg.onerror = reject;
+                        heartImg.src = '/icons/icon-heart.png';
+                    })
+                ]);
+
+                // Draw seal base
                 ctx.drawImage(sealImg, sealX, sealY, sealSize, sealSize);
-            } catch {
+
+                // Draw centered heart emblem inside seal medallion
+                const heartOffset = sealSize * (76 / 240);
+                const heartW = sealSize * (88 / 240);
+                ctx.drawImage(heartImg, sealX + heartOffset, sealY + heartOffset, heartW, heartW);
+            } catch (err) {
+                console.error('Error drawing seal to canvas:', err);
                 // Fallback circular seal
                 ctx.fillStyle = '#D4AF37';
                 ctx.beginPath();
@@ -342,12 +356,12 @@ export default function CertificateModal({ isOpen, onClose }) {
             ctx.fillStyle = '#555';
             ctx.fillText('Tudományos főtanácsadó', canvas.width - 300, 908);
 
-            // 7. Date at bottom
+            // 8. Date at bottom
             ctx.font = '600 20px "Montserrat", sans-serif';
             ctx.fillStyle = '#777';
             ctx.fillText(`Kelt: ${formattedDate}`, canvas.width / 2, 1025);
 
-            // Export image
+            // Export PNG
             const dataUrl = canvas.toDataURL('image/png');
             const link = document.createElement('a');
             link.download = `Csupasziv_Oklevel_${(playerName || 'hos').replace(/\s+/g, '_')}.png`;
@@ -403,7 +417,7 @@ export default function CertificateModal({ isOpen, onClose }) {
 
                         {/* Top Subtitle */}
                         <div className="text-[11px] sm:text-xs font-bold tracking-widest text-[#4F7942] uppercase mb-1">
-                            Csupaszív: A homokhátság hősei
+                            Csupaszív Kalandok - A Homokhátság Hősei
                         </div>
                         <h2 className="text-xl sm:text-2xl font-black text-[#263d20] tracking-wide mb-1">
                             DÍSZOKLEVÉL
