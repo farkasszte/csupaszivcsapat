@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useGame } from '../context/GameContext';
 import { FinaleActions } from './FinaleActions';
 
@@ -23,61 +23,56 @@ export const Choices = ({ hasImage }) => {
         setIsMounted(true);
     }, []);
 
-    const element = project.elements[currentElementId];
+    const element = project?.elements?.[currentElementId];
+    const isFinale = currentElementId === '3b3ba9f9-5559-48e5-bf9e-04e5c16493c1';
 
-    if (!isMounted) return null;
+    const uniqueChoices = useMemo(() => {
+        if (!element || isFinale) return [];
+        const outputs = element.outputs || [];
 
-    if (!element) return null;
+        const choices = outputs.map(connId => {
+            let connection = project?.connections?.[connId];
+            if (!connection) return null;
 
-    if (currentElementId === '3b3ba9f9-5559-48e5-bf9e-04e5c16493c1') {
-        return <FinaleActions />;
-    }
+            const { id: targetId, label: resolvedLabel } = resolveTarget(connection.targetid, connection.label);
+            if (!targetId) return null;
 
-    const outputs = element.outputs || [];
+            const finalLabel = resolvedLabel || 'Tovább';
+            let displayLabel = finalLabel;
 
-    const availableChoices = outputs.map(connId => {
-        let connection = project.connections[connId];
-        if (!connection) return null;
+            // Apply localization override
+            if (language === 'en' && storyTranslations?.[connId]) {
+                displayLabel = storyTranslations[connId].label || finalLabel;
+            } else if (language === 'en' && finalLabel === 'Tovább') {
+                displayLabel = 'Continue';
+            } else if (language && language.startsWith('sr') && storyTranslations?.[language]?.[connId]) {
+                displayLabel = storyTranslations[language][connId].label || finalLabel;
+            } else if (language === 'sr-latn' && (finalLabel === 'Tovább' || finalLabel === 'Continue')) {
+                displayLabel = 'Dalje';
+            } else if (language === 'sr-cyrl' && (finalLabel === 'Tovább' || finalLabel === 'Continue')) {
+                displayLabel = 'Даље';
+            }
 
-        const { id: targetId, label: resolvedLabel } = resolveTarget(connection.targetid, connection.label);
-        if (!targetId) return null;
+            const rendered = renderRichText(displayLabel);
 
-        const finalLabel = resolvedLabel || 'Tovább';
-        let displayLabel = finalLabel;
+            return {
+                id: connId,
+                targetId,
+                label: rendered,
+                rawLabel: rendered.replace(/<[^>]*>/g, '').trim(),
+            };
+        }).filter(Boolean);
 
-        // Apply localization override
-        if (language === 'en' && storyTranslations?.[connId]) {
-            displayLabel = storyTranslations[connId].label || finalLabel;
-        } else if (language === 'en' && finalLabel === 'Tovább') {
-            displayLabel = 'Continue';
-        } else if (language && language.startsWith('sr') && storyTranslations?.[language]?.[connId]) {
-            displayLabel = storyTranslations[language][connId].label || finalLabel;
-        } else if (language === 'sr-latn' && (finalLabel === 'Tovább' || finalLabel === 'Continue')) {
-            displayLabel = 'Dalje';
-        } else if (language === 'sr-cyrl' && (finalLabel === 'Tovább' || finalLabel === 'Continue')) {
-            displayLabel = 'Даље';
+        const deduped = [];
+        const seenLabels = new Set();
+        for (const choice of choices) {
+            if (!seenLabels.has(choice.rawLabel)) {
+                deduped.push(choice);
+                seenLabels.add(choice.rawLabel);
+            }
         }
-
-        const rendered = renderRichText(displayLabel);
-
-        return {
-            id: connId,
-            targetId,
-            label: rendered,
-            // Strip HTML tags from rendered label for the story log
-            rawLabel: rendered.replace(/<[^>]*>/g, '').trim(),
-        };
-    }).filter(choice => choice !== null);
-
-    // Deduplicate by label to avoid multiple identical "Tovább" buttons
-    const uniqueChoices = [];
-    const seenLabels = new Set();
-    for (const choice of availableChoices) {
-        if (!seenLabels.has(choice.rawLabel)) {
-            uniqueChoices.push(choice);
-            seenLabels.add(choice.rawLabel);
-        }
-    }
+        return deduped;
+    }, [element, isFinale, project, resolveTarget, language, storyTranslations, renderRichText]);
 
     // Keyboard navigation (1-9, or Space/Enter when single choice)
     useEffect(() => {
@@ -110,6 +105,10 @@ export const Choices = ({ hasImage }) => {
         window.addEventListener('keydown', handleKeyDown);
         return () => window.removeEventListener('keydown', handleKeyDown);
     }, [uniqueChoices, navigateTo, setShowImages]);
+
+    if (!isMounted) return null;
+    if (!element) return null;
+    if (isFinale) return <FinaleActions />;
 
     return (
         <div className={`mt-4 ${hasImage ? 'flex flex-wrap gap-2 justify-center' : 'grid gap-4 mt-2'}`}>

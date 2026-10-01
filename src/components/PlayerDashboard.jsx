@@ -215,16 +215,16 @@ export default function PlayerDashboard() {
                         {activeTab === 'characters' ? (
                             <>
                                 <RiHeartLine size={16} className="text-[#4F7942]" />
-                                <h3 className="text-xs font-bold text-[#4F7942] uppercase tracking-widest">
+                                <h2 className="text-xs font-bold text-[#4F7942] uppercase tracking-widest">
                                     {t('discovered_friends')} ({discoveredChars} / {totalChars})
-                                </h3>
+                                </h2>
                             </>
                         ) : (
                             <>
                                 <RiMapPin2Line size={16} className="text-[#4F7942]" />
-                                <h3 className="text-xs font-bold text-[#4F7942] uppercase tracking-widest">
+                                <h2 className="text-xs font-bold text-[#4F7942] uppercase tracking-widest">
                                     {t('discovered_locations')} ({discoveredLocs} / {totalLocs})
-                                </h3>
+                                </h2>
                             </>
                         )}
                     </div>

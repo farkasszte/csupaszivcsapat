@@ -246,29 +246,27 @@ export const StoryEngine = ({ hideMedia = false }) => {
 
                     {/* Integrated Media (Top of Content) - Mobile Only */}
                     {!hideMedia && (videoUrl || activeCoverUrl) && (
-                        <div className="lg:hidden mb-6 relative w-full flex justify-center animate-in fade-in duration-700">
+                        <div className="lg:hidden mb-6 relative w-full aspect-16/9 rounded-2xl overflow-hidden flex justify-center bg-black/5 animate-in fade-in duration-700">
                             {videoUrl ? (
                                 <video
                                     key={videoUrl}
                                     src={videoUrl}
                                     autoPlay loop muted playsInline
                                     onCanPlay={() => setIsVideoLoaded(true)}
-                                    className={`w-full h-auto shadow-none transition-opacity duration-300 ${isVideoLoaded ? 'opacity-100' : 'opacity-0'}`}
+                                    className={`w-full h-full object-cover shadow-none transition-opacity duration-300 ${isVideoLoaded ? 'opacity-100' : 'opacity-0'}`}
                                     style={{ filter: getColorFilterStyle(colorFilter) }}
                                 />
                             ) : (
-                                <div className="w-full flex justify-center">
-                                    <img
-                                        key={activeCoverUrl}
-                                        src={activeCoverUrl}
-                                        alt={getImageAlt?.(activeCoverUrl) || ''}
-                                        onError={(e) => {
-                                            e.target.style.display = 'none';
-                                        }}
-                                        className="w-full h-auto object-cover shadow-none"
-                                        style={{ filter: getColorFilterStyle(colorFilter) }}
-                                    />
-                                </div>
+                                <img
+                                    key={activeCoverUrl}
+                                    src={activeCoverUrl}
+                                    alt={getImageAlt?.(activeCoverUrl) || ''}
+                                    onError={(e) => {
+                                        e.target.style.display = 'none';
+                                    }}
+                                    className="w-full h-full object-cover shadow-none"
+                                    style={{ filter: getColorFilterStyle(colorFilter) }}
+                                />
                             )}
                         </div>
                     )}

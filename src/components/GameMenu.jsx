@@ -176,7 +176,7 @@ export default function GameMenu() {
                 </div>
 
                 <div className="p-3 bg-white/40 backdrop-blur-md rounded-xl border border-[#4F7942]/10 shadow-sm mt-1">
-                    <h3 className="text-xs font-bold uppercase tracking-widest text-[#4F7942] mb-3 ml-1">{t('settings')}</h3>
+                    <h2 className="text-xs font-bold uppercase tracking-widest text-[#4F7942] mb-3 ml-1">{t('settings')}</h2>
 
                     {/* Language Switch */}
                     <div className="px-3 py-2 bg-white/40 rounded-lg mb-2">
