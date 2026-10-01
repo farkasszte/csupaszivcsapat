@@ -227,22 +227,14 @@ export default function CertificateModal({ isOpen, onClose }) {
 
     return (
         <div className="absolute inset-0 z-50 bg-[#FAF7F0] flex flex-col overflow-hidden animate-in fade-in duration-200">
-            {/* Header */}
-            <div className="flex items-center justify-between px-5 py-3.5 bg-[#4F7942] text-white shrink-0">
-                <div className="flex items-center gap-2">
-                    <RiAwardLine className="w-5 h-5 text-amber-300" />
-                    <h3 className="font-bold text-sm sm:text-base">
-                        {t('certificate_title') || 'Díszoklevél Kiállítása'}
-                    </h3>
-                </div>
-                <button
-                    onClick={onClose}
-                    className="p-1 rounded-lg hover:bg-white/20 transition-colors cursor-pointer text-white"
-                    aria-label="Bezárás"
-                >
-                    <RiCloseLine size={20} />
-                </button>
-            </div>
+            {/* Floating Close Button */}
+            <button
+                onClick={onClose}
+                className="absolute top-3 right-3 z-10 p-1.5 rounded-full bg-black/5 hover:bg-black/10 text-zinc-600 hover:text-zinc-900 transition-colors cursor-pointer"
+                aria-label={t('close') || 'Bezárás'}
+            >
+                <RiCloseLine size={20} />
+            </button>
 
             {/* Content Body */}
             <div className="flex-1 overflow-y-auto p-4 sm:p-5 flex flex-col items-center text-center gap-3">
@@ -251,15 +243,12 @@ export default function CertificateModal({ isOpen, onClose }) {
                     <img
                         src="/icons/icon-heart.png"
                         alt="Csupaszív Logó"
-                        className="w-16 h-16 sm:w-20 sm:h-20 object-contain drop-shadow-md hover:scale-105 transition-transform duration-200"
+                        className="w-16 h-16 sm:w-20 sm:h-20 object-contain drop-shadow-md"
                     />
-                    <div className="text-xs sm:text-sm font-bold tracking-widest text-[#4F7942] uppercase mt-0.5">
-                        Csupaszív Kalandok - A Homokhátság Hősei
-                    </div>
                     <h2 className="text-xl sm:text-2xl font-black text-[#263d20]">
                         DÍSZOKLEVÉL
                     </h2>
-                    <p className="text-xs sm:text-sm text-zinc-700 max-w-sm leading-relaxed">
+                    <p className="text-sm text-zinc-700 max-w-sm leading-relaxed">
                         Gratulálunk! Sikeresen óvtad a Homokhátság természeti értékeit. Írd be a neved, és töltsd le a hivatalos, nagy felbontású díszoklevelet képként!
                     </p>
                 </div>

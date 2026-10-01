@@ -7,7 +7,10 @@
     "build": "next build",
     "start": "next start",
     "desktop:dev": "tauri dev",
-    "desktop:build": "powershell \"if (Test-Path 'src/app/auth') { Move-Item 'src/app/auth' 'src/auth_hidden' }\" && tauri build && powershell \"if (Test-Path 'src/auth_hidden') { Move-Item 'src/auth_hidden' 'src/app/auth' }\""
+    "desktop:build": "powershell \"if (Test-Path 'src/app/auth') { Move-Item 'src/app/auth' 'src/auth_hidden' }\" && tauri build && powershell \"if (Test-Path 'src/auth_hidden') { Move-Item 'src/auth_hidden' 'src/app/auth' }\"",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:headed": "playwright test --headed"
   },
   "dependencies": {
     "@remixicon/react": "^4.9.0",
@@ -25,6 +28,7 @@
     "zustand": "^5.0.15"
   },
   "devDependencies": {
+    "@playwright/test": "^1.63.0",
     "@serwist/turbopack": "^9.5.12",
     "@tailwindcss/postcss": "^4",
     "@tauri-apps/cli": "^2.11.3",
