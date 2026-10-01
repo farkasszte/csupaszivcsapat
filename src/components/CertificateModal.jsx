@@ -9,125 +9,6 @@ import {
     RiUser3Line
 } from '@remixicon/react';
 
-// Raw SVG string for HTML5 Canvas rasterization
-const SEAL_SVG_STRING = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 240 240" width="240" height="240">
-  <defs>
-    <linearGradient id="c_sealGold" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#FDE68A"/>
-      <stop offset="25%" stop-color="#F59E0B"/>
-      <stop offset="60%" stop-color="#D97706"/>
-      <stop offset="100%" stop-color="#92400E"/>
-    </linearGradient>
-    <linearGradient id="c_sealGoldHighlight" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#FFFBEB"/>
-      <stop offset="100%" stop-color="#D97706"/>
-    </linearGradient>
-    <radialGradient id="c_sealGreen" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#2D6A28"/>
-      <stop offset="65%" stop-color="#1B4D1B"/>
-      <stop offset="100%" stop-color="#0E2E0E"/>
-    </radialGradient>
-    <path id="c_upperSealPath" d="M 42,120 A 78,78 0 1,1 198,120" fill="none" />
-    <path id="c_lowerSealPath" d="M 44,120 A 76,76 0 0,0 196,120" fill="none" />
-  </defs>
-  <polygon points="120.0,4.0 130.6,12.5 142.6,6.2 151.4,16.7 164.4,12.8 170.9,24.8 184.4,23.5 188.5,36.5 202.0,38.0 203.5,51.5 216.5,55.6 215.2,69.1 227.2,75.6 223.3,88.6 233.8,97.4 227.5,109.4 236.0,120.0 227.5,130.6 233.8,142.6 223.3,151.4 227.2,164.4 215.2,170.9 216.5,184.4 203.5,188.5 202.0,202.0 188.5,203.5 184.4,216.5 170.9,215.2 164.4,227.2 151.4,223.3 142.6,233.8 130.6,227.5 120.0,236.0 109.4,227.5 97.4,233.8 88.6,223.3 75.6,227.2 69.1,215.2 55.6,216.5 51.5,203.5 38.0,202.0 36.5,188.5 23.5,184.4 24.8,170.9 12.8,164.4 16.7,151.4 6.2,142.6 12.5,130.6 4.0,120.0 12.5,109.4 6.2,97.4 16.7,88.6 12.8,75.6 24.8,69.1 23.5,55.6 36.5,51.5 38.0,38.0 51.5,36.5 55.6,23.5 69.1,24.8 75.6,12.8 88.6,16.7 97.4,6.2 109.4,12.5"
-    fill="url(#c_sealGold)" stroke="#92400E" stroke-width="1.5" />
-  <circle cx="120" cy="120" r="103" fill="none" stroke="url(#c_sealGoldHighlight)" stroke-width="2" />
-  <circle cx="120" cy="120" r="97" fill="url(#c_sealGreen)" stroke="#D97706" stroke-width="2" />
-  <circle cx="120" cy="120" r="91" fill="none" stroke="#FDE68A" stroke-width="1.5" stroke-dasharray="3 4" opacity="0.8" />
-  <circle cx="120" cy="120" r="61" fill="none" stroke="#FDE68A" stroke-width="1.5" stroke-dasharray="3 4" opacity="0.8" />
-  <text font-family="'Montserrat', 'Arial Black', sans-serif" font-weight="900" font-size="14.5" fill="#FEF08A" letter-spacing="2.8">
-    <textPath xlink:href="#c_upperSealPath" href="#c_upperSealPath" startOffset="50%" text-anchor="middle">CSUPASZÍV PECSÉT</textPath>
-  </text>
-  <text font-family="'Montserrat', 'Arial', sans-serif" font-weight="800" font-size="11" fill="#FDE68A" letter-spacing="2.2">
-    <textPath xlink:href="#c_lowerSealPath" href="#c_lowerSealPath" startOffset="50%" text-anchor="middle">★ HOMOKHÁTSÁG HŐSEI ★</textPath>
-  </text>
-  <circle cx="120" cy="120" r="50" fill="url(#c_sealGold)" stroke="#FFFBEB" stroke-width="2" />
-  <circle cx="120" cy="120" r="46" fill="#FFFDF8" stroke="#B45309" stroke-width="1.5" />
-</svg>`;
-
-// Interactive SVG Seal for Preview Card
-function CsupaszivSealSvg({ className = 'w-24 h-24' }) {
-    return (
-        <svg
-            viewBox="0 0 240 240"
-            className={className}
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            xmlnsXlink="http://www.w3.org/1999/xlink"
-        >
-            <defs>
-                <linearGradient id="previewSealGold" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#FDE68A" />
-                    <stop offset="25%" stopColor="#F59E0B" />
-                    <stop offset="60%" stopColor="#D97706" />
-                    <stop offset="100%" stopColor="#92400E" />
-                </linearGradient>
-                <linearGradient id="previewSealHighlight" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" stopColor="#FFFBEB" />
-                    <stop offset="100%" stopColor="#D97706" />
-                </linearGradient>
-                <radialGradient id="previewSealGreen" cx="50%" cy="50%" r="50%">
-                    <stop offset="0%" stopColor="#2D6A28" />
-                    <stop offset="65%" stopColor="#1B4D1B" />
-                    <stop offset="100%" stopColor="#0E2E0E" />
-                </radialGradient>
-                <path id="previewUpperPath" d="M 42,120 A 78,78 0 1,1 198,120" fill="none" />
-                <path id="previewLowerPath" d="M 44,120 A 76,76 0 0,0 196,120" fill="none" />
-                <filter id="previewSealShadow" x="-10%" y="-10%" width="120%" height="120%">
-                    <feDropShadow dx="0" dy="2" stdDeviation="3" floodColor="#000000" floodOpacity="0.35" />
-                </filter>
-            </defs>
-
-            {/* Rosette 32-point scalloped outer ring */}
-            <polygon
-                points="120.0,4.0 130.6,12.5 142.6,6.2 151.4,16.7 164.4,12.8 170.9,24.8 184.4,23.5 188.5,36.5 202.0,38.0 203.5,51.5 216.5,55.6 215.2,69.1 227.2,75.6 223.3,88.6 233.8,97.4 227.5,109.4 236.0,120.0 227.5,130.6 233.8,142.6 223.3,151.4 227.2,164.4 215.2,170.9 216.5,184.4 203.5,188.5 202.0,202.0 188.5,203.5 184.4,216.5 170.9,215.2 164.4,227.2 151.4,223.3 142.6,233.8 130.6,227.5 120.0,236.0 109.4,227.5 97.4,233.8 88.6,223.3 75.6,227.2 69.1,215.2 55.6,216.5 51.5,203.5 38.0,202.0 36.5,188.5 23.5,184.4 24.8,170.9 12.8,164.4 16.7,151.4 6.2,142.6 12.5,130.6 4.0,120.0 12.5,109.4 6.2,97.4 16.7,88.6 12.8,75.6 24.8,69.1 23.5,55.6 36.5,51.5 38.0,38.0 51.5,36.5 55.6,23.5 69.1,24.8 75.6,12.8 88.6,16.7 97.4,6.2 109.4,12.5"
-                fill="url(#previewSealGold)"
-                stroke="#92400E"
-                strokeWidth="1.5"
-            />
-
-            {/* Concentric gold ring */}
-            <circle cx="120" cy="120" r="103" fill="none" stroke="url(#previewSealHighlight)" strokeWidth="2" />
-
-            {/* Green Disc Background */}
-            <circle cx="120" cy="120" r="97" fill="url(#previewSealGreen)" stroke="#D97706" strokeWidth="2" />
-
-            {/* Dotted decorative tracks */}
-            <circle cx="120" cy="120" r="91" fill="none" stroke="#FDE68A" strokeWidth="1.5" strokeDasharray="3 4" opacity="0.8" />
-            <circle cx="120" cy="120" r="61" fill="none" stroke="#FDE68A" strokeWidth="1.5" strokeDasharray="3 4" opacity="0.8" />
-
-            {/* Upper text: CSUPASZÍV PECSÉT */}
-            <text fontFamily="'Montserrat', 'Arial Black', sans-serif" fontWeight="900" fontSize="14" fill="#FEF08A" letterSpacing="2.8">
-                <textPath href="#previewUpperPath" xlinkHref="#previewUpperPath" startOffset="50%" textAnchor="middle">
-                    CSUPASZÍV PECSÉT
-                </textPath>
-            </text>
-
-            {/* Lower text: ★ HOMOKHÁTSÁG HŐSEI ★ */}
-            <text fontFamily="'Montserrat', 'Arial', sans-serif" fontWeight="800" fontSize="11" fill="#FDE68A" letterSpacing="2.2">
-                <textPath href="#previewLowerPath" xlinkHref="#previewLowerPath" startOffset="50%" textAnchor="middle">
-                    ★ HOMOKHÁTSÁG HŐSEI ★
-                </textPath>
-            </text>
-
-            {/* Inner Center Medallion Disc */}
-            <circle cx="120" cy="120" r="50" fill="url(#previewSealGold)" stroke="#FFFBEB" strokeWidth="2" filter="url(#previewSealShadow)" />
-            <circle cx="120" cy="120" r="46" fill="#FFFDF8" stroke="#B45309" strokeWidth="1.5" />
-
-            {/* Authentic Heart of Homokhátság Emblem */}
-            <image
-                href="/icons/icon-heart.png"
-                x="76"
-                y="76"
-                width="88"
-                height="88"
-                preserveAspectRatio="xMidYMid meet"
-            />
-        </svg>
-    );
-}
-
 export default function CertificateModal({ isOpen, onClose }) {
     const { state, t } = useGame();
     const score = state?.variables?.score ?? 0;
@@ -277,54 +158,24 @@ export default function CertificateModal({ isOpen, onClose }) {
             ctx.fillStyle = '#4F7942';
             ctx.fillText(`Kiérdemelt rang: ${rankTitle}`, canvas.width / 2, boxY + 49);
 
-            // 6. Centered Seal under the Rank Box
-            const sealSize = 160;
-            const sealX = (canvas.width - sealSize) / 2;
-            const sealY = 720;
+            // 6. Centered Logo under the Rank Box (Direct Heart Logo, no circular stamp)
+            const logoSize = 145;
+            const logoX = (canvas.width - logoSize) / 2;
+            const logoY = 715;
 
-            // Draw SVG Seal and Heart Emblem onto Canvas
             try {
-                const sealImg = new Image();
-                const heartImg = new Image();
-                sealImg.crossOrigin = 'anonymous';
-                heartImg.crossOrigin = 'anonymous';
+                const logoImg = new Image();
+                logoImg.crossOrigin = 'anonymous';
 
-                const svgDataUri = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(SEAL_SVG_STRING);
+                await new Promise((resolve, reject) => {
+                    logoImg.onload = resolve;
+                    logoImg.onerror = reject;
+                    logoImg.src = '/icons/icon-heart.png';
+                });
 
-                await Promise.all([
-                    new Promise((resolve, reject) => {
-                        sealImg.onload = resolve;
-                        sealImg.onerror = reject;
-                        sealImg.src = svgDataUri;
-                    }),
-                    new Promise((resolve, reject) => {
-                        heartImg.onload = resolve;
-                        heartImg.onerror = reject;
-                        heartImg.src = '/icons/icon-heart.png';
-                    })
-                ]);
-
-                // Draw seal base
-                ctx.drawImage(sealImg, sealX, sealY, sealSize, sealSize);
-
-                // Draw centered heart emblem inside seal medallion
-                const heartOffset = sealSize * (76 / 240);
-                const heartW = sealSize * (88 / 240);
-                ctx.drawImage(heartImg, sealX + heartOffset, sealY + heartOffset, heartW, heartW);
+                ctx.drawImage(logoImg, logoX, logoY, logoSize, logoSize);
             } catch (err) {
-                console.error('Error drawing seal to canvas:', err);
-                // Fallback circular seal
-                ctx.fillStyle = '#D4AF37';
-                ctx.beginPath();
-                ctx.arc(sealX + sealSize / 2, sealY + sealSize / 2, sealSize / 2, 0, Math.PI * 2);
-                ctx.fill();
-                ctx.fillStyle = '#4F7942';
-                ctx.beginPath();
-                ctx.arc(sealX + sealSize / 2, sealY + sealSize / 2, sealSize / 2 - 8, 0, Math.PI * 2);
-                ctx.fill();
-                ctx.fillStyle = '#FFFFFF';
-                ctx.font = 'bold 16px "Montserrat", sans-serif';
-                ctx.fillText('CSUPASZÍV PECSÉT', sealX + sealSize / 2, sealY + sealSize / 2 + 6);
+                console.error('Error drawing logo to canvas:', err);
             }
 
             // 7. Signatures
@@ -445,9 +296,13 @@ export default function CertificateModal({ isOpen, onClose }) {
                             </div>
                         </div>
 
-                        {/* Centered SVG Seal under the Rank Box */}
+                        {/* Centered Heart Logo under the Rank Box (No circular stamp) */}
                         <div className="flex items-center justify-center my-2">
-                            <CsupaszivSealSvg className="w-24 h-24 sm:w-28 sm:h-28 drop-shadow-md hover:scale-105 transition-transform duration-200" />
+                            <img
+                                src="/icons/icon-heart.png"
+                                alt="Csupaszív Logó"
+                                className="w-20 h-20 sm:w-24 sm:h-24 object-contain drop-shadow-md hover:scale-105 transition-transform duration-200"
+                            />
                         </div>
 
                         <div className="text-[11px] text-zinc-500 mt-2">
