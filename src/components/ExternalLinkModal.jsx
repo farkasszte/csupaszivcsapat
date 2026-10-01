@@ -111,7 +111,7 @@ export default function ExternalLinkModal() {
                             const frame = document.getElementById('external-iframe');
                             if (frame) frame.src = externalModalUrl;
                         }}
-                        className="flex items-center gap-1 text-[11px] font-bold text-amber-900 hover:underline shrink-0 cursor-pointer"
+                        className="flex items-center gap-1 text-xs font-bold text-amber-900 hover:underline shrink-0 cursor-pointer"
                     >
                         <RiRefreshLine className="w-3.5 h-3.5" />
                         {t('refresh') || 'Frissítés'}

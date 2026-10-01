@@ -172,14 +172,9 @@ export default function PlayerDashboard() {
                         <div className="p-2 rounded-xl bg-amber-400 text-amber-950 shadow-xs">
                             <RiAwardLine size={18} />
                         </div>
-                        <div className="flex flex-col text-left">
-                            <span className="text-xs sm:text-sm font-bold text-zinc-900 group-hover:text-[#4F7942] transition-colors">
-                                {t('certificate_btn') || 'Díszes Oklevél'}
-                            </span>
-                            <span className="text-xs text-zinc-600">
-                                {t('certificate_desc') || 'Töltsd le névre szóló elismerésed képként!'}
-                            </span>
-                        </div>
+                        <span className="text-xs sm:text-sm font-bold text-zinc-900 group-hover:text-[#4F7942] transition-colors">
+                            {t('certificate_btn') || 'Díszes Oklevél'}
+                        </span>
                     </div>
                     <span className="text-xs font-bold text-[#4F7942] bg-[#4F7942]/10 px-2.5 py-1 rounded-lg shrink-0">
                         Megtekintés

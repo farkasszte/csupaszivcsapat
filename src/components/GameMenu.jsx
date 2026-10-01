@@ -247,7 +247,7 @@ export default function GameMenu() {
                             </button>
                         </div>
                         {isCyrillic && (
-                            <p className="text-[11px] text-zinc-600 mt-1.5 italic leading-tight">
+                            <p className="text-xs text-zinc-600 mt-1.5 italic leading-tight">
                                 {t('font_cyrillic_unavailable')}
                             </p>
                         )}
@@ -295,7 +295,7 @@ export default function GameMenu() {
                                 <span className={`pointer-events-none inline-block h-4 w-4 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${presentationMode ? 'translate-x-4' : 'translate-x-0'}`} />
                             </button>
                         </div>
-                        <p className="text-[11px] text-[#4F7942]/80 leading-tight mt-0.5">
+                        <p className="text-xs text-[#4F7942]/80 leading-tight mt-0.5">
                             {t('presentation_mode_desc') || 'A külső linkek felugró ablakban nyílnak meg a bemutató elhagyása nélkül.'}
                         </p>
                     </div>

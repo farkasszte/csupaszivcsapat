@@ -156,10 +156,10 @@ export default function CertificateModal({ isOpen, onClose }) {
             ctx.fillStyle = '#4F7942';
             ctx.fillText(`Kiérdemelt rang: ${rankTitle}`, canvas.width / 2, boxY + 49);
 
-            // 6. Centered Logo under the Rank Box (Direct Heart Logo, no circular stamp)
-            const logoSize = 145;
+            // 6. Centered Logo under the Rank Box (Doubled size: 290px)
+            const logoSize = 290;
             const logoX = (canvas.width - logoSize) / 2;
-            const logoY = 715;
+            const logoY = 705;
 
             try {
                 const logoImg = new Image();
@@ -238,7 +238,7 @@ export default function CertificateModal({ isOpen, onClose }) {
                         DÍSZOKLEVÉL
                     </h2>
                     <p className="text-sm text-zinc-700 max-w-sm leading-relaxed">
-                        Gratulálunk! Sikeresen óvtad a Homokhátság természeti értékeit. Írd be a neved, és töltsd le a hivatalos, nagy felbontású díszoklevelet képként!
+                        Gratulálunk! Sikeresen óvtad a Homokhátság természeti értékeit. Írd be a neved a díszoklevél kiállításához!
                     </p>
                 </div>
 

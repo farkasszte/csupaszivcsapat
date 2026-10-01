@@ -65,14 +65,9 @@ export const FinaleActions = () => {
                     <div className="p-3 rounded-xl bg-amber-400 text-amber-950 shadow-inner">
                         <RiAwardLine className="w-7 h-7" />
                     </div>
-                    <div className="flex flex-col text-left">
-                        <span className="text-base sm:text-lg font-black text-[#263d20] leading-tight">
-                            {t('certificate_btn') || 'Díszes Oklevél átvétele'}
-                        </span>
-                        <span className="text-xs text-amber-800 font-medium mt-0.5">
-                            {t('certificate_desc') || 'Töltsd le névre szóló elismerésed képként!'}
-                        </span>
-                    </div>
+                    <span className="text-base sm:text-lg font-black text-[#263d20] leading-tight">
+                        {t('certificate_btn') || 'Díszes Oklevél átvétele'}
+                    </span>
                 </div>
                 <span className="text-xs uppercase tracking-wider font-extrabold bg-[#4F7942] text-white px-3.5 py-2 rounded-xl shadow-xs shrink-0">
                     Átvétel
