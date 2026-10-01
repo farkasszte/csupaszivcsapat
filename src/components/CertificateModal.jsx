@@ -261,37 +261,31 @@ export default function CertificateModal({ isOpen, onClose }) {
             ctx.fillText('kiemelkedő bátorsággal és elkötelezettséggel', canvas.width / 2, 530);
             ctx.fillText('óvta a Homokhátság védett természeti kincseit.', canvas.width / 2, 570);
 
-            // 5. Aligned SVG Seal and Rank Box Row
-            const sealSize = 145;
-            const boxW = 560;
-            const boxH = 96;
-            const gap = 35;
-            const totalW = sealSize + gap + boxW;
-            const startX = (canvas.width - totalW) / 2;
-
-            const sealX = startX;
-            const sealY = 620;
-            const boxX = startX + sealSize + gap;
-            const boxY = 644;
+            // 5. Centered Rank Box
+            const boxW = 660;
+            const boxH = 76;
+            const boxX = (canvas.width - boxW) / 2;
+            const boxY = 615;
 
             // Draw Rank Box
             ctx.fillStyle = '#FFFFFF';
             ctx.strokeStyle = '#D4AF37';
             ctx.lineWidth = 3;
             ctx.beginPath();
-            ctx.roundRect(boxX, boxY, boxW, boxH, 20);
+            ctx.roundRect(boxX, boxY, boxW, boxH, 18);
             ctx.fill();
             ctx.stroke();
 
             // Text inside Rank Box
             ctx.textAlign = 'center';
-            ctx.font = 'bold 18px "Montserrat", sans-serif';
-            ctx.fillStyle = '#B45309';
-            ctx.fillText('KIÉRDEMELT RANG', boxX + boxW / 2, boxY + 36);
-
-            ctx.font = '900 32px "Montserrat", sans-serif';
+            ctx.font = 'bold 34px "Montserrat", sans-serif';
             ctx.fillStyle = '#4F7942';
-            ctx.fillText(rankTitle, boxX + boxW / 2, boxY + 76);
+            ctx.fillText(`Kiérdemelt rang: ${rankTitle}`, canvas.width / 2, boxY + 49);
+
+            // 6. Centered SVG Seal under the Rank Box
+            const sealSize = 160;
+            const sealX = (canvas.width - sealSize) / 2;
+            const sealY = 720;
 
             // Draw SVG Seal onto Canvas
             try {
@@ -319,7 +313,7 @@ export default function CertificateModal({ isOpen, onClose }) {
                 ctx.fillText('CSUPASZÍV PECSÉT', sealX + sealSize / 2, sealY + sealSize / 2 + 6);
             }
 
-            // 6. Signatures
+            // 7. Signatures
             ctx.textAlign = 'center';
 
             // Left Signature: Ürge Panni
@@ -428,22 +422,18 @@ export default function CertificateModal({ isOpen, onClose }) {
                             kiemelkedő bátorsággal és elkötelezettséggel óvta a Homokhátság védett természeti kincseit.
                         </div>
 
-                        {/* Rank and SVG Seal Row - Aligned together */}
-                        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 my-4 px-2">
-                            {/* Authentic SVG Seal */}
-                            <div className="shrink-0 flex items-center justify-center">
-                                <CsupaszivSealSvg className="w-20 h-20 sm:w-24 sm:h-24 drop-shadow-md transition-transform hover:scale-105 duration-200" />
+                        {/* Centered Rank Box */}
+                        <div className="flex justify-center my-3">
+                            <div className="inline-block bg-white border-2 border-[#D4AF37] px-6 py-2.5 rounded-xl shadow-xs text-center">
+                                <span className="text-xs sm:text-sm font-bold text-[#4F7942]">
+                                    Kiérdemelt rang: {rankTitle}
+                                </span>
                             </div>
+                        </div>
 
-                            {/* Aligned Rank Box */}
-                            <div className="bg-white border-2 border-[#D4AF37] px-5 sm:px-6 py-3 rounded-2xl shadow-xs flex flex-col justify-center text-center sm:text-left min-w-[200px]">
-                                <span className="text-[10px] sm:text-xs font-bold text-amber-700 uppercase tracking-wider">
-                                    Kiérdemelt rang
-                                </span>
-                                <span className="text-sm sm:text-lg font-black text-[#4F7942]">
-                                    {rankTitle}
-                                </span>
-                            </div>
+                        {/* Centered SVG Seal under the Rank Box */}
+                        <div className="flex items-center justify-center my-2">
+                            <CsupaszivSealSvg className="w-24 h-24 sm:w-28 sm:h-28 drop-shadow-md hover:scale-105 transition-transform duration-200" />
                         </div>
 
                         <div className="text-[11px] text-zinc-500 mt-2">
